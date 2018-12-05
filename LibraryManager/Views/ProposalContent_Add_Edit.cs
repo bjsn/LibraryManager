@@ -306,7 +306,7 @@
             this.label5.Text = "Product Benefits:";
             this.TxbPDescription.BackColor = Color.White;
             this.TxbPDescription.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
-            this.TxbPDescription.ImeMode = ImeMode.Katakana;
+//            this.TxbPDescription.ImeMode = ImeMode.Katakana;
             this.TxbPDescription.Location = new Point(0x10, 0x80);
             this.TxbPDescription.Name = "TxbPDescription";
             this.TxbPDescription.Size = new Size(0x221, 0x18);

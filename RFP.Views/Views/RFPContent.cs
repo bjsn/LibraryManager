@@ -7,427 +7,450 @@
     using System.ComponentModel;
     using System.Drawing;
     using System.Windows.Forms;
+    using Excel = Microsoft.Office.Interop.Excel;
 
     public class RFPContent : BasePartialView
     {
-        private const string VENDORS_FULL_LIST_NAME = "--All--";
         private IContainer components;
-        private CheckBox CbxUserAdded;
-        private Label label8;
-        private ComboBox CbxVendors;
-        private PictureBox BtnSearch;
         private Label label7;
         private TextBox TbxSearch;
-        private Button BtnAdd;
-        private Button BtnEdit;
-        private Button BtnDelete;
+        private Button BtnViewContent;
         private Label label6;
-        private DataGridView DTProposalContent;
+        internal DataGridView DTContent;
         private Label label1;
         private Label LblTotalRows;
-        private DataGridViewTextBoxColumn PartNumber;
-        private DataGridViewTextBoxColumn Manufacturer;
+        private PictureBox btnSeach;
+        private DataGridViewTextBoxColumn ID;
+        private DataGridViewTextBoxColumn DGName;
         private DataGridViewTextBoxColumn Description;
-        private DataGridViewCheckBoxColumn UserAdded;
+        private DataGridViewTextBoxColumn KeyWords;
+        private DataGridViewTextBoxColumn RTF;
+        private DataGridViewTextBoxColumn Name;
+        private Button button1;
+        private Core.RFPController RFPController;
 
         public RFPContent(Panel Panel) : base(Panel)
         {
-            //this.InitializeComponent();
-            //this.ProposalContentController = new LibraryManager.Core.ProposalContentController();
+            this.InitializeComponent();
+            this.RFPController = new RFPController();
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
+        private void RFPContent_Load(object sender, EventArgs e)
         {
-            //BasePartialView newView = new ProposalContent_Add_Edit(base.MainPanel, this);
-            //base.OpenPartialView(newView);
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
-            if (this.DTProposalContent.RowCount > 0)
+            List<Models.RFPContent> RFPContentList = this.RFPController.GetAll();
+            this.DTContent.Rows.Clear();
+            foreach (Models.RFPContent content in RFPContentList)
             {
-                newView.SetText("Part Number: " + this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString());
-                base.OpenPartialAlert(newView);
+                object[] values = new object[] { content.ID, content.Name, content.Description, content.Keywords, content.Content };
+                this.DTContent.Rows.Add(values);
             }
-        }
-
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            //ProposalContent_Add_Edit newView = new ProposalContent_Add_Edit(base.MainPanel, this);
-            //newView.SetPartNumber(this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString());
-            //base.OpenPartialView(newView);
-        }
-
-        private void BtnSearch_Click(object sender, EventArgs e)
-        {
-            string text = this.TbxSearch.Text;
-            this.CbxVendors.SelectedIndex = 0;
-            this.CbxUserAdded.Checked = false;
-            //this.ProposalContentList = this.ProposalContentController.GetByKeyWord(text);
-            //this.FillProposalContentTable(this.ProposalContentList);
-        }
-
-        private void cbxUserAdded_CheckedChanged(object sender, EventArgs e)
-        {
-            this.LoadAndFilterDataGridInformation();
-        }
-
-        private void CbxVendors_SelectedValueChanged(object sender, EventArgs e)
-        {
-            this.LoadAndFilterDataGridInformation();
-        }
-
-        public override void Delete()
-        {
-            if (this.DTProposalContent.RowCount > 0)
-            {
-                string partNumber = this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString();
-                //this.ProposalContentController.Delete(partNumber);
-                this.LoadProposalContent();
-            }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (this.components != null))
-            {
-                this.components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private void DTProposalContent_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                this.BtnDelete.Enabled = true;
-                this.BtnEdit.Enabled = true;
-            }
-        }
-
-        private void DTProposalContent_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //ProposalContent_Add_Edit newView = new ProposalContent_Add_Edit(base.MainPanel, this);
-            //if (this.DTProposalContent.RowCount > 0)
-            //{
-            //    newView.SetPartNumber(this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString());
-            //    base.OpenPartialView(newView);
-            //}
-        }
-
-        private void FillProposalContentTable(/*List<LibraryManager.Models.ProposalContent> ProposalContentList*/)
-        {
-            //this.DTProposalContent.Rows.Clear();
-            //foreach (LibraryManager.Models.ProposalContent content in ProposalContentList)
-            //{
-            //    bool flag = content.DownloadDT.Equals(DateTime.MinValue);
-            //    object[] values = new object[] { content.PartNumber, content.VendorName, content.ProductName, flag };
-            //    this.DTProposalContent.Rows.Add(values);
-            //}
-            //this.LblTotalRows.Text = ProposalContentList.Count + " Rows";
-        }
-
-
-        private void LoadAndFilterDataGridInformation()
-        {
-            //string text = this.TbxSearch.Text;
-            //bool userAddedOnly = this.CbxUserAdded.Checked;
-            //this.ProposalContentList = this.ProposalContentController.GetFiltered(userAddedOnly, this.CbxVendors.SelectedItem.Equals("--All--") ? "" : this.CbxVendors.SelectedItem.ToString(), text);
-            //this.FillProposalContentTable(this.ProposalContentList);
-        }
-
-        private void LoadProposalContent()
-        {
-            //this.ProposalContentList = this.ProposalContentController.Get();
-            //this.FillProposalContentTable(this.ProposalContentList);
-        }
-
-        private void LoadProposalVendors()
-        {
-            //List<string> vendors = this.ProposalContentController.GetVendors();
-            //vendors.Insert(0, "--All--");
-            //this.CbxVendors.SelectedValueChanged -= new EventHandler(this.CbxVendors_SelectedValueChanged);
-            //this.CbxVendors.DataSource = vendors.ToArray();
-            //this.CbxVendors.SelectedValueChanged += new EventHandler(this.CbxVendors_SelectedValueChanged);
-        }
-
-        private void ProposalContent_Load(object sender, EventArgs e)
-        {
-            this.Reload();
-        }
-        public override void Reload()
-        {
-            this.LoadProposalVendors();
-            this.LoadProposalContent();
+            this.LblTotalRows.Text = RFPContentList.Count + " Rows";
         }
 
         private void InitializeComponent()
         {
-            DataGridViewCellStyle style = new DataGridViewCellStyle();
-            DataGridViewCellStyle style2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle style3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle style4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle style5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle style6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle style7 = new DataGridViewCellStyle();
-            this.LblTotalRows = new Label();
-            this.label1 = new Label();
-            this.CbxUserAdded = new CheckBox();
-            this.DTProposalContent = new DataGridView();
-            this.PartNumber = new DataGridViewTextBoxColumn();
-            this.Manufacturer = new DataGridViewTextBoxColumn();
-            this.Description = new DataGridViewTextBoxColumn();
-            this.UserAdded = new DataGridViewCheckBoxColumn();
-            this.label8 = new Label();
-            this.CbxVendors = new ComboBox();
-            this.label7 = new Label();
-            this.TbxSearch = new TextBox();
-            this.BtnAdd = new Button();
-            this.BtnEdit = new Button();
-            this.BtnDelete = new Button();
-            this.label6 = new Label();
-            this.BtnSearch = new PictureBox();
-            ((ISupportInitialize) this.DTProposalContent).BeginInit();
-            ((ISupportInitialize) this.BtnSearch).BeginInit();
-            base.SuspendLayout();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.LblTotalRows = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.DTContent = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KeyWords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RTF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TbxSearch = new System.Windows.Forms.TextBox();
+            this.BtnViewContent = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnSeach = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.DTContent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSeach)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // LblTotalRows
+            // 
             this.LblTotalRows.AutoSize = true;
-            this.LblTotalRows.FlatStyle = FlatStyle.Flat;
-            this.LblTotalRows.Font = new Font("Segoe UI Semibold", 7f, FontStyle.Bold);
-            this.LblTotalRows.ForeColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.LblTotalRows.Location = new Point(0x3d, 0x228);
+            this.LblTotalRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LblTotalRows.Font = new System.Drawing.Font("Segoe UI Semibold", 7F, System.Drawing.FontStyle.Bold);
+            this.LblTotalRows.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.LblTotalRows.Location = new System.Drawing.Point(61, 552);
             this.LblTotalRows.Name = "LblTotalRows";
-            this.LblTotalRows.Size = new Size(0, 12);
-            this.LblTotalRows.TabIndex = 0x1b;
+            this.LblTotalRows.Size = new System.Drawing.Size(0, 15);
+            this.LblTotalRows.TabIndex = 27;
+            // 
+            // label1
+            // 
             this.label1.AutoSize = true;
-            this.label1.FlatStyle = FlatStyle.Flat;
-            this.label1.Font = new Font("Segoe UI Semibold", 7f, FontStyle.Bold);
-            this.label1.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label1.Location = new Point(14, 0x228);
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 7F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label1.Location = new System.Drawing.Point(14, 552);
             this.label1.Name = "label1";
-            this.label1.Size = new Size(0x2f, 12);
-            this.label1.TabIndex = 0x1a;
+            this.label1.Size = new System.Drawing.Size(57, 15);
+            this.label1.TabIndex = 26;
             this.label1.Text = "Showing:";
-            this.CbxUserAdded.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.CbxUserAdded.AutoSize = true;
-            this.CbxUserAdded.BackColor = Color.Transparent;
-            this.CbxUserAdded.Cursor = Cursors.Hand;
-            this.CbxUserAdded.FlatAppearance.BorderColor = Color.FromArgb(40, 40, 40);
-            this.CbxUserAdded.FlatAppearance.CheckedBackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.CbxUserAdded.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold);
-            this.CbxUserAdded.ForeColor = Color.FromArgb(40, 40, 40);
-            this.CbxUserAdded.Location = new Point(0x25a, 0x92);
-            this.CbxUserAdded.Name = "CbxUserAdded";
-            this.CbxUserAdded.Size = new Size(0x74, 0x13);
-            this.CbxUserAdded.TabIndex = 0x19;
-            this.CbxUserAdded.Text = "User-Added Only";
-            this.CbxUserAdded.TextImageRelation = TextImageRelation.ImageAboveText;
-            this.CbxUserAdded.UseVisualStyleBackColor = true;
-            this.CbxUserAdded.CheckedChanged += new EventHandler(this.cbxUserAdded_CheckedChanged);
-            this.DTProposalContent.AllowUserToAddRows = false;
-            this.DTProposalContent.AllowUserToDeleteRows = false;
-            this.DTProposalContent.AllowUserToResizeRows = false;
-            this.DTProposalContent.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.DTProposalContent.BackgroundColor = Color.White;
-            this.DTProposalContent.BorderStyle = BorderStyle.None;
-            this.DTProposalContent.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            this.DTProposalContent.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
-            this.DTProposalContent.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            style.BackColor = Color.White;
-            style.Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
-            style.ForeColor = SystemColors.WindowText;
-            style.SelectionBackColor = Color.FromArgb(0, 0x72, 0xc6);
-            style.SelectionForeColor = SystemColors.HighlightText;
-            style.WrapMode = DataGridViewTriState.False;
-            this.DTProposalContent.ColumnHeadersDefaultCellStyle = style;
-            this.DTProposalContent.ColumnHeadersHeight = 0x19;
-            this.DTProposalContent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            DataGridViewColumn[] dataGridViewColumns = new DataGridViewColumn[] { this.PartNumber, this.Manufacturer, this.Description, this.UserAdded };
-            this.DTProposalContent.Columns.AddRange(dataGridViewColumns);
-            this.DTProposalContent.Cursor = Cursors.Hand;
-            style2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            style2.BackColor = Color.White;
-            style2.Font = new Font("Segoe UI", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
-            style2.ForeColor = Color.FromArgb(0x23, 0x23, 0x23);
-            style2.SelectionBackColor = Color.FromArgb(0, 0x72, 0xc6);
-            style2.SelectionForeColor = SystemColors.HighlightText;
-            style2.WrapMode = DataGridViewTriState.False;
-            this.DTProposalContent.DefaultCellStyle = style2;
-            this.DTProposalContent.EnableHeadersVisualStyles = false;
-            this.DTProposalContent.GridColor = Color.White;
-            this.DTProposalContent.Location = new Point(13, 0xa9);
-            this.DTProposalContent.Name = "DTProposalContent";
-            this.DTProposalContent.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            style3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            style3.BackColor = SystemColors.Control;
-            style3.Font = new Font("Segoe UI", 9.75f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            style3.ForeColor = SystemColors.WindowText;
-            style3.SelectionBackColor = SystemColors.Highlight;
-            style3.SelectionForeColor = SystemColors.HighlightText;
-            style3.WrapMode = DataGridViewTriState.True;
-            this.DTProposalContent.RowHeadersDefaultCellStyle = style3;
-            this.DTProposalContent.RowHeadersVisible = false;
-            this.DTProposalContent.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.DTProposalContent.ScrollBars = ScrollBars.Vertical;
-            this.DTProposalContent.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.DTProposalContent.Size = new Size(0x2c1, 0x177);
-            this.DTProposalContent.TabIndex = 0x18;
-            this.DTProposalContent.CellClick += new DataGridViewCellEventHandler(this.DTProposalContent_CellClick);
-            this.DTProposalContent.CellContentDoubleClick += new DataGridViewCellEventHandler(this.DTProposalContent_CellContentDoubleClick);
-            style4.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.PartNumber.DefaultCellStyle = style4;
-            this.PartNumber.HeaderText = "Part Number";
-            this.PartNumber.Name = "PartNumber";
-            this.PartNumber.ReadOnly = true;
-            this.PartNumber.Width = 0x87;
-            style5.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold);
-            this.Manufacturer.DefaultCellStyle = style5;
-            this.Manufacturer.HeaderText = "Manufacturer";
-            this.Manufacturer.Name = "Manufacturer";
-            this.Manufacturer.ReadOnly = true;
-            this.Manufacturer.Width = 140;
-            style6.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold);
-            this.Description.DefaultCellStyle = style6;
+            // 
+            // DTContent
+            // 
+            this.DTContent.AllowUserToAddRows = false;
+            this.DTContent.AllowUserToDeleteRows = false;
+            this.DTContent.AllowUserToOrderColumns = true;
+            this.DTContent.AllowUserToResizeColumns = false;
+            this.DTContent.AllowUserToResizeRows = false;
+            this.DTContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DTContent.BackgroundColor = System.Drawing.Color.White;
+            this.DTContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DTContent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.DTContent.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.DTContent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DTContent.ColumnHeadersHeight = 25;
+            this.DTContent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DTContent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Name,
+            this.Description,
+            this.KeyWords,
+            this.RTF});
+            this.DTContent.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTContent.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DTContent.EnableHeadersVisualStyles = false;
+            this.DTContent.GridColor = System.Drawing.Color.White;
+            this.DTContent.Location = new System.Drawing.Point(13, 119);
+            this.DTContent.MultiSelect = false;
+            this.DTContent.Name = "DTContent";
+            this.DTContent.ReadOnly = true;
+            this.DTContent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DTContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.DTContent.RowHeadersVisible = false;
+            this.DTContent.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.DTContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DTContent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DTContent.Size = new System.Drawing.Size(705, 425);
+            this.DTContent.TabIndex = 24;
+            this.DTContent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTContent_CellClick);
+            this.DTContent.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DTContent_CellMouseDoubleClick);
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // Name
+            // 
+            this.Name.HeaderText = "Name";
+            this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
+            this.Name.Width = 200;
+            // 
+            // Description
+            // 
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
             this.Description.Width = 350;
-            style7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            style7.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold);
-            style7.NullValue = false;
-            this.UserAdded.DefaultCellStyle = style7;
-            this.UserAdded.FlatStyle = FlatStyle.Popup;
-            this.UserAdded.HeaderText = "User-Added";
-            this.UserAdded.Name = "UserAdded";
-            this.UserAdded.ReadOnly = true;
-            this.UserAdded.SortMode = DataGridViewColumnSortMode.Automatic;
-            this.UserAdded.Width = 80;
-            this.label8.AutoSize = true;
-            this.label8.FlatStyle = FlatStyle.Flat;
-            this.label8.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label8.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label8.Location = new Point(13, 110);
-            this.label8.Name = "label8";
-            this.label8.Size = new Size(0x6f, 15);
-            this.label8.TabIndex = 0x17;
-            this.label8.Text = "Manufacturer Filter:";
-            this.CbxVendors.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.CbxVendors.FlatStyle = FlatStyle.Popup;
-            this.CbxVendors.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
-            this.CbxVendors.FormattingEnabled = true;
-            this.CbxVendors.Location = new Point(0x10, 0x81);
-            this.CbxVendors.Name = "CbxVendors";
-            this.CbxVendors.Size = new Size(0xdd, 0x19);
-            this.CbxVendors.TabIndex = 0x16;
-            this.CbxVendors.SelectedValueChanged += new EventHandler(this.CbxVendors_SelectedValueChanged);
+            // 
+            // KeyWords
+            // 
+            this.KeyWords.HeaderText = "KeyWords";
+            this.KeyWords.Name = "KeyWords";
+            this.KeyWords.ReadOnly = true;
+            this.KeyWords.Width = 155;
+            // 
+            // RTF
+            // 
+            this.RTF.HeaderText = "RTF";
+            this.RTF.Name = "RTF";
+            this.RTF.ReadOnly = true;
+            this.RTF.Visible = false;
+            // 
+            // label7
+            // 
             this.label7.AutoSize = true;
-            this.label7.FlatStyle = FlatStyle.Flat;
-            this.label7.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label7.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label7.Location = new Point(15, 0x31);
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label7.Location = new System.Drawing.Point(14, 51);
             this.label7.Name = "label7";
-            this.label7.Size = new Size(0x2e, 15);
-            this.label7.TabIndex = 0x15;
+            this.label7.Size = new System.Drawing.Size(59, 20);
+            this.label7.TabIndex = 21;
             this.label7.Text = "Search:";
-            this.TbxSearch.BackColor = Color.White;
-            this.TbxSearch.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
-            this.TbxSearch.ImeMode = ImeMode.Katakana;
-            this.TbxSearch.Location = new Point(0x10, 0x44);
+            // 
+            // TbxSearch
+            // 
+            this.TbxSearch.BackColor = System.Drawing.Color.White;
+            this.TbxSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
+            this.TbxSearch.Location = new System.Drawing.Point(17, 74);
             this.TbxSearch.Name = "TbxSearch";
-            this.TbxSearch.Size = new Size(0xc7, 0x18);
+            this.TbxSearch.Size = new System.Drawing.Size(199, 29);
             this.TbxSearch.TabIndex = 20;
-            this.BtnAdd.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnAdd.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnAdd.Cursor = Cursors.Hand;
-            this.BtnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnAdd.FlatStyle = FlatStyle.Flat;
-            this.BtnAdd.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnAdd.ForeColor = Color.White;
-            this.BtnAdd.Location = new Point(0x1b4, 0x67);
-            this.BtnAdd.Name = "BtnAdd";
-            this.BtnAdd.Size = new Size(90, 0x20);
-            this.BtnAdd.TabIndex = 0x13;
-            this.BtnAdd.Text = "Add";
-            this.BtnAdd.UseVisualStyleBackColor = false;
-            this.BtnAdd.Click += new EventHandler(this.BtnAdd_Click);
-            this.BtnEdit.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnEdit.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnEdit.Cursor = Cursors.Hand;
-            this.BtnEdit.Enabled = false;
-            this.BtnEdit.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnEdit.FlatStyle = FlatStyle.Flat;
-            this.BtnEdit.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnEdit.ForeColor = Color.White;
-            this.BtnEdit.Location = new Point(0x214, 0x67);
-            this.BtnEdit.Name = "BtnEdit";
-            this.BtnEdit.Size = new Size(90, 0x20);
-            this.BtnEdit.TabIndex = 0x12;
-            this.BtnEdit.Text = "Edit";
-            this.BtnEdit.UseVisualStyleBackColor = false;
-            this.BtnEdit.Click += new EventHandler(this.BtnEdit_Click);
-            this.BtnDelete.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnDelete.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnDelete.Cursor = Cursors.Hand;
-            this.BtnDelete.Enabled = false;
-            this.BtnDelete.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnDelete.FlatStyle = FlatStyle.Flat;
-            this.BtnDelete.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnDelete.ForeColor = Color.White;
-            this.BtnDelete.Location = new Point(0x274, 0x67);
-            this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new Size(90, 0x20);
-            this.BtnDelete.TabIndex = 0x11;
-            this.BtnDelete.Text = "Delete";
-            this.BtnDelete.UseVisualStyleBackColor = false;
-            this.BtnDelete.Click += new EventHandler(this.BtnDelete_Click);
+            this.TbxSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbxSearch_KeyDown);
+            // 
+            // BtnViewContent
+            // 
+            this.BtnViewContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnViewContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnViewContent.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnViewContent.Enabled = false;
+            this.BtnViewContent.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnViewContent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnViewContent.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnViewContent.ForeColor = System.Drawing.Color.White;
+            this.BtnViewContent.Location = new System.Drawing.Point(428, 71);
+            this.BtnViewContent.Name = "BtnViewContent";
+            this.BtnViewContent.Size = new System.Drawing.Size(142, 32);
+            this.BtnViewContent.TabIndex = 19;
+            this.BtnViewContent.Text = "View Content";
+            this.BtnViewContent.UseVisualStyleBackColor = false;
+            this.BtnViewContent.Click += new System.EventHandler(this.BtnViewContent_Click);
+            // 
+            // label6
+            // 
             this.label6.AutoSize = true;
-            this.label6.FlatStyle = FlatStyle.Flat;
-            this.label6.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label6.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label6.Location = new Point(8, 6);
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label6.Location = new System.Drawing.Point(8, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new Size(0x145, 15);
-            this.label6.TabIndex = 0x10;
-            this.label6.Text = "Library Manager > Structured Proposal Content for Products";
-            this.BtnSearch.Anchor = AnchorStyles.None;
-            this.BtnSearch.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnSearch.BackgroundImageLayout = ImageLayout.Center;
-            this.BtnSearch.Cursor = Cursors.Hand;
-            //this.BtnSearch.Image = Resources.search;
-            this.BtnSearch.Location = new Point(0xd5, 0x44);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new Size(0x18, 0x18);
-            this.BtnSearch.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.BtnSearch.TabIndex = 15;
-            this.BtnSearch.TabStop = false;
-            this.BtnSearch.Click += new EventHandler(this.BtnSearch_Click);
-            base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.WhiteSmoke;
-            base.ClientSize = new Size(730, 580);
-            base.Controls.Add(this.LblTotalRows);
-            base.Controls.Add(this.label1);
-            base.Controls.Add(this.CbxUserAdded);
-            base.Controls.Add(this.DTProposalContent);
-            base.Controls.Add(this.label8);
-            base.Controls.Add(this.CbxVendors);
-            base.Controls.Add(this.BtnSearch);
-            base.Controls.Add(this.label7);
-            base.Controls.Add(this.TbxSearch);
-            base.Controls.Add(this.BtnAdd);
-            base.Controls.Add(this.BtnEdit);
-            base.Controls.Add(this.BtnDelete);
-            base.Controls.Add(this.label6);
-            base.FormBorderStyle = FormBorderStyle.None;
-            base.Name = "ProposalContent";
-            this.Text = "ProposalContent";
-            base.Load += new EventHandler(this.ProposalContent_Load);
-            ((ISupportInitialize) this.DTProposalContent).EndInit();
-            ((ISupportInitialize) this.BtnSearch).EndInit();
-            base.ResumeLayout(false);
-            base.PerformLayout();
+            this.label6.Size = new System.Drawing.Size(198, 20);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Insert RFP response content";
+            // 
+            // btnSeach
+            // 
+            this.btnSeach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.btnSeach.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSeach.Image = global::RFPView.Properties.Resources.search4;
+            this.btnSeach.Location = new System.Drawing.Point(216, 74);
+            this.btnSeach.Name = "btnSeach";
+            this.btnSeach.Size = new System.Drawing.Size(24, 24);
+            this.btnSeach.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnSeach.TabIndex = 28;
+            this.btnSeach.TabStop = false;
+            this.btnSeach.Click += new System.EventHandler(this.btnSeach_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(576, 71);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(142, 32);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "Add Content";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // RFPContent
+            // 
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(730, 580);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSeach);
+            this.Controls.Add(this.LblTotalRows);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.DTContent);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.TbxSearch);
+            this.Controls.Add(this.BtnViewContent);
+            this.Controls.Add(this.label6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Load += new System.EventHandler(this.RFPContent_Load);
+            this.Shown += new System.EventHandler(this.RFPContent_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.DTContent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSeach)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnViewContent_Click(object sender, EventArgs e)
+        {
+            RFP_Editor newView = new RFP_Editor(base.MainPanel, this);
+            newView.SetRTFString(this.DTContent.SelectedRows[0].Cells[4].Value.ToString());
+            newView.SetRTFId(Int32.Parse(this.DTContent.SelectedRows[0].Cells[0].Value.ToString()));
+            newView.SetRTFName(this.DTContent.SelectedRows[0].Cells[1].Value.ToString());
+            base.OpenPartialView(newView);
+        }
+
+        //private void DTContent_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    BtnViewContent.Enabled = true;
+        //}
+
+        public override void Reload() 
+        {
+            this.DTContent.Rows.Clear();
+            List<Models.RFPContent> RFPContentList = this.RFPController.GetAll();
+            this.DTContent.Rows.Clear();
+            foreach (Models.RFPContent content in RFPContentList)
+            {
+                object[] values = new object[] { content.ID, content.Name, content.Description, content.Keywords, content.Content };
+                this.DTContent.Rows.Add(values);
+            }
+            this.LblTotalRows.Text = RFPContentList.Count + " Rows";
+        }
+
+        private void RFPContent_Shown(object sender, EventArgs e)
+        {
+            this.Reload();
+        }
+
+        private void btnSeach_Click(object sender, EventArgs e)
+        {
+            ExecuteSearch(this.TbxSearch.Text);
+        }
+
+        private void ExecuteSearch(string Search) 
+        {
+            this.DTContent.Rows.Clear();
+            List<Models.RFPContent> RFPContentList = null;
+
+            if (!String.IsNullOrEmpty(Search))
+            {
+                RFPContentList = RFPController.GetByCoincidence(Search);
+            }
+            else
+            {
+                RFPContentList = this.RFPController.GetAll();
+            }
+            this.DTContent.Rows.Clear();
+            foreach (Models.RFPContent content in RFPContentList)
+            {
+                object[] values = new object[] { content.ID, content.Name, content.Description, content.Keywords, content.Content };
+                this.DTContent.Rows.Add(values);
+            }
+            this.LblTotalRows.Text = RFPContentList.Count + " Rows";
+        }
+
+        private void TbxSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                ExecuteSearch(this.TbxSearch.Text);
+            }    
+        }
+
+        //private void DTContent_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (this.DTContent.RowCount > 0)
+        //    {
+        //        Excel.Application xlApp = new Excel.Application();
+        //        Excel.Workbook xlWorkBook;
+        //        //~~> Start Excel and open the workbook.
+        //        xlWorkBook = xlApp.Workbooks.Open(@"C:\CorsPro\Test.xls");
+        //        //~~> Run the macros by supplying the necessary arguments
+        //        xlApp.Run("ShowMsg", this.DTContent.SelectedRows[0].Cells[1].Value.ToString());
+        //        //~~> Clean-up: Close the workbook
+        //        xlWorkBook.Close(false);
+        //        //~~> Quit the Excel Application
+        //        xlApp.Quit();
+        //        //~~> Clean Up
+        //        releaseObject(xlApp);
+        //        releaseObject(xlWorkBook);
+        //        System.Windows.Forms.Application.Exit();
+        //    }
+        //}
+
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
+        private void DTContent_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.DTContent.RowCount > 0)
+            {
+                BtnViewContent.Enabled = true;
+            }
+        }
+
+        private void DTContent_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                string XLAPath = RFPController.GetXLAPath();
+                if (this.DTContent.RowCount > 0)
+                {
+                    Excel.Application xlApp = new Excel.Application();
+                    Excel.Workbook xlWorkBook;
+                    //~~> Start Excel and open the workbook.
+                    xlWorkBook = xlApp.Workbooks.Open(XLAPath);
+                    //~~> Run the macros by supplying the necessary arguments
+                    xlApp.Run("InsertRFPContent", this.DTContent.SelectedRows[0].Cells[1].Value.ToString());
+                    //~~> Clean-up: Close the workbook
+                    xlWorkBook.Close(false);
+                    //~~> Quit the Excel Application
+                    xlApp.Quit();
+                    //~~> Clean Up
+                    releaseObject(xlApp);
+                    releaseObject(xlWorkBook);
+                    System.Windows.Forms.Application.Exit();
+                }
+            }
+            catch (Exception exception) 
+            {
+                MessageBox.Show(exception.Message,
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error 
+               );
+               System.Windows.Forms.Application.Exit();
+            }
+        }
+
     }
 }
 

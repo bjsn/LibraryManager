@@ -65,13 +65,13 @@ namespace RFP.Views
             this.pictureBox1.TabIndex = 0x1f;
             this.pictureBox1.TabStop = false;
             base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
+            //base.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.White;
             base.ClientSize = new Size(0x119, 0x67);
             base.Controls.Add(this.label1);
             base.Controls.Add(this.label4);
             base.Controls.Add(this.pictureBox1);
-            base.FormBorderStyle = FormBorderStyle.None;
+            //base.FormBorderStyle = FormBorderStyle.None;
             base.Name = "ConfirmationView";
             this.Text = "ConfirmationView";
             ((ISupportInitialize) this.pictureBox1).EndInit();

@@ -1,0 +1,5 @@
+C:\Byron\CorsPro code\LibraryManager\LibraryManager.Common\bin\Debug\LibraryManager.Common.dll
+C:\Byron\CorsPro code\LibraryManager\LibraryManager.Common\bin\Debug\LibraryManager.Common.pdb
+C:\Byron\CorsPro code\LibraryManager\LibraryManager.Common\obj\Debug\LibraryManager.Common.dll
+C:\Byron\CorsPro code\LibraryManager\LibraryManager.Common\obj\Debug\LibraryManager.Common.pdb
+C:\Byron\CorsPro code\LibraryManager\LibraryManager.Common\obj\Debug\LibraryManager.Common.csprojResolveAssemblyReference.cache

@@ -157,7 +157,7 @@
             this.lblTextDelete.Size = new Size(0, 0x11);
             this.lblTextDelete.TabIndex = 0x2e;
             base.AutoScaleDimensions = new SizeF(7f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
+            //base.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.White;
             base.ClientSize = new Size(0x133, 0x8a);
             base.Controls.Add(this.lblTextDelete);
@@ -166,7 +166,7 @@
             base.Controls.Add(this.label2);
             base.Controls.Add(this.panel2);
             this.Font = new Font("Segoe UI", 8.25f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            base.FormBorderStyle = FormBorderStyle.None;
+            //base.FormBorderStyle = FormBorderStyle.None;
             base.Name = "Delete_Alert";
             this.Text = "Delete_Alert";
             this.panel2.ResumeLayout(false);

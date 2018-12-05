@@ -7,8 +7,8 @@
     <ProjectGuid>{1BE23FD5-F920-4150-BCD8-DE1863A7FDEB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RFP.Views</RootNamespace>
-    <AssemblyName>RFP.Views</AssemblyName>
+    <RootNamespace>RFPView</RootNamespace>
+    <AssemblyName>RFPView</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,6 +33,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -60,7 +63,7 @@
     <Compile Include="Common\Main_Container_Base.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\ProposalContent_Container.cs">
+    <Compile Include="Common\RFPContent_Container.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Common\SeeThroughPanel.cs">
@@ -68,6 +71,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RFP_Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\RFPContent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +99,57 @@
       <Project>{df72c3c7-0e39-4b8f-97c5-61df4e4db431}</Project>
       <Name>RFP.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\BasePartialView.resx">
+      <DependentUpon>BasePartialView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\RFPContent_Container.resx">
+      <DependentUpon>RFPContent_Container.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RFPContent.resx">
+      <DependentUpon>RFPContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RFP_Editor.resx">
+      <DependentUpon>RFP_Editor.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CorsProLogo400pxWidel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo-transparent.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -57,6 +57,7 @@ namespace RFP.Views
             else
             {
                 this.PreviewForm.Show();
+                this.PreviewForm.Reload();
                 this.PreviewForm.DeleteThroughPanel();
             }
         }
@@ -84,14 +85,15 @@ namespace RFP.Views
 
         private void InitializeComponent()
         {
-            base.SuspendLayout();
-            base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
-            base.ClientSize = new Size(0xa7, 2);
-            base.FormBorderStyle = FormBorderStyle.FixedSingle;
-            base.Name = "BasePartialView";
+            this.SuspendLayout();
+            // 
+            // BasePartialView
+            // 
+            this.ClientSize = new System.Drawing.Size(167, 10);
+            this.Name = "BasePartialView";
             this.Text = "BasePartView";
-            base.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         protected void OpenPartialAlert(Form NewView)

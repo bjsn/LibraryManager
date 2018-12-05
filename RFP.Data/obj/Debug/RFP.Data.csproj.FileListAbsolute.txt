@@ -1,0 +1,9 @@
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\bin\Debug\RFP.Data.dll
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\bin\Debug\RFP.Data.pdb
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\bin\Debug\LibraryManager.Common.dll
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\bin\Debug\RFP.Models.dll
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\bin\Debug\LibraryManager.Common.pdb
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\bin\Debug\RFP.Models.pdb
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\obj\Debug\RFP.Data.csprojResolveAssemblyReference.cache
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\obj\Debug\RFP.Data.dll
+C:\Byron\CorsPro code\LibraryManager\RFP.Data\obj\Debug\RFP.Data.pdb

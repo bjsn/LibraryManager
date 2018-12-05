@@ -13,6 +13,7 @@ namespace LibraryManager.Core
         protected readonly string DIRECTORY_COMPANY;
         protected LibraryManager.Data.ProposalContentDL ProposalContentDL;
         protected string DBPW;
+       
 
         public BaseController()
         {

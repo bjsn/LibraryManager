@@ -10,7 +10,12 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Main_Container());
+
+            using (RFPContent_Container form = new RFPContent_Container())
+            {
+                form.ShowDialog();
+            }
+
         }
     }
 }
