@@ -164,260 +164,327 @@
 
         private void InitializeComponent()
         {
-            this.components = new Container();
-            this.BtnAddImage = new Button();
-            this.TxbPBenefits = new RichTextBox();
-            this.TxbPOverview = new RichTextBox();
-            this.TxbPDetails = new RichTextBox();
-            this.BtnRemoveImage = new Button();
-            this.BtnCancel = new Button();
-            this.BtnSave = new Button();
-            this.label8 = new Label();
-            this.label7 = new Label();
-            this.label5 = new Label();
-            this.TxbPDescription = new TextBox();
-            this.label4 = new Label();
-            this.label3 = new Label();
-            this.PBProduct = new PictureBox();
-            this.TxbManufacturer = new TextBox();
-            this.label2 = new Label();
-            this.TxbPartNumber = new TextBox();
-            this.label1 = new Label();
-            this.label6 = new Label();
-            this.errorProvider1 = new ErrorProvider(this.components);
-            ((ISupportInitialize) this.PBProduct).BeginInit();
-            ((ISupportInitialize) this.errorProvider1).BeginInit();
-            base.SuspendLayout();
-            this.BtnAddImage.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnAddImage.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnAddImage.Cursor = Cursors.Hand;
-            this.BtnAddImage.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnAddImage.FlatStyle = FlatStyle.Flat;
-            this.BtnAddImage.Font = new Font("Segoe UI", 7f, FontStyle.Bold);
-            this.BtnAddImage.ForeColor = Color.White;
-            this.BtnAddImage.Location = new Point(0x23f, 0xc2);
+            this.components = new System.ComponentModel.Container();
+            this.BtnAddImage = new System.Windows.Forms.Button();
+            this.TxbPBenefits = new System.Windows.Forms.RichTextBox();
+            this.TxbPOverview = new System.Windows.Forms.RichTextBox();
+            this.TxbPDetails = new System.Windows.Forms.RichTextBox();
+            this.BtnRemoveImage = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnSave = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TxbPDescription = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.PBProduct = new System.Windows.Forms.PictureBox();
+            this.TxbManufacturer = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TxbPartNumber = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.PBProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // BtnAddImage
+            // 
+            this.BtnAddImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAddImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnAddImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnAddImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnAddImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddImage.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold);
+            this.BtnAddImage.ForeColor = System.Drawing.Color.White;
+            this.BtnAddImage.Location = new System.Drawing.Point(575, 194);
             this.BtnAddImage.Name = "BtnAddImage";
-            this.BtnAddImage.Size = new Size(0x45, 0x19);
-            this.BtnAddImage.TabIndex = 0x2c;
+            this.BtnAddImage.Size = new System.Drawing.Size(69, 25);
+            this.BtnAddImage.TabIndex = 44;
             this.BtnAddImage.Text = "Add";
             this.BtnAddImage.UseVisualStyleBackColor = false;
-            this.BtnAddImage.Click += new EventHandler(this.BtnAddImage_Click);
-            this.TxbPBenefits.BackColor = Color.White;
-            this.TxbPBenefits.BorderStyle = BorderStyle.FixedSingle;
-            this.TxbPBenefits.Font = new Font("Segoe UI", 7f);
-            this.TxbPBenefits.Location = new Point(0x10, 0xb9);
+            this.BtnAddImage.Click += new System.EventHandler(this.BtnAddImage_Click);
+            // 
+            // TxbPBenefits
+            // 
+            this.TxbPBenefits.BackColor = System.Drawing.Color.White;
+            this.TxbPBenefits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxbPBenefits.Font = new System.Drawing.Font("Segoe UI", 7F);
+            this.TxbPBenefits.Location = new System.Drawing.Point(16, 185);
             this.TxbPBenefits.Name = "TxbPBenefits";
             this.TxbPBenefits.ReadOnly = true;
-            this.TxbPBenefits.Size = new Size(0x221, 90);
-            this.TxbPBenefits.TabIndex = 0x20;
+            this.TxbPBenefits.Size = new System.Drawing.Size(545, 90);
+            this.TxbPBenefits.TabIndex = 32;
             this.TxbPBenefits.Text = "";
-            this.TxbPBenefits.Click += new EventHandler(this.TxbPBenefits_Click);
-            this.TxbPBenefits.Enter += new EventHandler(this.TxbPBenefits_Enter);
-            this.TxbPOverview.BackColor = Color.White;
-            this.TxbPOverview.BorderStyle = BorderStyle.FixedSingle;
-            this.TxbPOverview.Font = new Font("Segoe UI", 7f);
-            this.TxbPOverview.Location = new Point(0x12, 0x131);
+            this.TxbPBenefits.Click += new System.EventHandler(this.TxbPBenefits_Click);
+            this.TxbPBenefits.Enter += new System.EventHandler(this.TxbPBenefits_Enter);
+            // 
+            // TxbPOverview
+            // 
+            this.TxbPOverview.BackColor = System.Drawing.Color.White;
+            this.TxbPOverview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxbPOverview.Font = new System.Drawing.Font("Segoe UI", 7F);
+            this.TxbPOverview.Location = new System.Drawing.Point(18, 305);
             this.TxbPOverview.Name = "TxbPOverview";
             this.TxbPOverview.ReadOnly = true;
-            this.TxbPOverview.Size = new Size(0x21b, 90);
-            this.TxbPOverview.TabIndex = 0x22;
+            this.TxbPOverview.Size = new System.Drawing.Size(539, 90);
+            this.TxbPOverview.TabIndex = 34;
             this.TxbPOverview.Text = "";
-            this.TxbPOverview.Click += new EventHandler(this.TxbPOverview_Click);
-            this.TxbPOverview.Enter += new EventHandler(this.TxbPOverview_Enter);
-            this.TxbPDetails.BackColor = Color.White;
-            this.TxbPDetails.Font = new Font("Segoe UI", 7f);
-            this.TxbPDetails.Location = new Point(0x12, 0x1ac);
+            this.TxbPOverview.Click += new System.EventHandler(this.TxbPOverview_Click);
+            this.TxbPOverview.Enter += new System.EventHandler(this.TxbPOverview_Enter);
+            // 
+            // TxbPDetails
+            // 
+            this.TxbPDetails.BackColor = System.Drawing.Color.White;
+            this.TxbPDetails.Font = new System.Drawing.Font("Segoe UI", 7F);
+            this.TxbPDetails.Location = new System.Drawing.Point(18, 428);
             this.TxbPDetails.Name = "TxbPDetails";
             this.TxbPDetails.ReadOnly = true;
-            this.TxbPDetails.Size = new Size(0x21b, 90);
-            this.TxbPDetails.TabIndex = 0x24;
+            this.TxbPDetails.Size = new System.Drawing.Size(539, 90);
+            this.TxbPDetails.TabIndex = 36;
             this.TxbPDetails.Text = "";
-            this.TxbPDetails.Click += new EventHandler(this.TxbPDetails_Click);
-            this.TxbPDetails.Enter += new EventHandler(this.TxbPDetails_Enter);
-            this.BtnRemoveImage.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnRemoveImage.BackColor = Color.FromArgb(0xfe, 0x35, 0x47);
-            this.BtnRemoveImage.Cursor = Cursors.Hand;
+            this.TxbPDetails.Click += new System.EventHandler(this.TxbPDetails_Click);
+            this.TxbPDetails.Enter += new System.EventHandler(this.TxbPDetails_Enter);
+            // 
+            // BtnRemoveImage
+            // 
+            this.BtnRemoveImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnRemoveImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
+            this.BtnRemoveImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnRemoveImage.Enabled = false;
-            this.BtnRemoveImage.FlatAppearance.MouseOverBackColor = Color.FromArgb(0xe5, 0x2d, 0x2d);
-            this.BtnRemoveImage.FlatStyle = FlatStyle.Flat;
-            this.BtnRemoveImage.Font = new Font("Segoe UI", 7f, FontStyle.Bold);
-            this.BtnRemoveImage.ForeColor = Color.White;
-            this.BtnRemoveImage.Location = new Point(0x289, 0xc2);
+            this.BtnRemoveImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.BtnRemoveImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRemoveImage.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold);
+            this.BtnRemoveImage.ForeColor = System.Drawing.Color.White;
+            this.BtnRemoveImage.Location = new System.Drawing.Point(649, 194);
             this.BtnRemoveImage.Name = "BtnRemoveImage";
-            this.BtnRemoveImage.Size = new Size(0x45, 0x19);
+            this.BtnRemoveImage.Size = new System.Drawing.Size(69, 25);
             this.BtnRemoveImage.TabIndex = 40;
             this.BtnRemoveImage.Text = "Remove";
             this.BtnRemoveImage.UseVisualStyleBackColor = false;
-            this.BtnRemoveImage.Click += new EventHandler(this.BtnRemoveImage_Click);
-            this.BtnCancel.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnCancel.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnCancel.Cursor = Cursors.Hand;
-            this.BtnCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnCancel.FlatStyle = FlatStyle.Flat;
-            this.BtnCancel.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnCancel.ForeColor = Color.White;
-            this.BtnCancel.Location = new Point(530, 0x218);
+            this.BtnRemoveImage.Click += new System.EventHandler(this.BtnRemoveImage_Click);
+            // 
+            // BtnCancel
+            // 
+            this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnCancel.ForeColor = System.Drawing.Color.White;
+            this.BtnCancel.Location = new System.Drawing.Point(530, 536);
             this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new Size(90, 0x20);
-            this.BtnCancel.TabIndex = 0x2a;
+            this.BtnCancel.Size = new System.Drawing.Size(90, 32);
+            this.BtnCancel.TabIndex = 42;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = false;
-            this.BtnCancel.Click += new EventHandler(this.BtnCancel_Click);
-            this.BtnSave.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnSave.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnSave.Cursor = Cursors.Hand;
-            this.BtnSave.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnSave.FlatStyle = FlatStyle.Flat;
-            this.BtnSave.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnSave.ForeColor = Color.White;
-            this.BtnSave.Location = new Point(0x272, 0x218);
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnSave.ForeColor = System.Drawing.Color.White;
+            this.BtnSave.Location = new System.Drawing.Point(626, 536);
             this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new Size(90, 0x20);
+            this.BtnSave.Size = new System.Drawing.Size(90, 32);
             this.BtnSave.TabIndex = 40;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = false;
-            this.BtnSave.Click += new EventHandler(this.BtnSave_Click);
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // label8
+            // 
             this.label8.AutoSize = true;
-            this.label8.FlatStyle = FlatStyle.Flat;
-            this.label8.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label8.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label8.Location = new Point(0x11, 410);
+            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label8.Location = new System.Drawing.Point(17, 410);
             this.label8.Name = "label8";
-            this.label8.Size = new Size(0x5b, 15);
-            this.label8.TabIndex = 0x23;
+            this.label8.Size = new System.Drawing.Size(117, 20);
+            this.label8.TabIndex = 35;
             this.label8.Text = "Product Details:";
+            // 
+            // label7
+            // 
             this.label7.AutoSize = true;
-            this.label7.FlatStyle = FlatStyle.Flat;
-            this.label7.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label7.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label7.Location = new Point(15, 0x11f);
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label7.Location = new System.Drawing.Point(15, 287);
             this.label7.Name = "label7";
-            this.label7.Size = new Size(0x68, 15);
-            this.label7.TabIndex = 0x21;
+            this.label7.Size = new System.Drawing.Size(136, 20);
+            this.label7.TabIndex = 33;
             this.label7.Text = "Product Overview:";
+            // 
+            // label5
+            // 
             this.label5.AutoSize = true;
-            this.label5.FlatStyle = FlatStyle.Flat;
-            this.label5.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label5.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label5.Location = new Point(15, 0xa7);
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label5.Location = new System.Drawing.Point(15, 167);
             this.label5.Name = "label5";
-            this.label5.Size = new Size(0x61, 15);
-            this.label5.TabIndex = 0x1f;
+            this.label5.Size = new System.Drawing.Size(125, 20);
+            this.label5.TabIndex = 31;
             this.label5.Text = "Product Benefits:";
-            this.TxbPDescription.BackColor = Color.White;
-            this.TxbPDescription.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
-//            this.TxbPDescription.ImeMode = ImeMode.Katakana;
-            this.TxbPDescription.Location = new Point(0x10, 0x80);
+            // 
+            // TxbPDescription
+            // 
+            this.TxbPDescription.BackColor = System.Drawing.Color.White;
+            this.TxbPDescription.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
+            this.TxbPDescription.Location = new System.Drawing.Point(16, 128);
             this.TxbPDescription.Name = "TxbPDescription";
-            this.TxbPDescription.Size = new Size(0x221, 0x18);
+            this.TxbPDescription.Size = new System.Drawing.Size(545, 29);
             this.TxbPDescription.TabIndex = 30;
-            this.TxbPDescription.Enter += new EventHandler(this.TxbPDescription_Enter);
+            this.TxbPDescription.Enter += new System.EventHandler(this.TxbPDescription_Enter);
+            // 
+            // label4
+            // 
             this.label4.AutoSize = true;
-            this.label4.FlatStyle = FlatStyle.Flat;
-            this.label4.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label4.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label4.Location = new Point(15, 110);
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label4.Location = new System.Drawing.Point(15, 110);
             this.label4.Name = "label4";
-            this.label4.Size = new Size(0x9f, 15);
-            this.label4.TabIndex = 0x1d;
+            this.label4.Size = new System.Drawing.Size(204, 20);
+            this.label4.TabIndex = 29;
             this.label4.Text = "Product Description (Name):";
+            // 
+            // label3
+            // 
             this.label3.AutoSize = true;
-            this.label3.FlatStyle = FlatStyle.Flat;
-            this.label3.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label3.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label3.Location = new Point(0x23f, 0x2b);
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label3.Location = new System.Drawing.Point(575, 43);
             this.label3.Name = "label3";
-            this.label3.Size = new Size(0x2f, 15);
-            this.label3.TabIndex = 0x1c;
+            this.label3.Size = new System.Drawing.Size(61, 20);
+            this.label3.TabIndex = 28;
             this.label3.Text = "Picture:";
-            this.PBProduct.BackColor = Color.Transparent;
-            this.PBProduct.BorderStyle = BorderStyle.FixedSingle;
-            this.PBProduct.Cursor = Cursors.Arrow;
-            this.PBProduct.Location = new Point(0x242, 0x3d);
+            // 
+            // PBProduct
+            // 
+            this.PBProduct.BackColor = System.Drawing.Color.Transparent;
+            this.PBProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PBProduct.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.PBProduct.Location = new System.Drawing.Point(578, 61);
             this.PBProduct.Name = "PBProduct";
-            this.PBProduct.Size = new Size(140, 130);
-            this.PBProduct.SizeMode = PictureBoxSizeMode.Zoom;
-            this.PBProduct.TabIndex = 0x1b;
+            this.PBProduct.Size = new System.Drawing.Size(140, 130);
+            this.PBProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PBProduct.TabIndex = 27;
             this.PBProduct.TabStop = false;
-            this.TxbManufacturer.BackColor = Color.White;
-            this.TxbManufacturer.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
-            this.TxbManufacturer.ImeMode = ImeMode.Katakana;
-            this.TxbManufacturer.Location = new Point(0x12d, 70);
+            // 
+            // TxbManufacturer
+            // 
+            this.TxbManufacturer.BackColor = System.Drawing.Color.White;
+            this.TxbManufacturer.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
+            this.TxbManufacturer.Location = new System.Drawing.Point(301, 70);
             this.TxbManufacturer.MaxLength = 500;
             this.TxbManufacturer.Name = "TxbManufacturer";
-            this.TxbManufacturer.Size = new Size(260, 0x18);
-            this.TxbManufacturer.TabIndex = 0x1a;
-            this.TxbManufacturer.Enter += new EventHandler(this.TxbManufacturer_Enter);
+            this.TxbManufacturer.Size = new System.Drawing.Size(260, 29);
+            this.TxbManufacturer.TabIndex = 26;
+            this.TxbManufacturer.Enter += new System.EventHandler(this.TxbManufacturer_Enter);
+            // 
+            // label2
+            // 
             this.label2.AutoSize = true;
-            this.label2.FlatStyle = FlatStyle.Flat;
-            this.label2.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label2.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label2.Location = new Point(0x12a, 0x34);
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label2.Location = new System.Drawing.Point(298, 52);
             this.label2.Name = "label2";
-            this.label2.Size = new Size(0x52, 15);
-            this.label2.TabIndex = 0x19;
+            this.label2.Size = new System.Drawing.Size(108, 20);
+            this.label2.TabIndex = 25;
             this.label2.Text = "Manufacturer:";
-            this.TxbPartNumber.BackColor = Color.White;
-            this.TxbPartNumber.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
-            this.TxbPartNumber.ImeMode = ImeMode.Katakana;
-            this.TxbPartNumber.Location = new Point(0x10, 70);
-            this.TxbPartNumber.MaxLength = 0xfe;
+            // 
+            // TxbPartNumber
+            // 
+            this.TxbPartNumber.BackColor = System.Drawing.Color.White;
+            this.TxbPartNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
+            this.TxbPartNumber.Location = new System.Drawing.Point(16, 70);
+            this.TxbPartNumber.MaxLength = 254;
             this.TxbPartNumber.Name = "TxbPartNumber";
-            this.TxbPartNumber.Size = new Size(260, 0x18);
-            this.TxbPartNumber.TabIndex = 0x18;
-            this.TxbPartNumber.Enter += new EventHandler(this.TxbPartNumber_Enter);
+            this.TxbPartNumber.Size = new System.Drawing.Size(260, 29);
+            this.TxbPartNumber.TabIndex = 24;
+            this.TxbPartNumber.Enter += new System.EventHandler(this.TxbPartNumber_Enter);
+            // 
+            // label1
+            // 
             this.label1.AutoSize = true;
-            this.label1.FlatStyle = FlatStyle.Flat;
-            this.label1.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label1.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label1.Location = new Point(15, 0x33);
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label1.Location = new System.Drawing.Point(15, 51);
             this.label1.Name = "label1";
-            this.label1.Size = new Size(0x4e, 15);
-            this.label1.TabIndex = 0x17;
+            this.label1.Size = new System.Drawing.Size(103, 20);
+            this.label1.TabIndex = 23;
             this.label1.Text = "Part Number:";
+            // 
+            // label6
+            // 
             this.label6.AutoSize = true;
-            this.label6.FlatStyle = FlatStyle.Flat;
-            this.label6.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label6.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label6.Location = new Point(8, 6);
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label6.Location = new System.Drawing.Point(8, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new Size(0x182, 15);
-            this.label6.TabIndex = 0x11;
+            this.label6.Size = new System.Drawing.Size(502, 20);
+            this.label6.TabIndex = 17;
             this.label6.Text = "Library Manager > Structured Proposal Content for Products > Add/Edit";
+            // 
+            // errorProvider1
+            // 
             this.errorProvider1.BlinkRate = 100;
-            this.errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
-            base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.WhiteSmoke;
-            base.ClientSize = new Size(730, 580);
-            base.Controls.Add(this.BtnAddImage);
-            base.Controls.Add(this.TxbPBenefits);
-            base.Controls.Add(this.TxbPOverview);
-            base.Controls.Add(this.TxbPDetails);
-            base.Controls.Add(this.BtnRemoveImage);
-            base.Controls.Add(this.BtnCancel);
-            base.Controls.Add(this.BtnSave);
-            base.Controls.Add(this.label8);
-            base.Controls.Add(this.label7);
-            base.Controls.Add(this.label5);
-            base.Controls.Add(this.TxbPDescription);
-            base.Controls.Add(this.label4);
-            base.Controls.Add(this.label3);
-            base.Controls.Add(this.PBProduct);
-            base.Controls.Add(this.TxbManufacturer);
-            base.Controls.Add(this.label2);
-            base.Controls.Add(this.TxbPartNumber);
-            base.Controls.Add(this.label1);
-            base.Controls.Add(this.label6);
-            base.FormBorderStyle = FormBorderStyle.None;
-            base.Name = "ProposalContent_Add_Edit";
+            // 
+            // ProposalContent_Add_Edit
+            // 
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(730, 580);
+            this.Controls.Add(this.BtnAddImage);
+            this.Controls.Add(this.TxbPBenefits);
+            this.Controls.Add(this.TxbPOverview);
+            this.Controls.Add(this.TxbPDetails);
+            this.Controls.Add(this.BtnRemoveImage);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnSave);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.TxbPDescription);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.PBProduct);
+            this.Controls.Add(this.TxbManufacturer);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.TxbPartNumber);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "ProposalContent_Add_Edit";
             this.Text = "ProposalContent_Add_Edit";
-            base.Load += new EventHandler(this.ProposalContent_Add_Edit_Load);
-            ((ISupportInitialize) this.PBProduct).EndInit();
-            ((ISupportInitialize) this.errorProvider1).EndInit();
-            base.ResumeLayout(false);
-            base.PerformLayout();
+            this.Load += new System.EventHandler(this.ProposalContent_Add_Edit_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.PBProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         private void ProposalContent_Add_Edit_Load(object sender, EventArgs e)

@@ -25,7 +25,7 @@
         private void InitializeComponent()
         {
             this.components = new Container();
-            base.AutoScaleMode = AutoScaleMode.Font;
+            //base.AutoScaleMode = AutoScaleMode.Font;
             this.Text = "Error";
         }
     }

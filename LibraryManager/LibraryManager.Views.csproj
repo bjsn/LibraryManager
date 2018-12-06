@@ -89,6 +89,21 @@
     <Compile Include="Views\ProposalContent_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="Common\ConfirmationView.resx">
+      <DependentUpon>ConfirmationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Delete_Alert.resx">
+      <DependentUpon>Delete_Alert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Main_Container.resx">
+      <DependentUpon>Main_Container.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Navbar.resx">
+      <DependentUpon>Navbar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\ProposalContent_Container.resx">
+      <DependentUpon>ProposalContent_Container.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -99,8 +114,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\DocSection.resx">
+      <DependentUpon>DocSection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ProposalContent.resx">
       <DependentUpon>ProposalContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ProposalContent_Add_Edit.resx">
+      <DependentUpon>ProposalContent_Add_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ProposalContent_Editor.resx">
+      <DependentUpon>ProposalContent_Editor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -127,6 +151,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo-transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\content.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contract.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\screen-with-news-sections.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window-with-different-sections.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text-editor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item-connections.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

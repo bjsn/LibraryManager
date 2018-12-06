@@ -50,280 +50,372 @@
 
         private void InitializeComponent()
         {
-            DataGridViewCellStyle style = new DataGridViewCellStyle();
-            DataGridViewCellStyle style2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle style3 = new DataGridViewCellStyle();
-            this.label6 = new Label();
-            this.label7 = new Label();
-            this.TbxSearch = new TextBox();
-            this.BtnSearch = new PictureBox();
-            this.BtnAdd = new Button();
-            this.BtnEdit = new Button();
-            this.BtnDelete = new Button();
-            this.BtnExport = new Button();
-            this.label8 = new Label();
-            this.CbxColumn = new ComboBox();
-            this.label1 = new Label();
-            this.comboBox1 = new ComboBox();
-            this.panel1 = new Panel();
-            this.DTProposalContent = new DataGridView();
-            this.button1 = new Button();
-            this.Id = new DataGridViewTextBoxColumn();
-            this.Section = new DataGridViewTextBoxColumn();
-            this.Location = new DataGridViewTextBoxColumn();
-            this.DocType = new DataGridViewTextBoxColumn();
-            this.Description = new DataGridViewTextBoxColumn();
-            this.Source = new DataGridViewTextBoxColumn();
-            this.Updated = new DataGridViewTextBoxColumn();
-            this.UpdatedBy = new DataGridViewTextBoxColumn();
-            this.ClientUpdated = new DataGridViewTextBoxColumn();
-            ((ISupportInitialize) this.BtnSearch).BeginInit();
-            ((ISupportInitialize) this.DTProposalContent).BeginInit();
-            base.SuspendLayout();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TbxSearch = new System.Windows.Forms.TextBox();
+            this.BtnSearch = new System.Windows.Forms.PictureBox();
+            this.BtnAdd = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
+            this.BtnExport = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.CbxColumn = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.DTProposalContent = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Section = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DocType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DTProposalContent)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label6
+            // 
             this.label6.AutoSize = true;
-            this.label6.FlatStyle = FlatStyle.Flat;
-            this.label6.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label6.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label6.Location = new Point(8, 6);
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label6.Location = new System.Drawing.Point(8, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new Size(0xb1, 15);
-            this.label6.TabIndex = 0x11;
+            this.label6.Size = new System.Drawing.Size(229, 20);
+            this.label6.TabIndex = 17;
             this.label6.Text = "Library Manager > Doc Sections";
+            // 
+            // label7
+            // 
             this.label7.AutoSize = true;
-            this.label7.FlatStyle = FlatStyle.Flat;
-            this.label7.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label7.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label7.Location = new Point(15, 0x33);
+            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label7.Location = new System.Drawing.Point(15, 51);
             this.label7.Name = "label7";
-            this.label7.Size = new Size(0x2e, 15);
-            this.label7.TabIndex = 0x18;
+            this.label7.Size = new System.Drawing.Size(59, 20);
+            this.label7.TabIndex = 24;
             this.label7.Text = "Search:";
-            this.TbxSearch.BackColor = Color.White;
-            this.TbxSearch.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
-            this.TbxSearch.ImeMode = ImeMode.Katakana;
-            this.TbxSearch.Location = new Point(0x10, 70);
+            // 
+            // TbxSearch
+            // 
+            this.TbxSearch.BackColor = System.Drawing.Color.White;
+            this.TbxSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
+            this.TbxSearch.Location = new System.Drawing.Point(16, 70);
             this.TbxSearch.Name = "TbxSearch";
-            this.TbxSearch.Size = new Size(0xc7, 0x18);
-            this.TbxSearch.TabIndex = 0x17;
-            this.BtnSearch.Anchor = AnchorStyles.None;
-            this.BtnSearch.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnSearch.BackgroundImageLayout = ImageLayout.Center;
-            this.BtnSearch.Cursor = Cursors.Hand;
-            //this.BtnSearch.Image = Resources.search;
-            this.BtnSearch.Location = new Point(0xd5, 70);
+            this.TbxSearch.Size = new System.Drawing.Size(199, 29);
+            this.TbxSearch.TabIndex = 23;
+            // 
+            // BtnSearch
+            // 
+            this.BtnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSearch.Location = new System.Drawing.Point(213, 70);
             this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new Size(0x18, 0x18);
-            this.BtnSearch.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.BtnSearch.TabIndex = 0x16;
+            this.BtnSearch.Size = new System.Drawing.Size(24, 24);
+            this.BtnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BtnSearch.TabIndex = 22;
             this.BtnSearch.TabStop = false;
-            this.BtnAdd.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnAdd.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnAdd.Cursor = Cursors.Hand;
-            this.BtnAdd.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnAdd.FlatStyle = FlatStyle.Flat;
-            this.BtnAdd.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnAdd.ForeColor = Color.White;
-            this.BtnAdd.Location = new Point(370, 0x5f);
+            // 
+            // BtnAdd
+            // 
+            this.BtnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnAdd.ForeColor = System.Drawing.Color.White;
+            this.BtnAdd.Location = new System.Drawing.Point(370, 95);
             this.BtnAdd.Name = "BtnAdd";
-            this.BtnAdd.Size = new Size(0x52, 0x1d);
-            this.BtnAdd.TabIndex = 0x1b;
+            this.BtnAdd.Size = new System.Drawing.Size(82, 29);
+            this.BtnAdd.TabIndex = 27;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = false;
-            this.BtnEdit.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnEdit.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnEdit.Cursor = Cursors.Hand;
+            // 
+            // BtnEdit
+            // 
+            this.BtnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnEdit.Enabled = false;
-            this.BtnEdit.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnEdit.FlatStyle = FlatStyle.Flat;
-            this.BtnEdit.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnEdit.ForeColor = Color.White;
-            this.BtnEdit.Location = new Point(0x1c8, 0x5f);
+            this.BtnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnEdit.ForeColor = System.Drawing.Color.White;
+            this.BtnEdit.Location = new System.Drawing.Point(456, 95);
             this.BtnEdit.Name = "BtnEdit";
-            this.BtnEdit.Size = new Size(0x51, 0x1d);
-            this.BtnEdit.TabIndex = 0x1a;
+            this.BtnEdit.Size = new System.Drawing.Size(81, 29);
+            this.BtnEdit.TabIndex = 26;
             this.BtnEdit.Text = "Edit";
             this.BtnEdit.UseVisualStyleBackColor = false;
-            this.BtnDelete.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnDelete.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnDelete.Cursor = Cursors.Hand;
+            // 
+            // BtnDelete
+            // 
+            this.BtnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnDelete.Enabled = false;
-            this.BtnDelete.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnDelete.FlatStyle = FlatStyle.Flat;
-            this.BtnDelete.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnDelete.ForeColor = Color.White;
-            this.BtnDelete.Location = new Point(0x21d, 0x5f);
+            this.BtnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnDelete.ForeColor = System.Drawing.Color.White;
+            this.BtnDelete.Location = new System.Drawing.Point(541, 95);
             this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new Size(0x52, 0x1d);
-            this.BtnDelete.TabIndex = 0x19;
+            this.BtnDelete.Size = new System.Drawing.Size(82, 29);
+            this.BtnDelete.TabIndex = 25;
             this.BtnDelete.Text = "Delete";
             this.BtnDelete.UseVisualStyleBackColor = false;
-            this.BtnExport.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnExport.BackColor = Color.FromArgb(0x27, 0x27, 0x27);
-            this.BtnExport.Cursor = Cursors.Hand;
+            // 
+            // BtnExport
+            // 
+            this.BtnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.BtnExport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnExport.Enabled = false;
-            this.BtnExport.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnExport.FlatStyle = FlatStyle.Flat;
-            this.BtnExport.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnExport.ForeColor = Color.White;
-            this.BtnExport.Location = new Point(0x21d, 0x80);
+            this.BtnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnExport.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnExport.ForeColor = System.Drawing.Color.White;
+            this.BtnExport.Location = new System.Drawing.Point(541, 128);
             this.BtnExport.Name = "BtnExport";
-            this.BtnExport.Size = new Size(0x52, 0x1d);
-            this.BtnExport.TabIndex = 0x1c;
+            this.BtnExport.Size = new System.Drawing.Size(82, 29);
+            this.BtnExport.TabIndex = 28;
             this.BtnExport.Text = "Export";
             this.BtnExport.UseVisualStyleBackColor = false;
+            // 
+            // label8
+            // 
             this.label8.AutoSize = true;
-            this.label8.FlatStyle = FlatStyle.Flat;
-            this.label8.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label8.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label8.Location = new Point(13, 0x75);
+            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label8.Location = new System.Drawing.Point(13, 117);
             this.label8.Name = "label8";
-            this.label8.Size = new Size(0x51, 15);
+            this.label8.Size = new System.Drawing.Size(105, 20);
             this.label8.TabIndex = 30;
             this.label8.Text = "Filter Column:";
-            this.CbxColumn.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.CbxColumn.FlatStyle = FlatStyle.Popup;
-            this.CbxColumn.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
+            // 
+            // CbxColumn
+            // 
+            this.CbxColumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbxColumn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.CbxColumn.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
             this.CbxColumn.FormattingEnabled = true;
-            this.CbxColumn.Location = new Point(0x10, 0x88);
+            this.CbxColumn.Location = new System.Drawing.Point(16, 136);
             this.CbxColumn.Name = "CbxColumn";
-            this.CbxColumn.Size = new Size(150, 0x19);
-            this.CbxColumn.TabIndex = 0x1d;
+            this.CbxColumn.Size = new System.Drawing.Size(150, 29);
+            this.CbxColumn.TabIndex = 29;
+            // 
+            // label1
+            // 
             this.label1.AutoSize = true;
-            this.label1.FlatStyle = FlatStyle.Flat;
-            this.label1.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label1.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label1.Location = new Point(0xac, 0x75);
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label1.Location = new System.Drawing.Point(172, 117);
             this.label1.Name = "label1";
-            this.label1.Size = new Size(0x44, 15);
-            this.label1.TabIndex = 0x20;
+            this.label1.Size = new System.Drawing.Size(90, 20);
+            this.label1.TabIndex = 32;
             this.label1.Text = "Filter Value:";
-            this.comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.comboBox1.FlatStyle = FlatStyle.Popup;
-            this.comboBox1.Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new Point(0xaf, 0x88);
+            this.comboBox1.Location = new System.Drawing.Point(175, 136);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new Size(150, 0x19);
-            this.comboBox1.TabIndex = 0x1f;
-            this.panel1.Location = new Point(0x14b, 0x86);
+            this.comboBox1.Size = new System.Drawing.Size(150, 29);
+            this.comboBox1.TabIndex = 31;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(331, 134);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new Size(0xce, 0x1b);
-            this.panel1.TabIndex = 0x21;
+            this.panel1.Size = new System.Drawing.Size(206, 27);
+            this.panel1.TabIndex = 33;
+            // 
+            // DTProposalContent
+            // 
             this.DTProposalContent.AllowUserToAddRows = false;
             this.DTProposalContent.AllowUserToDeleteRows = false;
             this.DTProposalContent.AllowUserToResizeRows = false;
-            this.DTProposalContent.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.DTProposalContent.BackgroundColor = Color.White;
-            this.DTProposalContent.BorderStyle = BorderStyle.None;
-            this.DTProposalContent.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            this.DTProposalContent.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
-            this.DTProposalContent.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            style.BackColor = Color.White;
-            style.Font = new Font("Segoe UI", 8.5f, FontStyle.Bold);
-            style.ForeColor = SystemColors.WindowText;
-            style.SelectionBackColor = Color.FromArgb(0, 0x72, 0xc6);
-            style.SelectionForeColor = SystemColors.HighlightText;
-            style.WrapMode = DataGridViewTriState.False;
-            this.DTProposalContent.ColumnHeadersDefaultCellStyle = style;
-            this.DTProposalContent.ColumnHeadersHeight = 0x19;
-            this.DTProposalContent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            DataGridViewColumn[] dataGridViewColumns = new DataGridViewColumn[] { this.Id, this.Section, this.Location, this.DocType, this.Description, this.Source, this.Updated, this.UpdatedBy, this.ClientUpdated };
-            this.DTProposalContent.Columns.AddRange(dataGridViewColumns);
-            this.DTProposalContent.Cursor = Cursors.Hand;
-            style2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            style2.BackColor = Color.White;
-            style2.Font = new Font("Segoe UI", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
-            style2.ForeColor = Color.FromArgb(0x23, 0x23, 0x23);
-            style2.SelectionBackColor = Color.FromArgb(0, 0x72, 0xc6);
-            style2.SelectionForeColor = SystemColors.HighlightText;
-            style2.WrapMode = DataGridViewTriState.False;
-            this.DTProposalContent.DefaultCellStyle = style2;
+            this.DTProposalContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DTProposalContent.BackgroundColor = System.Drawing.Color.White;
+            this.DTProposalContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DTProposalContent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.DTProposalContent.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.DTProposalContent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTProposalContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DTProposalContent.ColumnHeadersHeight = 25;
+            this.DTProposalContent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DTProposalContent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Section,
+            this.Location,
+            this.DocType,
+            this.Description,
+            this.Source,
+            this.Updated,
+            this.UpdatedBy,
+            this.ClientUpdated});
+            this.DTProposalContent.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTProposalContent.DefaultCellStyle = dataGridViewCellStyle2;
             this.DTProposalContent.EnableHeadersVisualStyles = false;
-            this.DTProposalContent.GridColor = Color.White;
-            this.DTProposalContent.Location = new Point(12, 0xa7);
+            this.DTProposalContent.GridColor = System.Drawing.Color.White;
+            this.DTProposalContent.Location = new System.Drawing.Point(12, 167);
             this.DTProposalContent.Name = "DTProposalContent";
-            this.DTProposalContent.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            style3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            style3.BackColor = SystemColors.Control;
-            style3.Font = new Font("Segoe UI", 9.75f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            style3.ForeColor = SystemColors.WindowText;
-            style3.SelectionBackColor = SystemColors.Highlight;
-            style3.SelectionForeColor = SystemColors.HighlightText;
-            style3.WrapMode = DataGridViewTriState.True;
-            this.DTProposalContent.RowHeadersDefaultCellStyle = style3;
+            this.DTProposalContent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DTProposalContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DTProposalContent.RowHeadersVisible = false;
-            this.DTProposalContent.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.DTProposalContent.ScrollBars = ScrollBars.Vertical;
-            this.DTProposalContent.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.DTProposalContent.Size = new Size(0x263, 0x134);
-            this.DTProposalContent.TabIndex = 0x22;
-            this.button1.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.button1.BackColor = Color.FromArgb(0x27, 0x27, 0x27);
-            this.button1.Cursor = Cursors.Hand;
-            this.button1.Enabled = false;
-            this.button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.button1.FlatStyle = FlatStyle.Flat;
-            this.button1.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.button1.ForeColor = Color.White;
-            this.button1.Location = new Point(0x11a, 0x5f);
-            this.button1.Name = "button1";
-            this.button1.Size = new Size(0x52, 0x1d);
-            this.button1.TabIndex = 0x23;
-            this.button1.Text = "Move";
-            this.button1.UseVisualStyleBackColor = false;
+            this.DTProposalContent.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.DTProposalContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DTProposalContent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DTProposalContent.Size = new System.Drawing.Size(611, 308);
+            this.DTProposalContent.TabIndex = 34;
+            // 
+            // Id
+            // 
             this.Id.HeaderText = "Order";
             this.Id.Name = "Id";
-            this.Id.Width = 0x2d;
+            this.Id.Width = 45;
+            // 
+            // Section
+            // 
             this.Section.HeaderText = "Section";
             this.Section.Name = "Section";
-            this.Section.Width = 0x41;
+            this.Section.Width = 65;
+            // 
+            // Location
+            // 
             this.Location.HeaderText = "Location";
             this.Location.Name = "Location";
-            this.Location.Width = 0x41;
+            this.Location.Width = 65;
+            // 
+            // DocType
+            // 
             this.DocType.HeaderText = "DocType";
             this.DocType.Name = "DocType";
-            this.DocType.Width = 0x41;
+            this.DocType.Width = 65;
+            // 
+            // Description
+            // 
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
             this.Description.Width = 90;
+            // 
+            // Source
+            // 
             this.Source.HeaderText = "Source";
             this.Source.Name = "Source";
-            this.Source.Width = 0x41;
+            this.Source.Width = 65;
+            // 
+            // Updated
+            // 
             this.Updated.HeaderText = "Updated";
             this.Updated.Name = "Updated";
-            this.Updated.Width = 0x41;
+            this.Updated.Width = 65;
+            // 
+            // UpdatedBy
+            // 
             this.UpdatedBy.HeaderText = "UpdatedBy";
             this.UpdatedBy.Name = "UpdatedBy";
-            this.UpdatedBy.Width = 0x4b;
+            this.UpdatedBy.Width = 75;
+            // 
+            // ClientUpdated
+            // 
             this.ClientUpdated.HeaderText = "ClientUpdated";
             this.ClientUpdated.Name = "ClientUpdated";
-            base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.WhiteSmoke;
-            base.ClientSize = new Size(0x27b, 0x1f9);
-            base.Controls.Add(this.button1);
-            base.Controls.Add(this.DTProposalContent);
-            base.Controls.Add(this.panel1);
-            base.Controls.Add(this.label1);
-            base.Controls.Add(this.comboBox1);
-            base.Controls.Add(this.label8);
-            base.Controls.Add(this.CbxColumn);
-            base.Controls.Add(this.BtnExport);
-            base.Controls.Add(this.BtnAdd);
-            base.Controls.Add(this.BtnEdit);
-            base.Controls.Add(this.BtnDelete);
-            base.Controls.Add(this.BtnSearch);
-            base.Controls.Add(this.label7);
-            base.Controls.Add(this.TbxSearch);
-            base.Controls.Add(this.label6);
-            base.FormBorderStyle = FormBorderStyle.None;
-            base.Name = "DocSection";
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Enabled = false;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(282, 95);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(82, 29);
+            this.button1.TabIndex = 35;
+            this.button1.Text = "Move";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // DocSection
+            // 
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(635, 505);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DTProposalContent);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.CbxColumn);
+            this.Controls.Add(this.BtnExport);
+            this.Controls.Add(this.BtnAdd);
+            this.Controls.Add(this.BtnEdit);
+            this.Controls.Add(this.BtnDelete);
+            this.Controls.Add(this.BtnSearch);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.TbxSearch);
+            this.Controls.Add(this.label6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "DocSection";
             this.Text = "DocSection";
-            ((ISupportInitialize) this.BtnSearch).EndInit();
-            ((ISupportInitialize) this.DTProposalContent).EndInit();
-            base.ResumeLayout(false);
-            base.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DTProposalContent)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
     }
 }

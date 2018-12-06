@@ -131,163 +131,210 @@
 
         private void InitializeComponent()
         {
-            ComponentResourceManager manager = new ComponentResourceManager(typeof(ProposalContent_Editor));
-            this.LblOpenTxb = new Label();
-            this.LblAction = new Label();
-            this.BtnCancel = new Button();
-            this.BtnSave = new Button();
-            this.panel1 = new Panel();
-            this.toolStrip1 = new ToolStrip();
-            this.EditorControl_Bold = new ToolStripButton();
-            this.EditorControl_Italic = new ToolStripButton();
-            this.EditorControl_Underline = new ToolStripButton();
-            this.toolStripSeparator1 = new ToolStripSeparator();
-            this.EditorControl_Bullet = new ToolStripButton();
-            this.EditorBox = new RichTextBox();
-            this.label6 = new Label();
+            this.LblOpenTxb = new System.Windows.Forms.Label();
+            this.LblAction = new System.Windows.Forms.Label();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnSave = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.EditorControl_Bold = new System.Windows.Forms.ToolStripButton();
+            this.EditorControl_Italic = new System.Windows.Forms.ToolStripButton();
+            this.EditorControl_Underline = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.EditorControl_Bullet = new System.Windows.Forms.ToolStripButton();
+            this.EditorBox = new System.Windows.Forms.RichTextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            base.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // LblOpenTxb
+            // 
             this.LblOpenTxb.AutoSize = true;
-            this.LblOpenTxb.Font = new Font("Segoe UI Semibold", 11f, FontStyle.Bold);
-            this.LblOpenTxb.ForeColor = Color.FromArgb(0xfe, 0x35, 0x47);
-            this.LblOpenTxb.Location = new Point(0x45, 0x2d);
+            this.LblOpenTxb.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.LblOpenTxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(53)))), ((int)(((byte)(71)))));
+            this.LblOpenTxb.Location = new System.Drawing.Point(69, 45);
             this.LblOpenTxb.Name = "LblOpenTxb";
-            this.LblOpenTxb.Size = new Size(0, 20);
-            this.LblOpenTxb.TabIndex = 0x2a;
+            this.LblOpenTxb.Size = new System.Drawing.Size(0, 25);
+            this.LblOpenTxb.TabIndex = 42;
+            // 
+            // LblAction
+            // 
             this.LblAction.AutoSize = true;
-            this.LblAction.Font = new Font("Segoe UI Semibold", 11f, FontStyle.Bold);
-            this.LblAction.Location = new Point(11, 0x2d);
+            this.LblAction.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.LblAction.Location = new System.Drawing.Point(11, 45);
             this.LblAction.Name = "LblAction";
-            this.LblAction.Size = new Size(0x3d, 20);
-            this.LblAction.TabIndex = 0x29;
+            this.LblAction.Size = new System.Drawing.Size(77, 25);
+            this.LblAction.TabIndex = 41;
             this.LblAction.Text = "Editing:";
-            this.BtnCancel.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnCancel.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnCancel.Cursor = Cursors.Hand;
-            this.BtnCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnCancel.FlatStyle = FlatStyle.Flat;
-            this.BtnCancel.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnCancel.ForeColor = Color.White;
-            this.BtnCancel.Location = new Point(530, 0x218);
+            // 
+            // BtnCancel
+            // 
+            this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnCancel.ForeColor = System.Drawing.Color.White;
+            this.BtnCancel.Location = new System.Drawing.Point(530, 536);
             this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new Size(90, 0x20);
+            this.BtnCancel.Size = new System.Drawing.Size(90, 32);
             this.BtnCancel.TabIndex = 40;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = false;
-            this.BtnCancel.Click += new EventHandler(this.BtnCancel_Click);
-            this.BtnSave.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.BtnSave.BackColor = Color.FromArgb(0, 0x72, 0xc6);
-            this.BtnSave.Cursor = Cursors.Hand;
-            this.BtnSave.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 100, 190);
-            this.BtnSave.FlatStyle = FlatStyle.Flat;
-            this.BtnSave.Font = new Font("Segoe UI Semibold", 10.5f, FontStyle.Bold);
-            this.BtnSave.ForeColor = Color.White;
-            this.BtnSave.Location = new Point(0x272, 0x218);
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
+            this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnSave.ForeColor = System.Drawing.Color.White;
+            this.BtnSave.Location = new System.Drawing.Point(626, 536);
             this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new Size(90, 0x20);
-            this.BtnSave.TabIndex = 0x27;
+            this.BtnSave.Size = new System.Drawing.Size(90, 32);
+            this.BtnSave.TabIndex = 39;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = false;
-            this.BtnSave.Click += new EventHandler(this.BtnSave_Click);
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // panel1
+            // 
             this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Controls.Add(this.EditorBox);
-            this.panel1.Location = new Point(12, 0x4d);
+            this.panel1.Location = new System.Drawing.Point(12, 77);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new Size(0x2c0, 0x1c5);
+            this.panel1.Size = new System.Drawing.Size(704, 453);
             this.panel1.TabIndex = 20;
-            ToolStripItem[] toolStripItems = new ToolStripItem[] { this.EditorControl_Bold, this.EditorControl_Italic, this.EditorControl_Underline, this.toolStripSeparator1, this.EditorControl_Bullet };
-            this.toolStrip1.Items.AddRange(toolStripItems);
-            this.toolStrip1.Location = new Point(0, 0);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EditorControl_Bold,
+            this.EditorControl_Italic,
+            this.EditorControl_Underline,
+            this.toolStripSeparator1,
+            this.EditorControl_Bullet});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new Size(0x2c0, 0x19);
+            this.toolStrip1.Size = new System.Drawing.Size(704, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            this.EditorControl_Bold.BackgroundImageLayout = ImageLayout.Center;
-            this.EditorControl_Bold.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            this.EditorControl_Bold.Font = new Font("Segoe UI", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            //this.EditorControl_Bold.Image = (Image) manager.GetObject("EditorControl_Bold.Image");
-            this.EditorControl_Bold.ImageTransparentColor = Color.Magenta;
+            // 
+            // EditorControl_Bold
+            // 
+            this.EditorControl_Bold.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.EditorControl_Bold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.EditorControl_Bold.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditorControl_Bold.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EditorControl_Bold.Name = "EditorControl_Bold";
-            this.EditorControl_Bold.Size = new Size(0x17, 0x16);
+            this.EditorControl_Bold.Size = new System.Drawing.Size(23, 24);
             this.EditorControl_Bold.Text = "B";
             this.EditorControl_Bold.ToolTipText = "Bold";
-            this.EditorControl_Bold.Click += new EventHandler(this.EditorControl_Bold_Click);
-            this.EditorControl_Italic.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            this.EditorControl_Italic.Font = new Font("Segoe UI", 9f, FontStyle.Italic | FontStyle.Bold, GraphicsUnit.Point, 0);
-            //this.EditorControl_Italic.Image = (Image) manager.GetObject("EditorControl_Italic.Image");
-            this.EditorControl_Italic.ImageScaling = ToolStripItemImageScaling.None;
-            this.EditorControl_Italic.ImageTransparentColor = Color.Magenta;
+            this.EditorControl_Bold.Click += new System.EventHandler(this.EditorControl_Bold_Click);
+            // 
+            // EditorControl_Italic
+            // 
+            this.EditorControl_Italic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.EditorControl_Italic.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditorControl_Italic.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.EditorControl_Italic.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EditorControl_Italic.Name = "EditorControl_Italic";
-            this.EditorControl_Italic.Size = new Size(0x17, 0x16);
+            this.EditorControl_Italic.Size = new System.Drawing.Size(23, 24);
             this.EditorControl_Italic.Text = "I";
             this.EditorControl_Italic.ToolTipText = "Italic";
-            this.EditorControl_Italic.Click += new EventHandler(this.EditorControl_Italic_Click);
-            this.EditorControl_Underline.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            this.EditorControl_Underline.Font = new Font("Segoe UI", 9f, FontStyle.Underline | FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.EditorControl_Underline.ForeColor = SystemColors.ActiveCaptionText;
-            //this.EditorControl_Underline.Image = (Image) manager.GetObject("EditorControl_Underline.Image");
-            this.EditorControl_Underline.ImageTransparentColor = Color.Magenta;
+            this.EditorControl_Italic.Click += new System.EventHandler(this.EditorControl_Italic_Click);
+            // 
+            // EditorControl_Underline
+            // 
+            this.EditorControl_Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.EditorControl_Underline.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditorControl_Underline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.EditorControl_Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EditorControl_Underline.Name = "EditorControl_Underline";
-            this.EditorControl_Underline.Size = new Size(0x17, 0x16);
+            this.EditorControl_Underline.Size = new System.Drawing.Size(24, 24);
             this.EditorControl_Underline.Text = "U";
             this.EditorControl_Underline.ToolTipText = "Undeline";
-            this.EditorControl_Underline.Click += new EventHandler(this.EditorControl_Underline_Click);
+            this.EditorControl_Underline.Click += new System.EventHandler(this.EditorControl_Underline_Click);
+            // 
+            // toolStripSeparator1
+            // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new Size(6, 0x19);
-            this.EditorControl_Bullet.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            //this.EditorControl_Bullet.Image = (Image) manager.GetObject("EditorControl_Bullet.Image");
-            this.EditorControl_Bullet.ImageTransparentColor = Color.Magenta;
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // EditorControl_Bullet
+            // 
+            this.EditorControl_Bullet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EditorControl_Bullet.Image = global::LibraryManager.Properties.Resources.bullets;
+            this.EditorControl_Bullet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EditorControl_Bullet.Name = "EditorControl_Bullet";
-            this.EditorControl_Bullet.Size = new Size(0x17, 0x16);
+            this.EditorControl_Bullet.Size = new System.Drawing.Size(23, 24);
             this.EditorControl_Bullet.Text = "Bullets";
-            this.EditorControl_Bullet.Click += new EventHandler(this.EditorControl_Bullet_Click);
-            this.EditorBox.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            this.EditorBox.BackColor = Color.White;
-            this.EditorBox.BorderStyle = BorderStyle.FixedSingle;
+            this.EditorControl_Bullet.Click += new System.EventHandler(this.EditorControl_Bullet_Click);
+            // 
+            // EditorBox
+            // 
+            this.EditorBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditorBox.BackColor = System.Drawing.Color.White;
+            this.EditorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EditorBox.BulletIndent = 15;
             this.EditorBox.DetectUrls = false;
-            this.EditorBox.Font = new Font("Segoe UI", 11f);
-            this.EditorBox.ForeColor = Color.Black;
-            this.EditorBox.Location = new Point(3, 0x1c);
+            this.EditorBox.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.EditorBox.ForeColor = System.Drawing.Color.Black;
+            this.EditorBox.Location = new System.Drawing.Point(3, 28);
             this.EditorBox.Name = "EditorBox";
-            this.EditorBox.ScrollBars = RichTextBoxScrollBars.Vertical;
-            this.EditorBox.Size = new Size(0x2bd, 0x1a6);
+            this.EditorBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.EditorBox.Size = new System.Drawing.Size(701, 422);
             this.EditorBox.TabIndex = 0;
             this.EditorBox.TabStop = false;
             this.EditorBox.Text = "";
-            this.EditorBox.MouseClick += new MouseEventHandler(this.EditorBox_MouseClick);
-            this.EditorBox.KeyPress += new KeyPressEventHandler(this.EditorBox_KeyPress);
-            this.EditorBox.KeyUp += new KeyEventHandler(this.EditorBox_KeyUp);
+            this.EditorBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EditorBox_MouseClick);
+            this.EditorBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditorBox_KeyPress);
+            this.EditorBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EditorBox_KeyUp);
+            // 
+            // label6
+            // 
             this.label6.AutoSize = true;
-            this.label6.FlatStyle = FlatStyle.Flat;
-            this.label6.Font = new Font("Segoe UI Semibold", 9f, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label6.ForeColor = Color.FromArgb(0x26, 0x26, 0x26);
-            this.label6.Location = new Point(8, 6);
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label6.Location = new System.Drawing.Point(8, 6);
             this.label6.Name = "label6";
-            this.label6.Size = new Size(0x1af, 15);
-            this.label6.TabIndex = 0x12;
+            this.label6.Size = new System.Drawing.Size(561, 20);
+            this.label6.TabIndex = 18;
             this.label6.Text = "Library Manager > Structured Proposal Content for Products > Add/Edit > Editor";
-            base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.WhiteSmoke;
-            base.ClientSize = new Size(730, 580);
-            base.Controls.Add(this.LblOpenTxb);
-            base.Controls.Add(this.LblAction);
-            base.Controls.Add(this.BtnCancel);
-            base.Controls.Add(this.BtnSave);
-            base.Controls.Add(this.panel1);
-            base.Controls.Add(this.label6);
-            base.FormBorderStyle = FormBorderStyle.None;
-            base.Name = "ProposalContent_Editor";
+            // 
+            // ProposalContent_Editor
+            // 
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(730, 580);
+            this.Controls.Add(this.LblOpenTxb);
+            this.Controls.Add(this.LblAction);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnSave);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "ProposalContent_Editor";
             this.Text = "ProposalContent_Editor";
-            base.Load += new EventHandler(this.ProposalContent_Editor_Load);
+            this.Load += new System.EventHandler(this.ProposalContent_Editor_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            base.ResumeLayout(false);
-            base.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         private void ProposalContent_Editor_Load(object sender, EventArgs e)
@@ -312,6 +359,12 @@
         {
             this.TxbOpenName = TbxName;
             this.LblOpenTxb.Text = this.TxbOpenName;
+        }
+
+
+        public void test() 
+        {
+            
         }
     }
 }

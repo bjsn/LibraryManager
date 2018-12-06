@@ -46,90 +46,106 @@
 
         private void InitializeComponent()
         {
-            ComponentResourceManager manager = new ComponentResourceManager(typeof(ProposalContent_Container));
-            this.PnlBorderTop = new Panel();
-            this.BtnMinimize = new PictureBox();
-            this.BtnClose = new PictureBox();
-            this.label1 = new Label();
-            this.pictureBox1 = new PictureBox();
-            this.MainPanel = new Panel();
+            this.PnlBorderTop = new System.Windows.Forms.Panel();
+            this.BtnMinimize = new System.Windows.Forms.PictureBox();
+            this.BtnClose = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MainPanel = new System.Windows.Forms.Panel();
             this.PnlBorderTop.SuspendLayout();
-            ((ISupportInitialize) this.BtnMinimize).BeginInit();
-            ((ISupportInitialize) this.BtnClose).BeginInit();
-            ((ISupportInitialize) this.pictureBox1).BeginInit();
-            base.SuspendLayout();
-            this.PnlBorderTop.BackColor = Color.FromArgb(0, 0x72, 0xc6);
+            ((System.ComponentModel.ISupportInitialize)(this.BtnMinimize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // PnlBorderTop
+            // 
+            this.PnlBorderTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
             this.PnlBorderTop.Controls.Add(this.BtnMinimize);
             this.PnlBorderTop.Controls.Add(this.BtnClose);
             this.PnlBorderTop.Controls.Add(this.label1);
-            this.PnlBorderTop.Location = new Point(0, 0);
+            this.PnlBorderTop.Location = new System.Drawing.Point(0, 0);
             this.PnlBorderTop.Name = "PnlBorderTop";
-            this.PnlBorderTop.Size = new Size(730, 0x16);
+            this.PnlBorderTop.Size = new System.Drawing.Size(730, 22);
             this.PnlBorderTop.TabIndex = 6;
-            this.PnlBorderTop.MouseDown += new MouseEventHandler(this.PnlBorderTop_MouseDown);
-            this.PnlBorderTop.MouseMove += new MouseEventHandler(this.PnlBorderTop_MouseMove);
-            this.PnlBorderTop.MouseUp += new MouseEventHandler(this.PnlBorderTop_MouseUp);
-            this.BtnMinimize.Anchor = AnchorStyles.None;
-            this.BtnMinimize.BackgroundImageLayout = ImageLayout.Center;
-            this.BtnMinimize.Cursor = Cursors.Hand;
-            //this.BtnMinimize.Image = Resources.minimizes2;
-            this.BtnMinimize.Location = new Point(0x2b3, 4);
+            this.PnlBorderTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlBorderTop_MouseDown);
+            this.PnlBorderTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PnlBorderTop_MouseMove);
+            this.PnlBorderTop.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PnlBorderTop_MouseUp);
+            // 
+            // BtnMinimize
+            // 
+            this.BtnMinimize.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnMinimize.Location = new System.Drawing.Point(691, 4);
             this.BtnMinimize.Name = "BtnMinimize";
-            this.BtnMinimize.Size = new Size(15, 15);
-            this.BtnMinimize.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.BtnMinimize.Size = new System.Drawing.Size(15, 15);
+            this.BtnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BtnMinimize.TabIndex = 3;
             this.BtnMinimize.TabStop = false;
-            this.BtnMinimize.Click += new EventHandler(this.BtnMinimize_Click);
-            this.BtnClose.Anchor = AnchorStyles.None;
-            this.BtnClose.BackgroundImageLayout = ImageLayout.Center;
-            this.BtnClose.Cursor = Cursors.Hand;
-            //this.BtnClose.Image = Resources.close;
-            this.BtnClose.Location = new Point(0x2c8, 4);
+            this.BtnMinimize.Click += new System.EventHandler(this.BtnMinimize_Click);
+            // 
+            // BtnClose
+            // 
+            this.BtnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnClose.Location = new System.Drawing.Point(712, 4);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new Size(15, 15);
-            this.BtnClose.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.BtnClose.Size = new System.Drawing.Size(15, 15);
+            this.BtnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BtnClose.TabIndex = 2;
             this.BtnClose.TabStop = false;
-            this.BtnClose.Click += new EventHandler(this.BtnClose_Click);
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            // 
+            // label1
+            // 
             this.label1.AutoSize = true;
-            this.label1.FlatStyle = FlatStyle.Flat;
-            this.label1.Font = new Font("Segoe UI Semibold", 8f, FontStyle.Bold);
-            this.label1.ForeColor = Color.White;
-            this.label1.Location = new Point(0xe8, 6);
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(232, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new Size(0xd7, 13);
+            this.label1.Size = new System.Drawing.Size(265, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "Add / Edit Proposal Content for Products";
-            //this.pictureBox1.Image = Resources.Logo_Transparent__white_;
-            this.pictureBox1.Location = new Point(0x129, 0x265);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::LibraryManager.Properties.Resources.Logo_transparent;
+            this.pictureBox1.Location = new System.Drawing.Point(297, 613);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new Size(0x85, 0x24);
-            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(133, 36);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            this.MainPanel.BackColor = Color.WhiteSmoke;
-            this.MainPanel.Location = new Point(0, 0x16);
+            // 
+            // MainPanel
+            // 
+            this.MainPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.MainPanel.Location = new System.Drawing.Point(0, 22);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new Size(730, 580);
+            this.MainPanel.Size = new System.Drawing.Size(730, 580);
             this.MainPanel.TabIndex = 8;
-            base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.FromArgb(0x26, 0x26, 0x26);
-            base.ClientSize = new Size(730, 0x295);
-            base.Controls.Add(this.MainPanel);
-            base.Controls.Add(this.pictureBox1);
-            base.Controls.Add(this.PnlBorderTop);
-            base.FormBorderStyle = FormBorderStyle.None;
-            //base.Icon = (Icon) manager.GetObject("$this.Icon");
-            base.Name = "ProposalContent_Container";
+            // 
+            // ProposalContent_Container
+            // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.ClientSize = new System.Drawing.Size(730, 661);
+            this.Controls.Add(this.MainPanel);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PnlBorderTop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "ProposalContent_Container";
             this.Text = "ProposalContent_Container";
-            base.Load += new EventHandler(this.ProposalContent_Container_Load);
+            this.Load += new System.EventHandler(this.ProposalContent_Container_Load);
             this.PnlBorderTop.ResumeLayout(false);
             this.PnlBorderTop.PerformLayout();
-            ((ISupportInitialize) this.BtnMinimize).EndInit();
-            ((ISupportInitialize) this.BtnClose).EndInit();
-            ((ISupportInitialize) this.pictureBox1).EndInit();
-            base.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BtnMinimize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         private void PnlBorderTop_MouseDown(object sender, MouseEventArgs e)

@@ -89,9 +89,8 @@
         {
             base.SuspendLayout();
             base.AutoScaleDimensions = new SizeF(6f, 13f);
-            base.AutoScaleMode = AutoScaleMode.Font;
             base.ClientSize = new Size(0xa7, 2);
-            base.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //base.FormBorderStyle = FormBorderStyle.FixedSingle;
             base.Name = "BasePartialView";
             this.Text = "BasePartView";
             base.ResumeLayout(false);
