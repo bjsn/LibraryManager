@@ -135,7 +135,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.BtnMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnClose)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         private void Main_Container_Load(object sender, EventArgs e)

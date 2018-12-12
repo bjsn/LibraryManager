@@ -315,9 +315,9 @@
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.label8.Location = new System.Drawing.Point(17, 410);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(117, 20);
+            this.label8.Size = new System.Drawing.Size(129, 20);
             this.label8.TabIndex = 35;
-            this.label8.Text = "Product Details:";
+            this.label8.Text = "Product Features:";
             // 
             // label7
             // 

@@ -1,9 +1,0 @@
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\bin\Debug\LibraryManager.Data.dll
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\bin\Debug\LibraryManager.Data.pdb
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\bin\Debug\LibraryManager.Common.dll
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\bin\Debug\LibraryManager.Models.dll
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\bin\Debug\LibraryManager.Common.pdb
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\bin\Debug\LibraryManager.Models.pdb
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\obj\Debug\LibraryManager.Data.csprojResolveAssemblyReference.cache
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\obj\Debug\LibraryManager.Data.dll
-C:\Byron\CorsPro code\LibraryManager\LibraryManager.Data\obj\Debug\LibraryManager.Data.pdb

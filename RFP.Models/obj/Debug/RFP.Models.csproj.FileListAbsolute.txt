@@ -1,5 +1,0 @@
-C:\Byron\CorsPro code\LibraryManager\RFP.Models\bin\Debug\RFP.Models.dll
-C:\Byron\CorsPro code\LibraryManager\RFP.Models\bin\Debug\RFP.Models.pdb
-C:\Byron\CorsPro code\LibraryManager\RFP.Models\obj\Debug\RFP.Models.dll
-C:\Byron\CorsPro code\LibraryManager\RFP.Models\obj\Debug\RFP.Models.pdb
-C:\Byron\CorsPro code\LibraryManager\RFP.Models\obj\Debug\RFP.Models.csprojResolveAssemblyReference.cache

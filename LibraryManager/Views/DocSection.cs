@@ -10,7 +10,6 @@
     {
         private IContainer components;
         private Label label6;
-        private PictureBox BtnSearch;
         private Label label7;
         private TextBox TbxSearch;
         private Button BtnAdd;
@@ -32,6 +31,7 @@
         private DataGridViewTextBoxColumn Source;
         private DataGridViewTextBoxColumn Updated;
         private DataGridViewTextBoxColumn UpdatedBy;
+        private PictureBox BtnSearch;
         private DataGridViewTextBoxColumn ClientUpdated;
 
         public DocSection(Panel Panel) : base(Panel)
@@ -56,7 +56,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.TbxSearch = new System.Windows.Forms.TextBox();
-            this.BtnSearch = new System.Windows.Forms.PictureBox();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
@@ -77,8 +76,9 @@
             this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
+            this.BtnSearch = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.DTProposalContent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // label6
@@ -114,19 +114,6 @@
             this.TbxSearch.Size = new System.Drawing.Size(199, 29);
             this.TbxSearch.TabIndex = 23;
             // 
-            // BtnSearch
-            // 
-            this.BtnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
-            this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSearch.Location = new System.Drawing.Point(213, 70);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(24, 24);
-            this.BtnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BtnSearch.TabIndex = 22;
-            this.BtnSearch.TabStop = false;
-            // 
             // BtnAdd
             // 
             this.BtnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -138,9 +125,9 @@
             this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.BtnAdd.ForeColor = System.Drawing.Color.White;
-            this.BtnAdd.Location = new System.Drawing.Point(370, 95);
+            this.BtnAdd.Location = new System.Drawing.Point(436, 95);
             this.BtnAdd.Name = "BtnAdd";
-            this.BtnAdd.Size = new System.Drawing.Size(82, 29);
+            this.BtnAdd.Size = new System.Drawing.Size(90, 32);
             this.BtnAdd.TabIndex = 27;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = false;
@@ -157,9 +144,9 @@
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEdit.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.BtnEdit.ForeColor = System.Drawing.Color.White;
-            this.BtnEdit.Location = new System.Drawing.Point(456, 95);
+            this.BtnEdit.Location = new System.Drawing.Point(532, 95);
             this.BtnEdit.Name = "BtnEdit";
-            this.BtnEdit.Size = new System.Drawing.Size(81, 29);
+            this.BtnEdit.Size = new System.Drawing.Size(90, 32);
             this.BtnEdit.TabIndex = 26;
             this.BtnEdit.Text = "Edit";
             this.BtnEdit.UseVisualStyleBackColor = false;
@@ -176,9 +163,9 @@
             this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.BtnDelete.ForeColor = System.Drawing.Color.White;
-            this.BtnDelete.Location = new System.Drawing.Point(541, 95);
+            this.BtnDelete.Location = new System.Drawing.Point(628, 95);
             this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new System.Drawing.Size(82, 29);
+            this.BtnDelete.Size = new System.Drawing.Size(90, 32);
             this.BtnDelete.TabIndex = 25;
             this.BtnDelete.Text = "Delete";
             this.BtnDelete.UseVisualStyleBackColor = false;
@@ -195,9 +182,9 @@
             this.BtnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnExport.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.BtnExport.ForeColor = System.Drawing.Color.White;
-            this.BtnExport.Location = new System.Drawing.Point(541, 128);
+            this.BtnExport.Location = new System.Drawing.Point(628, 129);
             this.BtnExport.Name = "BtnExport";
-            this.BtnExport.Size = new System.Drawing.Size(82, 29);
+            this.BtnExport.Size = new System.Drawing.Size(90, 32);
             this.BtnExport.TabIndex = 28;
             this.BtnExport.Text = "Export";
             this.BtnExport.UseVisualStyleBackColor = false;
@@ -250,9 +237,9 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(331, 134);
+            this.panel1.Location = new System.Drawing.Point(357, 134);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(206, 27);
+            this.panel1.Size = new System.Drawing.Size(256, 27);
             this.panel1.TabIndex = 33;
             // 
             // DTProposalContent
@@ -314,7 +301,7 @@
             this.DTProposalContent.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DTProposalContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DTProposalContent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DTProposalContent.Size = new System.Drawing.Size(611, 308);
+            this.DTProposalContent.Size = new System.Drawing.Size(706, 383);
             this.DTProposalContent.TabIndex = 34;
             // 
             // Id
@@ -382,17 +369,32 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(282, 95);
+            this.button1.Location = new System.Drawing.Point(340, 95);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 29);
+            this.button1.Size = new System.Drawing.Size(90, 32);
             this.button1.TabIndex = 35;
             this.button1.Text = "Move";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // BtnSearch
+            // 
+            this.BtnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSearch.Image = global::LibraryManager.Properties.Resources.search;
+            this.BtnSearch.Location = new System.Drawing.Point(213, 70);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(24, 24);
+            this.BtnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BtnSearch.TabIndex = 36;
+            this.BtnSearch.TabStop = false;
+            // 
             // DocSection
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(635, 505);
+            this.ClientSize = new System.Drawing.Size(730, 580);
+            this.Controls.Add(this.BtnSearch);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DTProposalContent);
             this.Controls.Add(this.panel1);
@@ -404,17 +406,21 @@
             this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.BtnDelete);
-            this.Controls.Add(this.BtnSearch);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.TbxSearch);
             this.Controls.Add(this.label6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DocSection";
             this.Text = "DocSection";
-            ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DTProposalContent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
 
         }
     }
