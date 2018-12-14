@@ -1,6 +1,6 @@
 ﻿namespace LibraryManager.Views
 {
-    using LibraryManager.Properties;
+    
     using System;
     using System.ComponentModel;
     using System.Drawing;

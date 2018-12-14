@@ -1,6 +1,6 @@
 ﻿namespace LibraryManager
 {
-    using LibraryManager.Properties;
+    using AddEditProposalContent.Properties;
     using LibraryManager.Views;
     using System;
     using System.Collections;
@@ -352,7 +352,7 @@
             // 
             this.pictureBox8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox8.Image = global::LibraryManager.Properties.Resources.list1;
+            this.pictureBox8.Image = global::AddEditProposalContent.Properties.Resources.list1;
             this.pictureBox8.Location = new System.Drawing.Point(24, 11);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(21, 17);
@@ -364,7 +364,7 @@
             // 
             this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox3.Image = global::LibraryManager.Properties.Resources.content;
+            this.pictureBox3.Image = global::AddEditProposalContent.Properties.Resources.content;
             this.pictureBox3.Location = new System.Drawing.Point(19, 10);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(19, 17);
@@ -376,7 +376,7 @@
             // 
             this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox4.Image = global::LibraryManager.Properties.Resources.contract;
+            this.pictureBox4.Image = global::AddEditProposalContent.Properties.Resources.contract;
             this.pictureBox4.Location = new System.Drawing.Point(20, 13);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(19, 17);
@@ -388,7 +388,7 @@
             // 
             this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox6.Image = global::LibraryManager.Properties.Resources.item_connections;
+            this.pictureBox6.Image = global::AddEditProposalContent.Properties.Resources.item_connections;
             this.pictureBox6.Location = new System.Drawing.Point(24, 12);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(21, 17);
@@ -400,7 +400,7 @@
             // 
             this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox5.Image = global::LibraryManager.Properties.Resources.screen_with_news_sections;
+            this.pictureBox5.Image = global::AddEditProposalContent.Properties.Resources.screen_with_news_sections;
             this.pictureBox5.Location = new System.Drawing.Point(24, 13);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(19, 17);
@@ -412,7 +412,7 @@
             // 
             this.pictureBox9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox9.Image = global::LibraryManager.Properties.Resources.list;
+            this.pictureBox9.Image = global::AddEditProposalContent.Properties.Resources.list;
             this.pictureBox9.Location = new System.Drawing.Point(6, 12);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(20, 18);
@@ -424,7 +424,7 @@
             // 
             this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox7.Image = global::LibraryManager.Properties.Resources.window_with_different_sections;
+            this.pictureBox7.Image = global::AddEditProposalContent.Properties.Resources.window_with_different_sections;
             this.pictureBox7.Location = new System.Drawing.Point(24, 10);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(21, 17);
@@ -436,7 +436,7 @@
             // 
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox2.Image = global::LibraryManager.Properties.Resources.text_editor;
+            this.pictureBox2.Image = global::AddEditProposalContent.Properties.Resources.text_editor;
             this.pictureBox2.Location = new System.Drawing.Point(7, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 18);
@@ -446,7 +446,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LibraryManager.Properties.Resources.Logo_transparent;
+            this.pictureBox1.Image = global::AddEditProposalContent.Properties.Resources.Logo_transparent;
             this.pictureBox1.Location = new System.Drawing.Point(14, 10);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(124, 34);

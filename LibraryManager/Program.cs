@@ -10,7 +10,7 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main_Container());
+            Application.Run(new ProposalContent_Container());
         }
     }
 }

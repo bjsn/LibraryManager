@@ -47,10 +47,14 @@
         public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
         private void InitializeComponent()
         {
-            base.SuspendLayout();
-            base.ClientSize = new Size(120, 13);
-            base.Name = "Main_Container_Base";
-            base.ResumeLayout(false);
+            this.SuspendLayout();
+            // 
+            // Main_Container_Base
+            // 
+            this.ClientSize = new System.Drawing.Size(148, 0);
+            this.Name = "Main_Container_Base";
+            this.ResumeLayout(false);
+
         }
 
         private void PanelMove_MouseDown(object sender, MouseEventArgs e)

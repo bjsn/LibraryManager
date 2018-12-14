@@ -1,6 +1,6 @@
 ﻿namespace LibraryManager.Common
 {
-    using LibraryManager.Properties;
+    using AddEditProposalContent.Properties;
     using LibraryManager.Views;
     using System;
     using System.ComponentModel;

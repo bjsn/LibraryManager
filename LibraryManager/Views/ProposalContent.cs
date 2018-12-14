@@ -1,8 +1,8 @@
 ﻿namespace LibraryManager.Views
 {
+    using AddEditProposalContent.Properties;
     using LibraryManager.Core;
     using LibraryManager.Models;
-    using LibraryManager.Properties;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -426,10 +426,10 @@
             this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
             this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSearch.Image = global::LibraryManager.Properties.Resources.search;
+            this.BtnSearch.Image = global::AddEditProposalContent.Properties.Resources.search;
             this.BtnSearch.Location = new System.Drawing.Point(213, 68);
             this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(24, 24);
+            this.BtnSearch.Size = new System.Drawing.Size(23, 23);
             this.BtnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BtnSearch.TabIndex = 15;
             this.BtnSearch.TabStop = false;

@@ -273,7 +273,7 @@
             // EditorControl_Bullet
             // 
             this.EditorControl_Bullet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EditorControl_Bullet.Image = global::LibraryManager.Properties.Resources.bullets;
+            this.EditorControl_Bullet.Image = global::AddEditProposalContent.Properties.Resources.bullets;
             this.EditorControl_Bullet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EditorControl_Bullet.Name = "EditorControl_Bullet";
             this.EditorControl_Bullet.Size = new System.Drawing.Size(23, 24);
@@ -328,6 +328,7 @@
             this.Name = "ProposalContent_Editor";
             this.Text = "ProposalContent_Editor";
             this.Load += new System.EventHandler(this.ProposalContent_Editor_Load);
+            this.Shown += new System.EventHandler(this.ProposalContent_Editor_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -361,11 +362,11 @@
             this.LblOpenTxb.Text = this.TxbOpenName;
         }
 
-
-        public void test() 
+        private void ProposalContent_Editor_Shown(object sender, EventArgs e)
         {
-            
+            this.EditorBox.Focus();
         }
+
     }
 }
 

@@ -7,8 +7,8 @@
     <ProjectGuid>{3DBEE7C1-5D9D-412B-95F0-9282B0332522}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibraryManager</RootNamespace>
-    <AssemblyName>LibraryManager</AssemblyName>
+    <RootNamespace>AddEditProposalContent</RootNamespace>
+    <AssemblyName>AddEditProposalContent</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -97,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Main_Container.resx">
       <DependentUpon>Main_Container.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Main_Container_Base.resx">
+      <DependentUpon>Main_Container_Base.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\Navbar.resx">
       <DependentUpon>Navbar.cs</DependentUpon>

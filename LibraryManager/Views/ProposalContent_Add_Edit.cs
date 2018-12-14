@@ -75,37 +75,55 @@
             {
                 if ((!flag && !flag2) && !flag3)
                 {
-                    string text = this.TxbPartNumber.Text;
-                    string imageLocation = this.PBProduct.ImageLocation;
-                    LibraryManager.Models.ProposalContent proposalContent = null;
-                    proposalContent = new LibraryManager.Models.ProposalContent {
-                        PartNumber = text,
-                        VendorName = this.TxbManufacturer.Text,
-                        ProductName = this.TxbPDescription.Text,
-                        FeatureBullets = this.TxbPBenefits.Rtf,
-                        MarketingInfo = this.TxbPOverview.Rtf,
-                        TechnicalInfo = this.TxbPDetails.Rtf,
-                        ProductPicturePath = string.IsNullOrEmpty(imageLocation) ? "" : imageLocation
-                    };
-                    if (!this.NewProposalContent)
+                    if (!String.IsNullOrEmpty(this.TxbPBenefits.Text) && !String.IsNullOrEmpty(this.TxbPOverview.Text) && !String.IsNullOrEmpty(this.TxbPDetails.Text))
                     {
-                        this.ProposalContentController.Update(proposalContent);
-                        base.CloseCurrentView();
-                    }
-                    else if (this.ProposalContentController.Get(text) != null)
-                    {
-                        MessageBox.Show("The product part number is a duplicate and therefore, not valid.", "Product part already exist", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        SaveProposalContent();
                     }
                     else
                     {
-                        this.ProposalContentController.Save(proposalContent);
-                        base.CloseCurrentView();
+                        DialogResult dialogResult = MessageBox.Show("This product will not be included in proposal content if it doesn't have either the Product Benefits or Product Description.  Would you like to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            SaveProposalContent();
+                        }
                     }
                 }
             }
             catch (Exception exception1)
             {
                 MessageBox.Show(exception1.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+
+        private void SaveProposalContent() 
+        {
+            string text = this.TxbPartNumber.Text;
+            string imageLocation = this.PBProduct.ImageLocation;
+            LibraryManager.Models.ProposalContent proposalContent = null;
+            proposalContent = new LibraryManager.Models.ProposalContent
+            {
+                PartNumber = text,
+                VendorName = this.TxbManufacturer.Text,
+                ProductName = this.TxbPDescription.Text,
+                FeatureBullets = this.TxbPBenefits.Rtf,
+                MarketingInfo = this.TxbPOverview.Rtf,
+                TechnicalInfo = this.TxbPDetails.Rtf,
+                ProductPicturePath = string.IsNullOrEmpty(imageLocation) ? "" : imageLocation
+            };
+            if (!this.NewProposalContent)
+            {
+                this.ProposalContentController.Update(proposalContent);
+                base.CloseCurrentView();
+            }
+            else if (this.ProposalContentController.Get(text) != null)
+            {
+                MessageBox.Show("The product part number is a duplicate and therefore, not valid.", "Product part already exist", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+            else
+            {
+                this.ProposalContentController.Save(proposalContent);
+                base.CloseCurrentView();
             }
         }
 
@@ -219,7 +237,6 @@
             this.TxbPBenefits.Size = new System.Drawing.Size(545, 90);
             this.TxbPBenefits.TabIndex = 32;
             this.TxbPBenefits.Text = "";
-            this.TxbPBenefits.Click += new System.EventHandler(this.TxbPBenefits_Click);
             this.TxbPBenefits.Enter += new System.EventHandler(this.TxbPBenefits_Enter);
             // 
             // TxbPOverview
@@ -371,7 +388,7 @@
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.label3.Location = new System.Drawing.Point(575, 43);
+            this.label3.Location = new System.Drawing.Point(575, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 20);
             this.label3.TabIndex = 28;
@@ -421,7 +438,7 @@
             this.TxbPartNumber.Name = "TxbPartNumber";
             this.TxbPartNumber.Size = new System.Drawing.Size(260, 29);
             this.TxbPartNumber.TabIndex = 24;
-            this.TxbPartNumber.Enter += new System.EventHandler(this.TxbPartNumber_Enter);
+            this.TxbPartNumber.TextChanged += new System.EventHandler(this.TxbPartNumber_TextChanged);
             // 
             // label1
             // 
@@ -551,11 +568,6 @@
             this.CleanUpTextBox(this.TxbPartNumber);
         }
 
-        private void TxbPBenefits_Click(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Benefits", 1, this.TxbPBenefits.Rtf);
-        }
-
         private void TxbPBenefits_Enter(object sender, EventArgs e)
         {
             this.CallNewEditorRTF("Product Benefits", 1, this.TxbPBenefits.Rtf);
@@ -584,6 +596,14 @@
         private void TxbPOverview_Enter(object sender, EventArgs e)
         {
             this.CallNewEditorRTF("Product Overview", 2, this.TxbPOverview.Rtf);
+        }
+
+        private void TxbPartNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (TxbPartNumber.Text.Contains("dd")) 
+            {
+                var testing = "";
+            }
         }
     }
 }
