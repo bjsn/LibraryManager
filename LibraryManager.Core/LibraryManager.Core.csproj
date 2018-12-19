@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -43,9 +46,11 @@
   <ItemGroup>
     <Compile Include="BaseController.cs" />
     <Compile Include="DocSectionController.cs" />
+    <Compile Include="FileController.cs" />
     <Compile Include="IBaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProposalContentController.cs" />
+    <Compile Include="SetupController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibraryManager.Common\LibraryManager.Common.csproj">

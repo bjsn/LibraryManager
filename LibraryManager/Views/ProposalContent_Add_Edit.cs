@@ -5,7 +5,9 @@
     using System;
     using System.ComponentModel;
     using System.Drawing;
+    using System.IO;
     using System.Runtime.InteropServices;
+    using System.Text;
     using System.Windows.Forms;
 
     public class ProposalContent_Add_Edit : BasePartialView
@@ -14,6 +16,9 @@
         private string PartNumber;
         private int DocumentPartEdit;
         private bool NewProposalContent;
+        public bool AdminContent = false;
+
+        #region components
         private IContainer components;
         private Label label6;
         private Label label1;
@@ -35,11 +40,14 @@
         private RichTextBox TxbPBenefits;
         private ErrorProvider errorProvider1;
         private Button BtnAddImage;
+        #endregion
 
-        public ProposalContent_Add_Edit(Panel Panel, BasePartialView Preview = null) : base(Panel, Preview)
+        public ProposalContent_Add_Edit(Panel Panel, BasePartialView Preview = null, bool requireAdminContent = false)
+            : base(Panel, Preview)
         {
+            this.AdminContent = requireAdminContent;
             this.InitializeComponent();
-            this.ProposalContentController = new LibraryManager.Core.ProposalContentController();
+            this.ProposalContentController = new LibraryManager.Core.ProposalContentController(this.AdminContent);
         }
 
         private void BtnAddImage_Click(object sender, EventArgs e)
@@ -73,19 +81,20 @@
             bool flag3 = this.RequiredFieldEmpty(this.TxbPDescription);
             try
             {
-                if ((!flag && !flag2) && !flag3)
+                if (!flag && !flag2 && !flag3)
                 {
-                    if (!String.IsNullOrEmpty(this.TxbPBenefits.Text) && !String.IsNullOrEmpty(this.TxbPOverview.Text) && !String.IsNullOrEmpty(this.TxbPDetails.Text))
+                    //if all of the fields are empty
+                    if (String.IsNullOrEmpty(this.TxbPBenefits.Text) && String.IsNullOrEmpty(this.TxbPOverview.Text))
                     {
-                        SaveProposalContent();
-                    }
-                    else
-                    {
-                        DialogResult dialogResult = MessageBox.Show("This product will not be included in proposal content if it doesn't have either the Product Benefits or Product Description.  Would you like to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult dialogResult = MessageBox.Show("This product will not be included in proposal content if it doesn't have either the Product Benefits or Product Overview.  Would you like to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (dialogResult == DialogResult.Yes)
                         {
                             SaveProposalContent();
                         }
+                    }
+                    else
+                    {
+                        SaveProposalContent();
                     }
                 }
             }
@@ -101,6 +110,12 @@
             string text = this.TxbPartNumber.Text;
             string imageLocation = this.PBProduct.ImageLocation;
             LibraryManager.Models.ProposalContent proposalContent = null;
+            byte[] image = null;
+            if (!string.IsNullOrEmpty(imageLocation)) 
+            {
+                //get bytes from image to save them into the database
+                image = Utilitary.GetBytesFromImage(imageLocation);
+            }
             proposalContent = new LibraryManager.Models.ProposalContent
             {
                 PartNumber = text,
@@ -109,7 +124,8 @@
                 FeatureBullets = this.TxbPBenefits.Rtf,
                 MarketingInfo = this.TxbPOverview.Rtf,
                 TechnicalInfo = this.TxbPDetails.Rtf,
-                ProductPicturePath = string.IsNullOrEmpty(imageLocation) ? "" : imageLocation
+                ProductPicturePath = string.IsNullOrEmpty(imageLocation) ? "" : imageLocation,
+                ProductPicture = image
             };
             if (!this.NewProposalContent)
             {
@@ -160,9 +176,16 @@
                 this.TxbPDescription.Text = proposalContent.ProductName;
                 if (!string.IsNullOrEmpty(proposalContent.ProductPicturePath))
                 {
-                    this.PBProduct.Image = new Bitmap(proposalContent.ProductPicturePath);
-                    this.PBProduct.ImageLocation = proposalContent.ProductPicturePath;
-                    this.BtnRemoveImage.Enabled = true;
+                    if (File.Exists(proposalContent.ProductPicturePath)) 
+                    {
+                        this.PBProduct.Image = new Bitmap(proposalContent.ProductPicturePath);
+                        this.PBProduct.ImageLocation = proposalContent.ProductPicturePath;
+                        this.BtnRemoveImage.Enabled = true;
+                    }
+                }
+                else if (proposalContent.ProductPicture != null)
+                {
+                    this.PBProduct.Image = Utilitary.ByteToImage(proposalContent.ProductPicture);
                 }
                 try
                 {
@@ -177,6 +200,109 @@
                 catch (Exception)
                 {
                 }
+            }
+        }
+
+
+        private void ProposalContent_Add_Edit_Load(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.PartNumber))
+            {
+                this.NewProposalContent = true;
+                this.TxbPartNumber.ReadOnly = false;
+                this.TxbPartNumber.Enabled = true;
+            }
+            else
+            {
+                this.NewProposalContent = false;
+                this.TxbPartNumber.ReadOnly = true;
+                this.TxbPartNumber.Enabled = false;
+                LibraryManager.Models.ProposalContent proposalContent = this.ProposalContentController.Get(this.PartNumber);
+                this.FillForm(proposalContent);
+            }
+        }
+
+        private bool RequiredFieldEmpty(TextBox Textbox)
+        {
+            if (Textbox.Text.Length <= 0)
+            {
+                Textbox.BackColor = Color.FromArgb(0xcc, 0x36, 0x36);
+                this.errorProvider1.SetError(Textbox, "This field is required");
+                return true;
+            }
+            Textbox.BackColor = Color.White;
+            this.errorProvider1.SetError(Textbox, "");
+            return false;
+        }
+
+        public void SetPartNumber(string partNumber)
+        {
+            this.PartNumber = partNumber;
+        }
+
+        public override void SetRTFText(string RTF)
+        {
+            switch (this.DocumentPartEdit)
+            {
+                case 1:
+                    this.TxbPBenefits.Rtf = RTF;
+                    return;
+
+                case 2:
+                    this.TxbPOverview.Rtf = RTF;
+                    return;
+
+                case 3:
+                    this.TxbPDetails.Rtf = RTF;
+                    return;
+            }
+        }
+
+        private void TxbManufacturer_Enter(object sender, EventArgs e)
+        {
+            this.CleanUpTextBox(this.TxbManufacturer);
+        }
+
+        private void TxbPartNumber_Enter(object sender, EventArgs e)
+        {
+            this.CleanUpTextBox(this.TxbPartNumber);
+        }
+
+        private void TxbPBenefits_Enter(object sender, EventArgs e)
+        {
+            this.CallNewEditorRTF("Product Benefits", 1, this.TxbPBenefits.Rtf);
+        }
+
+        private void TxbPDescription_Enter(object sender, EventArgs e)
+        {
+            this.CleanUpTextBox(this.TxbPDescription);
+        }
+
+        private void TxbPDetails_Click(object sender, EventArgs e)
+        {
+            this.CallNewEditorRTF("Product Details", 3, this.TxbPDetails.Rtf);
+        }
+
+        private void TxbPDetails_Enter(object sender, EventArgs e)
+        {
+            this.CallNewEditorRTF("Product Details", 3, this.TxbPDetails.Rtf);
+        }
+
+        private void TxbPOverview_Click(object sender, EventArgs e)
+        {
+            this.CallNewEditorRTF("Product Overview", 2, this.TxbPOverview.Rtf);
+        }
+
+        private void TxbPOverview_Enter(object sender, EventArgs e)
+        {
+            this.CallNewEditorRTF("Product Overview", 2, this.TxbPOverview.Rtf);
+        }
+
+        private void TxbPartNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (TxbPartNumber.Text.Contains("dd"))
+            {
+                var testing = "";
             }
         }
 
@@ -501,110 +627,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-        private void ProposalContent_Add_Edit_Load(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(this.PartNumber))
-            {
-                this.NewProposalContent = true;
-                this.TxbPartNumber.ReadOnly = false;
-                this.TxbPartNumber.Enabled = true;
-            }
-            else
-            {
-                this.NewProposalContent = false;
-                this.TxbPartNumber.ReadOnly = true;
-                this.TxbPartNumber.Enabled = false;
-                LibraryManager.Models.ProposalContent proposalContent = this.ProposalContentController.Get(this.PartNumber);
-                this.FillForm(proposalContent);
-            }
-        }
-
-        private bool RequiredFieldEmpty(TextBox Textbox)
-        {
-            if (Textbox.Text.Length <= 0)
-            {
-                Textbox.BackColor = Color.FromArgb(0xcc, 0x36, 0x36);
-                this.errorProvider1.SetError(Textbox, "This field is required");
-                return true;
-            }
-            Textbox.BackColor = Color.White;
-            this.errorProvider1.SetError(Textbox, "");
-            return false;
-        }
-
-        public void SetPartNumber(string partNumber)
-        {
-            this.PartNumber = partNumber;
-        }
-
-        public override void SetRTFText(string RTF)
-        {
-            switch (this.DocumentPartEdit)
-            {
-                case 1:
-                    this.TxbPBenefits.Rtf = RTF;
-                    return;
-
-                case 2:
-                    this.TxbPOverview.Rtf = RTF;
-                    return;
-
-                case 3:
-                    this.TxbPDetails.Rtf = RTF;
-                    return;
-            }
-        }
-
-        private void TxbManufacturer_Enter(object sender, EventArgs e)
-        {
-            this.CleanUpTextBox(this.TxbManufacturer);
-        }
-
-        private void TxbPartNumber_Enter(object sender, EventArgs e)
-        {
-            this.CleanUpTextBox(this.TxbPartNumber);
-        }
-
-        private void TxbPBenefits_Enter(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Benefits", 1, this.TxbPBenefits.Rtf);
-        }
-
-        private void TxbPDescription_Enter(object sender, EventArgs e)
-        {
-            this.CleanUpTextBox(this.TxbPDescription);
-        }
-
-        private void TxbPDetails_Click(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Details", 3, this.TxbPDetails.Rtf);
-        }
-
-        private void TxbPDetails_Enter(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Details", 3, this.TxbPDetails.Rtf);
-        }
-
-        private void TxbPOverview_Click(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Overview", 2, this.TxbPOverview.Rtf);
-        }
-
-        private void TxbPOverview_Enter(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Overview", 2, this.TxbPOverview.Rtf);
-        }
-
-        private void TxbPartNumber_TextChanged(object sender, EventArgs e)
-        {
-            if (TxbPartNumber.Text.Contains("dd")) 
-            {
-                var testing = "";
-            }
-        }
     }
 }
 

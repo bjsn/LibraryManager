@@ -1,11 +1,17 @@
 ﻿namespace LibraryManager.Data
 {
     using System;
-    using System.Data.OleDb;
-    using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
+using System.Runtime.CompilerServices;
 
     public class BaseDL
     {
+        public OleDbConnection DbConnection { get; set; }
+        public string ConnectionValue { get; set; }
+        public string DbPwd { get; set; }
+
         public void CloseDbConnection()
         {
             this.DbConnection.Close();
@@ -31,11 +37,7 @@
             return this.DbConnection;
         }
 
-        public OleDbConnection DbConnection { get; set; }
-
-        public string ConnectionValue { get; set; }
-
-        public string DbPwd { get; set; }
+       
     }
 }
 

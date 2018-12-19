@@ -21,9 +21,13 @@
 
         public string ProductPictureURL { get; set; }
 
+        public byte[] ProductPicture { get; set; }
+
         public string MfgPartNumber { get; set; }
 
         public string MfgName { get; set; }
+
+        public DateTime UserCreatedDT { get; set; }
 
         public DateTime DownloadDT { get; set; }
 

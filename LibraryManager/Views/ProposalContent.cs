@@ -11,9 +11,7 @@
 
     public class ProposalContent : BasePartialView
     {
-        private const string VENDORS_FULL_LIST_NAME = "--All--";
-        private LibraryManager.Core.ProposalContentController ProposalContentController;
-        private List<LibraryManager.Models.ProposalContent> ProposalContentList;
+        #region components
         private IContainer components;
         private CheckBox CbxUserAdded;
         private Label label8;
@@ -28,20 +26,95 @@
         private DataGridView DTProposalContent;
         private Label label1;
         private Label LblTotalRows;
+        #endregion
+
+        private const string VENDORS_FULL_LIST_NAME = "--All--";
+        private LibraryManager.Core.ProposalContentController ProposalContentController;
+        private List<LibraryManager.Models.ProposalContent> ProposalContentList;
         private DataGridViewTextBoxColumn PartNumber;
         private DataGridViewTextBoxColumn Manufacturer;
         private DataGridViewTextBoxColumn Description;
         private DataGridViewCheckBoxColumn UserAdded;
+        public bool AdminContent = false;
 
-        public ProposalContent(Panel Panel) : base(Panel)
+        public ProposalContent(Panel Panel, bool requireAdminContent) : base(Panel)
         {
+            this.AdminContent = requireAdminContent; 
             this.InitializeComponent();
-            this.ProposalContentController = new LibraryManager.Core.ProposalContentController();
+            this.ProposalContentController = new LibraryManager.Core.ProposalContentController(AdminContent);
+            LoadMainViewConfiguration();
         }
 
+        private void LoadMainViewConfiguration()
+        {
+            //resize columns when loading admin content
+            if (AdminContent) 
+            {
+                CbxUserAdded.Visible = false;
+                int sharedSize = DTProposalContent.Columns[3].Width / 3;
+                DTProposalContent.Columns[0].Width = DTProposalContent.Columns[0].Width + sharedSize;
+                DTProposalContent.Columns[1].Width = DTProposalContent.Columns[1].Width + sharedSize;
+                DTProposalContent.Columns[2].Width = DTProposalContent.Columns[2].Width + sharedSize;
+                DTProposalContent.Columns[3].Visible = false;
+            }
+        }
+
+        private void FillProposalContentTable(List<LibraryManager.Models.ProposalContent> ProposalContentList)
+        {
+            this.DTProposalContent.Rows.Clear();
+            foreach (LibraryManager.Models.ProposalContent content in ProposalContentList)
+            {
+                bool flag = content.DownloadDT.Equals(DateTime.MinValue);
+                object[] values = new object[] { content.PartNumber, content.VendorName, content.ProductName, flag };
+                this.DTProposalContent.Rows.Add(values);
+            }
+            this.LblTotalRows.Text = ProposalContentList.Count + " Rows";
+        }
+
+
+        private void LoadAndFilterDataGridInformation()
+        {
+            string text = this.TbxSearch.Text;
+            bool userAddedOnly = this.CbxUserAdded.Checked;
+            this.ProposalContentList = this.ProposalContentController.GetFiltered(userAddedOnly, this.CbxVendors.SelectedItem.Equals("--All--") ? "" : this.CbxVendors.SelectedItem.ToString(), text);
+            this.FillProposalContentTable(this.ProposalContentList);
+        }
+
+        private void LoadProposalContent()
+        {
+            this.ProposalContentList = this.ProposalContentController.Get();
+            this.FillProposalContentTable(this.ProposalContentList);
+        }
+
+        private void LoadProposalVendors()
+        {
+            List<string> vendors = this.ProposalContentController.GetVendors();
+            vendors.Insert(0, "--All--");
+            this.CbxVendors.SelectedValueChanged -= new EventHandler(this.CbxVendors_SelectedValueChanged);
+            this.CbxVendors.DataSource = vendors.ToArray();
+            this.CbxVendors.SelectedValueChanged += new EventHandler(this.CbxVendors_SelectedValueChanged);
+        }
+
+        public override void Reload()
+        {
+            this.LoadProposalVendors();
+            this.LoadProposalContent();
+        }
+
+        public override void Delete()
+        {
+            if (this.DTProposalContent.RowCount > 0)
+            {
+                string partNumber = this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString();
+                this.ProposalContentController.Delete(partNumber);
+                this.LoadProposalContent();
+            }
+        }
+
+        #region Events
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            BasePartialView newView = new ProposalContent_Add_Edit(base.MainPanel, this);
+            BasePartialView newView = new ProposalContent_Add_Edit(base.MainPanel, this, this.AdminContent);            
             base.OpenPartialView(newView);
         }
 
@@ -57,7 +130,7 @@
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            ProposalContent_Add_Edit newView = new ProposalContent_Add_Edit(base.MainPanel, this);
+            ProposalContent_Add_Edit newView = new ProposalContent_Add_Edit(base.MainPanel, this, this.AdminContent);
             newView.SetPartNumber(this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString());
             base.OpenPartialView(newView);
         }
@@ -81,15 +154,6 @@
             this.LoadAndFilterDataGridInformation();
         }
 
-        public override void Delete()
-        {
-            if (this.DTProposalContent.RowCount > 0)
-            {
-                string partNumber = this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString();
-                this.ProposalContentController.Delete(partNumber);
-                this.LoadProposalContent();
-            }
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -111,7 +175,7 @@
 
         private void DTProposalContent_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ProposalContent_Add_Edit newView = new ProposalContent_Add_Edit(base.MainPanel, this);
+            ProposalContent_Add_Edit newView = new ProposalContent_Add_Edit(base.MainPanel, this, this.AdminContent);
             if (this.DTProposalContent.RowCount > 0)
             {
                 newView.SetPartNumber(this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString());
@@ -119,18 +183,13 @@
             }
         }
 
-        private void FillProposalContentTable(List<LibraryManager.Models.ProposalContent> ProposalContentList)
+        private void ProposalContent_Load(object sender, EventArgs e)
         {
-            this.DTProposalContent.Rows.Clear();
-            foreach (LibraryManager.Models.ProposalContent content in ProposalContentList)
-            {
-                bool flag = content.DownloadDT.Equals(DateTime.MinValue);
-                object[] values = new object[] { content.PartNumber, content.VendorName, content.ProductName, flag };
-                this.DTProposalContent.Rows.Add(values);
-            }
-            this.LblTotalRows.Text = ProposalContentList.Count + " Rows";
+            this.Reload();
         }
+        #endregion
 
+        #region paintView
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -196,7 +255,7 @@
             this.CbxUserAdded.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
             this.CbxUserAdded.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.CbxUserAdded.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.CbxUserAdded.Location = new System.Drawing.Point(602, 146);
+            this.CbxUserAdded.Location = new System.Drawing.Point(603, 147);
             this.CbxUserAdded.Name = "CbxUserAdded";
             this.CbxUserAdded.Size = new System.Drawing.Size(148, 24);
             this.CbxUserAdded.TabIndex = 25;
@@ -262,7 +321,7 @@
             this.DTProposalContent.Size = new System.Drawing.Size(705, 375);
             this.DTProposalContent.TabIndex = 24;
             this.DTProposalContent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTProposalContent_CellClick);
-            this.DTProposalContent.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTProposalContent_CellContentDoubleClick);
+            this.DTProposalContent.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTProposalContent_CellClick);
             // 
             // PartNumber
             // 
@@ -289,7 +348,7 @@
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
-            this.Description.Width = 350;
+            this.Description.Width = 320;
             // 
             // UserAdded
             // 
@@ -302,7 +361,7 @@
             this.UserAdded.Name = "UserAdded";
             this.UserAdded.ReadOnly = true;
             this.UserAdded.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.UserAdded.Width = 80;
+            this.UserAdded.Width = 105;
             // 
             // label8
             // 
@@ -462,40 +521,8 @@
             this.PerformLayout();
 
         }
+        #endregion
 
-        private void LoadAndFilterDataGridInformation()
-        {
-            string text = this.TbxSearch.Text;
-            bool userAddedOnly = this.CbxUserAdded.Checked;
-            this.ProposalContentList = this.ProposalContentController.GetFiltered(userAddedOnly, this.CbxVendors.SelectedItem.Equals("--All--") ? "" : this.CbxVendors.SelectedItem.ToString(), text);
-            this.FillProposalContentTable(this.ProposalContentList);
-        }
-
-        private void LoadProposalContent()
-        {
-            this.ProposalContentList = this.ProposalContentController.Get();
-            this.FillProposalContentTable(this.ProposalContentList);
-        }
-
-        private void LoadProposalVendors()
-        {
-            List<string> vendors = this.ProposalContentController.GetVendors();
-            vendors.Insert(0, "--All--");
-            this.CbxVendors.SelectedValueChanged -= new EventHandler(this.CbxVendors_SelectedValueChanged);
-            this.CbxVendors.DataSource = vendors.ToArray();
-            this.CbxVendors.SelectedValueChanged += new EventHandler(this.CbxVendors_SelectedValueChanged);
-        }
-
-        private void ProposalContent_Load(object sender, EventArgs e)
-        {
-            this.Reload();
-        }
-
-        public override void Reload()
-        {
-            this.LoadProposalVendors();
-            this.LoadProposalContent();
-        }
     }
 }
 

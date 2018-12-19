@@ -47,9 +47,9 @@
         {
             this.PnlBorderTop = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.MainPanel = new System.Windows.Forms.Panel();
             this.BtnMinimize = new System.Windows.Forms.PictureBox();
             this.BtnClose = new System.Windows.Forms.PictureBox();
+            this.MainPanel = new System.Windows.Forms.Panel();
             this.PnlBorderTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnClose)).BeginInit();
@@ -82,14 +82,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Add / Edit Proposal Content for Products";
             // 
-            // MainPanel
-            // 
-            this.MainPanel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.MainPanel.Location = new System.Drawing.Point(163, 22);
-            this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(730, 580);
-            this.MainPanel.TabIndex = 5;
-            // 
             // BtnMinimize
             // 
             this.BtnMinimize.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -118,6 +110,14 @@
             this.BtnClose.TabStop = false;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // MainPanel
+            // 
+            this.MainPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.MainPanel.Location = new System.Drawing.Point(163, 22);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(730, 580);
+            this.MainPanel.TabIndex = 5;
+            // 
             // Main_Container
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
@@ -135,6 +135,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.BtnMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnClose)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         private void Main_Container_Load(object sender, EventArgs e)

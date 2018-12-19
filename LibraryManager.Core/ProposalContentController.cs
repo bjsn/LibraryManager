@@ -9,35 +9,28 @@
     using System.IO;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Text;
 
     public class ProposalContentController : BaseController
     {
-        public void Delete(string PartNumber)
+        public bool AdminContent = false;
+        ProposalContentDL ProposalContentDL { get; set; }
+        public ProposalContentController(bool requireAdminContent)
+            : base(requireAdminContent)
         {
-            try
+            this.AdminContent = requireAdminContent;
+            this.ProposalContentDL = new ProposalContentDL(base.DBConnectionPath, requireAdminContent)
             {
-                ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                    DbPwd = base.DBPW
-                };
-                base.ProposalContentDL = tdl;
-                base.ProposalContentDL.Delete(PartNumber);
-            }
-            catch (Exception exception1)
-            {
-                throw new Exception(exception1.Message);
-            }
+                DbPwd = base.DBPW
+            };
         }
 
         public List<ProposalContent> Get()
         {
-            List<ProposalContent> all;
+            List<ProposalContent> all = null;
             try
             {
-                ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                    DbPwd = base.DBPW
-                };
-                base.ProposalContentDL = tdl;
-                all = base.ProposalContentDL.GetAll();
+                all = this.ProposalContentDL.GetAll();
             }
             catch (Exception exception1)
             {
@@ -46,16 +39,13 @@
             return all;
         }
 
+
         public ProposalContent Get(string PartNumber)
         {
-            ProposalContent byPartNumber;
+            ProposalContent byPartNumber = null;
             try
             {
-                ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                    DbPwd = base.DBPW
-                };
-                base.ProposalContentDL = tdl;
-                byPartNumber = base.ProposalContentDL.GetByPartNumber(PartNumber);
+                byPartNumber = this.ProposalContentDL.GetByPartNumber(PartNumber);
             }
             catch (Exception exception1)
             {
@@ -64,26 +54,20 @@
             return byPartNumber;
         }
 
+
         public List<ProposalContent> GetByKeyWord(string keyWord)
         {
-            ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                DbPwd = base.DBPW
-            };
-            base.ProposalContentDL = tdl;
-            return (string.IsNullOrEmpty(keyWord) ? base.ProposalContentDL.GetAll() : base.ProposalContentDL.GetByKeyWord(keyWord));
+            return (string.IsNullOrEmpty(keyWord) ? this.ProposalContentDL.GetAll() : this.ProposalContentDL.GetByKeyWord(keyWord));
         }
+
 
         public List<ProposalContent> GetFiltered(bool userAddedOnly, string vendorFilterName, string keyWord = "")
         {
-            List<ProposalContent> list2;
+            List<ProposalContent> list2 = null;
             try
             {
-                ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                    DbPwd = base.DBPW
-                };
-                base.ProposalContentDL = tdl;
                 List<ProposalContent> source = null;
-                source = !string.IsNullOrEmpty(keyWord) ? base.ProposalContentDL.GetByKeyWord(keyWord) : base.ProposalContentDL.GetAll();
+                source = !string.IsNullOrEmpty(keyWord) ? this.ProposalContentDL.GetByKeyWord(keyWord) : this.ProposalContentDL.GetAll();
                 foreach (ProposalContent content in source.ToList<ProposalContent>())
                 {
                     bool flag = content.DownloadDT.Equals(DateTime.MinValue);
@@ -107,14 +91,10 @@
 
         public List<string> GetVendors()
         {
-            List<string> vendors;
+            List<string> vendors = null;
             try
             {
-                ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                    DbPwd = base.DBPW
-                };
-                base.ProposalContentDL = tdl;
-                vendors = base.ProposalContentDL.GetVendors();
+                vendors = this.ProposalContentDL.GetVendors();
             }
             catch (Exception exception1)
             {
@@ -128,11 +108,7 @@
             try
             {
                 proposalContent.ProductPicturePath = this.SaveImage(proposalContent.ProductPicturePath, proposalContent.PartNumber);
-                ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                    DbPwd = base.DBPW
-                };
-                base.ProposalContentDL = tdl;
-                base.ProposalContentDL.Create(proposalContent);
+                this.ProposalContentDL.Create(proposalContent);
             }
             catch (Exception exception1)
             {
@@ -168,22 +144,33 @@
             return str3;
         }
 
+
         public void Update(ProposalContent proposalContent)
         {
             try
             {
                 proposalContent.ProductPicturePath = this.SaveImage(proposalContent.ProductPicturePath, proposalContent.PartNumber);
-                ProposalContentDL tdl = new ProposalContentDL(base.ProposalContentDBConnectionPath) {
-                    DbPwd = base.DBPW
-                };
-                base.ProposalContentDL = tdl;
-                base.ProposalContentDL.Update(proposalContent);
+                this.ProposalContentDL.Update(proposalContent);
             }
             catch (Exception exception1)
             {
                 throw new Exception(exception1.Message);
             }
         }
+
+
+        public void Delete(string PartNumber)
+        {
+            try
+            {
+                this.ProposalContentDL.Delete(PartNumber);
+            }
+            catch (Exception exception1)
+            {
+                throw new Exception(exception1.Message);
+            }
+        }
+
     }
 }
 

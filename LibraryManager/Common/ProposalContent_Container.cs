@@ -175,7 +175,7 @@
 
         private void ProposalContent_Container_Load(object sender, EventArgs e)
         {
-            BasePartialView view = new ProposalContent(this.MainPanel) {
+            BasePartialView view = new ProposalContent(this.MainPanel, false) {
                 TopLevel = false,
                 AutoScroll = false,
                 Location = new Point(0, 0)

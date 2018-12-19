@@ -25,7 +25,7 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton EditorControl_Bullet;
         private Label LblOpenTxb;
-
+            
         public ProposalContent_Editor()
         {
             this.previewKeyEnter = new KeyEventArgs(Keys.Back);

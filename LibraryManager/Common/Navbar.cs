@@ -57,6 +57,106 @@
             base.Dispose(disposing);
         }
 
+        private void LockElements() 
+        {
+            //implement logic
+        }
+
+        private void Navbar_Load(object sender, EventArgs e)
+        {
+            BasePartialView proposalContentView = new ProposalContent(base.MainPanel, true);
+            this.SelectOption(this.Pnl_StructuredProposal, proposalContentView);
+        }
+
+        private void Pnl_DocSections_Click(object sender, EventArgs e)
+        {
+            BasePartialView proposalContentView = new DocSection(base.MainPanel);
+            this.SelectOption(this.Pnl_DocSections, proposalContentView);
+        }
+
+        private void Pnl_DocTemplates_Click(object sender, EventArgs e)
+        {
+            this.SelectOption(this.Pnl_DocTemplates, null);
+        }
+
+        private void Pnl_ItemCats_Click(object sender, EventArgs e)
+        {
+            this.SelectOption(this.Pnl_ItemCats, null);
+        }
+
+        private void Pnl_OutputTypes_Click(object sender, EventArgs e)
+        {
+            this.SelectOption(this.Pnl_OutputTypes, null);
+        }
+
+        private void Pnl_SectionTypes_Click(object sender, EventArgs e)
+        {
+            this.SelectOption(this.Pnl_SectionTypes, null);
+        }
+
+        private void Pnl_StructuredProposal_Click(object sender, EventArgs e)
+        {
+            BasePartialView proposalContentView = new ProposalContent(base.MainPanel, true);
+            this.SelectOption(this.Pnl_StructuredProposal, proposalContentView);
+        }
+
+        private void SelectOption(Panel panel, BasePartialView proposalContentView = null)
+        {
+            if (panel.BackColor != Color.FromArgb(0x1f, 0x1f, 0x1f))
+            {
+                base.MainPanel.Controls.Clear();
+                if (proposalContentView != null)
+                {
+                    proposalContentView.TopLevel = false;
+                    proposalContentView.AutoScroll = false;
+                    proposalContentView.Location = new Point(0, 0);
+                    base.MainPanel.Controls.Add(proposalContentView);
+                    proposalContentView.Show();
+                }
+            }
+            foreach (Control control in base.Controls)
+            {
+                if (!(control is Panel))
+                {
+                    continue;
+                }
+                if (!control.Name.Equals("Pnl_LibrayManager") && !control.Name.Equals("Pnl_TypesAssociations"))
+                {
+                    control.BackColor = Color.FromArgb(0x33, 0x33, 0x33);
+                    IEnumerator enumerator = control.Controls.GetEnumerator();
+                    try
+                    {
+                        while (enumerator.MoveNext())
+                        {
+                            Control current = (Control)enumerator.Current;
+                            if (current is Panel)
+                            {
+                                control.Controls.Remove(current);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        //IDisposable disposable = enumerator as IDisposable;
+                        //if (disposable == null)
+                        //{
+                        //    continue;
+                        //}
+                        //disposable.Dispose();
+                    }
+                }
+            }
+            Panel panel2 = new Panel
+            {
+                Location = new Point(0, 0),
+                Size = new Size(4, 40),
+                MaximumSize = new Size(4, 40),
+                BackColor = Color.FromArgb(0, 0x72, 0xc6)
+            };
+            panel.Controls.Add(panel2);
+            panel.BackColor = Color.FromArgb(0x1f, 0x1f, 0x1f);
+        }
+
         private void InitializeComponent()
         {
             this.Pnl_OutputTypes = new System.Windows.Forms.Panel();
@@ -502,99 +602,6 @@
 
         }
 
-        private void Navbar_Load(object sender, EventArgs e)
-        {
-            BasePartialView proposalContentView = new ProposalContent(base.MainPanel);
-            this.SelectOption(this.Pnl_StructuredProposal, proposalContentView);
-        }
-
-        private void Pnl_DocSections_Click(object sender, EventArgs e)
-        {
-            BasePartialView proposalContentView = new DocSection(base.MainPanel);
-            this.SelectOption(this.Pnl_DocSections, proposalContentView);
-        }
-
-        private void Pnl_DocTemplates_Click(object sender, EventArgs e)
-        {
-            this.SelectOption(this.Pnl_DocTemplates, null);
-        }
-
-        private void Pnl_ItemCats_Click(object sender, EventArgs e)
-        {
-            this.SelectOption(this.Pnl_ItemCats, null);
-        }
-
-        private void Pnl_OutputTypes_Click(object sender, EventArgs e)
-        {
-            this.SelectOption(this.Pnl_OutputTypes, null);
-        }
-
-        private void Pnl_SectionTypes_Click(object sender, EventArgs e)
-        {
-            this.SelectOption(this.Pnl_SectionTypes, null);
-        }
-
-        private void Pnl_StructuredProposal_Click(object sender, EventArgs e)
-        {
-            BasePartialView proposalContentView = new ProposalContent(base.MainPanel);
-            this.SelectOption(this.Pnl_StructuredProposal, proposalContentView);
-        }
-
-        private void SelectOption(Panel panel, BasePartialView proposalContentView = null)
-        {
-            if (panel.BackColor != Color.FromArgb(0x1f, 0x1f, 0x1f))
-            {
-                base.MainPanel.Controls.Clear();
-                if (proposalContentView != null)
-                {
-                    proposalContentView.TopLevel = false;
-                    proposalContentView.AutoScroll = false;
-                    proposalContentView.Location = new Point(0, 0);
-                    base.MainPanel.Controls.Add(proposalContentView);
-                    proposalContentView.Show();
-                }
-            }
-            foreach (Control control in base.Controls)
-            {
-                if (!(control is Panel))
-                {
-                    continue;
-                }
-                if (!control.Name.Equals("Pnl_LibrayManager") && !control.Name.Equals("Pnl_TypesAssociations"))
-                {
-                    control.BackColor = Color.FromArgb(0x33, 0x33, 0x33);
-                    IEnumerator enumerator = control.Controls.GetEnumerator();
-                    try
-                    {
-                        while (enumerator.MoveNext())
-                        {
-                            Control current = (Control) enumerator.Current;
-                            if (current is Panel)
-                            {
-                                control.Controls.Remove(current);
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        //IDisposable disposable = enumerator as IDisposable;
-                        //if (disposable == null)
-                        //{
-                        //    continue;
-                        //}
-                        //disposable.Dispose();
-                    }
-                }
-            }
-            Panel panel2 = new Panel {
-                Location = new Point(0, 0),
-                Size = new Size(4, 40),
-                MaximumSize = new Size(4, 40),
-                BackColor = Color.FromArgb(0, 0x72, 0xc6)
-            };
-            panel.Controls.Add(panel2);
-            panel.BackColor = Color.FromArgb(0x1f, 0x1f, 0x1f);
-        }
     }
 }
 
