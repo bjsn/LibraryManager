@@ -114,6 +114,7 @@
                     proposalContentView.Show();
                 }
             }
+
             foreach (Control control in base.Controls)
             {
                 if (!(control is Panel))

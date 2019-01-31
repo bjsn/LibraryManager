@@ -88,7 +88,7 @@
         private string GetSelectString() 
         {
             string query = "";
-            //the query chages if the database is PQDB o proposalCOntent
+            //the query chages if the database is PQDB o proposalContent
             if (AdminContent)
             {
                 query = "SELECT PartNumber, VendorName, ProductName, FeatureBullets, MarketingInfo, TechnicalInfo, ProductPicture, UserCreatedDT, UserUpdDT";
@@ -247,51 +247,57 @@
         /// <returns></returns>
         private List<ProposalContent> ConvertToObj(DataTable dataTable)
         {
-            
-            List<ProposalContent> list = new List<ProposalContent>();
-            if (dataTable.Rows.Count > 0)
+            try
             {
-                foreach (DataRow row in dataTable.Rows)
+                List<ProposalContent> list = new List<ProposalContent>();
+                if (dataTable.Rows.Count > 0)
                 {
-                    ProposalContent item = null;
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        ProposalContent item = null;
 
-                    if (AdminContent)
-                    {
-                        item = new ProposalContent
+                        if (AdminContent)
                         {
-                            PartNumber = (row["PartNumber"] != DBNull.Value) ? row["PartNumber"].ToString() : string.Empty,
-                            VendorName = (row["VendorName"] != DBNull.Value) ? row["VendorName"].ToString() : string.Empty,
-                            ProductName = (row["ProductName"] != DBNull.Value) ? row["ProductName"].ToString() : string.Empty,
-                            MarketingInfo = (row["MarketingInfo"] != DBNull.Value) ? row["MarketingInfo"].ToString() : string.Empty,
-                            FeatureBullets = (row["FeatureBullets"] != DBNull.Value) ? row["FeatureBullets"].ToString() : string.Empty,
-                            TechnicalInfo = (row["TechnicalInfo"] != DBNull.Value) ? row["TechnicalInfo"].ToString() : string.Empty,
-                            ProductPicture = (row["ProductPicture"] != DBNull.Value) ? ((byte[])row["ProductPicture"]) : null,
-                            UserCreatedDT = string.IsNullOrEmpty(row["UserCreatedDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["UserCreatedDT"].ToString()),
-                            UserUpdDT = string.IsNullOrEmpty(row["UserUpdDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["UserUpdDT"].ToString())
-                        };
-                    }
-                    else 
-                    {
-                        item = new ProposalContent
+                            item = new ProposalContent
+                            {
+                                PartNumber = (row["PartNumber"] != DBNull.Value) ? row["PartNumber"].ToString() : string.Empty,
+                                VendorName = (row["VendorName"] != DBNull.Value) ? row["VendorName"].ToString() : string.Empty,
+                                ProductName = (row["ProductName"] != DBNull.Value) ? row["ProductName"].ToString() : string.Empty,
+                                MarketingInfo = (row["MarketingInfo"] != DBNull.Value) ? row["MarketingInfo"].ToString() : string.Empty,
+                                FeatureBullets = (row["FeatureBullets"] != DBNull.Value) ? row["FeatureBullets"].ToString() : string.Empty,
+                                TechnicalInfo = (row["TechnicalInfo"] != DBNull.Value) ? row["TechnicalInfo"].ToString() : string.Empty,
+                                ProductPicture = (row["ProductPicture"] != DBNull.Value) ? ((byte[])row["ProductPicture"]) : null,
+                                UserCreatedDT = string.IsNullOrEmpty(row["UserCreatedDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["UserCreatedDT"].ToString()),
+                                UserUpdDT = string.IsNullOrEmpty(row["UserUpdDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["UserUpdDT"].ToString())
+                            };
+                        }
+                        else
                         {
-                            PartNumber = (row["PartNumber"] != DBNull.Value) ? row["PartNumber"].ToString() : string.Empty,
-                            VendorName = (row["VendorName"] != DBNull.Value) ? row["VendorName"].ToString() : string.Empty,
-                            ProductName = (row["ProductName"] != DBNull.Value) ? row["ProductName"].ToString() : string.Empty,
-                            MarketingInfo = (row["MarketingInfo"] != DBNull.Value) ? row["MarketingInfo"].ToString() : string.Empty,
-                            FeatureBullets = (row["FeatureBullets"] != DBNull.Value) ? row["FeatureBullets"].ToString() : string.Empty,
-                            TechnicalInfo = (row["TechnicalInfo"] != DBNull.Value) ? row["TechnicalInfo"].ToString() : string.Empty,
-                            ProductPicturePath = (row["ProductPicturePath"] != DBNull.Value) ? row["ProductPicturePath"].ToString() : string.Empty,
-                            ProductPictureURL = (row["ProductPictureURL"] != DBNull.Value) ? row["ProductPictureURL"].ToString() : string.Empty,
-                            MfgPartNumber = (row["MfgPartNumber"] != DBNull.Value) ? row["MfgPartNumber"].ToString() : string.Empty,
-                            MfgName = (row["MfgName"] != DBNull.Value) ? row["MfgName"].ToString() : string.Empty,
-                            DownloadDT = string.IsNullOrEmpty(row["DownloadDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["DownloadDT"].ToString()),
-                            UserUpdDT = string.IsNullOrEmpty(row["UserUpdDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["UserUpdDT"].ToString())
-                        };
+                            item = new ProposalContent
+                            {
+                                PartNumber = (row["PartNumber"] != DBNull.Value) ? row["PartNumber"].ToString() : string.Empty,
+                                VendorName = (row["VendorName"] != DBNull.Value) ? row["VendorName"].ToString() : string.Empty,
+                                ProductName = (row["ProductName"] != DBNull.Value) ? row["ProductName"].ToString() : string.Empty,
+                                MarketingInfo = (row["MarketingInfo"] != DBNull.Value) ? row["MarketingInfo"].ToString() : string.Empty,
+                                FeatureBullets = (row["FeatureBullets"] != DBNull.Value) ? row["FeatureBullets"].ToString() : string.Empty,
+                                TechnicalInfo = (row["TechnicalInfo"] != DBNull.Value) ? row["TechnicalInfo"].ToString() : string.Empty,
+                                ProductPicturePath = (row["ProductPicturePath"] != DBNull.Value) ? row["ProductPicturePath"].ToString() : string.Empty,
+                                ProductPictureURL = (row["ProductPictureURL"] != DBNull.Value) ? row["ProductPictureURL"].ToString() : string.Empty,
+                                MfgPartNumber = (row["MfgPartNumber"] != DBNull.Value) ? row["MfgPartNumber"].ToString() : string.Empty,
+                                MfgName = (row["MfgName"] != DBNull.Value) ? row["MfgName"].ToString() : string.Empty,
+                                DownloadDT = string.IsNullOrEmpty(row["DownloadDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["DownloadDT"].ToString()),
+                                UserUpdDT = string.IsNullOrEmpty(row["UserUpdDT"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["UserUpdDT"].ToString())
+                            };
+                        }
+                        list.Add(item);
                     }
-                    list.Add(item);
                 }
+                return list;
             }
-            return list;
+            catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
     }

@@ -23,7 +23,9 @@
             {
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
-                new OleDbDataAdapter("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, Word_Doc, ModSource, ModSourceUpdatedDate FROM Section_tbl WHERE DeleteMarkDate IS NULL;", base.DbConnection).Fill(dataTable);
+                new OleDbDataAdapter("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, ModSource, ModSourceUpdatedDate " +
+                                     "FROM Section_tbl " +
+                                     "WHERE DeleteMarkDate IS NULL;", base.DbConnection).Fill(dataTable);
                 base.CloseDbConnection();
                 list = this.Convert(dataTable);
             }
@@ -32,6 +34,25 @@
                 throw new Exception(exception1.Message);
             }
             return list;
+        }
+
+        public List<Double> GetAllIndexes()
+        {
+            try
+            {
+                base.OpenDbConnection();
+                DataTable dataTable = new DataTable();
+                new OleDbDataAdapter("SELECT Order_Number " +
+                                     "FROM Section_tbl " + 
+                                     "WHERE DeleteMarkDate IS NULL " +
+                                     "ORDER BY Order_Number;", base.DbConnection).Fill(dataTable);
+                base.CloseDbConnection();
+                return this.ConvertIndexes(dataTable);
+            }
+            catch (Exception exception1)
+            {
+                throw new Exception(exception1.Message);
+            }
         }
 
 
@@ -94,6 +115,34 @@
                 throw new Exception(exception1.Message);
             }
             return list;
+        }
+
+
+        public void UpdateSectionOrder(DocSection section)
+        {
+            try
+            {
+                if (section != null)
+                {
+                    OleDbCommand command = null;
+                    command = new OleDbCommand
+                    {
+                        CommandText = string.Format("Update Section_tbl Set Order_Number = @Order_Number WHERE Section_Name = @Section_Name", new object[0]),
+                        CommandType = CommandType.Text
+                    };
+                    command.Parameters.AddWithValue("@Order_Number", section.ReOrdered_Number);
+                    command.Parameters.AddWithValue("@Section_Name", section.Section);
+
+                    base.OpenDbConnection();
+                    command.Connection = base.DbConnection;
+                    command.ExecuteNonQuery();
+                    base.CloseDbConnection();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void UpdateSectionFileDocRecSource(string sectionName, byte[] fileDoc) 
@@ -215,6 +264,32 @@
                 throw new Exception(e.Message);
             }
             list = list.OrderBy(x => x.Order).ToList();
+            return list;
+        }
+
+
+        private List<double> ConvertIndexes(DataTable dataTable)
+        {
+            int c = 0;
+            List<Double> list = new List<Double>();
+            try
+            {
+                if (dataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        c++;
+                        double orderId = 0;
+                        Double.TryParse(row["Order_Number"].ToString(), out orderId);
+                        list.Add(orderId);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            list = list.OrderBy(x => x).ToList();
             return list;
         }
     }

@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace LibraryManager.Views
 {
@@ -25,7 +27,7 @@ namespace LibraryManager.Views
         private ComboBox comboBox1;
         private Panel panel1;
         private DataGridView DTSectionContent;
-        private Button BtnMove;
+        private Button BtnIndex;
         private PictureBox BtnSearch;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Section;
@@ -40,213 +42,29 @@ namespace LibraryManager.Views
         #endregion
 
         private FileController fileController;
-        private DocSectionController docSectionController;
-        private SetupController setupController;
+        private DocSectionController _docSectionController;
+        private SetupController _setupController;
+        private Label LblDtgvAlert;
         private string ClientName;
+        private List<double> ListOrderIndexes;
 
         public DocSection(Panel Panel) : base(Panel)
         {
             this.InitializeComponent();
-            this.docSectionController = new DocSectionController(true);
+            this._docSectionController = new DocSectionController(true);
             this.fileController = new FileController();
-            this.setupController = new SetupController();
+            this._setupController = new SetupController();
             LoadClientName();
             LoadColumnNames();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (this.components != null))
-            {
-                this.components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private void BtnSearch_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void DocSection_Shown(object sender, EventArgs e)
-        {
-            LoadDataGrid();
-        }
-
-        private void LoadClientName() 
-        {
-            try
-            {
-                this.ClientName = setupController.GetClientName();
-            }
-            catch (Exception e)
-            {
-                //add logic to validate
-            }
-        }
-
-        private void LoadColumnNames() 
-        {
-            CbxColumn.DataSource = new[]{
-                        "Section",
-                        "Location",
-                        "DocType",
-                        "Source",
-                        "UpdatedBy"
-                    };
-        }
-
-        private void DTSectionContent_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && this.DTSectionContent.SelectedRows.Count == 1)
-            {
-                if(this.DTSectionContent.SelectedRows[0].Cells[2].Value.ToString().ToUpper().Contains("INTERNAL"))
-                {
-                    BtnEdit.Enabled = true;
-                }
-                //enable just if the source is equal than the client name
-                BtnDelete.Enabled = this.DTSectionContent.SelectedRows[0].Cells[5].Value.ToString().ToUpper().Contains(this.ClientName.ToUpper());
-            }
-            else
-            {
-                BtnEdit.Enabled = false;
-                BtnDelete.Enabled = false;
-                BtnMove.Enabled = false;
-            }
-            if (this.DTSectionContent.SelectedRows.Count >= 1)
-            {
-                BtnMove.Enabled = true;
-            }
-        }
-
-
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            this.UpdateWordFile();
-        }
-
-        private void BtnMove_Click(object sender, EventArgs e)
-        {
-            if (this.DTSectionContent.SelectedRows.Count > 0)
-            {
-                this.DTSectionContent.BackgroundColor = Color.Gray;
-            }
-        }
-            
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
-            Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
-            newView.SetText("The section: '" + sectionName+"'");
-            base.OpenPartialAlert(newView);
-        }
-
-        public override void Delete()
-        {
-            
-            if (this.DTSectionContent.RowCount > 0)
-            {
-                string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
-                this.docSectionController.DeleteBySectionName(sectionName);
-                this.LoadDataGrid();
-            }
-        }
-
-        private void LoadDataGrid() 
-        {
-            this.DTSectionContent.Rows.Clear();
-            var sectionList = this.docSectionController.GetAll();
-            foreach (var section in sectionList)
-            {
-                object[] sectionObject = new object[] { section.Order, 
-                                                        section.Section, 
-                                                        section.Location, 
-                                                        section.DocType, 
-                                                        section.Description, 
-                                                        section.RecSource, 
-                                                        section.UpdatedDT.ToShortDateString(), 
-                                                        section.UpdatedBy, 
-                                                        (section.ClientUpdatedDT.Equals(DateTime.MinValue) ? "": "Y")
-                                                    };
-                this.DTSectionContent.Rows.Add(sectionObject);
-            }
-        }
-
-        //improve this function
-        private void UpdateWordFile() 
-        {
-            try
-            {
-                string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
-                string filePath = this.docSectionController.GetDocSectionFile(sectionName);
-                if (!string.IsNullOrEmpty(filePath))
-                {
-                    string copyFilePath = this.fileController.CreateFileCopy(filePath);
-                    bool fileOpenSuccessfully = this.fileController.OpenFile(filePath);
-                    
-                    System.Timers.Timer timer = new System.Timers.Timer();
-                    timer.Interval = 1000;
-                    timer.Elapsed += delegate
-                    {
-                        //run timer until the user close the file, then take it and save it into the database
-                        bool isFileInUse = this.fileController.IsFileInUse(filePath);
-                        if (!isFileInUse)
-                        {
-                            timer.Stop();
-                            timer.Dispose();
-                            if (!timer.Enabled) 
-                            {
-                                bool fileWithoutChanges = this.fileController.AreFilesEqual(filePath, copyFilePath);
-                                //if the original file had changes
-                                if (!fileWithoutChanges)
-                                {
-                                    this.UpdateFileChage(sectionName, filePath);
-                                }
-                                //delete both files 
-                                this.fileController.DeleteFile(filePath);
-                                this.fileController.DeleteFile(copyFilePath);
-
-                                if (!fileWithoutChanges)
-                                {
-                                    if (InvokeRequired)
-                                    {
-                                        BeginInvoke(new MethodInvoker(this.LoadDataGrid));
-                                    }
-                                    else
-                                    {
-                                        this.LoadDataGrid();
-                                    }
-                                }
-                            }
-                        }
-                    };
-                timer.Start();
-                }
-            }
-            catch (Exception exception)
-            {
-                //add error message
-            }
-        }
-
-        private void UpdateFileChage(string sectionName, string filePath) 
-        {
-            try
-            {
-                byte[] fileBynary = this.fileController.GetBinaryFile(filePath);
-                this.docSectionController.UpdateSectionFile(sectionName, fileBynary);
-            }
-            catch (Exception e) 
-            {
-                throw new Exception(e.Message);
-            }
+            SetTimer();
         }
 
         #region components
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.TbxSearch = new System.Windows.Forms.TextBox();
@@ -269,8 +87,9 @@ namespace LibraryManager.Views
             this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtnMove = new System.Windows.Forms.Button();
+            this.BtnIndex = new System.Windows.Forms.Button();
             this.BtnSearch = new System.Windows.Forms.PictureBox();
+            this.LblDtgvAlert = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DTSectionContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
@@ -325,7 +144,6 @@ namespace LibraryManager.Views
             this.BtnAdd.TabIndex = 27;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = false;
-            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // BtnEdit
             // 
@@ -453,14 +271,14 @@ namespace LibraryManager.Views
             this.DTSectionContent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.DTSectionContent.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.DTSectionContent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DTSectionContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTSectionContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DTSectionContent.ColumnHeadersHeight = 25;
             this.DTSectionContent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DTSectionContent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -474,28 +292,28 @@ namespace LibraryManager.Views
             this.UpdatedBy,
             this.ClientUpdated});
             this.DTSectionContent.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DTSectionContent.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTSectionContent.DefaultCellStyle = dataGridViewCellStyle2;
             this.DTSectionContent.EnableHeadersVisualStyles = false;
             this.DTSectionContent.GridColor = System.Drawing.Color.White;
             this.DTSectionContent.Location = new System.Drawing.Point(12, 167);
             this.DTSectionContent.Name = "DTSectionContent";
             this.DTSectionContent.ReadOnly = true;
             this.DTSectionContent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DTSectionContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DTSectionContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DTSectionContent.RowHeadersVisible = false;
             this.DTSectionContent.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DTSectionContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -503,9 +321,14 @@ namespace LibraryManager.Views
             this.DTSectionContent.Size = new System.Drawing.Size(706, 383);
             this.DTSectionContent.TabIndex = 34;
             this.DTSectionContent.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTSectionContent_CellContentClick);
+            this.DTSectionContent.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DTSectionContent_CellMouseClick);
+            this.DTSectionContent.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DTSectionContent_CellPainting);
+            this.DTSectionContent.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DTSectionContent_ColumnHeaderMouseClick);
             this.DTSectionContent.DragDrop += new System.Windows.Forms.DragEventHandler(this.DTSectionContent_DragDrop);
             this.DTSectionContent.DragOver += new System.Windows.Forms.DragEventHandler(this.DTSectionContent_DragOver);
+            this.DTSectionContent.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseClick);
             this.DTSectionContent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseDown);
+            this.DTSectionContent.MouseLeave += new System.EventHandler(this.DTSectionContent_MouseLeave);
             this.DTSectionContent.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseMove);
             // 
             // Id
@@ -570,25 +393,25 @@ namespace LibraryManager.Views
             this.ClientUpdated.Name = "ClientUpdated";
             this.ClientUpdated.ReadOnly = true;
             // 
-            // BtnMove
+            // BtnIndex
             // 
-            this.BtnMove.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.BtnIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnMove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.BtnMove.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnMove.Enabled = false;
-            this.BtnMove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(190)))));
-            this.BtnMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMove.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
-            this.BtnMove.ForeColor = System.Drawing.Color.White;
-            this.BtnMove.Location = new System.Drawing.Point(324, 95);
-            this.BtnMove.Name = "BtnMove";
-            this.BtnMove.Size = new System.Drawing.Size(90, 32);
-            this.BtnMove.TabIndex = 35;
-            this.BtnMove.Text = "Move";
-            this.BtnMove.UseVisualStyleBackColor = false;
-            this.BtnMove.Click += new System.EventHandler(this.BtnMove_Click);
+            this.BtnIndex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.BtnIndex.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnIndex.Enabled = false;
+            this.BtnIndex.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BtnIndex.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnIndex.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
+            this.BtnIndex.ForeColor = System.Drawing.Color.White;
+            this.BtnIndex.Location = new System.Drawing.Point(324, 95);
+            this.BtnIndex.Name = "BtnIndex";
+            this.BtnIndex.Size = new System.Drawing.Size(90, 32);
+            this.BtnIndex.TabIndex = 35;
+            this.BtnIndex.Text = "Index";
+            this.BtnIndex.UseVisualStyleBackColor = false;
+            this.BtnIndex.Click += new System.EventHandler(this.BtnReIndex_Click);
             // 
             // BtnSearch
             // 
@@ -605,12 +428,26 @@ namespace LibraryManager.Views
             this.BtnSearch.TabStop = false;
             this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click_1);
             // 
+            // LblDtgvAlert
+            // 
+            this.LblDtgvAlert.AutoSize = true;
+            this.LblDtgvAlert.BackColor = System.Drawing.Color.Transparent;
+            this.LblDtgvAlert.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.LblDtgvAlert.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.LblDtgvAlert.Location = new System.Drawing.Point(383, 553);
+            this.LblDtgvAlert.Name = "LblDtgvAlert";
+            this.LblDtgvAlert.Size = new System.Drawing.Size(395, 19);
+            this.LblDtgvAlert.TabIndex = 37;
+            this.LblDtgvAlert.Text = "You cannot move/cut sections if the list is not order by number";
+            this.LblDtgvAlert.Visible = false;
+            // 
             // DocSection
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(730, 580);
+            this.Controls.Add(this.LblDtgvAlert);
             this.Controls.Add(this.BtnSearch);
-            this.Controls.Add(this.BtnMove);
+            this.Controls.Add(this.BtnIndex);
             this.Controls.Add(this.DTSectionContent);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -636,45 +473,312 @@ namespace LibraryManager.Views
         }
         #endregion
 
-        private Rectangle dragBoxFromMouseDown;
-        private int rowIndexFromMouseDown;
-        private int rowIndexOfItemUnderMouseToDrop;
-        private void DTSectionContent_MouseMove(object sender, MouseEventArgs e)
+        private void LoadColumnNames()
         {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            CbxColumn.DataSource = new[]{
+                        "--All--",
+                        "Section",
+                        "Location",
+                        "DocType",
+                        "Source",
+                        "UpdatedBy"
+                    };
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (this.components != null))
             {
-                // If the mouse moves outside the rectangle, start the drag.
-                if (dragBoxFromMouseDown != Rectangle.Empty &&
-                    !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                this.components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private void DocSection_Shown(object sender, EventArgs e)
+        {
+            LoadDataGrid();
+            LoadIndexesList();
+        }
+
+        private void LoadClientName() 
+        {
+            try
+            {
+                this.ClientName = _setupController.GetClientName();
+            }
+            catch (Exception e)
+            {
+                //change this for the error implementation
+                MessageBox.Show("Error:"  + e.Message);
+            }
+        }
+
+        private void DTSectionContent_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && this.DTSectionContent.SelectedRows.Count == 1)
+            {
+                if(this.DTSectionContent.SelectedRows[0].Cells[2].Value.ToString().ToUpper().Contains("INTERNAL"))
                 {
-                    // Proceed with the drag and drop, passing in the list item.                    
-                    DragDropEffects dropEffect = DTSectionContent.DoDragDrop(
-                    DTSectionContent.Rows[rowIndexFromMouseDown],
-                    DragDropEffects.Move);
+                    BtnEdit.Enabled = true;
+                }
+                BtnDelete.Enabled = this.DTSectionContent.SelectedRows[0].Cells[5].Value.ToString().ToUpper().Contains(this.ClientName.ToUpper());
+            }
+            else
+            {
+                BtnEdit.Enabled = false;
+                BtnDelete.Enabled = false;
+            }
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            this.UpdateWordFile();
+        }
+            
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
+            Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
+            newView.SetText("The section: '" + sectionName+"'");
+            base.OpenPartialAlert(newView);
+        }
+
+        public override void Delete()
+        {
+            if (this.DTSectionContent.RowCount > 0)
+            {
+                string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
+                this._docSectionController.DeleteBySectionName(sectionName);
+                this.LoadDataGrid();
+            }
+        }
+
+        private void LoadDataGrid() 
+        {
+            this.DTSectionContent.Rows.Clear();
+            var sectionList = this._docSectionController.GetAll();
+            foreach (var section in sectionList)
+            {
+                object[] sectionObject = new object[] { section.Order, 
+                                                        section.Section, 
+                                                        section.Location, 
+                                                        section.DocType, 
+                                                        section.Description, 
+                                                        section.RecSource, 
+                                                        section.UpdatedDT.ToShortDateString(), 
+                                                        section.UpdatedBy, 
+                                                        (section.ClientUpdatedDT.Equals(DateTime.MinValue) ? "": "Y")
+                                                    };
+                this.DTSectionContent.Rows.Add(sectionObject);
+            }
+        }
+
+
+        private void LoadIndexesList()
+        {
+            this.ListOrderIndexes = this._docSectionController.GetAllIndexes();
+        }
+
+        //improve this function
+        private void UpdateWordFile() 
+        {
+            try
+            {
+                string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
+                string filePath = this._docSectionController.GetDocSectionFile(sectionName);
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    string copyFilePath = this.fileController.CreateFileCopy(filePath);
+                    bool fileOpenSuccessfully = this.fileController.OpenFile(filePath);
+                    
+                    System.Timers.Timer timer = new System.Timers.Timer();
+                    timer.Interval = 1000;
+                    timer.Elapsed += delegate
+                    {
+                        //run timer until the user close the file, then take it and save it into the database
+                        bool isFileInUse = this.fileController.IsFileInUse(filePath);
+                        if (!isFileInUse)
+                        {
+                            timer.Stop();
+                            timer.Dispose();
+                            if (!timer.Enabled) 
+                            {
+                                bool fileWithoutChanges = this.fileController.AreFilesEqual(filePath, copyFilePath);
+                                //if the original file had changes
+                                if (!fileWithoutChanges)
+                                {
+                                    this.UpdateFileChage(sectionName, filePath);
+                                }
+                                //delete both files 
+                                this.fileController.DeleteFile(filePath);
+                                this.fileController.DeleteFile(copyFilePath);
+
+                                if (!fileWithoutChanges)
+                                {
+                                    if (InvokeRequired)
+                                    {
+                                        BeginInvoke(new MethodInvoker(this.LoadDataGrid));
+                                    }
+                                    else
+                                    {
+                                        this.LoadDataGrid();
+                                    }
+                                }
+                            }
+                        }
+                    };
+                timer.Start();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error:" + e.Message);
+            }
+        }
+
+        private void UpdateFileChage(string sectionName, string filePath) 
+        {
+            try
+            {
+                byte[] fileBynary = this.fileController.GetBinaryFile(filePath);
+                this._docSectionController.UpdateSectionFile(sectionName, fileBynary);
+            }
+            catch (Exception e) 
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        #region Drang and drop functionality
+
+        private Rectangle DragBoxFromMouseDown;
+        private int RowIndexFromMouseDown;
+        private int RowIndexOfItemUnderMouseToDrop;
+        private System.Timers.Timer LoopTimerHoldDown;
+        private int RowHoverInt = 0;
+        private int SavedRowInt = 0;
+        private bool DTSortedById = true;
+        private List<DataGridViewRow> CutRows = new List<DataGridViewRow>();
+
+        private void SetTimer() 
+        {
+            //loop timer
+            LoopTimerHoldDown = new System.Timers.Timer();
+            LoopTimerHoldDown.Interval = 100;//interval in milliseconds
+            LoopTimerHoldDown.Enabled = false;
+            LoopTimerHoldDown.Elapsed += LoopTimerEvent;
+            LoopTimerHoldDown.AutoReset = true;
+        }
+
+        private void LoopTimerEvent(Object source, ElapsedEventArgs e)
+        {
+            if (this.DTSortedById)
+            {
+                int FirstIndex = this.DTSectionContent.FirstDisplayedScrollingRowIndex;
+                int MaximunShowedRows = 16;
+
+                if (this.DTSectionContent.InvokeRequired)
+                {
+                    BeginInvoke(new Action(() =>
+                    {
+                        Point p = DTSectionContent.PointToClient(new Point(Control.MousePosition.X, Control.MousePosition.Y));
+                        DataGridView.HitTestInfo hti = DTSectionContent.HitTest(p.X, p.Y);
+                        int index = (hti.RowIndex - FirstIndex + 1);
+                        RowHoverInt = hti.RowIndex;
+
+                        if (SavedRowInt != RowHoverInt && hti.RowIndex > -1 && SavedRowInt > -1)
+                        {
+                            this.DTSectionContent.InvalidateRow(SavedRowInt);
+                            this.DTSectionContent.InvalidateRow(hti.RowIndex);
+                        }
+
+                        SavedRowInt = RowHoverInt;
+                        if (index >= MaximunShowedRows - 2)
+                        {
+                            this.DTSectionContent.FirstDisplayedScrollingRowIndex = Math.Max(0, FirstIndex + 2);
+                        }
+                        else if (index <= 2)
+                        {
+                            if (FirstIndex > 0)
+                            {
+                                this.DTSectionContent.FirstDisplayedScrollingRowIndex = Math.Max(0, FirstIndex - 2);
+                            }
+                        }
+                    }));
                 }
             }
         }
 
+
+        private void DTSectionContent_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            //check to top
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && e.RowIndex == RowHoverInt && RowHoverInt >= 0 && LoopTimerHoldDown.Enabled)
+            {
+                using (Pen p = new Pen(Color.LightGray, 5))
+                {
+                    var cb = e.CellBounds;  // a short reference
+                    e.PaintBackground(e.ClipBounds, true);
+                    e.PaintContent(e.ClipBounds);
+                    e.Graphics.DrawLine(p, cb.X, cb.Y + cb.Height, cb.X + cb.Width, cb.Y + cb.Height);
+                    e.Handled = true;
+                }
+            }
+        }
+        
+        private void DTSectionContent_MouseLeave(object sender, EventArgs e)
+        {
+            //loopTimerHoldDown.Enabled = false;
+        }
+
         private void DTSectionContent_MouseDown(object sender, MouseEventArgs e)
         {
-            // Get the index of the item the mouse is below.
-            rowIndexFromMouseDown = DTSectionContent.HitTest(e.X, e.Y).RowIndex;
-            if (rowIndexFromMouseDown != -1)
+            if (this.DTSortedById) 
             {
-                // Remember the point where the mouse down occurred. 
-                // The DragSize indicates the size that the mouse can move 
-                // before a drag event should be started.                
-                Size dragSize = SystemInformation.DragSize;
+                // Get the index of the item the mouse is below.
+                RowIndexFromMouseDown = DTSectionContent.HitTest(e.X, e.Y).RowIndex;
+                if (RowIndexFromMouseDown != -1)
+                {
+                    // Remember the point where the mouse down occurred. 
+                    // The DragSize indicates the size that the mouse can move 
+                    // before a drag event should be started.                
+                    Size dragSize = SystemInformation.DragSize;
 
-                // Create a rectangle using the DragSize, with the mouse position being
-                // at the center of the rectangle.
-                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2),
-                                                               e.Y - (dragSize.Height / 2)),
-                                    dragSize);
+                    // Create a rectangle using the DragSize, with the mouse position being
+                    // at the center of the rectangle.
+                    DragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+                }
+                else
+                {
+                    // Reset the rectangle if the mouse is not over an item in the ListBox.
+                    DragBoxFromMouseDown = Rectangle.Empty;
+                }
             }
-            else
-                // Reset the rectangle if the mouse is not over an item in the ListBox.
-                dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+
+        private void DTSectionContent_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                if (!LoopTimerHoldDown.Enabled)
+                {
+                    LoopTimerHoldDown.Enabled = true;
+                }
+
+                // If the mouse moves outside the rectangle, start the drag.
+                if (DragBoxFromMouseDown != Rectangle.Empty &&
+                    !DragBoxFromMouseDown.Contains(e.X, e.Y))
+                {
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    DragDropEffects dropEffect = DTSectionContent.DoDragDrop(DTSectionContent.Rows[RowIndexFromMouseDown], DragDropEffects.Move);
+                }
+            }
+            else 
+            {
+                LoopTimerHoldDown.Enabled = false;
+            }
         }
 
         private void DTSectionContent_DragOver(object sender, DragEventArgs e)
@@ -682,39 +786,127 @@ namespace LibraryManager.Views
             e.Effect = DragDropEffects.Move;
         }
 
+        private void DTSectionContent_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left && (Control.ModifierKeys == Keys.Shift || Control.ModifierKeys == Keys.Control))
+            {
+                return;
+            }
+        }
+
         private void DTSectionContent_DragDrop(object sender, DragEventArgs e)
         {
-            // The mouse locations are relative to the screen, so they must be 
-            // converted to client coordinates.
+            List<DataGridViewRow> SelectedRows =
+            (from DataGridViewRow row in DTSectionContent.SelectedRows
+             where !row.IsNewRow
+             orderby row.Index
+             select row).ToList<DataGridViewRow>();
+        
             Point clientPoint = DTSectionContent.PointToClient(new Point(e.X, e.Y));
+            RowIndexOfItemUnderMouseToDrop = DTSectionContent.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+            
+            //reorder list in background to save them in the database
+            ReorderFullIndexList(SelectedRows, RowIndexOfItemUnderMouseToDrop);
 
-            // Get the row index of the item the mouse is below. 
-            rowIndexOfItemUnderMouseToDrop =
-                DTSectionContent.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
 
-            // If the drag operation was a move then remove and insert the row.
-            if (e.Effect == DragDropEffects.Move)
+            foreach (DataGridViewRow rowToMove in SelectedRows)
             {
-                DataGridViewRow rowToMove = e.Data.GetData(
-                    typeof(DataGridViewRow)) as DataGridViewRow;
-                DTSectionContent.Rows.RemoveAt(rowIndexFromMouseDown);
-                DTSectionContent.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                if (e.Effect == DragDropEffects.Move && RowHoverInt > -1)
+                {
+                    DataGridViewRow example = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
+                    DataGridViewRow rowCopy = rowToMove;
+                    DTSectionContent.Rows.RemoveAt(rowToMove.Index);
+                    DTSectionContent.Rows.Insert(RowIndexOfItemUnderMouseToDrop, rowCopy);
+                }
+            }
+            DTSectionContent.ClearSelection();
 
+            foreach (DataGridViewRow rowToMove in SelectedRows)
+            {
+                rowToMove.Selected = true;
+            }
+
+            if (LoopTimerHoldDown.Enabled)
+            {
+                LoopTimerHoldDown.Enabled = false;
+                if (RowHoverInt >= 0)
+                {
+                    this.DTSectionContent.InvalidateRow(RowHoverInt);
+                }
+            }
+
+            //activate the index button if the list is order by id
+            if (this.DTSortedById == true)
+            {
+                this.BtnIndex.Enabled = true;
+            }
+
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="ListToMove"></param>
+        /// <param name="rowToMove"></param>
+        private void ReorderFullIndexList(List<DataGridViewRow> ListRowsToMove, int RowIndexOfItemUnderMouseToDrop) 
+        {
+            try
+            {
+                List<double> LocalOrderIndexes = this.ListOrderIndexes;
+                DataGridViewRow RowToDrop = this.DTSectionContent.Rows[RowIndexOfItemUnderMouseToDrop];
+                double OrderIdRow = (double)RowToDrop.Cells[0].Value;
+                var eee = RowToDrop.Cells[1].Value;
+                int indexToInsert = LocalOrderIndexes.FindIndex(x => x == OrderIdRow);
+
+                List<double> IndexElemetsToMove = new List<double>();
+                foreach (var RowToMove in ListRowsToMove) 
+                {
+                    double OrderNumberRow = (double)RowToMove.Cells[0].Value;
+                    int IndexInFullList = LocalOrderIndexes.FindIndex(x => x == OrderNumberRow);
+                    if (IndexInFullList >= 0)
+                    {
+                        LocalOrderIndexes.RemoveAt(IndexInFullList);
+                        LocalOrderIndexes.Insert(indexToInsert, OrderNumberRow);
+                    }
+                    else 
+                    {
+                        throw new Exception("Error no element found");
+                    }
+                }
+
+                //reasign element to the normal list
+                this.ListOrderIndexes = LocalOrderIndexes;
+            }
+            catch (Exception e) 
+            {
+                //change this
+              
             }
         }
 
 
-        private void BtnAdd_Click(object sender, EventArgs e)
+
+        private void DTSectionContent_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+            //disable Index button if the list is not order by number
+            if (e.ColumnIndex == 0)
+            {
+                this.DTSortedById = true;
+                this.LblDtgvAlert.Visible = false;
+            }
+            else
+            {
+                this.DTSortedById = false;
+                this.BtnIndex.Enabled = false;
+                this.LblDtgvAlert.Visible = true;
+            }
         }
-
+        #endregion
 
         private void BtnSearch_Click_1(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(TbxSearch.Text))
             {
-                var sectionList = docSectionController.GetByKeyWord(TbxSearch.Text);
+                var sectionList = _docSectionController.GetByKeyWord(TbxSearch.Text);
                 this.DTSectionContent.Rows.Clear();
                 foreach (var section in sectionList)
                 {
@@ -737,8 +929,127 @@ namespace LibraryManager.Views
             }
         }
 
+        //Re index the order of the elemets in th respective order they should be
+        private void BtnReIndex_Click(object sender, EventArgs e)
+        {
+            this._docSectionController.ReIndexAllSections(this.ListOrderIndexes);
+            this.LoadDataGrid();
+            this.ListOrderIndexes.Clear();
+            this.LoadIndexesList();
+            //reindex the list
+        }
 
 
+        //add cut/past functionality buttom
+        private void DTSectionContent_MouseClick(object sender, MouseEventArgs e)
+        {
+            //get clicked row index
+            DataGridView dgv = (DataGridView)sender;
+            int rowIndex =  dgv.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndex >= 0) 
+            {
+                //get selected rows
+                List<DataGridViewRow> SelectedRows =
+                    (from DataGridViewRow row in this.DTSectionContent.SelectedRows
+                     where !row.IsNewRow
+                     orderby row.Index
+                     select row).ToList<DataGridViewRow>();
+
+                bool SelectedInList = (from row in SelectedRows
+                                       where row.Index == rowIndex
+                                       select row.Index).Any();
+
+                if (!SelectedInList)
+                {
+                    this.DTSectionContent.ClearSelection();
+                    this.DTSectionContent.Rows[rowIndex].Selected = true;
+                }
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    ContextMenu menuContext = new ContextMenu();
+                    menuContext.MenuItems.Add("Cut", new EventHandler(MenuContext_CutAction));
+                    menuContext.MenuItems.Add("Paste", new EventHandler(MenuContext_PasteAction));
+
+                    //enable or disable cut paste
+                    menuContext.MenuItems[1].Enabled = (CutRows.Count > 0);
+                    if (!DTSortedById) 
+                    {
+                        menuContext.MenuItems[0].Enabled = false;
+                        menuContext.MenuItems[1].Enabled = false;
+                    }
+                    int currentMouseOverRow = this.DTSectionContent.HitTest(e.X, e.Y).RowIndex;
+                    menuContext.Show(this.DTSectionContent, new Point(e.X, e.Y));
+                }
+            }
+        }
+
+
+        public void MenuContext_CutAction(object sender, EventArgs e)
+        {
+            try 
+            {
+                if (CutRows.Count > 0) 
+                {
+                    foreach (var row in CutRows)
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    CutRows.Clear();
+                }
+
+                List<DataGridViewRow> SelectedRows =
+               (from DataGridViewRow row in this.DTSectionContent.SelectedRows
+                where !row.IsNewRow
+                orderby row.Index
+                select row).ToList<DataGridViewRow>();
+                foreach(var row in SelectedRows)
+                {
+                    row.DefaultCellStyle.ForeColor = Color.DarkGray;
+                }
+                CutRows.AddRange(SelectedRows);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public void MenuContext_PasteAction(object sender, EventArgs e)
+        {
+            Point clientPoint = DTSectionContent.PointToClient(new Point(Control.MousePosition.X, Control.MousePosition.Y));
+            RowIndexOfItemUnderMouseToDrop = (from DataGridViewRow row in this.DTSectionContent.SelectedRows
+                                              where !row.IsNewRow
+                                              orderby row.Index
+                                              select row.Index).FirstOrDefault();
+
+
+            //reorder list in background to save them in the database
+            ReorderFullIndexList(CutRows, RowIndexOfItemUnderMouseToDrop);
+
+            foreach (DataGridViewRow rowToMove in CutRows)
+            {
+                DataGridViewRow rowCopy = rowToMove;
+                DTSectionContent.Rows.RemoveAt(rowToMove.Index);
+                DTSectionContent.Rows.Insert(RowIndexOfItemUnderMouseToDrop, rowCopy);
+            }
+
+            DTSectionContent.ClearSelection();
+            foreach (DataGridViewRow rowToMove in CutRows)
+            {
+                rowToMove.Selected = true;
+            }
+
+            foreach (var row in CutRows)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Black;
+                row.Selected = true;
+            }
+            CutRows.Clear();
+
+            this.BtnIndex.Enabled = true;
+        }
     }
 }
 

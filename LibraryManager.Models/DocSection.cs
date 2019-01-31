@@ -7,6 +7,8 @@ namespace LibraryManager.Models
     {
         public double Order { get; set; }
 
+        public double ReOrdered_Number { get; set; }
+
         public string Section { get; set; }
 
         public string Location { get; set; }
@@ -24,6 +26,8 @@ namespace LibraryManager.Models
         public DateTime ClientUpdatedDT { get; set; }
 
         public byte[] WordDoc { get; set; }
+
+      
     }
 }
 

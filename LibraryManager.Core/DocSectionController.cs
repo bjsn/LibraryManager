@@ -4,6 +4,9 @@ using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+
+
 namespace LibraryManager.Core
 {
     public class DocSectionController : BaseController
@@ -25,6 +28,19 @@ namespace LibraryManager.Core
                 return this.docSectionDL.GetAll();
             }
             catch (Exception e) 
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public List<double> GetAllIndexes()
+        {
+            try
+            {
+                return this.docSectionDL.GetAllIndexes();
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -54,6 +70,34 @@ namespace LibraryManager.Core
                 throw new Exception(e.Message);
             }
         }
+
+        public void ReIndexAllSections(List<double> FullSectionIndexListWithNewOrder) 
+        {
+            try
+            {
+                List<DocSection> SectionList = this.docSectionDL.GetAll();
+                List<DocSection> ReorderedList = new List<DocSection>();
+                for (int i = 0; i < FullSectionIndexListWithNewOrder.Count; i++) 
+                {
+                    DocSection SectionByIndex = SectionList.Where(x => x.Order == FullSectionIndexListWithNewOrder[i]).FirstOrDefault();
+                    if (SectionByIndex != null && SectionByIndex.Order != ((double)i + 1))
+                    {
+                        SectionByIndex.ReOrdered_Number = (double)i + 1;
+                        ReorderedList.Add(SectionByIndex);
+                    }
+                }
+
+                foreach (var section in ReorderedList)
+                {
+                    this.docSectionDL.UpdateSectionOrder(section);
+                    Console.WriteLine(section.Order);
+                }
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
 
         public void UpdateSectionFile(string sectionName, byte[] fileUpdated) 
         {
