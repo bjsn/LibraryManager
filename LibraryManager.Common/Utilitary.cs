@@ -22,6 +22,10 @@
             {
                 return string.Empty;
             }
+            catch (Exception) 
+            {
+                return string.Empty;
+            }
         }
 
         public static int ConvertToInt(string number)

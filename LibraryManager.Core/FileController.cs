@@ -112,5 +112,8 @@ namespace LibraryManager.Core
             }
             return bytes;
         }
+
+
+
     }
 }

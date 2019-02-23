@@ -7,8 +7,8 @@
     <ProjectGuid>{3DBEE7C1-5D9D-412B-95F0-9282B0332522}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AddEditProposalContent</RootNamespace>
-    <AssemblyName>AddEditProposalContent</AssemblyName>
+    <RootNamespace>LibrMgr</RootNamespace>
+    <AssemblyName>LibrMgr</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,70 +48,118 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ConfirmationView.cs">
+    <Compile Include="Views\Common\ConfirmationView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\Error.cs">
+    <Compile Include="Views\Common\Wait_Alert.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\Main_Container.cs">
+    <Compile Include="Views\Common\Error.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\Main_Container_Base.cs">
+    <Compile Include="Views\Common\Main_Container.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\Navbar.cs">
+    <Compile Include="Views\Common\Main_Container_Base.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Common\Navbar.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\ProposalContent_Container.cs">
+    <Compile Include="Views\Common\ProposalContent_Container.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\SeeThroughPanel.cs">
+    <Compile Include="Views\Common\SeeThroughPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Common\BasePartialView.cs">
+    <Compile Include="Views\Common\BasePartialView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Common\Delete_Alert.cs">
+    <Compile Include="Views\Common\Delete_Alert.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utilitary.cs" />
-    <Compile Include="Views\DocSection.cs">
+    <Compile Include="Views\DocTemplates\DocTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DocSection_Add.cs">
+    <Compile Include="Views\DocTemplates\DocTemplate.Designer.cs">
+      <DependentUpon>DocTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemCats\ItemCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DocSection_Add.Designer.cs">
-      <DependentUpon>DocSection_Add.cs</DependentUpon>
+    <Compile Include="Views\ItemCats\ItemCategory.Designer.cs">
+      <DependentUpon>ItemCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProposalContent.cs">
+    <Compile Include="Views\ItemCats\ItemCategory_Add_Edit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ProposalContent_Add_Edit.cs">
+    <Compile Include="Views\ItemCats\ItemCategory_Add_Edit.Designer.cs">
+      <DependentUpon>ItemCategory_Add_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OutputTypes\OutputType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ProposalContent_Editor.cs">
+    <Compile Include="Views\OutputTypes\OutputType.Designer.cs">
+      <DependentUpon>OutputType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OutputTypes\OutputType_Add_Edit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <EmbeddedResource Include="Common\ConfirmationView.resx">
+    <Compile Include="Views\OutputTypes\OutputType_Add_Edit.Designer.cs">
+      <DependentUpon>OutputType_Add_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SectionTypes\DocSectionType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SectionTypes\DocSectionType.Designer.cs">
+      <DependentUpon>DocSectionType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SectionTypes\DocSectionType_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SectionTypes\DocSectionType_Add.Designer.cs">
+      <DependentUpon>DocSectionType_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Section\DocSection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Section\DocSection_Add_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Section\DocSection_Add_Edit.Designer.cs">
+      <DependentUpon>DocSection_Add_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProposalContent\ProposalContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ProposalContent\ProposalContent_Add_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ProposalContent\ProposalContent_Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="Views\Common\ConfirmationView.resx">
       <DependentUpon>ConfirmationView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\Delete_Alert.resx">
+    <EmbeddedResource Include="Views\Common\Wait_Alert.resx">
+      <DependentUpon>Wait_Alert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Common\Delete_Alert.resx">
       <DependentUpon>Delete_Alert.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\Main_Container.resx">
+    <EmbeddedResource Include="Views\Common\Main_Container.resx">
       <DependentUpon>Main_Container.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\Main_Container_Base.resx">
+    <EmbeddedResource Include="Views\Common\Main_Container_Base.resx">
       <DependentUpon>Main_Container_Base.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\Navbar.resx">
+    <EmbeddedResource Include="Views\Common\Navbar.resx">
       <DependentUpon>Navbar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\ProposalContent_Container.resx">
+    <EmbeddedResource Include="Views\Common\ProposalContent_Container.resx">
       <DependentUpon>ProposalContent_Container.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -124,19 +172,40 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\DocSection.resx">
+    <EmbeddedResource Include="Views\DocTemplates\DocTemplate.resx">
+      <DependentUpon>DocTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ItemCats\ItemCategory.resx">
+      <DependentUpon>ItemCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ItemCats\ItemCategory_Add_Edit.resx">
+      <DependentUpon>ItemCategory_Add_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OutputTypes\OutputType.resx">
+      <DependentUpon>OutputType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\OutputTypes\OutputType_Add_Edit.resx">
+      <DependentUpon>OutputType_Add_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SectionTypes\DocSectionType.resx">
+      <DependentUpon>DocSectionType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SectionTypes\DocSectionType_Add.resx">
+      <DependentUpon>DocSectionType_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Section\DocSection.resx">
       <DependentUpon>DocSection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DocSection_Add.resx">
-      <DependentUpon>DocSection_Add.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Section\DocSection_Add_Edit.resx">
+      <DependentUpon>DocSection_Add_Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ProposalContent.resx">
+    <EmbeddedResource Include="Views\ProposalContent\ProposalContent.resx">
       <DependentUpon>ProposalContent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ProposalContent_Add_Edit.resx">
+    <EmbeddedResource Include="Views\ProposalContent\ProposalContent_Add_Edit.resx">
       <DependentUpon>ProposalContent_Add_Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ProposalContent_Editor.resx">
+    <EmbeddedResource Include="Views\ProposalContent\ProposalContent_Editor.resx">
       <DependentUpon>ProposalContent_Editor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -151,16 +220,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LibraryManager.Core\LibraryManager.Core.csproj">
-      <Project>{1e4ba459-79b8-474f-8c0e-716df058b5d7}</Project>
-      <Name>LibraryManager.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LibraryManager.Models\LibraryManager.Models.csproj">
-      <Project>{a705f759-d12d-4d22-9898-7ae6b12cf5a5}</Project>
-      <Name>LibraryManager.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search.png" />
@@ -200,6 +259,37 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\item-connections.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryManager.Core\LibraryManager.Core.csproj">
+      <Project>{65bfe906-c703-4ca2-9e00-4f53b26ef071}</Project>
+      <Name>LibraryManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryManager.Models\LibraryManager.Models.csproj">
+      <Project>{4a18442b-1414-487e-9ec8-5919c3259ed9}</Project>
+      <Name>LibraryManager.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\danger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\45 %282%29.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,7 +15,7 @@ namespace LibraryManager.Core
         protected string DBPW;
         protected bool AdminContent;
 
-        public BaseController(bool requireAdminContent)
+        public BaseController(bool requireAdminContent = true)
         {
             this.AdminContent = requireAdminContent;
             string regKey = ConfigurationManager.AppSettings["RegKey"].ToString(CultureInfo.InvariantCulture);

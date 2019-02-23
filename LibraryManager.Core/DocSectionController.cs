@@ -11,14 +11,18 @@ namespace LibraryManager.Core
 {
     public class DocSectionController : BaseController
     {
+        private FileController _fileController;
         private DocSectionDL docSectionDL;
+        private DocSectionsByItemDL _docSectionsByItemDL;
+        private SetupController _setupController;
 
         public DocSectionController(bool adminContent = true) : base(adminContent) 
         {
-            this.docSectionDL = new DocSectionDL(base.DBConnectionPath)
-            {
-                DbPwd = base.DBPW
-            };
+            this.docSectionDL = new DocSectionDL(base.DBConnectionPath) { DbPwd = base.DBPW };
+            this._docSectionsByItemDL = new DocSectionsByItemDL(base.DBConnectionPath) { DbPwd = base.DBPW };
+            this._setupController = new SetupController();
+
+            this._fileController = new FileController();
         }
 
         public List<DocSection> GetAll() 
@@ -33,12 +37,23 @@ namespace LibraryManager.Core
             }
         }
 
-
         public List<double> GetAllIndexes()
         {
             try
             {
                 return this.docSectionDL.GetAllIndexes();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public DocSection GetByName(string docSectionName)
+        {
+            try
+            {
+                return this.docSectionDL.GetByName(docSectionName);
             }
             catch (Exception e)
             {
@@ -58,14 +73,84 @@ namespace LibraryManager.Core
             }
         }
 
-        public string GetDocSectionFile(string sectionName) 
+
+        public List<DocSectionByItem> GetSectionsByItemCategory(string categoryName) 
         {
             try
             {
-                byte[] docSectionFile = this.docSectionDL.GetDocSectionFile(sectionName);
-                return DownloadFileFromByteArray(sectionName, docSectionFile);
+                return this._docSectionsByItemDL.GetByItemCategory(categoryName);
             }
-            catch (Exception e) 
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public int AddEditDocSectionsByItem(string itemCategoryName, Dictionary<string, string> docSectionList) 
+        {
+            try
+            {
+                var clientName = this._setupController.GetClientName();
+                var savedSectionItemList = this._docSectionsByItemDL.GetByItemCategory(itemCategoryName);
+                
+                foreach (var docSectionItem in docSectionList) 
+                {
+                    DocSectionByItem docSectionByItem = new DocSectionByItem()
+                    {
+                        ItemCategory = itemCategoryName,
+                        SOWSection = docSectionItem.Key,
+                        Include = docSectionItem.Value,
+                        RecSource = clientName,
+                        RecSourceUpdatedDate = DateTime.Now
+                    };
+
+                    var savedSectionItem = savedSectionItemList.Where(x => x.SOWSection.Equals(docSectionByItem.SOWSection)).FirstOrDefault();
+                    if (savedSectionItem == null)
+                    {
+                        //insert 
+                        int result = this._docSectionsByItemDL.Add(docSectionByItem);
+                    }
+                    else 
+                    {
+                        //update
+                        if (!savedSectionItem.Include.Equals(docSectionByItem.Include)) 
+                        {
+                            int result = this._docSectionsByItemDL.Update(docSectionByItem);
+                        }
+                    }
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public int DeleteDocSectionByItem(string itemCategoryName, List<string> docSectionList) 
+        {
+            try
+            {
+                foreach (var deletedDocSection in docSectionList) 
+                {
+                    this._docSectionsByItemDL.Delete(itemCategoryName, deletedDocSection);
+                }
+                return 1;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool ValidDocSectionName(string docSectionName) 
+        {
+            try
+            {
+                return this.docSectionDL.GetByName(docSectionName) == null;
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -90,7 +175,6 @@ namespace LibraryManager.Core
                 foreach (var section in ReorderedList)
                 {
                     this.docSectionDL.UpdateSectionOrder(section);
-                    Console.WriteLine(section.Order);
                 }
             }
             catch (Exception e)
@@ -98,19 +182,80 @@ namespace LibraryManager.Core
             }
         }
 
+        public bool IsDocSectionNameValid(string sectionName) 
+        {
+            try
+            {
+                var DocSection = this.docSectionDL.GetByName(sectionName);
+                return (DocSection == null);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public int Add(string sectionName, string locationType, string docLocation, string documentType, string description)
+        {
+            try
+            {
+                SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
+                string clientName = setupDL.GetClientName();
+                DocSection docSection = new DocSection() 
+                {
+                    Order = this.docSectionDL.GetLastSectionOrder_Number() + 1,
+                    Section = sectionName,
+                    Location = locationType,
+                    DocType = documentType,
+                    KeepStyle = "Yes",
+                    Description = description,
+                    WordDoc = (string.IsNullOrEmpty(docLocation) ? null : _fileController.GetBinaryFile(docLocation)),
+                    RecSource = clientName,
+                    RecSourceUpdateDate = DateTime.Now
+                };
+                return this.docSectionDL.Add(docSection);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public int Update(string sectionName, string locationType, string docLocation, string documentType, string description)
+        {
+            try
+            {
+                SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
+                string clientName = setupDL.GetClientName();
+                DocSection docSection = new DocSection()
+                {
+                    Section = sectionName,
+                    Location = locationType,
+                    DocType = documentType,
+                    Description = description,
+                    WordDoc = (string.IsNullOrEmpty(docLocation) ? null : _fileController.GetBinaryFile(docLocation)),
+                    ModSource = clientName,
+                    ModSourceUpdatedDate = DateTime.Now
+                };
+                this.docSectionDL.Update(docSection);
+            }
+            catch (Exception e) 
+            {
+                throw new Exception(e.Message);
+            }
+            return 0;
+        }
 
         public void UpdateSectionFile(string sectionName, byte[] fileUpdated) 
         {
             try
             {
-                SetupDL setupDL = new SetupDL(base.DBConnectionPath)
-                {
-                    DbPwd = base.DBPW
-                };
-
+                SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
                 string clientName = setupDL.GetClientName();
+
                 DocSection section = this.docSectionDL.GetByName(sectionName);
-                //if ClientName in setup able is equal than RecSource in Section_tbl update RecSourceUpdated if not, update ModSource and ModSourceUpdatedDate in Section_tbl
+                //if ClientName in setup is equal than RecSource in Section_tbl update RecSourceUpdated if not, update ModSource and ModSourceUpdatedDate in Section_tbl
                 bool UpdateClientOwner = clientName.ToUpper().Equals(section.RecSource.ToUpper());
                 if (UpdateClientOwner)
                 {
@@ -127,6 +272,7 @@ namespace LibraryManager.Core
             } 
         }
 
+
         public void DeleteBySectionName(string sectionName) 
         {
             try
@@ -134,6 +280,20 @@ namespace LibraryManager.Core
                 this.docSectionDL.UpdateSectionFileDeleteMarkDate(sectionName);
             }
             catch (Exception e) 
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public string GetDocSectionFile(string sectionName)
+        {
+            try
+            {
+                byte[] docSectionFile = this.docSectionDL.GetDocSectionFile(sectionName);
+                return DownloadFileFromByteArray(sectionName, docSectionFile);
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -148,7 +308,7 @@ namespace LibraryManager.Core
             {
                 filePath = TempPartFileFromByteArray(fileBytes, tmpFile + ".doc");
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 filePath = TempPartFileFromByteArray(fileBytes, tmpFile + ".docx");
             }
@@ -172,8 +332,6 @@ namespace LibraryManager.Core
             }
             return str;
         }
-
-
     }
 }
 

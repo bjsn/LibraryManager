@@ -343,9 +343,9 @@
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{D35036FA-C49E-4E72-9B89-8AE97026B85B}</td><td>CORSPRO</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{5709781F-197D-495F-A6C8-D3DB27BA3D9F}</td><td>PROPGEN</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LibraryManager.Common.Primary_output</td><td>{38D172B7-6A7B-4E03-9877-AA9A92797B41}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.common.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LibraryManager.Core.Primary_output</td><td>{580B805B-E893-4284-8156-F6BFB7C00969}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.core.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LibraryManager.Data.Primary_output</td><td>{047039A6-B7D7-4E34-9392-F97CE272DADE}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.data.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LibraryManager.Models.Primary_output</td><td>{24715A1F-FA72-4B9A-BE2E-49B9073C0783}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.models.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LibraryManager.Core.Primary_output</td><td>{0CB97336-5990-4C01-AC70-E5501966FB1A}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.core.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LibraryManager.Data.Primary_output</td><td>{618C5B8F-31B2-45F7-9BC9-19123E5A6D69}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.data.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LibraryManager.Models.Primary_output</td><td>{FBEF0441-6E1C-4A85-A272-5AAE0B159C77}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.models.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LibraryManager.Views.Primary_output</td><td>{98B91AC6-3609-4FAE-A99A-2DF2F489C4DB}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.views.primary</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1159,7 +1159,7 @@
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
-		<row><td>INSTALLDIR</td><td>PROPGEN</td><td>.</td><td/><td>0</td><td/></row>
+		<row><td>INSTALLDIR</td><td>PQMANAGER</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
 		<row><td>ISMyCompanyDir</td><td>ProgramFilesFolder</td><td>MYCOMP~1|My Company Name</td><td/><td>0</td><td/></row>
 		<row><td>ISMyProductDir</td><td>ISMyCompanyDir</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
@@ -1168,6 +1168,7 @@
 		<row><td>MY_PRODUCT_NAME</td><td>CORS_PRODUCTIVITY_SOLUTIONS</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
 		<row><td>NetHoodFolder</td><td>TARGETDIR</td><td>.:NetHood</td><td/><td>0</td><td/></row>
+		<row><td>PQMANAGER</td><td>CORSPRO</td><td>PQMANA~1|PQManager</td><td/><td>0</td><td/></row>
 		<row><td>PROPGEN</td><td>CORSPRO</td><td>PropGen</td><td/><td>0</td><td/></row>
 		<row><td>PersonalFolder</td><td>TARGETDIR</td><td>.:Personal</td><td/><td>0</td><td/></row>
 		<row><td>PrimaryVolumePath</td><td>TARGETDIR</td><td>.:Primar~1|PrimaryVolumePath</td><td/><td>0</td><td/></row>
@@ -2051,9 +2052,9 @@
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_CAF8B47C_83E2_4850_8F18_4AF9C9FC2596_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_B7EEEF7D_7288_47A6_AD4D_0E1838DB5FCE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LibraryManager.Common.Primary_output</td><td/><td/><td>_860C2AF8_561D_4272_BD15_16991B50FCFD_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LibraryManager.Core.Primary_output</td><td/><td/><td>_341197BD_10DD_45A7_A7CE_68FB027DD5A2_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LibraryManager.Data.Primary_output</td><td/><td/><td>_11C0F944_823F_4B1F_8F5D_67162FD39323_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LibraryManager.Models.Primary_output</td><td/><td/><td>_340D2174_058B_41D8_8903_0D594932F961_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LibraryManager.Core.Primary_output</td><td/><td/><td>_9D895151_27D3_4B6C_9A89_B812A13FBB61_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LibraryManager.Data.Primary_output</td><td/><td/><td>_3E85DAC6_647A_48E4_8BEB_D9E06289407A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LibraryManager.Models.Primary_output</td><td/><td/><td>_AC19187D_1DFE_4CE4_808E_2071F143872D_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LibraryManager.Views.Primary_output</td><td/><td/><td>_AAC703D0_83CB_4CAF_B989_B79BE34B53A8_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -2339,8 +2340,11 @@
 		<row><td>ISProjectFolder</td><td/><td/><td>1</td></row>
 		<row><td>LibraryManager.Common</td><td>LibraryManager.Common\LibraryManager.Common.csproj</td><td/><td>2</td></row>
 		<row><td>LibraryManager.Core</td><td>LibraryManager.Core\LibraryManager.Core.csproj</td><td/><td>2</td></row>
+		<row><td>LibraryManager.Core1</td><td>LibraryManager.Core1\LibraryManager.Core.csproj</td><td/><td>2</td></row>
 		<row><td>LibraryManager.Data</td><td>LibraryManager.Data\LibraryManager.Data.csproj</td><td/><td>2</td></row>
+		<row><td>LibraryManager.Data1</td><td>LibraryManager.Data1\LibraryManager.Data.csproj</td><td/><td>2</td></row>
 		<row><td>LibraryManager.Models</td><td>LibraryManager.Models\LibraryManager.Models.csproj</td><td/><td>2</td></row>
+		<row><td>LibraryManager.Models1</td><td>LibraryManager.Models1\LibraryManager.Models.csproj</td><td/><td>2</td></row>
 		<row><td>LibraryManager.Views</td><td>LibraryManager\LibraryManager.Views.csproj</td><td/><td>2</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
@@ -3747,7 +3751,7 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>1713784042</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>1713784042</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>1713784042</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.CorsProductivitySolutions.com</td><td>0</td><td/><td>1713790666</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>https://www.corspro.com</td><td>0</td><td/><td>-1725439665</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td>Cors Productivity Solutions</td><td>0</td><td/><td>1713790666</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>1713784042</td></row>
 	</table>
@@ -4368,7 +4372,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>ProductCode</td><td>{9793575A-9B86-492C-8667-55457CF154FA}</td><td/></row>
-		<row><td>ProductName</td><td>CorsPro Library Manager Client</td><td/></row>
+		<row><td>ProductName</td><td>CorsPro Library Manager</td><td/></row>
 		<row><td>ProductVersion</td><td>1.00.0000</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>

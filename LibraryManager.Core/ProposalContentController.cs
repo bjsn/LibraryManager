@@ -13,7 +13,6 @@
 
     public class ProposalContentController : BaseController
     {
-        public bool AdminContent = false;
         ProposalContentDL ProposalContentDL { get; set; }
         public ProposalContentController(bool requireAdminContent)
             : base(requireAdminContent)
@@ -80,13 +79,12 @@
                         source.Remove(content);
                     }
                 }
-                list2 = source;
+                return source;
             }
             catch (Exception exception1)
             {
                 throw new Exception(exception1.Message);
             }
-            return list2;
         }
 
         public List<string> GetVendors()

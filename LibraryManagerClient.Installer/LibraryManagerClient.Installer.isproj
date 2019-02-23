@@ -35,15 +35,15 @@
 		</ProjectReference>
 		<ProjectReference Include="..\LibraryManager.Core\LibraryManager.Core.csproj">
 			<Name>LibraryManager.Core</Name>
-			<Project>{1E4BA459-79B8-474F-8C0E-716DF058B5D7}</Project>
+			<Project>{65BFE906-C703-4CA2-9E00-4F53B26EF071}</Project>
 		</ProjectReference>
 		<ProjectReference Include="..\LibraryManager.Data\LibraryManager.Data.csproj">
 			<Name>LibraryManager.Data</Name>
-			<Project>{7C9AEC37-2907-4252-A79D-B7A4616B2B6C}</Project>
+			<Project>{FC1E91E4-0B33-4314-BE9D-147EBEA58BFB}</Project>
 		</ProjectReference>
 		<ProjectReference Include="..\LibraryManager.Models\LibraryManager.Models.csproj">
 			<Name>LibraryManager.Models</Name>
-			<Project>{A705F759-D12D-4D22-9898-7AE6B12CF5A5}</Project>
+			<Project>{4A18442B-1414-487E-9EC8-5919C3259ED9}</Project>
 		</ProjectReference>
 		<ProjectReference Include="..\LibraryManager\LibraryManager.Views.csproj">
 			<Name>LibraryManager.Views</Name>

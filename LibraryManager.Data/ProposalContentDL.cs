@@ -36,9 +36,12 @@
                 DataTable dataTable = new DataTable();
                 string query = GetSelectString();
                 //the query chages if the database is PQDB o proposalCOntent
-                new OleDbDataAdapter(string.Format(query + " FROM ProposalContentByPart WHERE PartNumber LIKE '%{0}%' OR VendorName LIKE '%{0}%' OR ProductName LIKE '%{0}%'", keyWord), base.DbConnection).Fill(dataTable);
+                new OleDbDataAdapter(string.Format(query + 
+                                    " FROM ProposalContentByPart" +
+                                    " WHERE PartNumber LIKE '%{0}%' OR VendorName LIKE '%{0}%' OR ProductName LIKE '%{0}%'", keyWord), base.DbConnection)
+                                    .Fill(dataTable);
                 base.CloseDbConnection();
-                list = this.ConvertToObj(dataTable);
+                list = this.Convert(dataTable);
             }
             catch (Exception exception1)
             {
@@ -56,9 +59,11 @@
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
                 string query = GetSelectString();
-                new OleDbDataAdapter(query + " FROM ProposalContentByPart WHERE PartNumber = '" + PartNumber + "'", base.DbConnection).Fill(dataTable);
+                new OleDbDataAdapter(query + 
+                                    " FROM ProposalContentByPart" + 
+                                    " WHERE PartNumber = '" + PartNumber + "'", base.DbConnection).Fill(dataTable);
                 base.CloseDbConnection();
-                content = this.ConvertToObj(dataTable).FirstOrDefault<ProposalContent>();
+                content = this.Convert(dataTable).FirstOrDefault<ProposalContent>();
             }
             catch (Exception exception1)
             {
@@ -67,6 +72,7 @@
             return content;
         }
 
+
         public List<string> GetVendors()
         {
             List<string> list;
@@ -74,7 +80,12 @@
             {
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
-                new OleDbDataAdapter("SELECT VendorName FROM ProposalContentByPart GROUP BY VendorName ORDER BY VendorName", base.DbConnection).Fill(dataTable);
+                new OleDbDataAdapter("SELECT VendorName " + 
+                                    "FROM ProposalContentByPart " +
+                                    "GROUP BY VendorName " +
+                                    "ORDER BY VendorName", base.DbConnection)
+                                    .Fill(dataTable);
+
                 base.CloseDbConnection();
                 list = (from value in dataTable.Rows.OfType<DataRow>() select value[0].ToString()).ToList<string>();
             }
@@ -108,9 +119,11 @@
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
                 string query = GetSelectString();
-                new OleDbDataAdapter(query + " FROM ProposalContentByPart;", base.DbConnection).Fill(dataTable);
+                new OleDbDataAdapter(query + 
+                                    " FROM ProposalContentByPart;", base.DbConnection)
+                                    .Fill(dataTable);
                 base.CloseDbConnection();
-                list = this.ConvertToObj(dataTable);
+                list = this.Convert(dataTable);
             }
             catch (Exception exception1)
             {
@@ -179,7 +192,9 @@
             {
                 base.OpenDbConnection();
                 DataTable table1 = new DataTable();
-                new OleDbCommand(string.Format("DELETE FROM ProposalContentByPart WHERE PartNumber = '{0}'", PartNumber), base.DbConnection).ExecuteNonQuery();
+                new OleDbCommand(string.Format("DELETE " +
+                                "FROM ProposalContentByPart " +
+                                "WHERE PartNumber = '{0}'", PartNumber), base.DbConnection).ExecuteNonQuery();
                 base.CloseDbConnection();
             }
             catch (Exception exception1)
@@ -198,7 +213,8 @@
                  {
                      command = new OleDbCommand
                      {
-                         CommandText = string.Format("Update ProposalContentByPart Set VendorName = @VendorName, ProductName = @ProductName, FeatureBullets = @FeatureBullets, MarketingInfo = @MarketingInfo, TechnicalInfo = @TechnicalInfo, ProductPicture =  @ProductPicture, UserUpdDT = @UserUpdDT Where PartNumber = @PartNumber", new object[0]),
+                         CommandText = string.Format("Update ProposalContentByPart " +
+                                       "Set VendorName = @VendorName, ProductName = @ProductName, FeatureBullets = @FeatureBullets, MarketingInfo = @MarketingInfo, TechnicalInfo = @TechnicalInfo, ProductPicture =  @ProductPicture, UserUpdDT = @UserUpdDT Where PartNumber = @PartNumber", new object[0]),
                          CommandType = CommandType.Text
                      };
                      byte[] fileStream = new byte[0];
@@ -215,7 +231,8 @@
                  {
                      command = new OleDbCommand
                      {
-                         CommandText = string.Format("Update ProposalContentByPart Set VendorName = @VendorName, ProductName = @ProductName, FeatureBullets = @FeatureBullets, MarketingInfo = @MarketingInfo, TechnicalInfo = @TechnicalInfo, ProductPicturePath =  @ProductPicturePath, MfgPartNumber = @MfgPartNumber, MfgName = @MfgName, UserUpdDT = @UserUpdDT Where PartNumber = @PartNumber", new object[0]),
+                         CommandText = string.Format("Update ProposalContentByPart " + 
+                                       "Set VendorName = @VendorName, ProductName = @ProductName, FeatureBullets = @FeatureBullets, MarketingInfo = @MarketingInfo, TechnicalInfo = @TechnicalInfo, ProductPicturePath =  @ProductPicturePath, MfgPartNumber = @MfgPartNumber, MfgName = @MfgName, UserUpdDT = @UserUpdDT Where PartNumber = @PartNumber", new object[0]),
                          CommandType = CommandType.Text
                      };
                      command.Parameters.AddWithValue("@VendorName", Utilitary.CleanInput(proposalContent.VendorName));
@@ -245,7 +262,7 @@
         /// </summary>
         /// <param name="dataTable"></param>
         /// <returns></returns>
-        private List<ProposalContent> ConvertToObj(DataTable dataTable)
+        private List<ProposalContent> Convert(DataTable dataTable)
         {
             try
             {

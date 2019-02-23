@@ -1,8 +1,9 @@
-﻿namespace LibraryManager.Models
-{
-    using System;
-    using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
+
+namespace LibraryManager.Models
+{
     public class ProposalContent : BaseEntity
     {
         public string PartNumber { get; set; }

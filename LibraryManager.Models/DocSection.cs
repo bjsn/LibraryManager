@@ -9,6 +9,8 @@ namespace LibraryManager.Models
 
         public double ReOrdered_Number { get; set; }
 
+        public string KeepStyle { get; set; }
+
         public string Section { get; set; }
 
         public string Location { get; set; }
@@ -18,6 +20,12 @@ namespace LibraryManager.Models
         public string Description { get; set; }
 
         public string RecSource { get; set; }
+
+        public DateTime RecSourceUpdateDate { get; set; } 
+
+        public string ModSource { get; set; }
+
+        public DateTime ModSourceUpdatedDate { get; set; }
 
         public DateTime UpdatedDT { get; set; }
 
