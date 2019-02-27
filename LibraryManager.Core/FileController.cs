@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Word = Microsoft.Office.Interop.Word;
-
 
 namespace LibraryManager.Core
 {
@@ -41,6 +41,30 @@ namespace LibraryManager.Core
                 {
                     throw new Exception(e.Message);
                 }
+            }
+            return false;
+        }
+
+        public bool CloseDocument(string filePath) 
+        {
+            try
+            {
+                if (IsFileInUse(filePath)) 
+                {
+                    string fileName = Path.GetFileName(filePath);
+                    foreach (var process in Process.GetProcessesByName("WINWORD"))
+                    {
+                        if (process.MainWindowTitle.Contains(fileName))
+                        {
+                            process.Kill();
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception) 
+            {
+                throw;
             }
             return false;
         }
@@ -84,7 +108,30 @@ namespace LibraryManager.Core
             {
                 throw new Exception(e.Message);
             }
-            
+        }
+
+
+        public bool AreFilesEqual(byte[] file1, byte[] file2)
+        {
+            try
+            {
+                if (file1.Length == file2.Length)
+                {
+                    for (int i = 0; i < file1.Length; i++)
+                    {
+                        if (file1[i] != file2[i])
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void DeleteFile(string filePath) 

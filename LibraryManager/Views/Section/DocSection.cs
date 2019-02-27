@@ -164,6 +164,7 @@ namespace LibraryManager.Views
             this.DTSectionContent.Size = new System.Drawing.Size(706, 448);
             this.DTSectionContent.TabIndex = 34;
             this.DTSectionContent.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTSectionContent_CellContentClick);
+            this.DTSectionContent.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTSectionContent_CellContentDoubleClick);
             this.DTSectionContent.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DTSectionContent_CellMouseClick);
             this.DTSectionContent.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DTSectionContent_CellPainting);
             this.DTSectionContent.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DTSectionContent_ColumnHeaderMouseClick);
@@ -357,11 +358,11 @@ namespace LibraryManager.Views
             this.BtnIndex.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.BtnIndex.ForeColor = System.Drawing.Color.White;
             this.BtnIndex.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BtnIndex.Location = new System.Drawing.Point(323, 63);
+            this.BtnIndex.Location = new System.Drawing.Point(293, 63);
             this.BtnIndex.Name = "BtnIndex";
-            this.BtnIndex.Size = new System.Drawing.Size(90, 32);
+            this.BtnIndex.Size = new System.Drawing.Size(120, 32);
             this.BtnIndex.TabIndex = 35;
-            this.BtnIndex.Text = "Save";
+            this.BtnIndex.Text = "Save Moves";
             this.BtnIndex.UseVisualStyleBackColor = false;
             this.BtnIndex.Click += new System.EventHandler(this.BtnReIndex_Click);
             // 
@@ -1024,32 +1025,14 @@ namespace LibraryManager.Views
             this.lblSaveAlert.Visible = true;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
+        private void DTSectionContent_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
+            DocSection_Add newView = new DocSection_Add(base.MainPanel, this, sectionName);
+            base.OpenPartialView(newView);
         }
 
-        private void CbxColumn_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnExport_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-    
     }
 }
 

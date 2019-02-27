@@ -26,6 +26,7 @@ namespace AddEditProposalContent.Views
         private string documentLocation;
         private string sectionName;
         private bool isNewSection;
+        private string openFileTempPath;
         #endregion
 
         public DocSection_Add(Panel Panel, BasePartialView Preview = null, string sectionName = "")
@@ -52,6 +53,7 @@ namespace AddEditProposalContent.Views
         #region Events
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            CloseOpenedFile();
             base.ClosePartialView();
         }
 
@@ -107,6 +109,7 @@ namespace AddEditProposalContent.Views
                                                                        this.CbxSectionType.SelectedItem.ToString(), this.TxtDescription.Text);
                     }
                     this.lblSectionNameError.Visible = false;
+                    CloseOpenedFile();
                     base.CloseCurrentView();
                 }
             }
@@ -182,7 +185,7 @@ namespace AddEditProposalContent.Views
             {
                 fileDialog.Title = "Import your section document";
                 fileDialog.InitialDirectory = Environment.SpecialFolder.MyDocuments.ToString();
-                fileDialog.Filter = "Word Files (*.doc, *.docx, *.dot, *.dotx)|*.docx; *.doc; *.dot; *.dotx";
+                fileDialog.Filter = "Word Files (*.doc, *.docx)|*.docx; *.doc";
                 fileDialog.FilterIndex = 2;
                 fileDialog.RestoreDirectory = true;
                 if (fileDialog.ShowDialog() == DialogResult.OK)
@@ -200,11 +203,22 @@ namespace AddEditProposalContent.Views
                 }
             };
         }
-    
+
+        private void CloseOpenedFile() 
+        {
+            if (!string.IsNullOrEmpty(this.openFileTempPath)) 
+            {
+                this._fileController.CloseDocument(openFileTempPath);
+                this.BtnViewEdit.Enabled = true;
+                this.PnlDocumentEdit.Visible = false;
+            }
+        }
+
         private void UpdateWordFile()
         {
             try
             {
+                this.PnlDocumentEdit.Visible = true;
                 string sectionName = this.TxtSectionName.Text.ToString();
                 string filePath = "";
                 
@@ -221,6 +235,7 @@ namespace AddEditProposalContent.Views
                 {
                     string copyFilePath = this._fileController.CreateFileCopy(filePath);
                     bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
+                    this.openFileTempPath = filePath;
 
                     System.Timers.Timer timer = new System.Timers.Timer();
                     timer.Interval = 1000;
@@ -239,12 +254,12 @@ namespace AddEditProposalContent.Views
                                     this.documentPath = filePath;
                                 }
                                 this._fileController.DeleteFile(copyFilePath);
-                                //this.BtnViewEdit.Invoke(new Action(() => this.BtnViewEdit.Enabled = true)); 
                             }
-                        }
-                        else 
-                        {
-                            //this.BtnViewEdit.Invoke(new Action(() => this.BtnViewEdit.Enabled = false)); 
+                            openFileTempPath = "";
+                            if (this.PnlDocumentEdit.InvokeRequired) 
+                            {
+                                this.PnlDocumentEdit.Invoke(new Action(() => this.PnlDocumentEdit.Visible = false));
+                            }
                         }
                     };
                     timer.Start();

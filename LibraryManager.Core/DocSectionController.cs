@@ -228,7 +228,10 @@ namespace LibraryManager.Core
             {
                 SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
                 string clientName = setupDL.GetClientName();
-                DocSection docSection = new DocSection()
+
+                DocSection savedSection = this.docSectionDL.GetByName(sectionName);
+
+                DocSection updatedSection = new DocSection()
                 {
                     Section = sectionName,
                     Location = locationType,
@@ -238,7 +241,34 @@ namespace LibraryManager.Core
                     ModSource = clientName,
                     ModSourceUpdatedDate = DateTime.Now
                 };
-                this.docSectionDL.Update(docSection);
+                bool documentUpdated = false;
+
+                //if there is any update
+                byte[] originalDoc = this.docSectionDL.GetDocSectionFile(updatedSection.Section);
+                if (updatedSection.WordDoc == null)
+                {
+                    updatedSection.WordDoc = originalDoc;
+                }
+                else if (!_fileController.AreFilesEqual(updatedSection.WordDoc, originalDoc))
+                {
+                    documentUpdated = true;
+                }
+
+                this.docSectionDL.Update(updatedSection);
+
+                if (documentUpdated) 
+                {
+                    if (clientName.Equals(savedSection.RecSource))
+                    {
+                        updatedSection.RecSource = clientName;
+                        this.docSectionDL.UpdateRecSource(updatedSection);
+                    }
+                    else 
+                    {
+                        updatedSection.ModSource = clientName;
+                        this.docSectionDL.UpdateModSource(updatedSection);
+                    }
+                }
             }
             catch (Exception e) 
             {

@@ -29,9 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.PnlDocumentEdit = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblSectionNameError = new System.Windows.Forms.Label();
+            this.LblLocationError = new System.Windows.Forms.Label();
             this.LblLocation = new System.Windows.Forms.Label();
             this.BtnViewEdit = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
@@ -52,12 +57,66 @@
             this.TxtSectionName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.LblLocationError = new System.Windows.Forms.Label();
-            this.lblSectionNameError = new System.Windows.Forms.Label();
+            this.PnlDocumentEdit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVOutputTypes)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // PnlDocumentEdit
+            // 
+            this.PnlDocumentEdit.Controls.Add(this.pictureBox2);
+            this.PnlDocumentEdit.Controls.Add(this.label5);
+            this.PnlDocumentEdit.Location = new System.Drawing.Point(12, 514);
+            this.PnlDocumentEdit.Name = "PnlDocumentEdit";
+            this.PnlDocumentEdit.Size = new System.Drawing.Size(343, 42);
+            this.PnlDocumentEdit.TabIndex = 51;
+            this.PnlDocumentEdit.Visible = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::LibrMgr.Properties.Resources.warning;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 55;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label5.Location = new System.Drawing.Point(27, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(216, 20);
+            this.label5.TabIndex = 52;
+            this.label5.Text = "The document is being edited!";
+            // 
+            // lblSectionNameError
+            // 
+            this.lblSectionNameError.AutoSize = true;
+            this.lblSectionNameError.BackColor = System.Drawing.Color.Transparent;
+            this.lblSectionNameError.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblSectionNameError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(70)))));
+            this.lblSectionNameError.Location = new System.Drawing.Point(20, 95);
+            this.lblSectionNameError.Name = "lblSectionNameError";
+            this.lblSectionNameError.Size = new System.Drawing.Size(0, 19);
+            this.lblSectionNameError.TabIndex = 50;
+            // 
+            // LblLocationError
+            // 
+            this.LblLocationError.AutoSize = true;
+            this.LblLocationError.BackColor = System.Drawing.Color.Transparent;
+            this.LblLocationError.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.LblLocationError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(70)))));
+            this.LblLocationError.Location = new System.Drawing.Point(20, 195);
+            this.LblLocationError.Name = "LblLocationError";
+            this.LblLocationError.Size = new System.Drawing.Size(0, 19);
+            this.LblLocationError.TabIndex = 49;
             // 
             // LblLocation
             // 
@@ -167,14 +226,14 @@
             this.DGVOutputTypes.CausesValidation = false;
             this.DGVOutputTypes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.DGVOutputTypes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGVOutputTypes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVOutputTypes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.DGVOutputTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVOutputTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OutputTypes});
@@ -186,8 +245,8 @@
             this.DGVOutputTypes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.DGVOutputTypes.RowHeadersVisible = false;
             this.DGVOutputTypes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.DGVOutputTypes.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.DGVOutputTypes.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.DGVOutputTypes.RowTemplate.Height = 24;
             this.DGVOutputTypes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DGVOutputTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -198,8 +257,8 @@
             // 
             // OutputTypes
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OutputTypes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OutputTypes.DefaultCellStyle = dataGridViewCellStyle8;
             this.OutputTypes.HeaderText = "Output Types";
             this.OutputTypes.Name = "OutputTypes";
             this.OutputTypes.ReadOnly = true;
@@ -340,32 +399,11 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // LblLocationError
-            // 
-            this.LblLocationError.AutoSize = true;
-            this.LblLocationError.BackColor = System.Drawing.Color.Transparent;
-            this.LblLocationError.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.LblLocationError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(70)))));
-            this.LblLocationError.Location = new System.Drawing.Point(20, 195);
-            this.LblLocationError.Name = "LblLocationError";
-            this.LblLocationError.Size = new System.Drawing.Size(0, 19);
-            this.LblLocationError.TabIndex = 49;
-            // 
-            // lblSectionNameError
-            // 
-            this.lblSectionNameError.AutoSize = true;
-            this.lblSectionNameError.BackColor = System.Drawing.Color.Transparent;
-            this.lblSectionNameError.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblSectionNameError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(70)))));
-            this.lblSectionNameError.Location = new System.Drawing.Point(20, 95);
-            this.lblSectionNameError.Name = "lblSectionNameError";
-            this.lblSectionNameError.Size = new System.Drawing.Size(0, 19);
-            this.lblSectionNameError.TabIndex = 50;
-            // 
             // DocSection_Add
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(730, 580);
+            this.Controls.Add(this.PnlDocumentEdit);
             this.Controls.Add(this.lblSectionNameError);
             this.Controls.Add(this.LblLocationError);
             this.Controls.Add(this.LblLocation);
@@ -387,6 +425,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DocSection_Add";
             this.Text = "DocSection_Add";
+            this.PnlDocumentEdit.ResumeLayout(false);
+            this.PnlDocumentEdit.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVOutputTypes)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -420,5 +461,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label LblLocationError;
         private System.Windows.Forms.Label lblSectionNameError;
+        private System.Windows.Forms.Panel PnlDocumentEdit;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

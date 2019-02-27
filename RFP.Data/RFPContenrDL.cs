@@ -54,7 +54,7 @@
                     CommandType = CommandType.Text
                 };
                 command.Parameters.AddWithValue("@Content", stringContent);
-                command.Parameters.AddWithValue("@UpdateDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@UpdateDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 command.Parameters.AddWithValue("@FileData", ByteDocx);
                 command.Parameters.AddWithValue("@ID", RFPID);
 
@@ -89,7 +89,7 @@
                 //command.Parameters.AddWithValue("@ProductPicturePath", proposalContent.ProductPicturePath);
                 //command.Parameters.AddWithValue("@MfgPartNumber", Utilitary.CleanInput(proposalContent.PartNumber));
                 //command.Parameters.AddWithValue("@MfgName", Utilitary.CleanInput(proposalContent.VendorName));
-                //command.Parameters.AddWithValue("@UserUpdDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                //command.Parameters.AddWithValue("@UserUpdDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 //base.OpenDbConnection();
                 //command.Connection = base.DbConnection;
                 //command.ExecuteNonQuery();
@@ -207,7 +207,7 @@
                 ////command.Parameters.AddWithValue("@ProductPicturePath", proposalContent.ProductPicturePath);
                 ////command.Parameters.AddWithValue("@MfgPartNumber", Utilitary.CleanInput(proposalContent.PartNumber));
                 ////command.Parameters.AddWithValue("@MfgName", Utilitary.CleanInput(proposalContent.VendorName));
-                ////command.Parameters.AddWithValue("@UserUpdDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                ////command.Parameters.AddWithValue("@UserUpdDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 ////command.Parameters.AddWithValue("@PartNumber", proposalContent.PartNumber);
                 //base.OpenDbConnection();
                 //command.Connection = base.DbConnection;

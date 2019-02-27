@@ -193,17 +193,16 @@ namespace LibraryManager.Data
                     CommandType = CommandType.Text
                 };
 
-
                 byte[] fileStream = new byte[0];
                 command.Parameters.AddWithValue("@Section_Name", Utilitary.CleanInput(docSection.Section));
                 command.Parameters.AddWithValue("@Order_Number", Utilitary.CleanInput(docSection.Order.ToString()));
                 command.Parameters.AddWithValue("@Object_Type", Utilitary.CleanInput(docSection.Location));
                 command.Parameters.AddWithValue("@DocType", Utilitary.CleanInput(docSection.DocType));
-                command.Parameters.AddWithValue("@Word_Doc", docSection.WordDoc);
+                command.Parameters.AddWithValue("@Word_Doc", (docSection.WordDoc != null ? docSection.WordDoc : fileStream));
                 command.Parameters.AddWithValue("@Keep_Style", Utilitary.CleanInput(docSection.KeepStyle));
                 command.Parameters.AddWithValue("@Description", Utilitary.CleanInput(docSection.Description));
                 command.Parameters.AddWithValue("@RecSource", Utilitary.CleanInput(docSection.RecSource));
-                command.Parameters.AddWithValue("@RecSourceUpdatedDate", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@RecSourceUpdatedDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
 
                 base.OpenDbConnection();
                 command.Connection = base.DbConnection;
@@ -229,9 +228,7 @@ namespace LibraryManager.Data
                                                 "SET Object_Type = @Object_Type, " +
                                                 "DocType = @DocType, " +
                                                 "Description = @Description, " +
-                                                "Word_Doc = @Word_Doc, " +
-                                                "ModSource = @ModSource, " +
-                                                "ModSourceUpdatedDate = @ModSourceUpdatedDate " +
+                                                "Word_Doc = @Word_Doc " +
                                                 "WHERE Section_Name = @Section_Name", new object[0]),
                     CommandType = CommandType.Text
                 };
@@ -240,11 +237,9 @@ namespace LibraryManager.Data
                 command.Parameters.AddWithValue("@Object_Type", Utilitary.CleanInput(docSection.Location));
                 command.Parameters.AddWithValue("@DocType", Utilitary.CleanInput(docSection.DocType));
                 command.Parameters.AddWithValue("@Description", Utilitary.CleanInput(docSection.Description));
-                command.Parameters.AddWithValue("@Word_Doc", docSection.WordDoc);
-                command.Parameters.AddWithValue("@ModSource", Utilitary.CleanInput(docSection.ModSource));
-                command.Parameters.AddWithValue("@ModSourceUpdatedDate", docSection.ModSourceUpdatedDate.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@Word_Doc", docSection.WordDoc != null ? docSection.WordDoc : fileStream);
                 command.Parameters.AddWithValue("@Section_Name", Utilitary.CleanInput(docSection.Section));
-     
+                
                 base.OpenDbConnection();
                 command.Connection = base.DbConnection;
                 int result = command.ExecuteNonQuery();
@@ -257,6 +252,64 @@ namespace LibraryManager.Data
             }
         }
 
+        public int UpdateRecSource(DocSection docSection)
+        {
+            try
+            {
+                OleDbCommand command = null;
+                command = new OleDbCommand
+                {
+                    CommandText = string.Format("UPDATE Section_tbl " +
+                                                "SET RecSource = @RecSource, " +
+                                                "RecSourceUpdatedDate = @RecSourceUpdatedDate " +
+                                                "WHERE Section_Name = @Section_Name", new object[0]),
+                    CommandType = CommandType.Text
+                };
+                command.Parameters.AddWithValue("@RecSource", Utilitary.CleanInput(docSection.RecSource));
+                command.Parameters.AddWithValue("@RecSourceUpdatedDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@Section_Name", Utilitary.CleanInput(docSection.Section));
+                
+                base.OpenDbConnection();
+                command.Connection = base.DbConnection;
+                int result = command.ExecuteNonQuery();
+                base.CloseDbConnection();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public int UpdateModSource(DocSection docSection)
+        {
+            try
+            {
+                OleDbCommand command = null;
+                command = new OleDbCommand
+                {
+                    CommandText = string.Format("UPDATE Section_tbl " +
+                                                "SET ModSource = @ModSource, " +
+                                                "ModSourceUpdatedDate = @ModSourceUpdatedDate " +
+                                                "WHERE Section_Name = @Section_Name", new object[0]),
+                    CommandType = CommandType.Text
+                };
+                command.Parameters.AddWithValue("@ModSource", Utilitary.CleanInput(docSection.ModSource));
+                command.Parameters.AddWithValue("@ModSourceUpdatedDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@Section_Name", Utilitary.CleanInput(docSection.Section));
+
+                base.OpenDbConnection();
+                command.Connection = base.DbConnection;
+                int result = command.ExecuteNonQuery();
+                base.CloseDbConnection();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
         public int UpdateSectionFileDocRecSource(string sectionName, byte[] fileDoc) 
         {

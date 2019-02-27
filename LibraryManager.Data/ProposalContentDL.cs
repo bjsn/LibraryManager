@@ -154,8 +154,8 @@
                     command.Parameters.AddWithValue("@MarketingInfo", proposalContent.MarketingInfo);
                     command.Parameters.AddWithValue("@TechnicalInfo", proposalContent.TechnicalInfo);
                     command.Parameters.AddWithValue("@ProductPicture", proposalContent.ProductPicture == null ? fileStream : proposalContent.ProductPicture);
-                    command.Parameters.AddWithValue("@UserCreatedDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
-                    command.Parameters.AddWithValue("@UserUpdDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                    command.Parameters.AddWithValue("@UserCreatedDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                    command.Parameters.AddWithValue("@UserUpdDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 }
                 else 
                 {
@@ -173,7 +173,7 @@
                     command.Parameters.AddWithValue("@ProductPicturePath", proposalContent.ProductPicturePath);
                     command.Parameters.AddWithValue("@MfgPartNumber", Utilitary.CleanInput(proposalContent.PartNumber));
                     command.Parameters.AddWithValue("@MfgName", Utilitary.CleanInput(proposalContent.VendorName));
-                    command.Parameters.AddWithValue("@UserUpdDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                    command.Parameters.AddWithValue("@UserUpdDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 }
                 base.OpenDbConnection();
                 command.Connection = base.DbConnection;
@@ -224,7 +224,7 @@
                      command.Parameters.AddWithValue("@MarketingInfo", proposalContent.MarketingInfo);
                      command.Parameters.AddWithValue("@TechnicalInfo", proposalContent.TechnicalInfo);
                      command.Parameters.AddWithValue("@ProductPicture", proposalContent.ProductPicture == null ? fileStream : proposalContent.ProductPicture);
-                     command.Parameters.AddWithValue("@UserUpdDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                     command.Parameters.AddWithValue("@UserUpdDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                      command.Parameters.AddWithValue("@PartNumber", proposalContent.PartNumber);
                  }
                  else 
@@ -243,7 +243,7 @@
                      command.Parameters.AddWithValue("@ProductPicturePath", proposalContent.ProductPicturePath);
                      command.Parameters.AddWithValue("@MfgPartNumber", Utilitary.CleanInput(proposalContent.PartNumber));
                      command.Parameters.AddWithValue("@MfgName", Utilitary.CleanInput(proposalContent.VendorName));
-                     command.Parameters.AddWithValue("@UserUpdDT", DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+                     command.Parameters.AddWithValue("@UserUpdDT", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                      command.Parameters.AddWithValue("@PartNumber", proposalContent.PartNumber);
                  }
                 base.OpenDbConnection();
