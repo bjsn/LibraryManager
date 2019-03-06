@@ -410,9 +410,9 @@
             this.lblDocTemplates.ForeColor = System.Drawing.Color.White;
             this.lblDocTemplates.Location = new System.Drawing.Point(34, 7);
             this.lblDocTemplates.Name = "lblDocTemplates";
-            this.lblDocTemplates.Size = new System.Drawing.Size(109, 21);
+            this.lblDocTemplates.Size = new System.Drawing.Size(110, 21);
             this.lblDocTemplates.TabIndex = 1;
-            this.lblDocTemplates.Text = "Doc templates";
+            this.lblDocTemplates.Text = "Doc Templates";
             this.lblDocTemplates.Click += new System.EventHandler(this.Pnl_DocTemplates_Click);
             this.lblDocTemplates.MouseEnter += new System.EventHandler(this.Pnl_DocTemplates_MouseEnter);
             this.lblDocTemplates.MouseLeave += new System.EventHandler(this.Pnl_DocTemplates_MouseLeave);

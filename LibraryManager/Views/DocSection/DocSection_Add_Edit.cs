@@ -27,6 +27,7 @@ namespace AddEditProposalContent.Views
         private string sectionName;
         private bool isNewSection;
         private string openFileTempPath;
+        private bool killDocumentOpenCheck = false;
         #endregion
 
         public DocSection_Add(Panel Panel, BasePartialView Preview = null, string sectionName = "")
@@ -38,6 +39,8 @@ namespace AddEditProposalContent.Views
             this.InitializeControllers();
             this.LoadDocTypes();
             this.LoadDocSection();
+            this.LoadOutputs();
+            this.DefaultEditDocumentVisibility();
         }
 
         #region Initializers
@@ -62,11 +65,16 @@ namespace AddEditProposalContent.Views
             this.LoadOutputTypes();
         }
 
+        bool activate = true;
         private void rbtLocation_Internal_Click(object sender, EventArgs e)
         {
-            this.documentLocation = "Internal";
-            this.LblLocationError.Visible = false;
-            this.LoadExternalDocument();
+            if (activate) 
+            {
+                this.documentLocation = "Internal";
+                this.LblLocationError.Visible = false;
+                this.LoadExternalDocument();
+            }
+            activate = true;
         }
 
         private void rbtLocation_External_Click(object sender, EventArgs e)
@@ -79,6 +87,7 @@ namespace AddEditProposalContent.Views
 
         private void BtnViewEdit_Click(object sender, EventArgs e)
         {
+            activate = false;
             this.UpdateWordFile();
         }
 
@@ -86,10 +95,21 @@ namespace AddEditProposalContent.Views
         {
             try
             {
+                
                 bool requiredName = this.RequiredFieldEmpty(this.TxtSectionName);
                 bool requiredDocument = IsDocumentRequired();
                 if (!requiredName && !requiredDocument)
                 {
+                    if (!string.IsNullOrEmpty(this.openFileTempPath)) 
+                    {
+                        if (this._fileController.IsFileInUse(this.openFileTempPath))
+                        {
+                            this.killDocumentOpenCheck = true;
+                            this.CloseOpenedFile(saveDocument: true);
+                            this.documentPath = this.openFileTempPath;
+                        }
+                    }
+
                     if (this.isNewSection)
                     {
                         if (this._docSectionController.IsDocSectionNameValid(this.TxtSectionName.Text))
@@ -109,6 +129,7 @@ namespace AddEditProposalContent.Views
                                                                        this.CbxSectionType.SelectedItem.ToString(), this.TxtDescription.Text);
                     }
                     this.lblSectionNameError.Visible = false;
+                    this.killDocumentOpenCheck = false;
                     CloseOpenedFile();
                     base.CloseCurrentView();
                 }
@@ -121,8 +142,19 @@ namespace AddEditProposalContent.Views
         #endregion
 
         #region Business
+
+        private void DefaultEditDocumentVisibility() 
+        {
+            if (string.IsNullOrEmpty(this.sectionName))
+            {
+                this.BtnViewEdit.Visible = false;
+            }
+        }
+
+
         private void LoadDocSection()
         {
+
             if (!string.IsNullOrEmpty(this.sectionName)) 
             {
                 var docSection = this._docSectionController.GetByName(this.sectionName);
@@ -146,6 +178,8 @@ namespace AddEditProposalContent.Views
                     this.BtnViewEdit.Enabled = false;
                     this.documentLocation = "External";
                 }
+                this.RbtLocation_External.Enabled = false;
+                this.RbtLocation_Internal.Enabled = false;
             }
             else
             {
@@ -166,12 +200,12 @@ namespace AddEditProposalContent.Views
                 string selectedOutput = this.CbxSectionType.SelectedItem.ToString();
                 var outputTypesByDocSection = this._docTypesByDocTypeGroupController.GetByDocType(selectedOutput);
                 this.DGVOutputTypes.Rows.Clear();
-                
                 foreach (var outputTypeGroup in outputTypesByDocSection)
                 {
                     object[] values = new object[] { outputTypeGroup.DocTypeGroupName };
                     this.DGVOutputTypes.Rows.Add(values);
                 }
+               
             }
             catch (Exception ex)
             {
@@ -191,6 +225,9 @@ namespace AddEditProposalContent.Views
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
                     this.documentPath = fileDialog.FileName;
+                    string fileName = Utilitary.GetFileNameFromPath(documentPath);
+                    this.TxtSectionName.Text = fileName;
+
                     this.LblLocation.Text = this.documentPath;
                     this.LblLocation.Visible = true;
                     this.BtnViewEdit.Enabled = true;
@@ -204,11 +241,16 @@ namespace AddEditProposalContent.Views
             };
         }
 
-        private void CloseOpenedFile() 
+        public void LoadOutputs() 
+        {
+
+        }
+
+        private void CloseOpenedFile(bool saveDocument = false) 
         {
             if (!string.IsNullOrEmpty(this.openFileTempPath)) 
             {
-                this._fileController.CloseDocument(openFileTempPath);
+                this._fileController.CloseDocument(openFileTempPath, saveDocument);
                 this.BtnViewEdit.Enabled = true;
                 this.PnlDocumentEdit.Visible = false;
             }
@@ -228,11 +270,27 @@ namespace AddEditProposalContent.Views
                 }
                 else
                 {
-                    filePath = this._docSectionController.GetDocSectionFile(sectionName);
+                    if (string.IsNullOrEmpty(this.openFileTempPath))
+                    {
+                        filePath = this._docSectionController.GetDocSectionFile(sectionName);
+                    }
+                    else 
+                    {
+                        filePath = this.openFileTempPath;
+                    }
+                }
+
+                if (this._fileController.IsFileInUse(filePath)) 
+                {
+                    MessageBox.Show("This file is already open, please close it before edit it.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.BtnViewEdit.Enabled = true;
+                    this.PnlDocumentEdit.Visible = false;
+                    return;
                 }
 
                 if (!string.IsNullOrEmpty(filePath) && !string.IsNullOrEmpty(sectionName))
                 {
+                    this.BtnViewEdit.Enabled = false;
                     string copyFilePath = this._fileController.CreateFileCopy(filePath);
                     bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
                     this.openFileTempPath = filePath;
@@ -242,23 +300,27 @@ namespace AddEditProposalContent.Views
                     timer.Elapsed += delegate
                     {
                         bool isFileInUse = this._fileController.IsFileInUse(filePath);
-                        if (!isFileInUse)
+                        if (!isFileInUse || killDocumentOpenCheck == true)
                         {
                             timer.Stop();
                             timer.Dispose();
-                            if (!timer.Enabled)
+                            //check just if the word instance was closed by the user, if the process was killed does not make the check
+                            if (!killDocumentOpenCheck) 
                             {
-                                bool fileWithoutChanges = this._fileController.AreFilesEqual(filePath, copyFilePath);
-                                if (!fileWithoutChanges)
+                                if (!timer.Enabled)
                                 {
-                                    this.documentPath = filePath;
+                                    bool fileWithoutChanges = this._fileController.AreFilesEqual(filePath, copyFilePath);
+                                    if (!fileWithoutChanges)
+                                    {
+                                        this.documentPath = filePath;
+                                    }
+                                    this._fileController.DeleteFile(copyFilePath);
                                 }
-                                this._fileController.DeleteFile(copyFilePath);
-                            }
-                            openFileTempPath = "";
-                            if (this.PnlDocumentEdit.InvokeRequired) 
-                            {
-                                this.PnlDocumentEdit.Invoke(new Action(() => this.PnlDocumentEdit.Visible = false));
+                                if (this.PnlDocumentEdit.InvokeRequired)
+                                {
+                                    this.PnlDocumentEdit.Invoke(new Action(() => this.PnlDocumentEdit.Visible = false));
+                                    this.BtnViewEdit.Invoke(new Action(() => this.BtnViewEdit.Enabled = true));
+                                }
                             }
                         }
                     };
@@ -325,6 +387,16 @@ namespace AddEditProposalContent.Views
             this.sectionName = sectionName;
         }
         #endregion
+
+        private void BtnViewEdit_EnabledChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DocSection_Add_Load(object sender, EventArgs e)
+        {
+            this.DGVOutputTypes.CurrentRow.Selected = false;
+        }
 
     }
 }

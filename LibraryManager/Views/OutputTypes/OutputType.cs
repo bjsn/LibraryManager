@@ -22,7 +22,6 @@ namespace AddEditProposalContent.Views.OutputTypes
             _docTypeGroupController = new DocTypeGroupController();
             LoadDataGrid();
         }
-
         #region bussines
         public override void Delete()
         {
@@ -91,8 +90,9 @@ namespace AddEditProposalContent.Views.OutputTypes
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             string outputName = this.DTOutputType.SelectedRows[0].Cells[0].Value.ToString();
+            string associations = this.DTOutputType.SelectedRows[0].Cells[1].Value.ToString();
             Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
-            newView.SetText("the output type: '" + outputName + "'");
+            newView.SetText("the output type '" + outputName + "' Output Type \rAlong with the " + associations + " Doc Section Type \rAssociations?");
             base.OpenPartialAlert(newView);
         }
 
@@ -114,6 +114,16 @@ namespace AddEditProposalContent.Views.OutputTypes
         private void DTOutputType_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 1) 
+            {
+                string outputName = this.DTOutputType.SelectedRows[0].Cells[0].Value.ToString();
+                BasePartialView newView = new OutputType_Add_Edit(base.MainPanel, this, outputName);
+                base.OpenPartialView(newView);
+            }
+        }
+
+        private void DTOutputType_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
             {
                 string outputName = this.DTOutputType.SelectedRows[0].Cells[0].Value.ToString();
                 BasePartialView newView = new OutputType_Add_Edit(base.MainPanel, this, outputName);

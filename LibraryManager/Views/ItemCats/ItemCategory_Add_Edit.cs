@@ -16,9 +16,11 @@ namespace AddEditProposalContent.Views.ItemCats
     {
         private ItemCategoryController _itemCategoryController;
         private DocSectionController _docSectionController;
-        private List<string> deletedDocSectionList;
+        private SetupController _setupController;
 
+        private List<string> deletedDocSectionList;
         private string itemCategoryName;
+        private string clientName;
 
         public ItemCategory_Add_Edit(Panel panel, BasePartialView preview = null, string itemCategoryName = "")
         : base(panel, preview)
@@ -26,15 +28,25 @@ namespace AddEditProposalContent.Views.ItemCats
             InitializeComponent();
             this._itemCategoryController = new ItemCategoryController();
             this._docSectionController = new DocSectionController();
+            this._setupController = new SetupController();
+
             this.deletedDocSectionList = new List<string>();
             this.itemCategoryName = itemCategoryName;
 
+            LoadDataGridViewCombobox();
             LoadItemCategoryList();
             LoadItemCategoryInformation();
             LoadDocSectionList();
         }
 
         #region bussiness 
+
+        private void LoadClientName()
+        {
+            this.clientName = _setupController.GetClientName();
+        }
+
+
         private void LoadItemCategoryInformation() 
         {
             this.CbxCategoryList.Enabled = string.IsNullOrEmpty(this.itemCategoryName);
@@ -48,6 +60,21 @@ namespace AddEditProposalContent.Views.ItemCats
             LoadItemCategoryInformationByName(this.itemCategoryName);
         }
 
+        private void LoadDataGridViewCombobox() 
+        {
+            var combocolumn = new DataGridViewComboBoxColumn();
+            combocolumn.Width = 100;
+            combocolumn.FlatStyle = FlatStyle.Flat;
+            combocolumn.Name = "Include";
+            combocolumn.DataSource = new string[] { "Yes", "No" };
+            DTSectionType.Columns.Add(combocolumn);
+
+            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+            column.Width = 300;
+            column.ReadOnly = true;
+            DTSectionType.Columns.Add(column);
+            this.DTSectionType.DefaultCellStyle.Font = new Font("Segoe UI Semibold", 8);
+        }
 
         private void LoadItemCategoryInformationByName(string itemCategoryName)
         {
@@ -59,14 +86,17 @@ namespace AddEditProposalContent.Views.ItemCats
                 {
                      var sectionsByCategory = this._docSectionController.GetSectionsByItemCategory(itemCategory.ItemCategoryName)
                                              .OrderBy(x => x.SOWSection).ToList();
+
+                    
                      foreach (var sectionByCategory in sectionsByCategory)
                      {
                          object[] values = new object[] 
                          {
-                             sectionByCategory.SOWSection,  
-                             string.IsNullOrEmpty(sectionByCategory.Include) || sectionByCategory.ToString().ToLower().Equals("y") ? "Y" : "N"
+                             sectionByCategory.SOWSection,
+                             sectionByCategory.RecSource
                          };
                          this.DTSectionType.Rows.Add(values);
+                         DTSectionType.Rows[DTSectionType.Rows.Count - 1].Cells[2].Value = (sectionByCategory.Include.ToUpper().Equals("N")) ? "No" : "Yes";
                      }
                 }
             }
@@ -141,7 +171,8 @@ namespace AddEditProposalContent.Views.ItemCats
                      object[] values = new object[] 
                      { 
                          selectedSection,
-                         (RbtIncluded_Yes.Checked) ? "Y" : "N"
+                         "",
+                         "Yes"
                      };
                      this.DTSectionType.Rows.Add(values);
                      this.LblAlertSection.Visible = false;
@@ -166,7 +197,6 @@ namespace AddEditProposalContent.Views.ItemCats
              }
         }
 
-
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             string docSection = this.DTSectionType.SelectedRows[0].Cells[0].Value.ToString();
@@ -185,6 +215,7 @@ namespace AddEditProposalContent.Views.ItemCats
             }
             
             this.DTSectionType.Rows.RemoveAt(this.DTSectionType.SelectedRows[0].Index);
+            CheckSelectedDataRow();
         }
 
 
@@ -206,7 +237,8 @@ namespace AddEditProposalContent.Views.ItemCats
                 Dictionary<string, string> docSectionList = new Dictionary<string, string>();
                 foreach (DataGridViewRow row in this.DTSectionType.Rows)
                 {
-                    docSectionList.Add(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString());
+                    string includedValue = row.Cells[2].Value.ToString().Equals("Yes") ? "Y" : "N";
+                    docSectionList.Add(row.Cells[0].Value.ToString(), includedValue);
                 }
 
                 if (docSectionList.Count > 0) 
@@ -227,11 +259,32 @@ namespace AddEditProposalContent.Views.ItemCats
         {
             if (e.RowIndex >= 0)
             {
-                BtnDelete.Enabled = true;
+                CheckSelectedDataRow();
             }
             else
             {
                 BtnDelete.Enabled = false;
+            }
+        }
+
+        private void CheckSelectedDataRow() 
+        {
+            string recSource = this.DTSectionType.SelectedRows[0].Cells[1].Value.ToString();
+            BtnDelete.Enabled = (recSource.ToString().Equals(this.clientName) || string.IsNullOrEmpty(recSource));
+        }
+
+
+        private void SelectIncludeRadioButton(string included) 
+        {
+            if (included.Equals("Y"))
+            {
+                //this.RbtIncluded_Yes.Checked = true;
+                //this.RbtIncluded_False.Checked = false;
+            }
+            else
+            {
+                //this.RbtIncluded_False.Checked = true;
+                //this.RbtIncluded_Yes.Checked = false;
             }
         }
 
@@ -241,9 +294,9 @@ namespace AddEditProposalContent.Views.ItemCats
             string selectedCategory = this.CbxCategoryList.SelectedItem == null ? "" : this.CbxCategoryList.SelectedItem.ToString();
             this.LoadItemCategoryInformationByName(selectedCategory);
             this.deletedDocSectionList = new List<string>();
+            
         }
         #endregion
-
 
     }
 }

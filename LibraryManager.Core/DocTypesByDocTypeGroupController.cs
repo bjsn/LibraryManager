@@ -44,5 +44,17 @@ namespace LibraryManager.Core
         }
 
 
+        public List<DocTypesByDocTypeGroup> GetByDocTypeGroup(string DocTypeGroup)
+        {
+            try
+            {
+                return this._docTypesByDocTypeGroupDL.GetListByDocTypeGroup(DocTypeGroup);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

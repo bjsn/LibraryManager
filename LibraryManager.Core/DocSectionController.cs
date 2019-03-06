@@ -116,6 +116,18 @@ namespace LibraryManager.Core
                         if (!savedSectionItem.Include.Equals(docSectionByItem.Include)) 
                         {
                             int result = this._docSectionsByItemDL.Update(docSectionByItem);
+                            if (savedSectionItem.RecSource.Equals(clientName))
+                            {
+                                docSectionByItem.RecSource = clientName;
+                                docSectionByItem.RecSourceUpdatedDate = DateTime.Now;
+                                this._docSectionsByItemDL.UpdateRecSource(docSectionByItem);
+                            }
+                            else 
+                            {
+                                docSectionByItem.ModSource = clientName;
+                                docSectionByItem.ModSourceUpdatedDate = DateTime.Now;
+                                this._docSectionsByItemDL.UpdateModSource(docSectionByItem);
+                            }
                         }
                     }
                 }
@@ -127,14 +139,19 @@ namespace LibraryManager.Core
             }
         }
 
-
         public int DeleteDocSectionByItem(string itemCategoryName, List<string> docSectionList) 
         {
             try
             {
                 foreach (var deletedDocSection in docSectionList) 
                 {
-                    this._docSectionsByItemDL.Delete(itemCategoryName, deletedDocSection);
+                    DocSectionByItem docSectionByItem = new DocSectionByItem() 
+                    {
+                        ItemCategory = itemCategoryName,
+                        SOWSection = deletedDocSection,
+                        DeleteMarkDate = DateTime.Now
+                    };
+                    this._docSectionsByItemDL.Delete(docSectionByItem);
                 }
                 return 1;
             }
@@ -202,6 +219,8 @@ namespace LibraryManager.Core
             {
                 SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
                 string clientName = setupDL.GetClientName();
+                string fileExt = string.IsNullOrEmpty(docLocation) ? "" : Path.GetExtension(docLocation).ToLower().Replace(".", "");
+
                 DocSection docSection = new DocSection() 
                 {
                     Order = this.docSectionDL.GetLastSectionOrder_Number() + 1,
@@ -212,7 +231,8 @@ namespace LibraryManager.Core
                     Description = description,
                     WordDoc = (string.IsNullOrEmpty(docLocation) ? null : _fileController.GetBinaryFile(docLocation)),
                     RecSource = clientName,
-                    RecSourceUpdateDate = DateTime.Now
+                    RecSourceUpdateDate = DateTime.Now,
+                    FileExt = fileExt
                 };
                 return this.docSectionDL.Add(docSection);
             }
@@ -228,6 +248,7 @@ namespace LibraryManager.Core
             {
                 SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
                 string clientName = setupDL.GetClientName();
+                string fileExt = string.IsNullOrEmpty(docLocation) ? "" : Path.GetExtension(docLocation).ToLower().Replace(".", "");
 
                 DocSection savedSection = this.docSectionDL.GetByName(sectionName);
 
@@ -239,7 +260,8 @@ namespace LibraryManager.Core
                     Description = description,
                     WordDoc = (string.IsNullOrEmpty(docLocation) ? null : _fileController.GetBinaryFile(docLocation)),
                     ModSource = clientName,
-                    ModSourceUpdatedDate = DateTime.Now
+                    ModSourceUpdatedDate = DateTime.Now,
+                    FileExt = fileExt
                 };
                 bool documentUpdated = false;
 
@@ -337,10 +359,29 @@ namespace LibraryManager.Core
             try
             {
                 filePath = TempPartFileFromByteArray(fileBytes, tmpFile + ".doc");
+                return filePath;
             }
-            catch (Exception)
+            catch (Exception e)
+            {
+                if (e.Message.Contains("because it is being used by another process."))
+                {
+                    filePath = tmpFile + ".doc";
+                    return filePath;
+                }
+            }
+
+            try
             {
                 filePath = TempPartFileFromByteArray(fileBytes, tmpFile + ".docx");
+                return filePath;
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("is being used by another process"))
+                {
+                    filePath = tmpFile + ".docx";
+                    return filePath;
+                }
             }
             return filePath;
         }

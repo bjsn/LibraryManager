@@ -38,6 +38,7 @@ namespace LibraryManager.Data
             return list;
         }
 
+
         public List<DocTypesByDocTypeGroup> GetByDocTypeGroup(string DocType)
         {
             List<DocTypesByDocTypeGroup> list;
@@ -47,9 +48,54 @@ namespace LibraryManager.Data
                 DataTable dataTable = new DataTable();
                 new OleDbDataAdapter("SELECT DocTypeGroup, DocType " +
                                      "FROM DocTypesByDocTypeGroup " +
-                                     "WHERE DocTypeGroup =  '" + DocType + "'", base.DbConnection)
+                                     "WHERE DocType =  '" + DocType + "'", base.DbConnection)
                                     .Fill(dataTable);
                 
+                base.CloseDbConnection();
+                list = this.Convert(dataTable);
+            }
+            catch (Exception exception1)
+            {
+                throw new Exception(exception1.Message);
+            }
+            return list;
+        }
+
+
+        public List<DocTypesByDocTypeGroup> GetListByDocTypeGroup(string DocTypeGroup)
+        {
+            List<DocTypesByDocTypeGroup> list;
+            try
+            {
+                base.OpenDbConnection();
+                DataTable dataTable = new DataTable();
+                new OleDbDataAdapter("SELECT DocTypeGroup, DocType " +
+                                     "FROM DocTypesByDocTypeGroup " +
+                                     "WHERE DocTypeGroup =  '" + DocTypeGroup + "'", base.DbConnection)
+                                    .Fill(dataTable);
+
+                base.CloseDbConnection();
+                list = this.Convert(dataTable);
+            }
+            catch (Exception exception1)
+            {
+                throw new Exception(exception1.Message);
+            }
+            return list;
+        }
+
+        public List<DocTypesByDocTypeGroup> GetByDocType(string DocTypeGroup)
+        {
+            List<DocTypesByDocTypeGroup> list;
+            try
+            {
+                base.OpenDbConnection();
+                DataTable dataTable = new DataTable();
+                new OleDbDataAdapter("SELECT DocTypeGroup, DocType " +
+                                     "FROM DocTypesByDocTypeGroup " +
+                                     "WHERE DocTypeGroup =  '" + DocTypeGroup + "'", base.DbConnection)
+                                    .Fill(dataTable);
+
                 base.CloseDbConnection();
                 list = this.Convert(dataTable);
             }

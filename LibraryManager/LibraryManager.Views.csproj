@@ -111,25 +111,25 @@
     <Compile Include="Views\OutputTypes\OutputType_Add_Edit.Designer.cs">
       <DependentUpon>OutputType_Add_Edit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SectionTypes\DocSectionType.cs">
+    <Compile Include="Views\DocSectionTypes\DocSectionType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\SectionTypes\DocSectionType.Designer.cs">
+    <Compile Include="Views\DocSectionTypes\DocSectionType.Designer.cs">
       <DependentUpon>DocSectionType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\SectionTypes\DocSectionType_Add.cs">
+    <Compile Include="Views\DocSectionTypes\DocSectionType_Add.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\SectionTypes\DocSectionType_Add.Designer.cs">
+    <Compile Include="Views\DocSectionTypes\DocSectionType_Add.Designer.cs">
       <DependentUpon>DocSectionType_Add.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Section\DocSection.cs">
+    <Compile Include="Views\DocSection\DocSection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Section\DocSection_Add_Edit.cs">
+    <Compile Include="Views\DocSection\DocSection_Add_Edit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Section\DocSection_Add_Edit.Designer.cs">
+    <Compile Include="Views\DocSection\DocSection_Add_Edit.Designer.cs">
       <DependentUpon>DocSection_Add_Edit.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ProposalContent\ProposalContent.cs">
@@ -187,16 +187,16 @@
     <EmbeddedResource Include="Views\OutputTypes\OutputType_Add_Edit.resx">
       <DependentUpon>OutputType_Add_Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SectionTypes\DocSectionType.resx">
+    <EmbeddedResource Include="Views\DocSectionTypes\DocSectionType.resx">
       <DependentUpon>DocSectionType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SectionTypes\DocSectionType_Add.resx">
+    <EmbeddedResource Include="Views\DocSectionTypes\DocSectionType_Add.resx">
       <DependentUpon>DocSectionType_Add.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Section\DocSection.resx">
+    <EmbeddedResource Include="Views\DocSection\DocSection.resx">
       <DependentUpon>DocSection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Section\DocSection_Add_Edit.resx">
+    <EmbeddedResource Include="Views\DocSection\DocSection_Add_Edit.resx">
       <DependentUpon>DocSection_Add_Edit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ProposalContent\ProposalContent.resx">

@@ -52,11 +52,11 @@
             this.BtnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnView.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             this.BtnView.ForeColor = System.Drawing.Color.White;
-            this.BtnView.Location = new System.Drawing.Point(368, 66);
+            this.BtnView.Location = new System.Drawing.Point(421, 66);
             this.BtnView.Name = "BtnView";
-            this.BtnView.Size = new System.Drawing.Size(158, 32);
+            this.BtnView.Size = new System.Drawing.Size(105, 32);
             this.BtnView.TabIndex = 46;
-            this.BtnView.Text = "View Document";
+            this.BtnView.Text = "View/Edit";
             this.BtnView.UseVisualStyleBackColor = false;
             this.BtnView.Click += new System.EventHandler(this.BtnView_Click);
             // 
@@ -75,7 +75,7 @@
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(90, 32);
             this.BtnAdd.TabIndex = 27;
-            this.BtnAdd.Text = "Import";
+            this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = false;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
@@ -136,6 +136,7 @@
             this.DTDocTemplate.EnableHeadersVisualStyles = false;
             this.DTDocTemplate.GridColor = System.Drawing.Color.White;
             this.DTDocTemplate.Location = new System.Drawing.Point(12, 104);
+            this.DTDocTemplate.MultiSelect = false;
             this.DTDocTemplate.Name = "DTDocTemplate";
             this.DTDocTemplate.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -153,6 +154,7 @@
             this.DTDocTemplate.Size = new System.Drawing.Size(705, 426);
             this.DTDocTemplate.TabIndex = 25;
             this.DTDocTemplate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTDocTemplate_CellClick);
+            this.DTDocTemplate.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DTDocTemplate_CellMouseDoubleClick);
             // 
             // DocTemplateName
             // 

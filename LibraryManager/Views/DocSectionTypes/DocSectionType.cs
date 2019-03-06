@@ -14,7 +14,8 @@ namespace AddEditProposalContent.Views.SectionTypes
 {
     public partial class DocSectionType : BasePartialView
     {
-        DocTypeController _docSectionTypeController;
+        private DocTypeController _docSectionTypeController;
+
         public DocSectionType(Panel panel)
             : base(panel)
         {
@@ -47,9 +48,28 @@ namespace AddEditProposalContent.Views.SectionTypes
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             string docSectionTypeName = this.DTDocSectionType.SelectedRows[0].Cells[0].Value.ToString();
-            Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
-            newView.SetText("the doc section type: '" + docSectionTypeName + "'");
-            base.OpenPartialAlert(newView);
+            if(this._docSectionTypeController.HasAssociatedOutputType(docSectionTypeName))
+            {
+                MessageBox.Show("You cannot delete this Doc Section Type because Output Types are associated with this Doc Section Type",
+                "Alert",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error,
+                MessageBoxDefaultButton.Button1);
+            }
+            else if(this._docSectionTypeController.HasAssociatedSection(docSectionTypeName))
+            {
+                MessageBox.Show("You cannot delete this Doc Section Type because doc sections are associated with this Doc Section Type",
+                "Alert",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error,
+                MessageBoxDefaultButton.Button1);
+            }
+            else
+            {
+                Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
+                newView.SetText("the doc section type: '" + docSectionTypeName + "'");
+                base.OpenPartialAlert(newView);
+            }
         }
 
         private void DTDocSectionType_CellClick(object sender, DataGridViewCellEventArgs e)

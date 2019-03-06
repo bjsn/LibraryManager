@@ -134,10 +134,29 @@ namespace LibraryManager.Core
             try
             {
                 filePath = TempPartFileFromByteArray(fileBytes, tmpFile + ".dot");
+                return filePath;
             }
-            catch (Exception)
+            catch (Exception e)
+            {
+                if (e.Message.Contains("because it is being used by another process."))
+                {
+                    filePath = tmpFile + ".dot";
+                    return filePath;
+                }
+            }
+
+            try
             {
                 filePath = TempPartFileFromByteArray(fileBytes, tmpFile + ".dotx");
+                return filePath;
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("is being used by another process"))
+                {
+                    filePath = tmpFile + ".dotx";
+                    return filePath;
+                }
             }
             return filePath;
         }

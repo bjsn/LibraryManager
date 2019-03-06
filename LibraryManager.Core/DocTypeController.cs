@@ -12,11 +12,13 @@ namespace LibraryManager.Core
     {
         private DocTypeDL _docTypeDL;
         private DocTypesByDocTypeGroupDL _docTypesByDocTypeGroupDL;
+        private DocSectionDL _docSectionDL;
 
         public DocTypeController() : base()
         {
             this._docTypeDL = new DocTypeDL(base.DBConnectionPath) { DbPwd = base.DBPW };
             this._docTypesByDocTypeGroupDL = new DocTypesByDocTypeGroupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
+            this._docSectionDL = new DocSectionDL(base.DBConnectionPath) { DbPwd = base.DBPW };
         }
 
         public List<DocType> GetAll() 
@@ -71,38 +73,6 @@ namespace LibraryManager.Core
             }
         }
 
-        //public int AddWithDocTypesByDocTypeGroup(string docTypeName, List<string> docSectionTypeList)
-        //{
-        //    try
-        //    {
-        //        DocType docType = new DocType()
-        //        {
-        //            DocTypeName = docTypeName
-        //        };
-        //        this._docTypeDL.Add(docType);
-
-        //        List<DocTypesByDocTypeGroup> docTypesByDocTypeGroupList = new List<DocTypesByDocTypeGroup>();
-        //        foreach (var docSectionType in docSectionTypeList)
-        //        {
-        //            docTypesByDocTypeGroupList.Add(new DocTypesByDocTypeGroup()
-        //            {
-        //                DocType = docTypeName,
-        //                DocTypeGroupName = docSectionType
-        //            });
-        //        }
-
-        //        foreach (var docTypesByDocTypeGroup in docTypesByDocTypeGroupList)
-        //        {
-        //            this._docTypesByDocTypeGroupDL.Add(docTypesByDocTypeGroup);
-        //        }
-        //        return 1;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception(e.Message);
-        //    }
-        //}
-
         public int Delete(string docTypeName) 
         {
             try
@@ -111,12 +81,36 @@ namespace LibraryManager.Core
                 {
                     DocTypeName = docTypeName
                 };
-                _docTypeDL.Delete(docType);
+                this._docTypeDL.Delete(docType);
                 return this._docTypeDL.Delete(docType);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        public bool HasAssociatedOutputType(string docTypeName) 
+        {
+            try 
+            {
+                return (this._docTypesByDocTypeGroupDL.GetByDocTypeGroup(docTypeName).Count > 0);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
+        public bool HasAssociatedSection(string docTypeName) 
+        {
+            try
+            {
+                return (this._docSectionDL.GetByDocType(docTypeName).Count > 0);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

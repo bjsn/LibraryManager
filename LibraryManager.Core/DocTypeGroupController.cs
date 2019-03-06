@@ -127,6 +127,11 @@ namespace LibraryManager.Core
         {
             try
             {
+                var docTypeByDocTypeGroupList = _docTypesByDocTypeGroupDL.GetByDocType(OutPutName);
+                foreach (var docTypeByDocTypeGroup in docTypeByDocTypeGroupList) 
+                {
+                    this._docTypesByDocTypeGroupDL.Delete(docTypeByDocTypeGroup);
+                }
                 //delete elements in other table either
                 return _docTypeGroupDL.Delete(OutPutName);
             }

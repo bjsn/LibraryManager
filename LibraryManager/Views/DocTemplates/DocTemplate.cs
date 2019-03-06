@@ -17,6 +17,7 @@ namespace AddEditProposalContent.Views.DocTemplates
     {
         private DocTemplateController _docTemplateController;
         private FileController _fileController;
+        private bool isDocumentBeingUpdated = false;
 
         public DocTemplate(Panel panel) : base(panel)
         {
@@ -129,8 +130,16 @@ namespace AddEditProposalContent.Views.DocTemplates
         {
             if (e.RowIndex >= 0 && this.DTDocTemplate.SelectedRows.Count == 1)
             {
-                BtnDelete.Enabled = true;
-                BtnView.Enabled = true;
+                if (!this.isDocumentBeingUpdated)
+                {
+                    BtnDelete.Enabled = true;
+                    BtnView.Enabled = true;
+                }
+                else 
+                {
+                    BtnDelete.Enabled = false;
+                    BtnView.Enabled = false;
+                }
             }
             else
             {
@@ -145,7 +154,6 @@ namespace AddEditProposalContent.Views.DocTemplates
         }
         #endregion
 
-        //improve this function
         private void UpdateWordFile()
         {
             try
@@ -156,6 +164,16 @@ namespace AddEditProposalContent.Views.DocTemplates
                 {
                     string copyFilePath = this._fileController.CreateFileCopy(filePath);
                     bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
+                    if (!fileOpenSuccessfully)
+                    {
+                        string fileName = Path.GetFileName(filePath);
+                        MessageBox.Show("The file: " + fileName + " is already open.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        this.BtnView.Enabled = true;
+                        this.isDocumentBeingUpdated = false;
+                        return;
+                    }
+                    this.BtnView.Enabled = false;
+                    this.isDocumentBeingUpdated = true;
 
                     System.Timers.Timer timer = new System.Timers.Timer();
                     timer.Interval = 1000;
@@ -173,7 +191,7 @@ namespace AddEditProposalContent.Views.DocTemplates
                                 //if the original file had changes
                                 if (!fileWithoutChanges)
                                 {
-                                    this.UpdateFileChage(sectionName, filePath);
+                                    this.UpdateFileChange(sectionName, filePath);
                                 }
                                 //delete both files 
                                 this._fileController.DeleteFile(filePath);
@@ -190,6 +208,15 @@ namespace AddEditProposalContent.Views.DocTemplates
                                         this.LoadDataGrid();
                                     }
                                 }
+
+                                if (this.BtnView.InvokeRequired) 
+                                {
+                                    this.Invoke((MethodInvoker)delegate 
+                                    {
+                                        this.BtnView.Enabled = true;
+                                        this.isDocumentBeingUpdated = false;
+                                    });
+                                }
                             }
                         }
                     };
@@ -198,11 +225,12 @@ namespace AddEditProposalContent.Views.DocTemplates
             }
             catch (Exception e)
             {
+                this.BtnView.Enabled = true;
                 MessageBox.Show("Error:" + e.Message);
             }
         }
 
-        private void UpdateFileChage(string sectionName, string filePath)
+        private void UpdateFileChange(string sectionName, string filePath)
         {
             try
             {
@@ -215,7 +243,16 @@ namespace AddEditProposalContent.Views.DocTemplates
             }
         }
 
-       
+        private void DTDocTemplate_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                this.BtnView.Enabled = false;
+                UpdateWordFile();
+            }
+        }
+
+    
 
     }
 }

@@ -37,6 +37,7 @@
             this.DTItemCategory = new System.Windows.Forms.DataGridView();
             this.Item_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Doc_Sections = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.BtnSearch = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -129,7 +130,8 @@
             this.DTItemCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DTItemCategory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Item_Category,
-            this.Doc_Sections});
+            this.Doc_Sections,
+            this.RecSource});
             this.DTItemCategory.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
@@ -142,6 +144,7 @@
             this.DTItemCategory.EnableHeadersVisualStyles = false;
             this.DTItemCategory.GridColor = System.Drawing.Color.White;
             this.DTItemCategory.Location = new System.Drawing.Point(12, 101);
+            this.DTItemCategory.MultiSelect = false;
             this.DTItemCategory.Name = "DTItemCategory";
             this.DTItemCategory.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -159,6 +162,7 @@
             this.DTItemCategory.Size = new System.Drawing.Size(705, 440);
             this.DTItemCategory.TabIndex = 34;
             this.DTItemCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTItemCategory_CellClick);
+            this.DTItemCategory.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTItemCategory_CellDoubleClick);
             // 
             // Item_Category
             // 
@@ -173,6 +177,12 @@
             this.Doc_Sections.Name = "Doc_Sections";
             this.Doc_Sections.ReadOnly = true;
             this.Doc_Sections.Width = 355;
+            // 
+            // RecSource
+            // 
+            this.RecSource.HeaderText = "RecSource";
+            this.RecSource.Name = "RecSource";
+            this.RecSource.Visible = false;
             // 
             // label6
             // 
@@ -251,10 +261,11 @@
         private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Button BtnDelete;
         private System.Windows.Forms.DataGridView DTItemCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Item_Category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Doc_Sections;
         private System.Windows.Forms.PictureBox BtnSearch;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TbxSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Item_Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Doc_Sections;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecSource;
     }
 }

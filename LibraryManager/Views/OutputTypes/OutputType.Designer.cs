@@ -92,6 +92,7 @@
             this.DTOutputType.EnableHeadersVisualStyles = false;
             this.DTOutputType.GridColor = System.Drawing.Color.White;
             this.DTOutputType.Location = new System.Drawing.Point(12, 101);
+            this.DTOutputType.MultiSelect = false;
             this.DTOutputType.Name = "DTOutputType";
             this.DTOutputType.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -110,6 +111,7 @@
             this.DTOutputType.TabIndex = 26;
             this.DTOutputType.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTOutputType_CellClick);
             this.DTOutputType.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTOutputType_CellContentClick);
+            this.DTOutputType.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTOutputType_CellContentDoubleClick);
             // 
             // Output_Type
             // 

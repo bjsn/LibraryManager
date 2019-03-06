@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PnlDocumentEdit = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -148,6 +148,7 @@
             this.BtnViewEdit.TabIndex = 45;
             this.BtnViewEdit.Text = "Edit Document";
             this.BtnViewEdit.UseVisualStyleBackColor = false;
+            this.BtnViewEdit.EnabledChanged += new System.EventHandler(this.BtnViewEdit_EnabledChanged);
             this.BtnViewEdit.Click += new System.EventHandler(this.BtnViewEdit_Click);
             // 
             // BtnCancel
@@ -224,19 +225,20 @@
             this.DGVOutputTypes.BackgroundColor = System.Drawing.Color.White;
             this.DGVOutputTypes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DGVOutputTypes.CausesValidation = false;
-            this.DGVOutputTypes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
+            this.DGVOutputTypes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.DGVOutputTypes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGVOutputTypes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVOutputTypes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGVOutputTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVOutputTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OutputTypes});
+            this.DGVOutputTypes.Enabled = false;
             this.DGVOutputTypes.GridColor = System.Drawing.Color.White;
             this.DGVOutputTypes.Location = new System.Drawing.Point(425, 70);
             this.DGVOutputTypes.MultiSelect = false;
@@ -245,8 +247,8 @@
             this.DGVOutputTypes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.DGVOutputTypes.RowHeadersVisible = false;
             this.DGVOutputTypes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.DGVOutputTypes.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.DGVOutputTypes.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.DGVOutputTypes.RowTemplate.Height = 24;
             this.DGVOutputTypes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DGVOutputTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -257,8 +259,8 @@
             // 
             // OutputTypes
             // 
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OutputTypes.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OutputTypes.DefaultCellStyle = dataGridViewCellStyle2;
             this.OutputTypes.HeaderText = "Output Types";
             this.OutputTypes.Name = "OutputTypes";
             this.OutputTypes.ReadOnly = true;
@@ -302,7 +304,6 @@
             // CbxSectionType
             // 
             this.CbxSectionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbxSectionType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.CbxSectionType.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.CbxSectionType.FormattingEnabled = true;
             this.CbxSectionType.Location = new System.Drawing.Point(12, 250);
@@ -425,6 +426,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DocSection_Add";
             this.Text = "DocSection_Add";
+            this.Load += new System.EventHandler(this.DocSection_Add_Load);
             this.PnlDocumentEdit.ResumeLayout(false);
             this.PnlDocumentEdit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

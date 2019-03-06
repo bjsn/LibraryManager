@@ -35,6 +35,8 @@ namespace LibraryManager.Models
 
         public byte[] WordDoc { get; set; }
 
+        public string FileExt { get; set; }
+
       
     }
 }

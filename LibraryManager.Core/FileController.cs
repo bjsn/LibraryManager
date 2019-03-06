@@ -11,11 +11,26 @@ namespace LibraryManager.Core
 {
     public class FileController
     {
+        private static Word.Application app;
+        private static Word.Document document;
+
+        public FileController() 
+        {
+            app = null;
+            document = null;
+        }
+
+        private void InitializeWordInstance() 
+        {
+            app = new Word.Application();
+            //document = new Word.Document();
+        }
+
         public bool IsFileInUse(string filePath) 
         {
             try
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Open))
+                using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
                 {}
                 System.GC.Collect();
                 return false;
@@ -32,10 +47,14 @@ namespace LibraryManager.Core
             {
                 try
                 {
-                    Word.Application  app = new Word.Application();
-                    app.Visible = true;
-                    Word.Document document = app.Documents.Open(filePath);
-                    return true;
+                    InitializeWordInstance();
+                    if (!this.IsFileOpenForce(filePath)) 
+                    {
+                        app.Visible = true;
+                        document = app.Documents.Open(filePath);
+                        return true;
+                    }
+                    return false;
                 }
                 catch (Exception e)
                 {
@@ -45,7 +64,26 @@ namespace LibraryManager.Core
             return false;
         }
 
-        public bool CloseDocument(string filePath) 
+        public bool IsFileOpenForce(string filePath)
+        {
+            try
+            {
+                string fileName = Path.GetFileName(filePath);
+                foreach (var process in Process.GetProcessesByName("WINWORD"))
+                {
+                    if (process.MainWindowTitle.Contains(fileName))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
+        public bool CloseDocument(string filePath, bool saveDocument = false) 
         {
             try
             {
@@ -56,6 +94,11 @@ namespace LibraryManager.Core
                     {
                         if (process.MainWindowTitle.Contains(fileName))
                         {
+                            if (saveDocument) 
+                            {
+                                document.SaveAs(filePath);
+                                app.Documents.Close();
+                            }
                             process.Kill();
                             break;
                         }

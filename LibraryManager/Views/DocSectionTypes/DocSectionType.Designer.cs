@@ -127,6 +127,7 @@
             this.DTDocSectionType.EnableHeadersVisualStyles = false;
             this.DTDocSectionType.GridColor = System.Drawing.Color.White;
             this.DTDocSectionType.Location = new System.Drawing.Point(12, 101);
+            this.DTDocSectionType.MultiSelect = false;
             this.DTDocSectionType.Name = "DTDocSectionType";
             this.DTDocSectionType.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;

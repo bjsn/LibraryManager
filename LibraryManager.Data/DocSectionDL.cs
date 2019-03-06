@@ -23,7 +23,7 @@ namespace LibraryManager.Data
             {
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
-                new OleDbDataAdapter("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, ModSource, ModSourceUpdatedDate " +
+                new OleDbDataAdapter("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, ModSource, ModSourceUpdatedDate, FileExt " +
                                      "FROM Section_tbl " +
                                      "WHERE DeleteMarkDate IS NULL;", base.DbConnection).Fill(dataTable);
                 base.CloseDbConnection();
@@ -84,12 +84,33 @@ namespace LibraryManager.Data
                 sectionName = Utilitary.CleanInput(sectionName);
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
-                new OleDbDataAdapter("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, Word_Doc,  ModSource, ModSourceUpdatedDate " + 
+                new OleDbDataAdapter("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, Word_Doc,  ModSource, ModSourceUpdatedDate, FileExt " + 
                                      "FROM Section_tbl " + 
                                      "WHERE Section_Name = '" + sectionName + "' AND DeleteMarkDate IS NULL;", base.DbConnection)
                                      .Fill(dataTable);
                 base.CloseDbConnection();
                 return this.Convert(dataTable).FirstOrDefault();
+            }
+            catch (Exception exception1)
+            {
+                throw new Exception(exception1.Message);
+            }
+        }
+
+
+        public List<DocSection> GetByDocType(string docType)
+        {
+            try
+            {
+                docType = Utilitary.CleanInput(docType);
+                base.OpenDbConnection();
+                DataTable dataTable = new DataTable();
+                new OleDbDataAdapter("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, Word_Doc,  ModSource, ModSourceUpdatedDate, FileExt " +
+                                     "FROM Section_tbl " +
+                                     "WHERE DocType = '" + docType + "' AND DeleteMarkDate IS NULL;", base.DbConnection)
+                                     .Fill(dataTable);
+                base.CloseDbConnection();
+                return this.Convert(dataTable);
             }
             catch (Exception exception1)
             {
@@ -134,7 +155,7 @@ namespace LibraryManager.Data
                 keyWord = Utilitary.CleanInput(keyWord);
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
-                new OleDbDataAdapter(string.Format("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, Word_Doc, ModSource, ModSourceUpdatedDate  " + 
+                new OleDbDataAdapter(string.Format("SELECT Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, Word_Doc, ModSource, ModSourceUpdatedDate, FileExt  " + 
                                                    "FROM Section_tbl " + 
                                                    "WHERE Section_Name LIKE '%{0}%' OR DocType LIKE '%{0}%' OR Description LIKE '%{0}%' ", keyWord), base.DbConnection)
                                                    .Fill(dataTable);
@@ -187,8 +208,8 @@ namespace LibraryManager.Data
                 OleDbCommand command = null;
                 command = new OleDbCommand
                 {
-                    CommandText = string.Format("INSERT INTO Section_tbl(Section_Name, Order_Number, Object_Type, DocType, Word_Doc, Keep_Style, Description, RecSource, RecSourceUpdatedDate)" +
-                                                "VALUES (@Section_Name, @Order_Number, @Object_Type, @DocType, @Word_Doc, @Keep_Style, @Description, @RecSource, @RecSourceUpdatedDate) ", 
+                    CommandText = string.Format("INSERT INTO Section_tbl(Section_Name, Order_Number, Object_Type, DocType, Word_Doc, Keep_Style, Description, RecSource, RecSourceUpdatedDate, FileExt)" +
+                                                "VALUES (@Section_Name, @Order_Number, @Object_Type, @DocType, @Word_Doc, @Keep_Style, @Description, @RecSource, @RecSourceUpdatedDate, @FileExt) ", 
                                                 new object[0]),
                     CommandType = CommandType.Text
                 };
@@ -203,6 +224,7 @@ namespace LibraryManager.Data
                 command.Parameters.AddWithValue("@Description", Utilitary.CleanInput(docSection.Description));
                 command.Parameters.AddWithValue("@RecSource", Utilitary.CleanInput(docSection.RecSource));
                 command.Parameters.AddWithValue("@RecSourceUpdatedDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@FileExt", Utilitary.CleanInput(docSection.FileExt));
 
                 base.OpenDbConnection();
                 command.Connection = base.DbConnection;
@@ -228,7 +250,8 @@ namespace LibraryManager.Data
                                                 "SET Object_Type = @Object_Type, " +
                                                 "DocType = @DocType, " +
                                                 "Description = @Description, " +
-                                                "Word_Doc = @Word_Doc " +
+                                                "Word_Doc = @Word_Doc, " +
+                                                "FileExt = @FileExt " +
                                                 "WHERE Section_Name = @Section_Name", new object[0]),
                     CommandType = CommandType.Text
                 };
@@ -238,6 +261,7 @@ namespace LibraryManager.Data
                 command.Parameters.AddWithValue("@DocType", Utilitary.CleanInput(docSection.DocType));
                 command.Parameters.AddWithValue("@Description", Utilitary.CleanInput(docSection.Description));
                 command.Parameters.AddWithValue("@Word_Doc", docSection.WordDoc != null ? docSection.WordDoc : fileStream);
+                command.Parameters.AddWithValue("@FileExt", Utilitary.CleanInput(docSection.FileExt));
                 command.Parameters.AddWithValue("@Section_Name", Utilitary.CleanInput(docSection.Section));
                 
                 base.OpenDbConnection();
@@ -430,6 +454,7 @@ namespace LibraryManager.Data
                             UpdatedDT = string.IsNullOrEmpty(row["RecSourceUpdatedDate"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["RecSourceUpdatedDate"].ToString()),
                             UpdatedBy = (row["ModSource"] != DBNull.Value) ? row["ModSource"].ToString() : string.Empty,
                             ClientUpdatedDT = string.IsNullOrEmpty(row["ModSourceUpdatedDate"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["ModSourceUpdatedDate"].ToString()),
+                            FileExt = (row["FileExt"] != DBNull.Value) ? row["FileExt"].ToString() : string.Empty
                         });
                     }
                 }

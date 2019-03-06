@@ -139,16 +139,13 @@ namespace LibraryManager.Data
                 command = new OleDbCommand
                 {
                     CommandText = string.Format("UPDATE DocSectionsByItem " +
-                                                "SET Include = @Include, " +
-                                                "RecSource = @RecSource, " +
-                                                "RecSourceUpdatedDate = @RecSourceUpdatedDate " +
+                                                "SET Include = @Include " +
                                                 "WHERE ItemCategory = @ItemCategory AND SOWSection = @SOWSection", new object[0]),
                     CommandType = CommandType.Text
                 };
 
                 command.Parameters.AddWithValue("@Include", Utilitary.CleanInput(docSectionByItem.Include));
-                command.Parameters.AddWithValue("@RecSource", Utilitary.CleanInput(docSectionByItem.RecSource));
-                command.Parameters.AddWithValue("@RecSourceUpdatedDate", docSectionByItem.RecSourceUpdatedDate.ToString(CultureInfo.InvariantCulture));
+              
                 command.Parameters.AddWithValue("@ItemCategory", Utilitary.CleanInput(docSectionByItem.ItemCategory));
                 command.Parameters.AddWithValue("@SOWSection", Utilitary.CleanInput(docSectionByItem.SOWSection));
                
@@ -164,42 +161,93 @@ namespace LibraryManager.Data
             }
         }
 
-        public int Delete(string itemCategoryName, string sowSectionName) 
+
+        public int UpdateRecSource(DocSectionByItem docSectionByItem)
         {
             try
             {
                 OleDbCommand command = null;
                 command = new OleDbCommand
                 {
-                    CommandText = string.Format("DELETE " +
-                                                "FROM DocSectionsByItem " +
+                    CommandText = string.Format("UPDATE DocSectionsByItem " +
+                                                "SET RecSource = @RecSource, " +
+                                                "RecSourceUpdatedDate = @RecSourceUpdatedDate " +
                                                 "WHERE ItemCategory = @ItemCategory AND SOWSection = @SOWSection", new object[0]),
                     CommandType = CommandType.Text
                 };
-                command.Parameters.AddWithValue("@ItemCategory", itemCategoryName);
-                command.Parameters.AddWithValue("@SOWSection", sowSectionName);
+
+                command.Parameters.AddWithValue("@RecSource", Utilitary.CleanInput(docSectionByItem.RecSource));
+                command.Parameters.AddWithValue("@RecSourceUpdatedDate", docSectionByItem.RecSourceUpdatedDate.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@ItemCategory", Utilitary.CleanInput(docSectionByItem.ItemCategory));
+                command.Parameters.AddWithValue("@SOWSection", Utilitary.CleanInput(docSectionByItem.SOWSection));
+
                 base.OpenDbConnection();
                 command.Connection = base.DbConnection;
                 int result = command.ExecuteNonQuery();
                 base.CloseDbConnection();
                 return result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
-                //OleDbCommand command = null;
-                //command = new OleDbCommand
-                //{
-                //    CommandText = string.Format("UPDATE DocSectionsByItem " +
-                //                                "SET DeleteMarkDate = @DeleteMarkDate " +
-                //                                "WHERE ItemCategory = @ItemCategory AND SOWSection = @SOWSection", new object[0]),
-                //    CommandType = CommandType.Text
-                //};
-                //command.Parameters.AddWithValue("@DeleteMarkDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
-                //command.Parameters.AddWithValue("@ItemCategory", itemCategoryName);
-                //command.Parameters.AddWithValue("@SOWSection", sowSectionName);
-                //base.OpenDbConnection();
-                //command.Connection = base.DbConnection;
-                //int result = command.ExecuteNonQuery();
-                //base.CloseDbConnection();
-                //return result;
+
+        public int UpdateModSource(DocSectionByItem docSectionByItem)
+        {
+            try
+            {
+                OleDbCommand command = null;
+                command = new OleDbCommand
+                {
+                    CommandText = string.Format("UPDATE DocSectionsByItem " +
+                                                "SET ModSource = @ModSource, " +
+                                                "ModSourceUpdatedDate = @ModSourceUpdatedDate " +
+                                                "WHERE ItemCategory = @ItemCategory AND SOWSection = @SOWSection", new object[0]),
+                    CommandType = CommandType.Text
+                };
+
+                command.Parameters.AddWithValue("@ModSource", Utilitary.CleanInput(docSectionByItem.ModSource));
+                command.Parameters.AddWithValue("@ModSourceUpdatedDate", docSectionByItem.ModSourceUpdatedDate.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@ItemCategory", Utilitary.CleanInput(docSectionByItem.ItemCategory));
+                command.Parameters.AddWithValue("@SOWSection", Utilitary.CleanInput(docSectionByItem.SOWSection));
+
+                base.OpenDbConnection();
+                command.Connection = base.DbConnection;
+                int result = command.ExecuteNonQuery();
+                base.CloseDbConnection();
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public int Delete(DocSectionByItem docSectionByItem) 
+        {
+            try
+            {
+                OleDbCommand command = null;
+                command = new OleDbCommand
+                {
+                    CommandText = string.Format("UPDATE DocSectionsByItem " +
+                                                "SET DeleteMarkDate = @DeleteMarkDate " +
+                                                "WHERE ItemCategory = @ItemCategory AND SOWSection = @SOWSection", new object[0]),
+                    CommandType = CommandType.Text
+                };
+
+                command.Parameters.AddWithValue("@DeleteMarkDate", docSectionByItem.DeleteMarkDate.Value.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@ItemCategory", Utilitary.CleanInput(docSectionByItem.ItemCategory));
+                command.Parameters.AddWithValue("@SOWSection", Utilitary.CleanInput(docSectionByItem.SOWSection));
+                
+                base.OpenDbConnection();
+                command.Connection = base.DbConnection;
+                int result = command.ExecuteNonQuery();
+                base.CloseDbConnection();
+                return result;
             }
             catch (Exception)
             {

@@ -378,7 +378,6 @@
             // CbxVendors
             // 
             this.CbxVendors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbxVendors.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.CbxVendors.Font = new System.Drawing.Font("Segoe UI Semibold", 9.5F, System.Drawing.FontStyle.Bold);
             this.CbxVendors.FormattingEnabled = true;
             this.CbxVendors.Location = new System.Drawing.Point(16, 129);

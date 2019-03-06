@@ -43,7 +43,7 @@ namespace AddEditProposalContent.Views.OutputTypes
                 this.TxbOutputTypeName.Text = docTypeGroup.DocTypeGroupName;
                 this.TxbOutputTypeName.Enabled = false;
 
-                var docTypeByDocTypeGroupList = this._docTypesByDocTypeGroupController.GetByDocType(this.outputTypeName);
+                var docTypeByDocTypeGroupList = this._docTypesByDocTypeGroupController.GetByDocTypeGroup(this.outputTypeName);
                 this.DTSectionType.Rows.Clear();
                 foreach (var docTypeByDocTypeGroup in docTypeByDocTypeGroupList)
                 {

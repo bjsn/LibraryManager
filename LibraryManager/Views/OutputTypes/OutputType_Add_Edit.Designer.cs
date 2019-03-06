@@ -100,7 +100,6 @@
             // CbxSectionType
             // 
             this.CbxSectionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbxSectionType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.CbxSectionType.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.CbxSectionType.FormattingEnabled = true;
             this.CbxSectionType.Location = new System.Drawing.Point(16, 128);
@@ -184,6 +183,7 @@
             this.DTSectionType.EnableHeadersVisualStyles = false;
             this.DTSectionType.GridColor = System.Drawing.Color.White;
             this.DTSectionType.Location = new System.Drawing.Point(12, 220);
+            this.DTSectionType.MultiSelect = false;
             this.DTSectionType.Name = "DTSectionType";
             this.DTSectionType.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;

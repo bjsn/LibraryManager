@@ -15,21 +15,39 @@ namespace AddEditProposalContent.Views.ItemCats
     public partial class ItemCategory : BasePartialView
     {
         private ItemCategoryController _itemCategoryController;
+        private SetupController _setupController;
+        private string ClientName;
 
         public ItemCategory(Panel panel)
             : base(panel)
         {
             InitializeComponent();
             _itemCategoryController = new ItemCategoryController();
+            _setupController = new SetupController();
             LoadItemCategoryList();
+            LoadClientName();
         }
+
+        private void LoadClientName()
+        {
+            try
+            {
+                this.ClientName = _setupController.GetClientName();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error:" + e.Message);
+            }
+        }
+
 
         #region events
         private void DTItemCategory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             if (e.RowIndex >= 0)
             {
-                BtnDelete.Enabled = true;
+                BtnDelete.Enabled = this.DTItemCategory.SelectedRows[0].Cells[2].Value.ToString().ToUpper().Contains(this.ClientName.ToUpper());
                 BtnEdit.Enabled = true;
             }
             else
@@ -86,7 +104,8 @@ namespace AddEditProposalContent.Views.ItemCats
                 object[] templateObject = new object[] 
                 {
                        itemCategory.ItemCategoryName,
-                       itemCategory.DocSectionByItemCount
+                       itemCategory.DocSectionByItemCount,
+                       itemCategory.RecSource
                 };
                 this.DTItemCategory.Rows.Add(templateObject);
             }
@@ -122,6 +141,17 @@ namespace AddEditProposalContent.Views.ItemCats
             }
         }
         #endregion
+
+        private void DTItemCategory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string itemName = this.DTItemCategory.SelectedRows[0].Cells[0].Value.ToString();
+                BasePartialView newView = new ItemCategory_Add_Edit(base.MainPanel, this, itemName);
+                base.OpenPartialView(newView);
+            }
+        }
+
 
     }
 }

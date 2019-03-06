@@ -101,7 +101,9 @@ namespace LibraryManager.Core
         {
             try
             {
-                return this._itemCategortDL.Delete(itemCategoryName);
+                ItemCategory itemCategory = this.GetByName(itemCategoryName);
+                itemCategory.DeleteMarkDate = DateTime.Now;
+                return this._itemCategortDL.Delete(itemCategory);
             }
             catch (Exception e)
             {

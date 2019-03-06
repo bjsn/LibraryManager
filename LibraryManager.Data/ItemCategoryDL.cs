@@ -27,7 +27,7 @@ namespace LibraryManager.Data
                 new OleDbDataAdapter("SELECT itemCategories.ItemCategory, itemCategories.Comment, itemCategories.RecSource, itemCategories.RecSourceUpdatedDate, COUNT(docSectionsByItem.ItemCategory) AS DocSectionByItemCount " +
                                      "FROM ItemCategories itemCategories " +
                                      "LEFT JOIN DocSectionsByItem docSectionsByItem ON itemCategories.ItemCategory = docSectionsByItem.ItemCategory " +
-                                     "WHERE itemCategories.DeleteMarkDate IS NULL AND itemCategories.DeleteMarkDate IS NULL " +
+                                     "WHERE itemCategories.DeleteMarkDate IS NULL AND docSectionsByItem.DeleteMarkDate IS NULL " +
                                      "GROUP BY itemCategories.ItemCategory, itemCategories.Comment, itemCategories.RecSource, itemCategories.RecSourceUpdatedDate"
                                     ,base.DbConnection)
                                     .Fill(dataTable);
@@ -50,7 +50,7 @@ namespace LibraryManager.Data
                 new OleDbDataAdapter(string.Format("SELECT itemCategories.ItemCategory, itemCategories.Comment, itemCategories.RecSource, itemCategories.RecSourceUpdatedDate, COUNT(docSectionsByItem.ItemCategory) AS DocSectionByItemCount " +
                                      "FROM ItemCategories itemCategories " +
                                      "LEFT JOIN DocSectionsByItem docSectionsByItem ON itemCategories.ItemCategory = docSectionsByItem.ItemCategory " +
-                                     "WHERE itemCategories.DeleteMarkDate IS NULL AND itemCategories.DeleteMarkDate IS NULL AND itemCategories.ItemCategory LIKE '%{0}%'" +
+                                     "WHERE itemCategories.DeleteMarkDate IS NULL AND docSectionsByItem.DeleteMarkDate IS NULL AND itemCategories.ItemCategory LIKE '%{0}%'" +
                                      "GROUP BY itemCategories.ItemCategory, itemCategories.Comment, itemCategories.RecSource, itemCategories.RecSourceUpdatedDate", keyWord)
                                     ,base.DbConnection)
                                     .Fill(dataTable);
@@ -150,20 +150,23 @@ namespace LibraryManager.Data
             }
         }
 
-        public int Delete(string itemCategoryName)
+        public int Delete(ItemCategory itemCategory)
         {
             try
             {
+
                 OleDbCommand command = null;
                 command = new OleDbCommand
                 {
-                    CommandText = string.Format("DELETE " +
-                                                "FROM ItemCategories " +
-                                                "WHERE ItemCategory = @ItemCategory", new object[0]),
+
+                    CommandText = string.Format("UPDATE ItemCategories " +
+                                                "SET DeleteMarkDate = @DeleteMarkDate " +
+                                                "WHERE ItemCategory = @ItemCategory;", new object[0]),
                     CommandType = CommandType.Text
                 };
-                command.Parameters.AddWithValue("@ItemCategory", Utilitary.CleanInput(itemCategoryName));
-
+                command.Parameters.AddWithValue("@DeleteMarkDate", itemCategory.DeleteMarkDate.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@ItemCategory", Utilitary.CleanInput(itemCategory.ItemCategoryName));
+               
                 base.OpenDbConnection();
                 command.Connection = base.DbConnection;
                 int result = command.ExecuteNonQuery();

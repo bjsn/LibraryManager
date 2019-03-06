@@ -26,15 +26,6 @@ namespace LibraryManager.Views
         private DataGridView DTSectionContent;
         private Button BtnIndex;
         private PictureBox BtnSearch;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Section;
-        private DataGridViewTextBoxColumn Location;
-        private DataGridViewTextBoxColumn DocType;
-        private DataGridViewTextBoxColumn Description;
-        private DataGridViewTextBoxColumn Source;
-        private DataGridViewTextBoxColumn Updated;
-        private DataGridViewTextBoxColumn UpdatedBy;
-        private DataGridViewTextBoxColumn ClientUpdated;
 
         #endregion
 
@@ -44,6 +35,15 @@ namespace LibraryManager.Views
         private Label LblDtgvAlert;
         private string ClientName;
         private Label lblSaveAlert;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Section;
+        private DataGridViewTextBoxColumn Location;
+        private DataGridViewTextBoxColumn DocType;
+        private DataGridViewTextBoxColumn Description;
+        private DataGridViewTextBoxColumn Source;
+        private DataGridViewTextBoxColumn Updated;
+        private DataGridViewTextBoxColumn UpdatedBy;
+        private DataGridViewTextBoxColumn ClientUpdated;
         private List<double> ListOrderIndexes;
 
         public DocSection(Panel Panel) : base(Panel)
@@ -53,27 +53,17 @@ namespace LibraryManager.Views
             this.fileController = new FileController();
             this._setupController = new SetupController();
             LoadClientName();
-            LoadColumnNames();
             SetTimer();
         }
 
         #region components
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.LblDtgvAlert = new System.Windows.Forms.Label();
             this.DTSectionContent = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Section = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DocType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
@@ -83,6 +73,15 @@ namespace LibraryManager.Views
             this.BtnSearch = new System.Windows.Forms.PictureBox();
             this.BtnIndex = new System.Windows.Forms.Button();
             this.lblSaveAlert = new System.Windows.Forms.Label();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Section = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DocType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DTSectionContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
@@ -114,14 +113,14 @@ namespace LibraryManager.Views
             this.DTSectionContent.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.DTSectionContent.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.DTSectionContent.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DTSectionContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTSectionContent.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DTSectionContent.ColumnHeadersHeight = 25;
             this.DTSectionContent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DTSectionContent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -135,31 +134,30 @@ namespace LibraryManager.Views
             this.UpdatedBy,
             this.ClientUpdated});
             this.DTSectionContent.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DTSectionContent.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DTSectionContent.DefaultCellStyle = dataGridViewCellStyle2;
             this.DTSectionContent.EnableHeadersVisualStyles = false;
             this.DTSectionContent.GridColor = System.Drawing.Color.White;
             this.DTSectionContent.Location = new System.Drawing.Point(12, 100);
             this.DTSectionContent.Name = "DTSectionContent";
             this.DTSectionContent.ReadOnly = true;
             this.DTSectionContent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DTSectionContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DTSectionContent.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DTSectionContent.RowHeadersVisible = false;
             this.DTSectionContent.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.DTSectionContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DTSectionContent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DTSectionContent.Size = new System.Drawing.Size(706, 448);
             this.DTSectionContent.TabIndex = 34;
@@ -174,68 +172,6 @@ namespace LibraryManager.Views
             this.DTSectionContent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseDown);
             this.DTSectionContent.MouseLeave += new System.EventHandler(this.DTSectionContent_MouseLeave);
             this.DTSectionContent.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseMove);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Order";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 45;
-            // 
-            // Section
-            // 
-            this.Section.HeaderText = "Section";
-            this.Section.Name = "Section";
-            this.Section.ReadOnly = true;
-            this.Section.Width = 72;
-            // 
-            // Location
-            // 
-            this.Location.HeaderText = "Location";
-            this.Location.Name = "Location";
-            this.Location.ReadOnly = true;
-            this.Location.Width = 70;
-            // 
-            // DocType
-            // 
-            this.DocType.HeaderText = "DocType";
-            this.DocType.Name = "DocType";
-            this.DocType.ReadOnly = true;
-            this.DocType.Width = 73;
-            // 
-            // Description
-            // 
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            this.Description.Width = 110;
-            // 
-            // Source
-            // 
-            this.Source.HeaderText = "Source";
-            this.Source.Name = "Source";
-            this.Source.ReadOnly = true;
-            this.Source.Width = 80;
-            // 
-            // Updated
-            // 
-            this.Updated.HeaderText = "Updated";
-            this.Updated.Name = "Updated";
-            this.Updated.ReadOnly = true;
-            this.Updated.Width = 70;
-            // 
-            // UpdatedBy
-            // 
-            this.UpdatedBy.HeaderText = "UpdatedBy";
-            this.UpdatedBy.Name = "UpdatedBy";
-            this.UpdatedBy.ReadOnly = true;
-            this.UpdatedBy.Width = 80;
-            // 
-            // ClientUpdated
-            // 
-            this.ClientUpdated.HeaderText = "ClientUpdated";
-            this.ClientUpdated.Name = "ClientUpdated";
-            this.ClientUpdated.ReadOnly = true;
             // 
             // BtnAdd
             // 
@@ -379,6 +315,67 @@ namespace LibraryManager.Views
             this.lblSaveAlert.Text = "Click save to apply the changes!";
             this.lblSaveAlert.Visible = false;
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Order";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 45;
+            // 
+            // Section
+            // 
+            this.Section.HeaderText = "Section";
+            this.Section.Name = "Section";
+            this.Section.ReadOnly = true;
+            this.Section.Width = 72;
+            // 
+            // Location
+            // 
+            this.Location.HeaderText = "Location";
+            this.Location.Name = "Location";
+            this.Location.ReadOnly = true;
+            this.Location.Width = 70;
+            // 
+            // DocType
+            // 
+            this.DocType.HeaderText = "DocType";
+            this.DocType.Name = "DocType";
+            this.DocType.ReadOnly = true;
+            this.DocType.Width = 70;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // Source
+            // 
+            this.Source.HeaderText = "Source";
+            this.Source.Name = "Source";
+            this.Source.ReadOnly = true;
+            this.Source.Width = 80;
+            // 
+            // Updated
+            // 
+            this.Updated.HeaderText = "Updated";
+            this.Updated.Name = "Updated";
+            this.Updated.ReadOnly = true;
+            this.Updated.Width = 70;
+            // 
+            // UpdatedBy
+            // 
+            this.UpdatedBy.HeaderText = "UpdatedBy";
+            this.UpdatedBy.Name = "UpdatedBy";
+            this.UpdatedBy.ReadOnly = true;
+            this.UpdatedBy.Width = 80;
+            // 
+            // ClientUpdated
+            // 
+            this.ClientUpdated.HeaderText = "ClientUpdated";
+            this.ClientUpdated.Name = "ClientUpdated";
+            this.ClientUpdated.ReadOnly = true;
+            // 
             // DocSection
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -406,17 +403,6 @@ namespace LibraryManager.Views
         }
         #endregion
 
-        private void LoadColumnNames()
-        {
-            //CbxColumn.DataSource = new[]{
-            //            "--All--",
-            //            "Section",
-            //            "Location",
-            //            "DocType",
-            //            "Source",
-            //            "UpdatedBy"
-            //        };
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -541,63 +527,7 @@ namespace LibraryManager.Views
         {
             this.ListOrderIndexes = this._docSectionController.GetAllIndexes();
         }
-
-        //improve this function
-        private void UpdateWordFile() 
-        {
-            try
-            {
-                string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
-                string filePath = this._docSectionController.GetDocSectionFile(sectionName);
-                if (!string.IsNullOrEmpty(filePath))
-                {
-                    string copyFilePath = this.fileController.CreateFileCopy(filePath);
-                    bool fileOpenSuccessfully = this.fileController.OpenFile(filePath);
-                    
-                    System.Timers.Timer timer = new System.Timers.Timer();
-                    timer.Interval = 1000;
-                    timer.Elapsed += delegate
-                    {
-                        //run timer until the user close the file, then take it and save it into the database
-                        bool isFileInUse = this.fileController.IsFileInUse(filePath);
-                        if (!isFileInUse)
-                        {
-                            timer.Stop();
-                            timer.Dispose();
-                            if (!timer.Enabled) 
-                            {
-                                bool fileWithoutChanges = this.fileController.AreFilesEqual(filePath, copyFilePath);
-                                //if the original file had changes
-                                if (!fileWithoutChanges)
-                                {
-                                    this.UpdateFileChage(sectionName, filePath);
-                                }
-                                //delete both files 
-                                this.fileController.DeleteFile(filePath);
-                                this.fileController.DeleteFile(copyFilePath);
-
-                                if (!fileWithoutChanges)
-                                {
-                                    if (InvokeRequired)
-                                    {
-                                        BeginInvoke(new MethodInvoker(this.LoadDataGrid));
-                                    }
-                                    else
-                                    {
-                                        this.LoadDataGrid();
-                                    }
-                                }
-                            }
-                        }
-                    };
-                timer.Start();
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error:" + e.Message);
-            }
-        }
+      
 
         private void UpdateFileChage(string sectionName, string filePath) 
         {
@@ -614,7 +544,6 @@ namespace LibraryManager.Views
 
 
         #region Drang and drop functionality
-
         private Rectangle DragBoxFromMouseDown;
         private int RowIndexFromMouseDown;
         private int RowIndexOfItemUnderMouseToDrop;
@@ -775,10 +704,15 @@ namespace LibraryManager.Views
             {
                 if (e.Effect == DragDropEffects.Move && RowHoverInt > -1)
                 {
-                    DataGridViewRow example = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
                     DataGridViewRow rowCopy = rowToMove;
-                    DTSectionContent.Rows.RemoveAt(rowToMove.Index);
-                    DTSectionContent.Rows.Insert(RowIndexOfItemUnderMouseToDrop, rowCopy);
+                    int rowToMoveIndex = rowToMove.Index;
+                    int rowToCpyUnderIndex = RowIndexOfItemUnderMouseToDrop;
+                    DTSectionContent.Rows.RemoveAt(rowToMoveIndex);
+                    if (rowToMoveIndex > RowIndexOfItemUnderMouseToDrop && rowToMoveIndex > 0) 
+                    {
+                        rowToCpyUnderIndex += 1;
+                    }
+                    DTSectionContent.Rows.Insert(rowToCpyUnderIndex, rowCopy);
                 }
             }
 
