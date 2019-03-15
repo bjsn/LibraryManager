@@ -148,7 +148,6 @@
             this.BtnViewEdit.TabIndex = 45;
             this.BtnViewEdit.Text = "Edit Document";
             this.BtnViewEdit.UseVisualStyleBackColor = false;
-            this.BtnViewEdit.EnabledChanged += new System.EventHandler(this.BtnViewEdit_EnabledChanged);
             this.BtnViewEdit.Click += new System.EventHandler(this.BtnViewEdit_Click);
             // 
             // BtnCancel
@@ -256,6 +255,7 @@
             this.DGVOutputTypes.ShowEditingIcon = false;
             this.DGVOutputTypes.Size = new System.Drawing.Size(283, 208);
             this.DGVOutputTypes.TabIndex = 35;
+            this.DGVOutputTypes.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DGVOutputTypes_RowPostPaint);
             // 
             // OutputTypes
             // 

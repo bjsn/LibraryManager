@@ -51,6 +51,12 @@
     <Compile Include="Views\Common\ConfirmationView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\Common\Edit document\Edit_Document.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Common\Edit document\Edit_Document.Designer.cs">
+      <DependentUpon>Edit_Document.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Common\Wait_Alert.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="Views\Common\ConfirmationView.resx">
       <DependentUpon>ConfirmationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Common\Edit document\Edit_Document.resx">
+      <DependentUpon>Edit_Document.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Common\Wait_Alert.resx">
       <DependentUpon>Wait_Alert.cs</DependentUpon>
@@ -299,6 +308,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tumblr_mhr5wyNb0t1rvr9sko1_500.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CorsProLogo400pxWidel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo-resize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

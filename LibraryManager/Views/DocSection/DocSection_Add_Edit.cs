@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -28,14 +30,17 @@ namespace AddEditProposalContent.Views
         private bool isNewSection;
         private string openFileTempPath;
         private bool killDocumentOpenCheck = false;
+        private int sectionNumber;
         #endregion
 
-        public DocSection_Add(Panel Panel, BasePartialView Preview = null, string sectionName = "")
+        public DocSection_Add(Panel Panel, BasePartialView Preview = null, string sectionName = "", int sectionNumber = 0)
             : base(Panel, Preview)
         {
-            this.sectionName = sectionName;
-
             InitializeComponent();
+
+            this.sectionName = sectionName;
+            this.sectionNumber = sectionNumber; 
+
             this.InitializeControllers();
             this.LoadDocTypes();
             this.LoadDocSection();
@@ -95,7 +100,6 @@ namespace AddEditProposalContent.Views
         {
             try
             {
-                
                 bool requiredName = this.RequiredFieldEmpty(this.TxtSectionName);
                 bool requiredDocument = IsDocumentRequired();
                 if (!requiredName && !requiredDocument)
@@ -114,13 +118,14 @@ namespace AddEditProposalContent.Views
                     {
                         if (this._docSectionController.IsDocSectionNameValid(this.TxtSectionName.Text))
                         {
-                            int result = this._docSectionController.Add(this.TxtSectionName.Text, this.documentLocation, this.documentPath,
+                            int result = this._docSectionController.Add(this.sectionNumber, this.TxtSectionName.Text, this.documentLocation, this.documentPath,
                                                                         this.CbxSectionType.SelectedItem.ToString(), this.TxtDescription.Text);
                         }
                         else
                         {
                             this.lblSectionNameError.Text = "The section name already exist, try with a different one.";
                             this.lblSectionNameError.Visible = true;
+                            return;
                         }
                     }
                     else 
@@ -193,6 +198,7 @@ namespace AddEditProposalContent.Views
             this.CbxSectionType.DataSource = docTypes.Select(x => x.DocTypeName).ToList();
         }
 
+
         private void LoadOutputTypes()
         {
             try
@@ -205,7 +211,6 @@ namespace AddEditProposalContent.Views
                     object[] values = new object[] { outputTypeGroup.DocTypeGroupName };
                     this.DGVOutputTypes.Rows.Add(values);
                 }
-               
             }
             catch (Exception ex)
             {
@@ -256,6 +261,14 @@ namespace AddEditProposalContent.Views
             }
         }
 
+        Wait_Alert waitAlert = null;
+        private void OpenOpenDocumentForm()
+        {
+            waitAlert = new Wait_Alert(base.MainPanel, this);
+            waitAlert.SetText("We are opening your document");
+            base.OpenPartialAlert(waitAlert);
+        }
+
         private void UpdateWordFile()
         {
             try
@@ -280,21 +293,26 @@ namespace AddEditProposalContent.Views
                     }
                 }
 
-                if (this._fileController.IsFileInUse(filePath)) 
+                if (this._fileController.IsFileInUse(filePath))
                 {
-                    MessageBox.Show("This file is already open, please close it before edit it.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string fileName = Path.GetFileName(filePath);
+                    MessageBox.Show("The file: " + fileName + " is already open.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     this.BtnViewEdit.Enabled = true;
                     this.PnlDocumentEdit.Visible = false;
                     return;
                 }
+                //else 
+                //{
+                //    OpenOpenDocumentForm();
+                //}
 
                 if (!string.IsNullOrEmpty(filePath) && !string.IsNullOrEmpty(sectionName))
                 {
                     this.BtnViewEdit.Enabled = false;
                     string copyFilePath = this._fileController.CreateFileCopy(filePath);
-                    bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
-                    this.openFileTempPath = filePath;
+                    OpenWordDocument(filePath);
 
+                    this.openFileTempPath = filePath;
                     System.Timers.Timer timer = new System.Timers.Timer();
                     timer.Interval = 1000;
                     timer.Elapsed += delegate
@@ -333,6 +351,13 @@ namespace AddEditProposalContent.Views
             }
         }
 
+        private bool OpenWordDocument(string filePath) 
+        {
+            bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
+            return fileOpenSuccessfully;
+        }
+
+       
 
         private void UpdateFileChage(string sectionName, string filePath)
         {
@@ -388,12 +413,12 @@ namespace AddEditProposalContent.Views
         }
         #endregion
 
-        private void BtnViewEdit_EnabledChanged(object sender, EventArgs e)
+        private void DocSection_Add_Load(object sender, EventArgs e)
         {
-
+            this.DGVOutputTypes.CurrentRow.Selected = false;
         }
 
-        private void DocSection_Add_Load(object sender, EventArgs e)
+        private void DGVOutputTypes_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             this.DGVOutputTypes.CurrentRow.Selected = false;
         }

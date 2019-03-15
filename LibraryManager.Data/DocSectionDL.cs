@@ -33,9 +33,7 @@ namespace LibraryManager.Data
             {
                 throw new Exception(exception1.Message);
             }
-           
         }
-
 
         public List<Double> GetAllIndexes()
         {
@@ -55,7 +53,6 @@ namespace LibraryManager.Data
                 throw new Exception(exception1.Message);
             }
         }
-
 
         public double GetLastSectionOrder_Number() 
         {
@@ -193,6 +190,38 @@ namespace LibraryManager.Data
                     return result;
                 }
                 return 0;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public int UpdateSectionOrderList(List<DocSection> sectionList)
+        {
+            try
+            {
+                base.OpenDbConnection();
+                foreach (var section in sectionList) 
+                {
+                    OleDbCommand command = null;
+                    command = new OleDbCommand
+                    {
+                        CommandText = string.Format("UPDATE Section_tbl  " +
+                                                    "SET Order_Number = @Order_Number " +
+                                                    "WHERE Section_Name = @Section_Name", new object[0]),
+                        CommandType = CommandType.Text
+                    };
+                    command.Parameters.AddWithValue("@Order_Number", section.ReOrdered_Number);
+                    command.Parameters.AddWithValue("@Section_Name", section.Section);
+
+
+                    command.Connection = base.DbConnection;
+                    int result = command.ExecuteNonQuery();
+                }
+                base.CloseDbConnection();
+                return 1;
             }
             catch (Exception e)
             {

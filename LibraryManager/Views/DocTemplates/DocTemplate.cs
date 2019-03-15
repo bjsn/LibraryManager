@@ -1,5 +1,6 @@
 ﻿using LibraryManager.Core;
 using LibraryManager.Views;
+using LibrMgr.Views.Common.Edit_document;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,17 +19,17 @@ namespace AddEditProposalContent.Views.DocTemplates
     {
         private DocTemplateController _docTemplateController;
         private FileController _fileController;
-        private bool isDocumentBeingUpdated = false;
+        private bool closeDocument = false;
+        private string tempFilePath = "";
 
         public DocTemplate(Panel panel) : base(panel)
         {
             InitializeComponent();
             this._docTemplateController = new DocTemplateController();
             this._fileController = new FileController();
-            this.LoadDataGrid();
             this.BtnView.Enabled = false;   
+            this.LoadDataGrid();
         }
-
 
         #region Business
         private void LoadDataGrid() 
@@ -130,16 +132,8 @@ namespace AddEditProposalContent.Views.DocTemplates
         {
             if (e.RowIndex >= 0 && this.DTDocTemplate.SelectedRows.Count == 1)
             {
-                if (!this.isDocumentBeingUpdated)
-                {
-                    BtnDelete.Enabled = true;
-                    BtnView.Enabled = true;
-                }
-                else 
-                {
-                    BtnDelete.Enabled = false;
-                    BtnView.Enabled = false;
-                }
+                BtnDelete.Enabled = true;
+                BtnView.Enabled = true;
             }
             else
             {
@@ -150,85 +144,108 @@ namespace AddEditProposalContent.Views.DocTemplates
 
         private void BtnView_Click(object sender, EventArgs e)
         {
-            UpdateWordFile();
+            this.tempFilePath = "";
+            this.closeDocument = false;
+            OpenEditDocument();
         }
         #endregion
 
-        private void UpdateWordFile()
+
+        private async void OpenEditDocument() 
+        {
+            string sectionName = this.DTDocTemplate.SelectedRows[0].Cells[0].Value.ToString();
+            Edit_Document edit_Document = new Edit_Document(this);
+            base.OpenPartialAlert(edit_Document);
+
+            edit_Document.EditText("Opening " + sectionName + "...");
+            string fileOpenedPath = "";
+            await Task.Run(() => fileOpenedPath = OpenWordDocument().Result);
+
+            if (!string.IsNullOrEmpty(fileOpenedPath)) 
+            {
+                edit_Document.EditText("The template is being edited in Word...");
+                edit_Document.EditingDocument();
+                bool fileHasChanges = false;
+                await Task.Run(() => fileHasChanges = CheckIfDocumentIsOpen(fileOpenedPath).Result);
+                
+                edit_Document.EditText("Processing document...");
+                await Task.Delay(500);
+                if (fileHasChanges)
+                {
+                    edit_Document.EditText("Want to save your changes to " + sectionName + "?");
+                    edit_Document.ClosingDocument();
+                }
+                else
+                {
+                    edit_Document.EditText("There are not changes...");
+                    await Task.Delay(500);
+                    edit_Document.CloseCurrent();
+                    closeDocument = true;
+                }
+            }
+        }
+
+        public override void SaveChanges()
+        {
+            if (!string.IsNullOrEmpty(this.tempFilePath)) 
+            {
+                string sectionName = this.DTDocTemplate.SelectedRows[0].Cells[0].Value.ToString();
+                byte[] GetBinaryFile = this._fileController.GetBinaryFile(this.tempFilePath);
+                this._docTemplateController.UpdateTemplateFile(sectionName, GetBinaryFile);
+                this._fileController.DeleteFile(this.tempFilePath);
+                this.tempFilePath = "";
+            }
+        }
+
+        public override void CloseDocument()
+        {
+            if (!string.IsNullOrEmpty(this.tempFilePath)) 
+            {
+                this.closeDocument = true;
+            }
+        }
+
+        private async Task<string> OpenWordDocument() 
         {
             try
             {
                 string sectionName = this.DTDocTemplate.SelectedRows[0].Cells[0].Value.ToString();
                 string filePath = this._docTemplateController.GetDocTemplateFile(sectionName);
-                if (!string.IsNullOrEmpty(filePath))
-                {
-                    string copyFilePath = this._fileController.CreateFileCopy(filePath);
-                    bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
-                    if (!fileOpenSuccessfully)
-                    {
-                        string fileName = Path.GetFileName(filePath);
-                        MessageBox.Show("The file: " + fileName + " is already open.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        this.BtnView.Enabled = true;
-                        this.isDocumentBeingUpdated = false;
-                        return;
-                    }
-                    this.BtnView.Enabled = false;
-                    this.isDocumentBeingUpdated = true;
-
-                    System.Timers.Timer timer = new System.Timers.Timer();
-                    timer.Interval = 1000;
-                    timer.Elapsed += delegate
-                    {
-                        //run timer until the user close the file, then take it and save it into the database
-                        bool isFileInUse = this._fileController.IsFileInUse(filePath);
-                        if (!isFileInUse)
-                        {
-                            timer.Stop();
-                            timer.Dispose();
-                            if (!timer.Enabled)
-                            {
-                                bool fileWithoutChanges = this._fileController.AreFilesEqual(filePath, copyFilePath);
-                                //if the original file had changes
-                                if (!fileWithoutChanges)
-                                {
-                                    this.UpdateFileChange(sectionName, filePath);
-                                }
-                                //delete both files 
-                                this._fileController.DeleteFile(filePath);
-                                this._fileController.DeleteFile(copyFilePath);
-
-                                if (!fileWithoutChanges)
-                                {
-                                    if (InvokeRequired)
-                                    {
-                                        BeginInvoke(new MethodInvoker(this.LoadDataGrid));
-                                    }
-                                    else
-                                    {
-                                        this.LoadDataGrid();
-                                    }
-                                }
-
-                                if (this.BtnView.InvokeRequired) 
-                                {
-                                    this.Invoke((MethodInvoker)delegate 
-                                    {
-                                        this.BtnView.Enabled = true;
-                                        this.isDocumentBeingUpdated = false;
-                                    });
-                                }
-                            }
-                        }
-                    };
-                    timer.Start();
-                }
+                this.tempFilePath = filePath;
+                string copyFilePath = this._fileController.CreateFileCopy(filePath);
+                bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
+                return (fileOpenSuccessfully) ? filePath : "";
             }
-            catch (Exception e)
+            catch (Exception) 
             {
-                this.BtnView.Enabled = true;
-                MessageBox.Show("Error:" + e.Message);
+                throw;
             }
         }
+
+
+        private async Task<bool> CheckIfDocumentIsOpen(string filePath) 
+        {
+            try
+            {
+                string copyFilePath = this._fileController.CreateFileCopy(filePath);
+                bool hasFileChanges = false;
+                bool isFileInUse = true;
+                while (isFileInUse && closeDocument == false)
+                {
+                    isFileInUse = this._fileController.IsFileInUse(filePath);
+                    Thread.Sleep(500);
+                }
+                this._fileController.CloseDocument(filePath, true);
+                hasFileChanges = !this._fileController.AreFilesEqual(filePath, copyFilePath);
+                this._fileController.DeleteFile(copyFilePath);
+                return hasFileChanges;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         private void UpdateFileChange(string sectionName, string filePath)
         {
@@ -243,16 +260,15 @@ namespace AddEditProposalContent.Views.DocTemplates
             }
         }
 
+
         private void DTDocTemplate_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 this.BtnView.Enabled = false;
-                UpdateWordFile();
+               
             }
         }
-
-    
 
     }
 }

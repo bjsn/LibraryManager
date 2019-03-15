@@ -188,14 +188,31 @@ namespace LibraryManager.Core
                         ReorderedList.Add(SectionByIndex);
                     }
                 }
-
-                foreach (var section in ReorderedList)
-                {
-                    this.docSectionDL.UpdateSectionOrder(section);
-                }
+                this.docSectionDL.UpdateSectionOrderList(ReorderedList);
             }
             catch (Exception e)
             {
+                throw;
+            }
+        }
+
+        private void ReIndexSectionAfterInsert(int insertedIndex) 
+        {
+            try
+            {
+                if (insertedIndex > 0) 
+                {
+                    List<DocSection> SectionList = this.docSectionDL.GetAll();
+                    List<DocSection> ReorderedList = new List<DocSection>();
+                    SectionList = SectionList.Where(x => x.Order >= (double)insertedIndex).ToList();
+                    SectionList.ToList().ForEach(section => section.ReOrdered_Number = (section.Order + 1));
+                    ReorderedList = SectionList;
+                    this.docSectionDL.UpdateSectionOrderList(ReorderedList);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -213,17 +230,17 @@ namespace LibraryManager.Core
         }
 
 
-        public int Add(string sectionName, string locationType, string docLocation, string documentType, string description)
+        public int Add(int sectionNumber, string sectionName, string locationType, string docLocation, string documentType, string description)
         {
             try
             {
                 SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
                 string clientName = setupDL.GetClientName();
                 string fileExt = string.IsNullOrEmpty(docLocation) ? "" : Path.GetExtension(docLocation).ToLower().Replace(".", "");
-
+                sectionNumber = sectionNumber + 1;
                 DocSection docSection = new DocSection() 
                 {
-                    Order = this.docSectionDL.GetLastSectionOrder_Number() + 1,
+                    Order = ((sectionNumber == 0) ? this.docSectionDL.GetLastSectionOrder_Number() + 1 : sectionNumber),
                     Section = sectionName,
                     Location = locationType,
                     DocType = documentType,
@@ -234,6 +251,7 @@ namespace LibraryManager.Core
                     RecSourceUpdateDate = DateTime.Now,
                     FileExt = fileExt
                 };
+                ReIndexSectionAfterInsert(sectionNumber);
                 return this.docSectionDL.Add(docSection);
             }
             catch (Exception e)

@@ -13,7 +13,7 @@
         private Panel panel2;
         private PictureBox BtnMinimize;
         private PictureBox BtnClose;
-        private Label label1;
+        private Label lblTitle;
         private Label label2;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
@@ -45,13 +45,18 @@
             base.Dispose(disposing);
         }
 
+        public void SetText(string text)
+        {
+            this.lblText.Text = text;
+        }
+
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.BtnMinimize = new System.Windows.Forms.PictureBox();
             this.BtnClose = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblText = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -68,7 +73,7 @@
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Controls.Add(this.BtnMinimize);
             this.panel2.Controls.Add(this.BtnClose);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.lblTitle);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(307, 28);
@@ -110,17 +115,17 @@
             this.BtnClose.TabIndex = 2;
             this.BtnClose.TabStop = false;
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(37, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Saving changes";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(37, 4);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(129, 23);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Saving changes";
             // 
             // label2
             // 
@@ -175,11 +180,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-        }
 
-        public void SetText(string text)
-        {
-            this.lblText.Text = text;
         }
     }
 }

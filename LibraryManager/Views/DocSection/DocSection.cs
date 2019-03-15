@@ -45,6 +45,7 @@ namespace LibraryManager.Views
         private DataGridViewTextBoxColumn UpdatedBy;
         private DataGridViewTextBoxColumn ClientUpdated;
         private List<double> ListOrderIndexes;
+        private int SelectedRowIndex = 0;
 
         public DocSection(Panel Panel) : base(Panel)
         {
@@ -64,15 +65,6 @@ namespace LibraryManager.Views
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.LblDtgvAlert = new System.Windows.Forms.Label();
             this.DTSectionContent = new System.Windows.Forms.DataGridView();
-            this.BtnAdd = new System.Windows.Forms.Button();
-            this.BtnEdit = new System.Windows.Forms.Button();
-            this.BtnDelete = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.TbxSearch = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.BtnSearch = new System.Windows.Forms.PictureBox();
-            this.BtnIndex = new System.Windows.Forms.Button();
-            this.lblSaveAlert = new System.Windows.Forms.Label();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Section = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +74,15 @@ namespace LibraryManager.Views
             this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnAdd = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TbxSearch = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.BtnSearch = new System.Windows.Forms.PictureBox();
+            this.BtnIndex = new System.Windows.Forms.Button();
+            this.lblSaveAlert = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DTSectionContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
@@ -161,7 +162,7 @@ namespace LibraryManager.Views
             this.DTSectionContent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DTSectionContent.Size = new System.Drawing.Size(706, 448);
             this.DTSectionContent.TabIndex = 34;
-            this.DTSectionContent.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTSectionContent_CellContentClick);
+            this.DTSectionContent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTSectionContent_CellClick);
             this.DTSectionContent.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTSectionContent_CellContentDoubleClick);
             this.DTSectionContent.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DTSectionContent_CellMouseClick);
             this.DTSectionContent.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DTSectionContent_CellPainting);
@@ -172,6 +173,67 @@ namespace LibraryManager.Views
             this.DTSectionContent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseDown);
             this.DTSectionContent.MouseLeave += new System.EventHandler(this.DTSectionContent_MouseLeave);
             this.DTSectionContent.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseMove);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Order";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 45;
+            // 
+            // Section
+            // 
+            this.Section.HeaderText = "Section";
+            this.Section.Name = "Section";
+            this.Section.ReadOnly = true;
+            this.Section.Width = 72;
+            // 
+            // Location
+            // 
+            this.Location.HeaderText = "Location";
+            this.Location.Name = "Location";
+            this.Location.ReadOnly = true;
+            this.Location.Width = 70;
+            // 
+            // DocType
+            // 
+            this.DocType.HeaderText = "DocType";
+            this.DocType.Name = "DocType";
+            this.DocType.ReadOnly = true;
+            this.DocType.Width = 70;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // Source
+            // 
+            this.Source.HeaderText = "Source";
+            this.Source.Name = "Source";
+            this.Source.ReadOnly = true;
+            this.Source.Width = 80;
+            // 
+            // Updated
+            // 
+            this.Updated.HeaderText = "Updated";
+            this.Updated.Name = "Updated";
+            this.Updated.ReadOnly = true;
+            this.Updated.Width = 70;
+            // 
+            // UpdatedBy
+            // 
+            this.UpdatedBy.HeaderText = "UpdatedBy";
+            this.UpdatedBy.Name = "UpdatedBy";
+            this.UpdatedBy.ReadOnly = true;
+            this.UpdatedBy.Width = 80;
+            // 
+            // ClientUpdated
+            // 
+            this.ClientUpdated.HeaderText = "ClientUpdated";
+            this.ClientUpdated.Name = "ClientUpdated";
+            this.ClientUpdated.ReadOnly = true;
             // 
             // BtnAdd
             // 
@@ -315,67 +377,6 @@ namespace LibraryManager.Views
             this.lblSaveAlert.Text = "Click save to apply the changes!";
             this.lblSaveAlert.Visible = false;
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Order";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 45;
-            // 
-            // Section
-            // 
-            this.Section.HeaderText = "Section";
-            this.Section.Name = "Section";
-            this.Section.ReadOnly = true;
-            this.Section.Width = 72;
-            // 
-            // Location
-            // 
-            this.Location.HeaderText = "Location";
-            this.Location.Name = "Location";
-            this.Location.ReadOnly = true;
-            this.Location.Width = 70;
-            // 
-            // DocType
-            // 
-            this.DocType.HeaderText = "DocType";
-            this.DocType.Name = "DocType";
-            this.DocType.ReadOnly = true;
-            this.DocType.Width = 70;
-            // 
-            // Description
-            // 
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            // 
-            // Source
-            // 
-            this.Source.HeaderText = "Source";
-            this.Source.Name = "Source";
-            this.Source.ReadOnly = true;
-            this.Source.Width = 80;
-            // 
-            // Updated
-            // 
-            this.Updated.HeaderText = "Updated";
-            this.Updated.Name = "Updated";
-            this.Updated.ReadOnly = true;
-            this.Updated.Width = 70;
-            // 
-            // UpdatedBy
-            // 
-            this.UpdatedBy.HeaderText = "UpdatedBy";
-            this.UpdatedBy.Name = "UpdatedBy";
-            this.UpdatedBy.ReadOnly = true;
-            this.UpdatedBy.Width = 80;
-            // 
-            // ClientUpdated
-            // 
-            this.ClientUpdated.HeaderText = "ClientUpdated";
-            this.ClientUpdated.Name = "ClientUpdated";
-            this.ClientUpdated.ReadOnly = true;
-            // 
             // DocSection
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -432,23 +433,6 @@ namespace LibraryManager.Views
             }
         }
 
-        private void DTSectionContent_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && this.DTSectionContent.SelectedRows.Count == 1)
-            {
-                if(this.DTSectionContent.SelectedRows[0].Cells[2].Value.ToString().ToUpper().Contains("INTERNAL"))
-                {
-                    BtnEdit.Enabled = true;
-                }
-                BtnDelete.Enabled = this.DTSectionContent.SelectedRows[0].Cells[5].Value.ToString().ToUpper().Contains(this.ClientName.ToUpper());
-            }
-            else
-            {
-                BtnEdit.Enabled = false;
-                BtnDelete.Enabled = false;
-            }
-        }
-
         private void BtnEdit_Click(object sender, EventArgs e)
         {
             string sectionName = this.DTSectionContent.SelectedRows[0].Cells[1].Value.ToString();
@@ -458,7 +442,7 @@ namespace LibraryManager.Views
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            BasePartialView newView = new DocSection_Add(base.MainPanel, this);
+            BasePartialView newView = new DocSection_Add(base.MainPanel, this, "", this.SelectedRowIndex);
             base.OpenPartialView(newView);
         }
 
@@ -738,7 +722,6 @@ namespace LibraryManager.Views
                 this.BtnIndex.Enabled = true;
                 this.lblSaveAlert.Visible = true;
             }
-
         }
 
         /// <summary>
@@ -834,17 +817,29 @@ namespace LibraryManager.Views
             Thread thread = new Thread(threadStart);
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
-            thread.Join();
-
-            this.LoadDataGrid();
-            this.ListOrderIndexes.Clear();
-            this.LoadIndexesList();
-            CloseWaitAlert();
         }
 
         private void ReindexElements() 
         {
             this._docSectionController.ReIndexAllSections(this.ListOrderIndexes);
+            ReloadIndexAfterSave();
+        }
+
+        private void ReloadIndexAfterSave() 
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(() => { ReloadIndexAfterSave(); }));
+            }
+            else 
+            {
+                this.LoadDataGrid();
+                this.ListOrderIndexes.Clear();
+                this.LoadIndexesList();
+                this.BtnIndex.Enabled = false;
+                this.lblSaveAlert.Visible = false;
+                this.CloseWaitAlert();
+            }
         }
 
         //add cut/past functionality buttom
@@ -906,7 +901,7 @@ namespace LibraryManager.Views
                 }
 
                 List<DataGridViewRow> SelectedRows =
-               (from DataGridViewRow row in this.DTSectionContent.SelectedRows
+                (from DataGridViewRow row in this.DTSectionContent.SelectedRows
                 where !row.IsNewRow
                 orderby row.Index
                 select row).ToList<DataGridViewRow>();
@@ -966,6 +961,25 @@ namespace LibraryManager.Views
             DocSection_Add newView = new DocSection_Add(base.MainPanel, this, sectionName);
             base.OpenPartialView(newView);
         }
+
+        private void DTSectionContent_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && this.DTSectionContent.SelectedRows.Count == 1)
+            {
+                this.SelectedRowIndex = this.DTSectionContent.SelectedRows[0].Index + 1;
+                if (this.DTSectionContent.SelectedRows[0].Cells[2].Value.ToString().ToUpper().Contains("INTERNAL"))
+                {
+                    BtnEdit.Enabled = true;
+                }
+                BtnDelete.Enabled = this.DTSectionContent.SelectedRows[0].Cells[5].Value.ToString().ToUpper().Contains(this.ClientName.ToUpper());
+            }
+            else
+            {
+                BtnEdit.Enabled = false;
+                BtnDelete.Enabled = false;
+            }
+        }
+
 
     }
 }

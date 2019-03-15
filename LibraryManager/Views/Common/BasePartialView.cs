@@ -77,7 +77,7 @@
         {
         }
 
-        private void DeleteThroughPanel()
+        public void DeleteThroughPanel()
         {
             if (this.SeeThroughPanel != null)
             {
@@ -144,6 +144,25 @@
         public virtual void SetRTFText(string RTF)
         {
         }
+
+        public virtual void SaveChanges()
+        {
+            if (this.PreviewForm != null) 
+            {
+                this.PreviewForm.SaveChanges();
+            }
+        }
+
+
+        public virtual void CloseDocument()
+        {
+            if (this.PreviewForm != null)
+            {
+                this.PreviewForm.CloseDocument();
+            }
+        }
+
+
     }
 }
 
