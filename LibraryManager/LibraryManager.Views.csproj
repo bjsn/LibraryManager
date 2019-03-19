@@ -147,6 +147,12 @@
     <Compile Include="Views\ProposalContent\ProposalContent_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\Reindex\Reindex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Reindex\Reindex.Designer.cs">
+      <DependentUpon>Reindex.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\Common\ConfirmationView.resx">
       <DependentUpon>ConfirmationView.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ProposalContent\ProposalContent_Editor.resx">
       <DependentUpon>ProposalContent_Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Reindex\Reindex.resx">
+      <DependentUpon>Reindex.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -326,6 +335,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\warning1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo-resize1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -120,6 +120,7 @@ namespace AddEditProposalContent.Views.DocTemplates
             this.AddDocTemplate();
         }
 
+
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             string docTemplateName = this.DTDocTemplate.SelectedRows[0].Cells[0].Value.ToString();
@@ -127,6 +128,7 @@ namespace AddEditProposalContent.Views.DocTemplates
             newView.SetText("the template: '" + docTemplateName + "'");
             base.OpenPartialAlert(newView);
         }
+
 
         private void DTDocTemplate_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -141,6 +143,7 @@ namespace AddEditProposalContent.Views.DocTemplates
                 BtnView.Enabled = false;
             }
         }
+
 
         private void BtnView_Click(object sender, EventArgs e)
         {
@@ -157,33 +160,34 @@ namespace AddEditProposalContent.Views.DocTemplates
             Edit_Document edit_Document = new Edit_Document(this);
             base.OpenPartialAlert(edit_Document);
 
-            edit_Document.EditText("Opening " + sectionName + "...");
+            edit_Document.EditText("Opening the " + sectionName + " doc template");
             string fileOpenedPath = "";
             await Task.Run(() => fileOpenedPath = OpenWordDocument().Result);
 
             if (!string.IsNullOrEmpty(fileOpenedPath)) 
             {
-                edit_Document.EditText("The template is being edited in Word...");
+                edit_Document.EditText("The " + sectionName + " template \nis being edited in Word");
                 edit_Document.EditingDocument();
                 bool fileHasChanges = false;
                 await Task.Run(() => fileHasChanges = CheckIfDocumentIsOpen(fileOpenedPath).Result);
                 
-                edit_Document.EditText("Processing document...");
+                edit_Document.EditText("Processing document");
                 await Task.Delay(500);
                 if (fileHasChanges)
                 {
-                    edit_Document.EditText("Want to save your changes to " + sectionName + "?");
+                    edit_Document.EditText("Do you want to save the changes to \nthe " + sectionName + "doc template?");
                     edit_Document.ClosingDocument();
                 }
                 else
                 {
-                    edit_Document.EditText("There are not changes...");
+                    edit_Document.EditText("Closing the template");
                     await Task.Delay(500);
                     edit_Document.CloseCurrent();
                     closeDocument = true;
                 }
             }
         }
+
 
         public override void SaveChanges()
         {
@@ -197,6 +201,7 @@ namespace AddEditProposalContent.Views.DocTemplates
             }
         }
 
+
         public override void CloseDocument()
         {
             if (!string.IsNullOrEmpty(this.tempFilePath)) 
@@ -204,6 +209,7 @@ namespace AddEditProposalContent.Views.DocTemplates
                 this.closeDocument = true;
             }
         }
+
 
         private async Task<string> OpenWordDocument() 
         {
@@ -266,7 +272,9 @@ namespace AddEditProposalContent.Views.DocTemplates
             if (e.RowIndex >= 0)
             {
                 this.BtnView.Enabled = false;
-               
+                this.tempFilePath = "";
+                this.closeDocument = false;
+                OpenEditDocument();
             }
         }
 

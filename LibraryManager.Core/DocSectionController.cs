@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 
 namespace LibraryManager.Core
@@ -188,7 +189,10 @@ namespace LibraryManager.Core
                         ReorderedList.Add(SectionByIndex);
                     }
                 }
-                this.docSectionDL.UpdateSectionOrderList(ReorderedList);
+                Thread thread = new Thread(
+                       () => this.docSectionDL.UpdateSectionReOrderList(ReorderedList));
+                thread.Start();
+                //this.docSectionDL.UpdateSectionReOrderList(ReorderedList);
             }
             catch (Exception e)
             {
@@ -207,8 +211,68 @@ namespace LibraryManager.Core
                     SectionList = SectionList.Where(x => x.Order >= (double)insertedIndex).ToList();
                     SectionList.ToList().ForEach(section => section.ReOrdered_Number = (section.Order + 1));
                     ReorderedList = SectionList;
-                    this.docSectionDL.UpdateSectionOrderList(ReorderedList);
+
+                    //send process to a new thread
+                    Thread thread = new Thread(
+                        () => this.docSectionDL.UpdateSectionReOrderList(ReorderedList));
+                    thread.Start();
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public void ReOrderNumberList() 
+        {
+            try
+            {
+                List<DocSection> SectionList = this.docSectionDL.GetAll();
+                List<DocSection> ReorderedList = new List<DocSection>();
+                for (int i = 0; i < SectionList.Count; i++)
+                {
+                    double orderedNumber = ((double)i + 1);
+                    if (SectionList[i].Order != orderedNumber)
+                    {
+                        SectionList[i].ReOrdered_Number = (double)i + 1;
+                        ReorderedList.Add(SectionList[i]);
+                    }
+                }
+                this.docSectionDL.UpdateSectionReOrderList(ReorderedList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void FillReOrderNumberList() 
+        {
+            try
+            {
+                List<DocSection> SectionList = this.docSectionDL.GetAll();
+                var OrderedList = SectionList.Where(x => x.ReOrdered_Number  == 0 ).ToList();
+                if (OrderedList.Count > 0) 
+                {   
+                    SectionList.ToList().ForEach(section => section.ReOrdered_Number = (section.Order));
+                    this.docSectionDL.UpdateSectionReOrderList(SectionList);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void FillOrderNumberList()
+        {
+            try
+            {
+                List<DocSection> SectionList = this.docSectionDL.GetAll();
+                SectionList.ToList().ForEach(section => section.Order = (section.ReOrdered_Number));
+                this.docSectionDL.UpdateSectionReOrderList(SectionList);
             }
             catch (Exception)
             {
@@ -237,10 +301,10 @@ namespace LibraryManager.Core
                 SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
                 string clientName = setupDL.GetClientName();
                 string fileExt = string.IsNullOrEmpty(docLocation) ? "" : Path.GetExtension(docLocation).ToLower().Replace(".", "");
-                sectionNumber = sectionNumber + 1;
+                double sectionNumberD = sectionNumber + 0.1;
                 DocSection docSection = new DocSection() 
                 {
-                    Order = ((sectionNumber == 0) ? this.docSectionDL.GetLastSectionOrder_Number() + 1 : sectionNumber),
+                    Order = ((sectionNumberD == 0) ? this.docSectionDL.GetLastSectionOrder_Number() + 0.1 : sectionNumberD),
                     Section = sectionName,
                     Location = locationType,
                     DocType = documentType,
@@ -251,7 +315,7 @@ namespace LibraryManager.Core
                     RecSourceUpdateDate = DateTime.Now,
                     FileExt = fileExt
                 };
-                ReIndexSectionAfterInsert(sectionNumber);
+                //ReIndexSectionAfterInsert(sectionNumber);
                 return this.docSectionDL.Add(docSection);
             }
             catch (Exception e)

@@ -87,17 +87,18 @@ namespace LibraryManager.Core
         {
             try
             {
-                if (IsFileInUse(filePath)) 
+                if (IsFileInUse(filePath))
                 {
                     string fileName = Path.GetFileName(filePath);
                     foreach (var process in Process.GetProcessesByName("WINWORD"))
                     {
                         if (process.MainWindowTitle.Contains(fileName))
                         {
-                            if (saveDocument) 
+                            if (saveDocument)
                             {
                                 document.SaveAs(filePath);
                                 app.Documents.Close();
+
                             }
                             process.Kill();
                             break;
@@ -105,9 +106,18 @@ namespace LibraryManager.Core
                     }
                 }
             }
-            catch (Exception) 
+            catch (Exception)
             {
+                app.Documents.Close();
                 throw;
+            }
+            finally 
+            {
+                if (IsFileInUse(filePath)) 
+                {
+                    app.Documents.Close();
+                    app.Quit();
+                }
             }
             return false;
         }

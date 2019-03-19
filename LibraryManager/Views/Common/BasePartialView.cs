@@ -54,7 +54,7 @@
             if (this.PreviewForm != null)
             {
                 this.PreviewForm.Show();
-                this.PreviewForm.Reload();
+                this.PreviewForm.ReloadGrid();
             }
         }
 
@@ -144,6 +144,10 @@
         public virtual void SetRTFText(string RTF)
         {
         }
+
+        public virtual void ReloadGrid()
+        {
+        } 
 
         public virtual void SaveChanges()
         {

@@ -470,7 +470,6 @@ namespace LibraryManager.Views
             }
         }
 
-
         public override void Delete()
         {
             if (this.DTSectionContent.RowCount > 0)
@@ -483,16 +482,23 @@ namespace LibraryManager.Views
 
         public override void Reload()
         {
-            this.LoadDataGrid();
+            //this.LoadDataGrid();
         }
 
+
+        public override void ReloadGrid()
+        {
+            this.LoadDataGrid();
+        } 
+        
         private void LoadDataGrid() 
         {
             this.DTSectionContent.Rows.Clear();
             var sectionList = this._docSectionController.GetAll();
+            int counter = 1;
             foreach (var section in sectionList)
             {
-                object[] sectionObject = new object[] { section.Order, 
+                object[] sectionObject = new object[] { counter, 
                                                         section.Section, 
                                                         section.Location, 
                                                         section.DocType, 
@@ -503,6 +509,7 @@ namespace LibraryManager.Views
                                                         (section.ClientUpdatedDT.Equals(DateTime.MinValue) ? "": "Y")
                                                     };
                 this.DTSectionContent.Rows.Add(sectionObject);
+                counter++;
             }
         }
 
@@ -821,8 +828,28 @@ namespace LibraryManager.Views
 
         private void ReindexElements() 
         {
+            FillListOrderIndexes();
             this._docSectionController.ReIndexAllSections(this.ListOrderIndexes);
             ReloadIndexAfterSave();
+            this.ListOrderIndexes.Clear();
+        }
+
+        private void UpdateLocalOrderNumbers() 
+        {
+            for (int i = 0; i < this.DTSectionContent.RowCount; i++) 
+            {
+                this.DTSectionContent.Rows[i].Cells[0].Value = i + 1;
+            }
+        }
+
+        private void FillListOrderIndexes() 
+        {
+            this.ListOrderIndexes.Clear();
+            foreach (DataGridViewRow row in this.DTSectionContent.Rows) 
+            {
+                double val = Convert.ToDouble(row.Cells[0].Value.ToString());
+                ListOrderIndexes.Add(val);
+            }
         }
 
         private void ReloadIndexAfterSave() 
@@ -833,7 +860,7 @@ namespace LibraryManager.Views
             }
             else 
             {
-                this.LoadDataGrid();
+                UpdateLocalOrderNumbers();
                 this.ListOrderIndexes.Clear();
                 this.LoadIndexesList();
                 this.BtnIndex.Enabled = false;

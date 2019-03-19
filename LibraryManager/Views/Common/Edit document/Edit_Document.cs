@@ -30,7 +30,7 @@ namespace LibrMgr.Views.Common.Edit_document
         {
             Point middel =  GetPosition();
             var with = this.LblMessage.Size.Width / 2 ;
-            this.LblMessage.Location = new Point(middel.X - with, middel.Y + 5); ;
+            this.LblMessage.Location = new Point(middel.X - with, middel.Y - 5); ;
         }
 
         public void EditingDocument() 
@@ -40,7 +40,6 @@ namespace LibrMgr.Views.Common.Edit_document
 
         public void ClosingDocument()
         {
-            this.PBWait.Visible = false;
             this.PBAlert.Visible = true;
             this.BtnClose.Visible = false;
             this.BtnCancel.Visible = true;
@@ -69,7 +68,6 @@ namespace LibrMgr.Views.Common.Edit_document
             base.SaveChanges();
             CloseCurrent();
         }
-
 
         public void CloseCurrent() 
         {

@@ -198,28 +198,39 @@ namespace LibraryManager.Data
         }
 
 
-        public int UpdateSectionOrderList(List<DocSection> sectionList)
+        public int UpdateSectionReOrderList(List<DocSection> sectionList)
         {
             try
             {
-                base.OpenDbConnection();
-                foreach (var section in sectionList) 
+                var connection = base.OpenDbConnection();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = base.DbConnection;
+                command.CommandText = string.Format("UPDATE Section_tbl  " +
+                                                     "SET Order_Number = ? " +
+                                                     "WHERE Section_Name = ?;");
+
+                command.Parameters.Add("?", OleDbType.Integer, 8);
+                command.Parameters.Add("?", OleDbType.VarChar, 30);
+
+                command.Prepare();
+                OleDbTransaction transaction = connection.BeginTransaction();
+                command.Transaction = transaction;
+               
+                foreach (var section in sectionList)
                 {
-                    OleDbCommand command = null;
-                    command = new OleDbCommand
+                    command.Parameters[0].Value = section.ReOrdered_Number;
+                    command.Parameters[1].Value = section.Section;
+                    try
                     {
-                        CommandText = string.Format("UPDATE Section_tbl  " +
-                                                    "SET Order_Number = @Order_Number " +
-                                                    "WHERE Section_Name = @Section_Name", new object[0]),
-                        CommandType = CommandType.Text
-                    };
-                    command.Parameters.AddWithValue("@Order_Number", section.ReOrdered_Number);
-                    command.Parameters.AddWithValue("@Section_Name", section.Section);
-
-
-                    command.Connection = base.DbConnection;
-                    int result = command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex) 
+                    {
+                        //var eeee = "";
+                    }
                 }
+
+                transaction.Commit();
                 base.CloseDbConnection();
                 return 1;
             }
@@ -462,7 +473,6 @@ namespace LibraryManager.Data
 
         private List<DocSection> Convert(DataTable dataTable)
         {
-            
             List<DocSection> listDocSection = new List<DocSection>();
             try
             {
@@ -472,6 +482,7 @@ namespace LibraryManager.Data
                     {
                         double orderId = 0;
                         Double.TryParse(row["Order_Number"].ToString(), out orderId);
+
                         listDocSection.Add(new DocSection()
                         {
                             Order = orderId,
@@ -483,7 +494,7 @@ namespace LibraryManager.Data
                             UpdatedDT = string.IsNullOrEmpty(row["RecSourceUpdatedDate"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["RecSourceUpdatedDate"].ToString()),
                             UpdatedBy = (row["ModSource"] != DBNull.Value) ? row["ModSource"].ToString() : string.Empty,
                             ClientUpdatedDT = string.IsNullOrEmpty(row["ModSourceUpdatedDate"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["ModSourceUpdatedDate"].ToString()),
-                            FileExt = (row["FileExt"] != DBNull.Value) ? row["FileExt"].ToString() : string.Empty
+                            FileExt = (row["FileExt"] != DBNull.Value) ? row["FileExt"].ToString() : string.Empty,
                         });
                     }
                 }

@@ -28,37 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PBWait = new System.Windows.Forms.PictureBox();
             this.PBAlert = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnClose = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnClose = new System.Windows.Forms.Button();
             this.LblMessage = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.PBWait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PBAlert)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // PBWait
-            // 
-            this.PBWait.Image = global::LibrMgr.Properties.Resources._45__2_1;
-            this.PBWait.Location = new System.Drawing.Point(130, 34);
-            this.PBWait.Name = "PBWait";
-            this.PBWait.Size = new System.Drawing.Size(48, 45);
-            this.PBWait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBWait.TabIndex = 44;
-            this.PBWait.TabStop = false;
-            // 
             // PBAlert
             // 
             this.PBAlert.Image = global::LibrMgr.Properties.Resources.warning1;
-            this.PBAlert.Location = new System.Drawing.Point(130, 34);
+            this.PBAlert.Location = new System.Drawing.Point(130, 28);
             this.PBAlert.Name = "PBAlert";
             this.PBAlert.Size = new System.Drawing.Size(48, 45);
             this.PBAlert.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -92,40 +80,19 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(1, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(178, 20);
+            this.label1.Size = new System.Drawing.Size(173, 20);
             this.label1.TabIndex = 35;
-            this.label1.Text = "Procesing the template...";
+            this.label1.Text = "Procesing Doc Template";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.BtnClose);
             this.panel1.Controls.Add(this.BtnSave);
             this.panel1.Controls.Add(this.BtnCancel);
-            this.panel1.Location = new System.Drawing.Point(1, 108);
+            this.panel1.Controls.Add(this.BtnClose);
+            this.panel1.Location = new System.Drawing.Point(1, 115);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(316, 50);
+            this.panel1.Size = new System.Drawing.Size(316, 43);
             this.panel1.TabIndex = 39;
-            // 
-            // BtnClose
-            // 
-            this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClose.BackColor = System.Drawing.Color.LightGray;
-            this.BtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnClose.Enabled = false;
-            this.BtnClose.FlatAppearance.BorderSize = 0;
-            this.BtnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.BtnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnClose.Location = new System.Drawing.Point(201, 12);
-            this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(105, 32);
-            this.BtnClose.TabIndex = 53;
-            this.BtnClose.Text = "Close";
-            this.BtnClose.UseVisualStyleBackColor = false;
-            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // BtnSave
             // 
@@ -139,7 +106,7 @@
             this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.BtnSave.ForeColor = System.Drawing.Color.White;
-            this.BtnSave.Location = new System.Drawing.Point(201, 12);
+            this.BtnSave.Location = new System.Drawing.Point(204, 5);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(105, 32);
             this.BtnSave.TabIndex = 52;
@@ -160,7 +127,7 @@
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.BtnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnCancel.Location = new System.Drawing.Point(89, 11);
+            this.BtnCancel.Location = new System.Drawing.Point(92, 5);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(105, 32);
             this.BtnCancel.TabIndex = 51;
@@ -168,6 +135,27 @@
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Visible = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // BtnClose
+            // 
+            this.BtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnClose.BackColor = System.Drawing.Color.LightGray;
+            this.BtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnClose.Enabled = false;
+            this.BtnClose.FlatAppearance.BorderSize = 0;
+            this.BtnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.BtnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BtnClose.Location = new System.Drawing.Point(204, 6);
+            this.BtnClose.Name = "BtnClose";
+            this.BtnClose.Size = new System.Drawing.Size(105, 32);
+            this.BtnClose.TabIndex = 53;
+            this.BtnClose.Text = "Close";
+            this.BtnClose.UseVisualStyleBackColor = false;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // LblMessage
             // 
@@ -181,9 +169,8 @@
             // 
             // Edit_Document
             // 
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(317, 160);
-            this.Controls.Add(this.PBWait);
             this.Controls.Add(this.PBAlert);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.panel2);
@@ -192,7 +179,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Edit_Document";
             this.Text = "Edit_Document";
-            ((System.ComponentModel.ISupportInitialize)(this.PBWait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PBAlert)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -214,7 +200,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label LblMessage;
         private System.Windows.Forms.PictureBox PBAlert;
-        private System.Windows.Forms.PictureBox PBWait;
 
 
     }
