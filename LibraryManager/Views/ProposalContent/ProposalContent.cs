@@ -304,6 +304,7 @@
             this.DTProposalContent.EnableHeadersVisualStyles = false;
             this.DTProposalContent.GridColor = System.Drawing.Color.White;
             this.DTProposalContent.Location = new System.Drawing.Point(13, 169);
+            this.DTProposalContent.MultiSelect = false;
             this.DTProposalContent.Name = "DTProposalContent";
             this.DTProposalContent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -322,6 +323,7 @@
             this.DTProposalContent.TabIndex = 24;
             this.DTProposalContent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTProposalContent_CellClick);
             this.DTProposalContent.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTProposalContent_CellClick);
+            this.DTProposalContent.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTProposalContent_CellDoubleClick);
             // 
             // PartNumber
             // 
@@ -521,6 +523,18 @@
 
         }
         #endregion
+
+        private void DTProposalContent_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                this.BtnDelete.Enabled = true;
+                this.BtnEdit.Enabled = true;
+                ProposalContent_Add_Edit newView = new ProposalContent_Add_Edit(base.MainPanel, this, this.AdminContent);
+                newView.SetPartNumber(this.DTProposalContent.SelectedRows[0].Cells[0].Value.ToString());
+                base.OpenPartialView(newView);
+            }
+        }
 
     }
 }

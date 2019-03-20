@@ -113,6 +113,7 @@ namespace LibraryManager.Core
                     }
                     else 
                     {
+                        savedSectionItem.Include = string.IsNullOrEmpty(savedSectionItem.Include) ? "Y" : savedSectionItem.Include;
                         //update
                         if (!savedSectionItem.Include.Equals(docSectionByItem.Include)) 
                         {

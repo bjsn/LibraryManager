@@ -100,6 +100,10 @@ namespace LibraryManager.Core
                                 app.Documents.Close();
 
                             }
+                            else 
+                            {
+                                app.Documents.Close();
+                            }
                             process.Kill();
                             break;
                         }

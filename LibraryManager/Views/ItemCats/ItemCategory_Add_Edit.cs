@@ -37,6 +37,7 @@ namespace AddEditProposalContent.Views.ItemCats
             LoadItemCategoryList();
             LoadItemCategoryInformation();
             LoadDocSectionList();
+            LoadClientName();
         }
 
         #region bussiness 
@@ -126,7 +127,17 @@ namespace AddEditProposalContent.Views.ItemCats
                 var itemCategoryList = this._itemCategoryController.GetAll().OrderBy(x => x.ItemCategoryName);
                 foreach (var itemCategory in itemCategoryList)
                 {
-                    this.CbxCategoryList.Items.Add(itemCategory.ItemCategoryName);
+                    if (string.IsNullOrEmpty(this.itemCategoryName))
+                    {
+                        if (itemCategory.DocSectionByItemCount == 0) 
+                        {
+                            this.CbxCategoryList.Items.Add(itemCategory.ItemCategoryName);
+                        }
+                    }
+                    else 
+                    {
+                        this.CbxCategoryList.Items.Add(itemCategory.ItemCategoryName);
+                    }
                 }
             }
             catch (Exception e)

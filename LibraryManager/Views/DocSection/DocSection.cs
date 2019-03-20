@@ -146,6 +146,7 @@ namespace LibraryManager.Views
             this.DTSectionContent.EnableHeadersVisualStyles = false;
             this.DTSectionContent.GridColor = System.Drawing.Color.White;
             this.DTSectionContent.Location = new System.Drawing.Point(12, 100);
+            this.DTSectionContent.MultiSelect = false;
             this.DTSectionContent.Name = "DTSectionContent";
             this.DTSectionContent.ReadOnly = true;
             this.DTSectionContent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;

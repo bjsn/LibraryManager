@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProposalContentDL.cs" />
     <Compile Include="SetupDL.cs" />
+    <Compile Include="VendorContentDL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibraryManager.Common\LibraryManager.Common.csproj">

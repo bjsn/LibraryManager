@@ -225,7 +225,7 @@
             this.DGVOutputTypes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DGVOutputTypes.CausesValidation = false;
             this.DGVOutputTypes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.DGVOutputTypes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.DGVOutputTypes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
@@ -235,6 +235,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DGVOutputTypes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGVOutputTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVOutputTypes.ColumnHeadersVisible = false;
             this.DGVOutputTypes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OutputTypes});
             this.DGVOutputTypes.Enabled = false;

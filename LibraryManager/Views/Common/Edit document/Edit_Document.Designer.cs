@@ -80,9 +80,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(1, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 20);
+            this.label1.Size = new System.Drawing.Size(179, 20);
             this.label1.TabIndex = 35;
-            this.label1.Text = "Procesing Doc Template";
+            this.label1.Text = "Processing Doc Template";
             // 
             // panel1
             // 

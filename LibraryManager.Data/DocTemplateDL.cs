@@ -27,7 +27,8 @@ namespace LibraryManager.Data
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
                 new OleDbDataAdapter("SELECT Template_Name, RecSource, RecSourceUpdatedDate " +
-                                     "FROM  Temp_tbl", base.DbConnection)
+                                     "FROM  Temp_tbl " +
+                                      "ORDER BY Template_Name", base.DbConnection)
                                      .Fill(dataTable);
                 base.CloseDbConnection();
                 return this.Convert(dataTable);
@@ -47,7 +48,8 @@ namespace LibraryManager.Data
                 DataTable dataTable = new DataTable();
                 new OleDbDataAdapter("SELECT Template_Name, Word_Doc, RecSource, RecSourceUpdatedDate " +
                                      "FROM  Temp_tbl " +
-                                     "WHERE Template_Name = '"+ Utilitary.CleanInput(templateName) + "'", base.DbConnection)
+                                     "WHERE Template_Name = '"+ Utilitary.CleanInput(templateName) + "' "+
+                                     "ORDER BY Template_Name", base.DbConnection)
                                      .Fill(dataTable);
                 base.CloseDbConnection();
                 return this.Convert(dataTable)

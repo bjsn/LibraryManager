@@ -35,13 +35,13 @@
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
             this.DTItemCategory = new System.Windows.Forms.DataGridView();
-            this.Item_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Doc_Sections = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RecSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.BtnSearch = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.TbxSearch = new System.Windows.Forms.TextBox();
+            this.Item_Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Doc_Sections = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DTItemCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
@@ -164,26 +164,6 @@
             this.DTItemCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTItemCategory_CellClick);
             this.DTItemCategory.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DTItemCategory_CellDoubleClick);
             // 
-            // Item_Category
-            // 
-            this.Item_Category.HeaderText = "Item Category";
-            this.Item_Category.Name = "Item_Category";
-            this.Item_Category.ReadOnly = true;
-            this.Item_Category.Width = 350;
-            // 
-            // Doc_Sections
-            // 
-            this.Doc_Sections.HeaderText = "Doc Section";
-            this.Doc_Sections.Name = "Doc_Sections";
-            this.Doc_Sections.ReadOnly = true;
-            this.Doc_Sections.Width = 355;
-            // 
-            // RecSource
-            // 
-            this.RecSource.HeaderText = "RecSource";
-            this.RecSource.Name = "RecSource";
-            this.RecSource.Visible = false;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -231,6 +211,26 @@
             this.TbxSearch.Name = "TbxSearch";
             this.TbxSearch.Size = new System.Drawing.Size(199, 29);
             this.TbxSearch.TabIndex = 38;
+            // 
+            // Item_Category
+            // 
+            this.Item_Category.HeaderText = "Item Category";
+            this.Item_Category.Name = "Item_Category";
+            this.Item_Category.ReadOnly = true;
+            this.Item_Category.Width = 350;
+            // 
+            // Doc_Sections
+            // 
+            this.Doc_Sections.HeaderText = "Doc Section(s)";
+            this.Doc_Sections.Name = "Doc_Sections";
+            this.Doc_Sections.ReadOnly = true;
+            this.Doc_Sections.Width = 355;
+            // 
+            // RecSource
+            // 
+            this.RecSource.HeaderText = "RecSource";
+            this.RecSource.Name = "RecSource";
+            this.RecSource.Visible = false;
             // 
             // ItemCategory
             // 

@@ -126,6 +126,7 @@ namespace AddEditProposalContent.Views.OutputTypes
                     {
                         docTypeList.Add(row.Cells[0].Value.ToString());
                     }
+                    this.outputTypeName = this.TxbOutputTypeName.Text;
                     if (this._docTypeGroupController.IsValidName(outputTypeName))
                     {
                         this._docTypeGroupController.Add(docTypeGroupName, docTypeList);
@@ -134,7 +135,7 @@ namespace AddEditProposalContent.Views.OutputTypes
                     }
                     else
                     {
-                        this.lblNameError.Text = "The Output TYpe name already exist, try with a different one.";
+                        this.lblNameError.Text = "The Output Type Name already exists. Please enter a different name.";
                         this.lblNameError.Visible = true;
                     }
                 }

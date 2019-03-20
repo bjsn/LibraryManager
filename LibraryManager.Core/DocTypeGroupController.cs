@@ -48,7 +48,7 @@ namespace LibraryManager.Core
         {
             try
             {
-                return _docTypeGroupDL.GetByName(docTypeGroupName) != null;
+                return _docTypeGroupDL.GetByName(docTypeGroupName) == null;
             }
             catch (Exception e)
             {
@@ -88,12 +88,12 @@ namespace LibraryManager.Core
             }
         }
 
-        public int Update(string docTypeGroupName, List<string> docTypeList) 
+        public int Update(string docType, List<string> docTypeList) 
         {
             try
             {
                 //delete old elements
-                var docTypesByDocTypeGroupList = this._docTypesByDocTypeGroupDL.GetByDocTypeGroup(docTypeGroupName);
+                var docTypesByDocTypeGroupList = this._docTypesByDocTypeGroupDL.GetByDocType(docType);
                 foreach (var docTypesByDocTypeGroup in docTypesByDocTypeGroupList) 
                 {
                     this._docTypesByDocTypeGroupDL.Delete(docTypesByDocTypeGroup);
@@ -105,7 +105,7 @@ namespace LibraryManager.Core
                     docTypesByDocTypeGroupNewList.Add(new DocTypesByDocTypeGroup()
                     {
                         DocType = docSectionType,
-                        DocTypeGroupName = docTypeGroupName
+                        DocTypeGroupName = docType
                     });
                 }
 

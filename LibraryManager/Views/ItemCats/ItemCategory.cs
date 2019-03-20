@@ -91,6 +91,11 @@ namespace AddEditProposalContent.Views.ItemCats
                 MessageBox.Show(e.Message);
             }
         }
+
+        public override void ReloadGrid()
+        {
+            LoadItemCategoryList();
+        }
         #endregion
 
 
@@ -107,7 +112,11 @@ namespace AddEditProposalContent.Views.ItemCats
                        itemCategory.DocSectionByItemCount,
                        itemCategory.RecSource
                 };
-                this.DTItemCategory.Rows.Add(templateObject);
+
+                if (itemCategory.DocSectionByItemCount > 0) 
+                {
+                    this.DTItemCategory.Rows.Add(templateObject);
+                }
             }
         }
 
@@ -121,9 +130,13 @@ namespace AddEditProposalContent.Views.ItemCats
                 object[] templateObject = new object[] 
                 {
                        itemCategory.ItemCategoryName,
-                       itemCategory.DocSectionByItemCount
+                       itemCategory.DocSectionByItemCount,
+                       itemCategory.RecSource
                 };
-                this.DTItemCategory.Rows.Add(templateObject);
+                if (itemCategory.DocSectionByItemCount > 0)
+                {
+                    this.DTItemCategory.Rows.Add(templateObject);
+                }
             }
         }
 

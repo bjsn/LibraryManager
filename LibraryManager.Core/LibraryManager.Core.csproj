@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProposalContentController.cs" />
     <Compile Include="SetupController.cs" />
+    <Compile Include="VendorContentController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibraryManager.Common\LibraryManager.Common.csproj">

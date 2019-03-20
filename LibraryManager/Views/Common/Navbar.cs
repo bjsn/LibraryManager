@@ -13,9 +13,11 @@
     using System.Drawing;
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
+    using LibraryManager.Core;
 
     public class Navbar : BasePartialView
     {
+        #region UI-Components
         private IContainer components;
         private Panel Pnl_OutputTypes;
         private Label lblOutputTypes;
@@ -40,6 +42,7 @@
         private Label label5;
         private Label lblLibraryManager;
         private PictureBox pictureBox1;
+        #endregion
 
         public Navbar(Panel panel) : base(panel)
         {
@@ -58,13 +61,35 @@
 
         private void LockElements() 
         {
-            //implement logic
         }
 
         private void Navbar_Load(object sender, EventArgs e)
         {
             BasePartialView proposalContentView = new DocSection(base.MainPanel);
             this.SelectOption(this.Pnl_DocSections, proposalContentView);
+
+            this.HideShowStructuredProposalContent();
+        }
+
+        private void HideShowStructuredProposalContent()
+        {
+            try
+            {
+                VendorContentController _vendorContentController = new VendorContentController();
+                if (!_vendorContentController.CheckIfVendorNameExist("Etilize")) 
+                {
+                    this.Pnl_StructuredProposal.Visible = false;
+                    int height = this.Pnl_StructuredProposal.Size.Height;
+                    this.lblTypeAssociations.Location = new Point(this.lblTypeAssociations.Location.X, this.lblTypeAssociations.Location.Y - height);
+                    this.Pnl_OutputTypes.Location = new Point(this.Pnl_OutputTypes.Location.X, this.Pnl_OutputTypes.Location.Y - height);
+                    this.Pnl_SectionTypes.Location = new Point(this.Pnl_SectionTypes.Location.X, this.Pnl_SectionTypes.Location.Y - height);
+                    this.Pnl_ItemCats.Location = new Point(this.Pnl_ItemCats.Location.X, this.Pnl_ItemCats.Location.Y - height);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error: " + exception.Message);
+            }
         }
 
         #region Menu Elements Events
@@ -454,9 +479,9 @@
             this.lblDocItemCats.ForeColor = System.Drawing.Color.White;
             this.lblDocItemCats.Location = new System.Drawing.Point(34, 7);
             this.lblDocItemCats.Name = "lblDocItemCats";
-            this.lblDocItemCats.Size = new System.Drawing.Size(134, 21);
+            this.lblDocItemCats.Size = new System.Drawing.Size(123, 21);
             this.lblDocItemCats.TabIndex = 1;
-            this.lblDocItemCats.Text = "Docs  - Items Cats";
+            this.lblDocItemCats.Text = "Docs - Item Cats";
             this.lblDocItemCats.Click += new System.EventHandler(this.Pnl_ItemCats_Click);
             this.lblDocItemCats.MouseEnter += new System.EventHandler(this.Pnl_ItemCats_MouseEnter);
             this.lblDocItemCats.MouseLeave += new System.EventHandler(this.Pnl_ItemCats_MouseLeave);

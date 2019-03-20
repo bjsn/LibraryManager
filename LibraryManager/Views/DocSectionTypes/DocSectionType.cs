@@ -99,6 +99,10 @@ namespace AddEditProposalContent.Views.SectionTypes
             }
         }
 
+        public override void ReloadGrid()
+        {
+            LoadDocSectionTypes();
+        } 
 
     }
 }

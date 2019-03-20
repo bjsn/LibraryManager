@@ -65,7 +65,7 @@ namespace LibraryManager
             this.PnlBorderTop.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.PnlBorderTop.Location = new System.Drawing.Point(166, -1);
             this.PnlBorderTop.Name = "PnlBorderTop";
-            this.PnlBorderTop.Size = new System.Drawing.Size(727, 22);
+            this.PnlBorderTop.Size = new System.Drawing.Size(729, 22);
             this.PnlBorderTop.TabIndex = 5;
             this.PnlBorderTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.PnlBorderTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
@@ -89,7 +89,7 @@ namespace LibraryManager
             this.BtnMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnMinimize.Image = global::LibrMgr.Properties.Resources.icon;
-            this.BtnMinimize.Location = new System.Drawing.Point(679, 3);
+            this.BtnMinimize.Location = new System.Drawing.Point(680, 3);
             this.BtnMinimize.Name = "BtnMinimize";
             this.BtnMinimize.Size = new System.Drawing.Size(15, 15);
             this.BtnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -103,7 +103,7 @@ namespace LibraryManager
             this.BtnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnClose.Image = global::LibrMgr.Properties.Resources.cancel;
-            this.BtnClose.Location = new System.Drawing.Point(705, 3);
+            this.BtnClose.Location = new System.Drawing.Point(706, 3);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(15, 15);
             this.BtnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -116,7 +116,7 @@ namespace LibraryManager
             this.MainPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.MainPanel.Location = new System.Drawing.Point(166, 20);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(730, 580);
+            this.MainPanel.Size = new System.Drawing.Size(729, 580);
             this.MainPanel.TabIndex = 5;
             // 
             // Main_Container

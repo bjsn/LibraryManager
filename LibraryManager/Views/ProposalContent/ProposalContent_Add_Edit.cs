@@ -186,6 +186,7 @@
                 else if (proposalContent.ProductPicture != null)
                 {
                     this.PBProduct.Image = Utilitary.ByteToImage(proposalContent.ProductPicture);
+                    this.BtnRemoveImage.Enabled = true;
                 }
                 try
                 {
@@ -278,20 +279,20 @@
             this.CleanUpTextBox(this.TxbPDescription);
         }
 
-        private void TxbPDetails_Click(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Details", 3, this.TxbPDetails.Rtf);
-        }
+        //private void TxbPDetails_Click(object sender, EventArgs e)
+        //{
+        //    this.CallNewEditorRTF("Product Details", 3, this.TxbPDetails.Rtf);
+        //}
 
         private void TxbPDetails_Enter(object sender, EventArgs e)
         {
             this.CallNewEditorRTF("Product Details", 3, this.TxbPDetails.Rtf);
         }
 
-        private void TxbPOverview_Click(object sender, EventArgs e)
-        {
-            this.CallNewEditorRTF("Product Overview", 2, this.TxbPOverview.Rtf);
-        }
+        //private void TxbPOverview_Click(object sender, EventArgs e)
+        //{
+        //    this.CallNewEditorRTF("Product Overview", 2, this.TxbPOverview.Rtf);
+        //}
 
         private void TxbPOverview_Enter(object sender, EventArgs e)
         {
@@ -376,7 +377,7 @@
             this.TxbPOverview.Size = new System.Drawing.Size(539, 90);
             this.TxbPOverview.TabIndex = 34;
             this.TxbPOverview.Text = "";
-            this.TxbPOverview.Click += new System.EventHandler(this.TxbPOverview_Click);
+            //this.TxbPOverview.Click += new System.EventHandler(this.TxbPOverview_Click);
             this.TxbPOverview.Enter += new System.EventHandler(this.TxbPOverview_Enter);
             // 
             // TxbPDetails
@@ -389,7 +390,7 @@
             this.TxbPDetails.Size = new System.Drawing.Size(539, 90);
             this.TxbPDetails.TabIndex = 36;
             this.TxbPDetails.Text = "";
-            this.TxbPDetails.Click += new System.EventHandler(this.TxbPDetails_Click);
+            //this.TxbPDetails.Click += new System.EventHandler(this.TxbPDetails_Click);
             this.TxbPDetails.Enter += new System.EventHandler(this.TxbPDetails_Enter);
             // 
             // BtnRemoveImage

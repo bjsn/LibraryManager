@@ -25,7 +25,8 @@ namespace LibraryManager.Data
                 base.OpenDbConnection();
                 DataTable dataTable = new DataTable();
                 new OleDbDataAdapter("SELECT DocType " +
-                                     "FROM DocTypes ", base.DbConnection)
+                                     "FROM DocTypes " +
+                                      "ORDER BY DocType;", base.DbConnection)
                                     .Fill(dataTable);
 
                 base.CloseDbConnection();
@@ -47,7 +48,8 @@ namespace LibraryManager.Data
                 DataTable dataTable = new DataTable();
                 new OleDbDataAdapter("SELECT DocType " +
                                      "FROM DocTypes " +
-                                     "WHERE DocType = '" + Utilitary.CleanFileName(docType) + "'", base.DbConnection)
+                                     "WHERE DocType = '" + Utilitary.CleanFileName(docType) + "' "+
+                                      "ORDER BY DocType", base.DbConnection)
                                     .Fill(dataTable);
 
                 base.CloseDbConnection();

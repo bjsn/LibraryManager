@@ -65,10 +65,10 @@ namespace AddEditProposalContent.Views.DocTemplates
                 fileDialog.RestoreDirectory = true;
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    string documentPath = fileDialog.FileName;
+                    string fileName = Path.GetFileNameWithoutExtension(documentPath);
                     try
                     {
-                        string documentPath = fileDialog.FileName;
-                        string fileName = Path.GetFileNameWithoutExtension(documentPath);
                         if (this._docTemplateController.IsTemplateNameValid(fileName))
                         {
                             this._docTemplateController.Add(fileName, documentPath);
@@ -76,7 +76,7 @@ namespace AddEditProposalContent.Views.DocTemplates
                         }
                         else 
                         {
-                            MessageBox.Show("Not imported, a template with that name already exist",
+                            MessageBox.Show("Doc template " + fileName + " already exists and therefore cannot be imported",
                                              "Alert",
                                              MessageBoxButtons.OK, 
                                              MessageBoxIcon.Warning);

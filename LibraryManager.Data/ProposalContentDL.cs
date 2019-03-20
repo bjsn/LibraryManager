@@ -37,8 +37,9 @@
                 string query = GetSelectString();
                 //the query chages if the database is PQDB o proposalCOntent
                 new OleDbDataAdapter(string.Format(query + 
-                                    " FROM ProposalContentByPart" +
-                                    " WHERE PartNumber LIKE '%{0}%' OR VendorName LIKE '%{0}%' OR ProductName LIKE '%{0}%'", keyWord), base.DbConnection)
+                                    "FROM ProposalContentByPart " +
+                                    "WHERE PartNumber LIKE '%{0}%' OR VendorName LIKE '%{0}%' OR ProductName LIKE '%{0}%' " +
+                                     "ORDER BY PartNumber;", keyWord), base.DbConnection)
                                     .Fill(dataTable);
                 base.CloseDbConnection();
                 list = this.Convert(dataTable);
@@ -61,7 +62,8 @@
                 string query = GetSelectString();
                 new OleDbDataAdapter(query + 
                                     " FROM ProposalContentByPart" + 
-                                    " WHERE PartNumber = '" + PartNumber + "'", base.DbConnection).Fill(dataTable);
+                                    " WHERE PartNumber = '" + PartNumber + "' " +
+                                     "ORDER BY PartNumber;", base.DbConnection).Fill(dataTable);
                 base.CloseDbConnection();
                 content = this.Convert(dataTable).FirstOrDefault<ProposalContent>();
             }
@@ -102,11 +104,11 @@
             //the query chages if the database is PQDB o proposalContent
             if (AdminContent)
             {
-                query = "SELECT PartNumber, VendorName, ProductName, FeatureBullets, MarketingInfo, TechnicalInfo, ProductPicture, UserCreatedDT, UserUpdDT";
+                query = "SELECT PartNumber, VendorName, ProductName, FeatureBullets, MarketingInfo, TechnicalInfo, ProductPicture, UserCreatedDT, UserUpdDT ";
             }
             else
             {
-                query = "SELECT PartNumber, VendorName, ProductName, FeatureBullets, MarketingInfo, TechnicalInfo, ProductPicturePath, ProductPictureURL, MfgPartNumber, MfgName, DownloadDT, UserUpdDT";
+                query = "SELECT PartNumber, VendorName, ProductName, FeatureBullets, MarketingInfo, TechnicalInfo, ProductPicturePath, ProductPictureURL, MfgPartNumber, MfgName, DownloadDT, UserUpdDT ";
             }
             return query;
         }
@@ -120,7 +122,8 @@
                 DataTable dataTable = new DataTable();
                 string query = GetSelectString();
                 new OleDbDataAdapter(query + 
-                                    " FROM ProposalContentByPart;", base.DbConnection)
+                                    "FROM ProposalContentByPart " +
+                                    "ORDER BY PartNumber;", base.DbConnection)
                                     .Fill(dataTable);
                 base.CloseDbConnection();
                 list = this.Convert(dataTable);
