@@ -160,13 +160,13 @@ namespace AddEditProposalContent.Views.DocTemplates
             Edit_Document edit_Document = new Edit_Document(this);
             base.OpenPartialAlert(edit_Document);
 
-            edit_Document.EditText("Opening the " + sectionName + " doc template");
+            edit_Document.EditText("Opening the '" + sectionName + "' doc template");
             string fileOpenedPath = "";
             await Task.Run(() => fileOpenedPath = OpenWordDocument().Result);
 
             if (!string.IsNullOrEmpty(fileOpenedPath)) 
             {
-                edit_Document.EditText("The " + sectionName + " template \nis being edited in Word");
+                edit_Document.EditText("The '" + sectionName + "' template \nis being edited in Word");
                 edit_Document.EditingDocument();
                 bool fileHasChanges = false;
                 await Task.Run(() => fileHasChanges = CheckIfDocumentIsOpen(fileOpenedPath).Result);
@@ -175,7 +175,7 @@ namespace AddEditProposalContent.Views.DocTemplates
                 await Task.Delay(500);
                 if (fileHasChanges)
                 {
-                    edit_Document.EditText("Do you want to save the changes to \nthe " + sectionName + "doc template?");
+                    edit_Document.EditText("Do you want to save the changes to \nthe '" + sectionName + "' doc template?");
                     edit_Document.ClosingDocument();
                 }
                 else

@@ -40,7 +40,6 @@ namespace AddEditProposalContent.Views.ItemCats
             }
         }
 
-
         #region events
         private void DTItemCategory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -94,7 +93,9 @@ namespace AddEditProposalContent.Views.ItemCats
 
         public override void ReloadGrid()
         {
-            LoadItemCategoryList();
+            int selectedIndex = this.DTItemCategory.CurrentCell.RowIndex;
+            this.LoadItemCategoryList();
+            this.DTItemCategory.Rows[selectedIndex].Selected = true;
         }
         #endregion
 

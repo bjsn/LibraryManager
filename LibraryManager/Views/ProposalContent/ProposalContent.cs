@@ -72,6 +72,13 @@
         }
 
 
+        public override void ReloadGrid()
+        {
+            int selectedIndex = this.DTProposalContent.CurrentCell.RowIndex;
+            this.LoadProposalContent();
+            this.DTProposalContent.Rows[selectedIndex].Selected = true;
+        }
+
         private void LoadAndFilterDataGridInformation()
         {
             string text = this.TbxSearch.Text;

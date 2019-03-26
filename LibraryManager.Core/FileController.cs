@@ -98,10 +98,10 @@ namespace LibraryManager.Core
                             {
                                 document.SaveAs(filePath);
                                 app.Documents.Close();
-
                             }
                             else 
                             {
+                                document.Save();
                                 app.Documents.Close();
                             }
                             process.Kill();

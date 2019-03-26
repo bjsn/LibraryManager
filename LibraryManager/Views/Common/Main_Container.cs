@@ -63,7 +63,7 @@ namespace LibraryManager
             this.PnlBorderTop.Controls.Add(this.BtnMinimize);
             this.PnlBorderTop.Controls.Add(this.BtnClose);
             this.PnlBorderTop.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.PnlBorderTop.Location = new System.Drawing.Point(166, -1);
+            this.PnlBorderTop.Location = new System.Drawing.Point(165, -1);
             this.PnlBorderTop.Name = "PnlBorderTop";
             this.PnlBorderTop.Size = new System.Drawing.Size(729, 22);
             this.PnlBorderTop.TabIndex = 5;
@@ -114,7 +114,7 @@ namespace LibraryManager
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.MainPanel.Location = new System.Drawing.Point(166, 20);
+            this.MainPanel.Location = new System.Drawing.Point(166, 19);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(729, 580);
             this.MainPanel.TabIndex = 5;

@@ -35,6 +35,7 @@ namespace LibraryManager.Views
         private Label LblDtgvAlert;
         private string ClientName;
         private Label lblSaveAlert;
+        private List<double> ListOrderIndexes;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Section;
         private DataGridViewTextBoxColumn Location;
@@ -43,8 +44,8 @@ namespace LibraryManager.Views
         private DataGridViewTextBoxColumn Source;
         private DataGridViewTextBoxColumn Updated;
         private DataGridViewTextBoxColumn UpdatedBy;
+        private DataGridViewTextBoxColumn Date;
         private DataGridViewTextBoxColumn ClientUpdated;
-        private List<double> ListOrderIndexes;
         private int SelectedRowIndex = 0;
 
         public DocSection(Panel Panel) : base(Panel)
@@ -65,15 +66,6 @@ namespace LibraryManager.Views
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.LblDtgvAlert = new System.Windows.Forms.Label();
             this.DTSectionContent = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Section = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DocType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
@@ -83,6 +75,16 @@ namespace LibraryManager.Views
             this.BtnSearch = new System.Windows.Forms.PictureBox();
             this.BtnIndex = new System.Windows.Forms.Button();
             this.lblSaveAlert = new System.Windows.Forms.Label();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Section = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DocType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DTSectionContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
@@ -133,6 +135,7 @@ namespace LibraryManager.Views
             this.Source,
             this.Updated,
             this.UpdatedBy,
+            this.Date,
             this.ClientUpdated});
             this.DTSectionContent.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -174,67 +177,6 @@ namespace LibraryManager.Views
             this.DTSectionContent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseDown);
             this.DTSectionContent.MouseLeave += new System.EventHandler(this.DTSectionContent_MouseLeave);
             this.DTSectionContent.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DTSectionContent_MouseMove);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Order";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 45;
-            // 
-            // Section
-            // 
-            this.Section.HeaderText = "Section";
-            this.Section.Name = "Section";
-            this.Section.ReadOnly = true;
-            this.Section.Width = 72;
-            // 
-            // Location
-            // 
-            this.Location.HeaderText = "Location";
-            this.Location.Name = "Location";
-            this.Location.ReadOnly = true;
-            this.Location.Width = 70;
-            // 
-            // DocType
-            // 
-            this.DocType.HeaderText = "DocType";
-            this.DocType.Name = "DocType";
-            this.DocType.ReadOnly = true;
-            this.DocType.Width = 70;
-            // 
-            // Description
-            // 
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            // 
-            // Source
-            // 
-            this.Source.HeaderText = "Source";
-            this.Source.Name = "Source";
-            this.Source.ReadOnly = true;
-            this.Source.Width = 80;
-            // 
-            // Updated
-            // 
-            this.Updated.HeaderText = "Updated";
-            this.Updated.Name = "Updated";
-            this.Updated.ReadOnly = true;
-            this.Updated.Width = 70;
-            // 
-            // UpdatedBy
-            // 
-            this.UpdatedBy.HeaderText = "UpdatedBy";
-            this.UpdatedBy.Name = "UpdatedBy";
-            this.UpdatedBy.ReadOnly = true;
-            this.UpdatedBy.Width = 80;
-            // 
-            // ClientUpdated
-            // 
-            this.ClientUpdated.HeaderText = "ClientUpdated";
-            this.ClientUpdated.Name = "ClientUpdated";
-            this.ClientUpdated.ReadOnly = true;
             // 
             // BtnAdd
             // 
@@ -378,6 +320,74 @@ namespace LibraryManager.Views
             this.lblSaveAlert.Text = "Click save to apply the changes!";
             this.lblSaveAlert.Visible = false;
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Order";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 45;
+            // 
+            // Section
+            // 
+            this.Section.HeaderText = "Section";
+            this.Section.Name = "Section";
+            this.Section.ReadOnly = true;
+            this.Section.Width = 72;
+            // 
+            // Location
+            // 
+            this.Location.HeaderText = "Location";
+            this.Location.Name = "Location";
+            this.Location.ReadOnly = true;
+            this.Location.Width = 70;
+            // 
+            // DocType
+            // 
+            this.DocType.HeaderText = "DocType";
+            this.DocType.Name = "DocType";
+            this.DocType.ReadOnly = true;
+            this.DocType.Width = 70;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // Source
+            // 
+            this.Source.HeaderText = "Source";
+            this.Source.Name = "Source";
+            this.Source.ReadOnly = true;
+            this.Source.Width = 80;
+            // 
+            // Updated
+            // 
+            this.Updated.HeaderText = "Updated";
+            this.Updated.Name = "Updated";
+            this.Updated.ReadOnly = true;
+            this.Updated.Width = 70;
+            // 
+            // UpdatedBy
+            // 
+            this.UpdatedBy.HeaderText = "UpdatedBy";
+            this.UpdatedBy.Name = "UpdatedBy";
+            this.UpdatedBy.ReadOnly = true;
+            this.UpdatedBy.Width = 80;
+            // 
+            // Date
+            // 
+            this.Date.HeaderText = "Date";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            this.Date.Width = 70;
+            // 
+            // ClientUpdated
+            // 
+            this.ClientUpdated.HeaderText = "ClientUpdated";
+            this.ClientUpdated.Name = "ClientUpdated";
+            this.ClientUpdated.ReadOnly = true;
+            // 
             // DocSection
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -481,15 +491,11 @@ namespace LibraryManager.Views
             }
         }
 
-        public override void Reload()
-        {
-            //this.LoadDataGrid();
-        }
-
-
         public override void ReloadGrid()
         {
+            int selectedIndex = this.DTSectionContent.CurrentCell.RowIndex;
             this.LoadDataGrid();
+            this.DTSectionContent.Rows[selectedIndex].Selected = true;
         } 
         
         private void LoadDataGrid() 
@@ -507,6 +513,7 @@ namespace LibraryManager.Views
                                                         section.RecSource, 
                                                         section.UpdatedDT.ToShortDateString(), 
                                                         section.UpdatedBy, 
+                                                        (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString()),
                                                         (section.ClientUpdatedDT.Equals(DateTime.MinValue) ? "": "Y")
                                                     };
                 this.DTSectionContent.Rows.Add(sectionObject);
@@ -805,6 +812,7 @@ namespace LibraryManager.Views
                                                             section.RecSource, 
                                                             section.UpdatedDT.ToShortDateString(), 
                                                             section.UpdatedBy, 
+                                                            (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString()),
                                                             (section.ClientUpdatedDT.Equals(DateTime.MinValue) ? "": "Y")
                                                         };
                     this.DTSectionContent.Rows.Add(sectionObject);
@@ -911,9 +919,9 @@ namespace LibraryManager.Views
                     int currentMouseOverRow = this.DTSectionContent.HitTest(e.X, e.Y).RowIndex;
                     menuContext.Show(this.DTSectionContent, new Point(e.X, e.Y));
                 }
+
             }
         }
-
 
         public void MenuContext_CutAction(object sender, EventArgs e)
         {
@@ -944,7 +952,6 @@ namespace LibraryManager.Views
                 throw new Exception(ex.Message);
             }
         }
-
 
         public void MenuContext_PasteAction(object sender, EventArgs e)
         {
@@ -995,10 +1002,7 @@ namespace LibraryManager.Views
             if (e.RowIndex >= 0 && this.DTSectionContent.SelectedRows.Count == 1)
             {
                 this.SelectedRowIndex = this.DTSectionContent.SelectedRows[0].Index + 1;
-                if (this.DTSectionContent.SelectedRows[0].Cells[2].Value.ToString().ToUpper().Contains("INTERNAL"))
-                {
-                    BtnEdit.Enabled = true;
-                }
+                BtnEdit.Enabled = true;
                 BtnDelete.Enabled = this.DTSectionContent.SelectedRows[0].Cells[5].Value.ToString().ToUpper().Contains(this.ClientName.ToUpper());
             }
             else

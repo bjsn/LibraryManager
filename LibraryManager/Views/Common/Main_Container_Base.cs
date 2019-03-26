@@ -48,10 +48,16 @@
         private void InitializeComponent()
         {
             this.SuspendLayout();
+            // 
             // Main_Container_Base
-            this.ClientSize = new System.Drawing.Size(148, 0);
+            // 
+            this.ClientSize = new System.Drawing.Size(1, 1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Main_Container_Base";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
             this.ResumeLayout(false);
+
         }
 
         private void PanelMove_MouseDown(object sender, MouseEventArgs e)
@@ -83,9 +89,9 @@
                 DwmSetWindowAttribute(base.Handle, 2, ref attrValue, 4);
                 MARGINS pMarInset = new MARGINS {
                     bottomHeight = 1,
-                    leftWidth = 0,
-                    rightWidth = 0,
-                    topHeight = 0
+                    leftWidth = 1,
+                    rightWidth = 1,
+                    topHeight = 1
                 };
                 DwmExtendFrameIntoClientArea(base.Handle, ref pMarInset);
             }

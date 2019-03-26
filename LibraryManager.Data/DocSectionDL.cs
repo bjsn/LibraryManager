@@ -416,11 +416,13 @@ namespace LibraryManager.Data
                 command = new OleDbCommand
                 {
                     CommandText = string.Format("UPDATE Section_tbl " + 
-                                                "SET DeleteMarkDate = @DeleteMarkDate " +
+                                                "SET DeleteMarkDate = @DeleteMarkDate, " +
+                                                "RecSourceUpdatedDate = @RecSourceUpdatedDate " +
                                                 "WHERE Section_Name = @Section_Name", new object[0]),
                     CommandType = CommandType.Text
                 };
                 command.Parameters.AddWithValue("@DeleteMarkDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@RecSourceUpdatedDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 command.Parameters.AddWithValue("@Section_Name", sectionName);
 
                 base.OpenDbConnection();

@@ -66,6 +66,7 @@ namespace AddEditProposalContent.Views.OutputTypes
         #region events
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            this.lblNameError.Visible = false;
             var selectedDocType = this.CbxSectionType.SelectedItem == null ? "" : this.CbxSectionType.SelectedItem;
             if (!string.IsNullOrEmpty(selectedDocType.ToString()))
             {
@@ -112,7 +113,7 @@ namespace AddEditProposalContent.Views.OutputTypes
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            
+            this.lblNameError.Visible = false;
             if (String.IsNullOrEmpty(this.outputTypeName))
             {
                 //add
@@ -126,9 +127,9 @@ namespace AddEditProposalContent.Views.OutputTypes
                     {
                         docTypeList.Add(row.Cells[0].Value.ToString());
                     }
-                    this.outputTypeName = this.TxbOutputTypeName.Text;
-                    if (this._docTypeGroupController.IsValidName(outputTypeName))
+                    if (this._docTypeGroupController.IsValidName(this.TxbOutputTypeName.Text))
                     {
+                       
                         this._docTypeGroupController.Add(docTypeGroupName, docTypeList);
                         this.lblNameError.Visible = false;
                         base.CloseCurrentView();
@@ -150,12 +151,9 @@ namespace AddEditProposalContent.Views.OutputTypes
                 {
                     docTypeList.Add(row.Cells[0].Value.ToString());
                 }
-                if (this._docTypeGroupController.IsValidName(outputTypeName))
-                {
-                    this._docTypeGroupController.Update(docTypeGroupName, docTypeList);
-                    this.lblNameError.Visible = false;
-                    base.CloseCurrentView();
-                }
+                this._docTypeGroupController.Update(docTypeGroupName, docTypeList);
+                this.lblNameError.Visible = false;
+                base.CloseCurrentView();
             }
         }
         #endregion
