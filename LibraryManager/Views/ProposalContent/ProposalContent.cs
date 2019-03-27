@@ -74,9 +74,19 @@
 
         public override void ReloadGrid()
         {
-            int selectedIndex = this.DTProposalContent.CurrentCell.RowIndex;
-            this.LoadProposalContent();
-            this.DTProposalContent.Rows[selectedIndex].Selected = true;
+            //reload previous view and position
+            if (this.DTProposalContent.RowCount > 0)
+            {
+                int firstShowedRow = this.DTProposalContent.FirstDisplayedScrollingRowIndex;
+                int selectedIndex = this.DTProposalContent.CurrentCell.RowIndex;
+                this.LoadProposalContent();
+                this.DTProposalContent.Rows[selectedIndex].Selected = true;
+                this.DTProposalContent.FirstDisplayedScrollingRowIndex = firstShowedRow;
+            }
+            else 
+            {
+                this.LoadProposalContent();
+            }
         }
 
         private void LoadAndFilterDataGridInformation()

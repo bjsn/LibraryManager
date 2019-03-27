@@ -93,9 +93,18 @@ namespace AddEditProposalContent.Views.ItemCats
 
         public override void ReloadGrid()
         {
-            int selectedIndex = this.DTItemCategory.CurrentCell.RowIndex;
-            this.LoadItemCategoryList();
-            this.DTItemCategory.Rows[selectedIndex].Selected = true;
+            if (this.DTItemCategory.RowCount > 0)
+            {
+                int firstShowedRow = this.DTItemCategory.FirstDisplayedScrollingRowIndex;
+                int selectedIndex = this.DTItemCategory.CurrentCell.RowIndex;
+                this.LoadItemCategoryList();
+                this.DTItemCategory.Rows[selectedIndex].Selected = true;
+                this.DTItemCategory.FirstDisplayedScrollingRowIndex = firstShowedRow;
+            }
+            else
+            {
+                this.LoadItemCategoryList();
+            }
         }
         #endregion
 

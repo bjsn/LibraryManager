@@ -14,8 +14,6 @@
             Application.Run(new Reindex());
             //Application.Run(new ProposalContent_Container());
             Application.Run(new Main_Container());
-
-
         }
     }
 }

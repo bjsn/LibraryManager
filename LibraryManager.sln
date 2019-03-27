@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFP.Models", "RFP.Models\RF
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "RFPInstaller", "RFPInstaller\RFPInstaller.isproj", "{2C9C0919-1FAC-4E8D-AB90-F4FF0A969229}"
 EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "LibraryManagerClient.Installer", "LibraryManagerClient.Installer\LibraryManagerClient.Installer.isproj", "{FB8746AA-E6FF-43F2-92F4-39648DC16A19}"
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Installer.LibraryManagerClient", "LibraryManagerClient.Installer\Installer.LibraryManagerClient.isproj", "{FB8746AA-E6FF-43F2-92F4-39648DC16A19}"
 	ProjectSection(ProjectDependencies) = postProject
 		{65BFE906-C703-4CA2-9E00-4F53B26EF071} = {65BFE906-C703-4CA2-9E00-4F53B26EF071}
 		{A83B6E0A-7555-4766-8347-BDA97EAE6089} = {A83B6E0A-7555-4766-8347-BDA97EAE6089}
@@ -35,6 +35,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{924EBB
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManager.Views.AddEditProposalContent", "LibraryManager.AddEditProposalContent\LibraryManager.Views.AddEditProposalContent.csproj", "{942929DD-FA0B-4CEB-97DE-D2B061A4E000}"
+EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Installer.AddEditProposalContent", "AddEditProposalContent\Installer.AddEditProposalContent.isproj", "{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{65BFE906-C703-4CA2-9E00-4F53B26EF071} = {65BFE906-C703-4CA2-9E00-4F53B26EF071}
+		{A83B6E0A-7555-4766-8347-BDA97EAE6089} = {A83B6E0A-7555-4766-8347-BDA97EAE6089}
+		{4A18442B-1414-487E-9EC8-5919C3259ED9} = {4A18442B-1414-487E-9EC8-5919C3259ED9}
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000} = {942929DD-FA0B-4CEB-97DE-D2B061A4E000}
+		{FC1E91E4-0B33-4314-BE9D-147EBEA58BFB} = {FC1E91E4-0B33-4314-BE9D-147EBEA58BFB}
 	EndProjectSection
 EndProject
 Global
@@ -156,6 +167,26 @@ Global
 		{4A18442B-1414-487E-9EC8-5919C3259ED9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4A18442B-1414-487E-9EC8-5919C3259ED9}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{4A18442B-1414-487E-9EC8-5919C3259ED9}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{942929DD-FA0B-4CEB-97DE-D2B061A4E000}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.Debug|Any CPU.ActiveCfg = DVD-5
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.Debug|Any CPU.Build.0 = DVD-5
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.DVD-5|Any CPU.Build.0 = DVD-5
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.Release|Any CPU.ActiveCfg = SingleImage
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.Release|Any CPU.Build.0 = SingleImage
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{5E6F7AB7-7A4C-46B1-AB73-DC42D380544C}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

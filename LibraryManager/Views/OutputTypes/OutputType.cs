@@ -72,7 +72,7 @@ namespace AddEditProposalContent.Views.OutputTypes
 
         private void RepaintAssociatedDocSectionCells()
         {
-             foreach (DataGridViewRow row in this.DTOutputType.Rows) 
+            foreach (DataGridViewRow row in this.DTOutputType.Rows) 
             {
                 row.Cells[1].Style.ForeColor = Color.Blue;
             }
@@ -97,7 +97,7 @@ namespace AddEditProposalContent.Views.OutputTypes
             string outputName = this.DTOutputType.SelectedRows[0].Cells[0].Value.ToString();
             string associations = this.DTOutputType.SelectedRows[0].Cells[1].Value.ToString();
             Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
-            newView.SetText("Are you sure you want to delete Output Type \r'" + outputName + "' along with the " + associations + " associated Doc \rSection Type associations?");
+            newView.SetText("the Output Type '" + outputName + "' along with \rthe " + associations + " associated Doc \rSection Type associations?");
             base.OpenPartialAlert(newView);
         }
 

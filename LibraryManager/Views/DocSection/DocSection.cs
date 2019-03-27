@@ -45,7 +45,6 @@ namespace LibraryManager.Views
         private DataGridViewTextBoxColumn Updated;
         private DataGridViewTextBoxColumn UpdatedBy;
         private DataGridViewTextBoxColumn Date;
-        private DataGridViewTextBoxColumn ClientUpdated;
         private int SelectedRowIndex = 0;
 
         public DocSection(Panel Panel) : base(Panel)
@@ -84,7 +83,6 @@ namespace LibraryManager.Views
             this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DTSectionContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
@@ -135,8 +133,7 @@ namespace LibraryManager.Views
             this.Source,
             this.Updated,
             this.UpdatedBy,
-            this.Date,
-            this.ClientUpdated});
+            this.Date});
             this.DTSectionContent.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
@@ -382,12 +379,6 @@ namespace LibraryManager.Views
             this.Date.ReadOnly = true;
             this.Date.Width = 70;
             // 
-            // ClientUpdated
-            // 
-            this.ClientUpdated.HeaderText = "ClientUpdated";
-            this.ClientUpdated.Name = "ClientUpdated";
-            this.ClientUpdated.ReadOnly = true;
-            // 
             // DocSection
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -493,9 +484,18 @@ namespace LibraryManager.Views
 
         public override void ReloadGrid()
         {
-            int selectedIndex = this.DTSectionContent.CurrentCell.RowIndex;
-            this.LoadDataGrid();
-            this.DTSectionContent.Rows[selectedIndex].Selected = true;
+            if (this.DTSectionContent.RowCount > 0)
+            {
+                int firstShowedRow = this.DTSectionContent.FirstDisplayedScrollingRowIndex;
+                int selectedIndex = this.DTSectionContent.CurrentCell.RowIndex;
+                this.LoadDataGrid();
+                this.DTSectionContent.Rows[selectedIndex].Selected = true;
+                this.DTSectionContent.FirstDisplayedScrollingRowIndex = firstShowedRow;
+            }
+            else 
+            {
+                this.LoadDataGrid();
+            }
         } 
         
         private void LoadDataGrid() 
@@ -513,8 +513,7 @@ namespace LibraryManager.Views
                                                         section.RecSource, 
                                                         section.UpdatedDT.ToShortDateString(), 
                                                         section.UpdatedBy, 
-                                                        (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString()),
-                                                        (section.ClientUpdatedDT.Equals(DateTime.MinValue) ? "": "Y")
+                                                        (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString())
                                                     };
                 this.DTSectionContent.Rows.Add(sectionObject);
                 counter++;
@@ -812,8 +811,7 @@ namespace LibraryManager.Views
                                                             section.RecSource, 
                                                             section.UpdatedDT.ToShortDateString(), 
                                                             section.UpdatedBy, 
-                                                            (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString()),
-                                                            (section.ClientUpdatedDT.Equals(DateTime.MinValue) ? "": "Y")
+                                                            (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString())
                                                         };
                     this.DTSectionContent.Rows.Add(sectionObject);
                 }
