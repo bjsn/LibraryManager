@@ -193,7 +193,6 @@ namespace LibraryManager.Core
                 Thread thread = new Thread(
                        () => this.docSectionDL.UpdateSectionReOrderList(ReorderedList));
                 thread.Start();
-                //this.docSectionDL.UpdateSectionReOrderList(ReorderedList);
             }
             catch (Exception e)
             {
@@ -224,7 +223,6 @@ namespace LibraryManager.Core
                 throw;
             }
         }
-
 
         public void ReOrderNumberList() 
         {
@@ -294,15 +292,22 @@ namespace LibraryManager.Core
             }
         }
 
-
-        public int Add(int sectionNumber, string sectionName, string locationType, string docLocation, string documentType, string description)
+        public int Add(double sectionNumber, string sectionName, string locationType, string docLocation, string documentType, string description)
         {
             try
             {
                 SetupDL setupDL = new SetupDL(base.DBConnectionPath) { DbPwd = base.DBPW };
                 string clientName = setupDL.GetClientName();
                 string fileExt = string.IsNullOrEmpty(docLocation) ? "" : Path.GetExtension(docLocation).ToLower().Replace(".", "");
-                double sectionNumberD = sectionNumber + 0.1;
+                
+                DocSection previousSection = this.docSectionDL.GetPreviousDocSectionByOrder(sectionNumber);
+                double previousOrder = 0;
+                if (previousSection != null) 
+                {
+                    previousOrder = previousSection.Order;
+                }
+                //take the last one, add the actual and divided by two give the result
+                double sectionNumberD = ((previousOrder  + sectionNumber) / 2);
                 DocSection docSection = new DocSection() 
                 {
                     Order = ((sectionNumberD == 0) ? this.docSectionDL.GetLastSectionOrder_Number() + 0.1 : sectionNumberD),

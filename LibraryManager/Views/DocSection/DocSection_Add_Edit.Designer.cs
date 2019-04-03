@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblImportSection = new System.Windows.Forms.Label();
             this.PnlDocumentEdit = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -64,6 +66,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label10.Location = new System.Drawing.Point(37, 122);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(161, 19);
+            this.label10.TabIndex = 53;
+            this.label10.Text = "(import Word document)";
+            // 
+            // lblImportSection
+            // 
+            this.lblImportSection.AutoSize = true;
+            this.lblImportSection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblImportSection.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblImportSection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblImportSection.Location = new System.Drawing.Point(37, 106);
+            this.lblImportSection.Name = "lblImportSection";
+            this.lblImportSection.Size = new System.Drawing.Size(327, 19);
+            this.lblImportSection.TabIndex = 52;
+            this.lblImportSection.Text = "Import a doc section by selecting \'Internal to library\'";
+            // 
             // PnlDocumentEdit
             // 
             this.PnlDocumentEdit.Controls.Add(this.pictureBox2);
@@ -76,7 +102,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::LibrMgr.Properties.Resources.warning;
+            this.pictureBox2.Image = global::LibraryManager.Views.Properties.Resources.warning;
             this.pictureBox2.Location = new System.Drawing.Point(3, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 24);
@@ -102,7 +128,7 @@
             this.lblSectionNameError.BackColor = System.Drawing.Color.Transparent;
             this.lblSectionNameError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSectionNameError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(70)))));
-            this.lblSectionNameError.Location = new System.Drawing.Point(20, 95);
+            this.lblSectionNameError.Location = new System.Drawing.Point(20, 210);
             this.lblSectionNameError.Name = "lblSectionNameError";
             this.lblSectionNameError.Size = new System.Drawing.Size(0, 19);
             this.lblSectionNameError.TabIndex = 50;
@@ -124,7 +150,7 @@
             this.LblLocation.BackColor = System.Drawing.Color.Transparent;
             this.LblLocation.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.LblLocation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
-            this.LblLocation.Location = new System.Drawing.Point(20, 192);
+            this.LblLocation.Location = new System.Drawing.Point(20, 140);
             this.LblLocation.Name = "LblLocation";
             this.LblLocation.Size = new System.Drawing.Size(0, 19);
             this.LblLocation.TabIndex = 48;
@@ -318,7 +344,7 @@
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel1.Controls.Add(this.RbtLocation_External);
             this.panel1.Controls.Add(this.RbtLocation_Internal);
-            this.panel1.Location = new System.Drawing.Point(19, 139);
+            this.panel1.Location = new System.Drawing.Point(18, 59);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(337, 55);
             this.panel1.TabIndex = 30;
@@ -344,10 +370,10 @@
             this.RbtLocation_Internal.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.RbtLocation_Internal.Location = new System.Drawing.Point(3, 4);
             this.RbtLocation_Internal.Name = "RbtLocation_Internal";
-            this.RbtLocation_Internal.Size = new System.Drawing.Size(291, 23);
+            this.RbtLocation_Internal.Size = new System.Drawing.Size(292, 23);
             this.RbtLocation_Internal.TabIndex = 31;
             this.RbtLocation_Internal.TabStop = true;
-            this.RbtLocation_Internal.Text = "Internal to library (Import word document)";
+            this.RbtLocation_Internal.Text = "Internal to library (import Word document)";
             this.RbtLocation_Internal.UseVisualStyleBackColor = true;
             this.RbtLocation_Internal.Click += new System.EventHandler(this.rbtLocation_Internal_Click);
             // 
@@ -357,11 +383,11 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.label1.Location = new System.Drawing.Point(12, 117);
+            this.label1.Location = new System.Drawing.Point(11, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 20);
+            this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Location:";
+            this.label1.Text = "Section Location:";
             // 
             // label7
             // 
@@ -369,7 +395,7 @@
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.label7.Location = new System.Drawing.Point(15, 46);
+            this.label7.Location = new System.Drawing.Point(14, 159);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(108, 20);
             this.label7.TabIndex = 26;
@@ -379,7 +405,7 @@
             // 
             this.TxtSectionName.BackColor = System.Drawing.Color.White;
             this.TxtSectionName.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.TxtSectionName.Location = new System.Drawing.Point(16, 68);
+            this.TxtSectionName.Location = new System.Drawing.Point(15, 181);
             this.TxtSectionName.MaxLength = 30;
             this.TxtSectionName.Name = "TxtSectionName";
             this.TxtSectionName.Size = new System.Drawing.Size(340, 27);
@@ -405,6 +431,8 @@
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(730, 580);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblImportSection);
             this.Controls.Add(this.PnlDocumentEdit);
             this.Controls.Add(this.lblSectionNameError);
             this.Controls.Add(this.LblLocationError);
@@ -467,5 +495,7 @@
         private System.Windows.Forms.Panel PnlDocumentEdit;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblImportSection;
     }
 }

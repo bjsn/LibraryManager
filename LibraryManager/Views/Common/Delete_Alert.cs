@@ -140,7 +140,7 @@
             // 
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox2.Image = global::LibrMgr.Properties.Resources.danger;
+            this.pictureBox2.Image = global::LibraryManager.Views.Properties.Resources.danger;
             this.pictureBox2.Location = new System.Drawing.Point(10, 5);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 18);

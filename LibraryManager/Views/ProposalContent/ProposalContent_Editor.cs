@@ -273,7 +273,7 @@
             // EditorControl_Bullet
             // 
             this.EditorControl_Bullet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EditorControl_Bullet.Image = global::LibrMgr.Properties.Resources.bullets;
+            this.EditorControl_Bullet.Image = global::LibraryManager.Views.Properties.Resources.bullets;
             this.EditorControl_Bullet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EditorControl_Bullet.Name = "EditorControl_Bullet";
             this.EditorControl_Bullet.Size = new System.Drawing.Size(23, 24);

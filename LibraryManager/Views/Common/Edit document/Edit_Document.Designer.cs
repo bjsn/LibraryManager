@@ -45,7 +45,7 @@
             // 
             // PBAlert
             // 
-            this.PBAlert.Image = global::LibrMgr.Properties.Resources.warning1;
+            this.PBAlert.Image = global::LibraryManager.Views.Properties.Resources.warning1;
             this.PBAlert.Location = new System.Drawing.Point(130, 28);
             this.PBAlert.Name = "PBAlert";
             this.PBAlert.Size = new System.Drawing.Size(48, 45);
@@ -56,7 +56,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::LibrMgr.Properties.Resources.logo_resize;
+            this.pictureBox2.Image = global::LibraryManager.Views.Properties.Resources.logo_resize;
             this.pictureBox2.Location = new System.Drawing.Point(229, 27);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(80, 23);

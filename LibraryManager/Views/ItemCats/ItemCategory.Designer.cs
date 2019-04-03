@@ -182,7 +182,7 @@
             this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
             this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSearch.Image = global::LibrMgr.Properties.Resources.search;
+            this.BtnSearch.Image = global::LibraryManager.Views.Properties.Resources.search;
             this.BtnSearch.Location = new System.Drawing.Point(209, 63);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(24, 24);

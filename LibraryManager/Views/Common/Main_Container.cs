@@ -1,4 +1,4 @@
-﻿using LibrMgr.Properties;
+﻿using LibraryManager.Views.Properties;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -88,7 +88,7 @@ namespace LibraryManager
             this.BtnMinimize.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BtnMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnMinimize.Image = global::LibrMgr.Properties.Resources.icon;
+            this.BtnMinimize.Image = global::LibraryManager.Views.Properties.Resources.icon;
             this.BtnMinimize.Location = new System.Drawing.Point(680, 3);
             this.BtnMinimize.Name = "BtnMinimize";
             this.BtnMinimize.Size = new System.Drawing.Size(15, 15);
@@ -102,7 +102,7 @@ namespace LibraryManager
             this.BtnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BtnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnClose.Image = global::LibrMgr.Properties.Resources.cancel;
+            this.BtnClose.Image = global::LibraryManager.Views.Properties.Resources.cancel;
             this.BtnClose.Location = new System.Drawing.Point(706, 3);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(15, 15);

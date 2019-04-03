@@ -1,6 +1,6 @@
 ﻿namespace LibraryManager.Common
 {
-    using LibrMgr.Properties;
+    using LibraryManager.Views.Properties;
     using LibraryManager.Views;
     using System;
     using System.ComponentModel;

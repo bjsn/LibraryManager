@@ -45,6 +45,7 @@ namespace LibraryManager.Views
         private DataGridViewTextBoxColumn Updated;
         private DataGridViewTextBoxColumn UpdatedBy;
         private DataGridViewTextBoxColumn Date;
+        private DataGridViewTextBoxColumn RealIndexNumber;
         private int SelectedRowIndex = 0;
 
         public DocSection(Panel Panel) : base(Panel)
@@ -83,6 +84,7 @@ namespace LibraryManager.Views
             this.Updated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UpdatedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RealIndexNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DTSectionContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.SuspendLayout();
@@ -133,7 +135,8 @@ namespace LibraryManager.Views
             this.Source,
             this.Updated,
             this.UpdatedBy,
-            this.Date});
+            this.Date,
+            this.RealIndexNumber});
             this.DTSectionContent.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
@@ -273,7 +276,7 @@ namespace LibraryManager.Views
             this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
             this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSearch.Image = global::LibrMgr.Properties.Resources.search;
+            this.BtnSearch.Image = global::LibraryManager.Views.Properties.Resources.search;
             this.BtnSearch.Location = new System.Drawing.Point(209, 63);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(24, 24);
@@ -379,6 +382,13 @@ namespace LibraryManager.Views
             this.Date.ReadOnly = true;
             this.Date.Width = 70;
             // 
+            // RealIndexNumber
+            // 
+            this.RealIndexNumber.HeaderText = "RealIndexNumber";
+            this.RealIndexNumber.Name = "RealIndexNumber";
+            this.RealIndexNumber.ReadOnly = true;
+            this.RealIndexNumber.Visible = false;
+            // 
             // DocSection
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -405,7 +415,6 @@ namespace LibraryManager.Views
 
         }
         #endregion
-
 
         protected override void Dispose(bool disposing)
         {
@@ -444,7 +453,8 @@ namespace LibraryManager.Views
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            BasePartialView newView = new DocSection_Add(base.MainPanel, this, "", this.SelectedRowIndex);
+            double rowInternalIndex = (double)this.DTSectionContent.SelectedRows[0].Cells[9].Value;
+            BasePartialView newView = new DocSection_Add(base.MainPanel, this, "", rowInternalIndex);
             base.OpenPartialView(newView);
         }
 
@@ -503,6 +513,9 @@ namespace LibraryManager.Views
             this.DTSectionContent.Rows.Clear();
             var sectionList = this._docSectionController.GetAll();
             int counter = 1;
+            this.DTSectionContent.Columns["Updated"].DefaultCellStyle.Format = "MM/dd/yyyy";
+            this.DTSectionContent.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+            
             foreach (var section in sectionList)
             {
                 object[] sectionObject = new object[] { counter, 
@@ -511,21 +524,20 @@ namespace LibraryManager.Views
                                                         section.DocType, 
                                                         section.Description, 
                                                         section.RecSource, 
-                                                        section.UpdatedDT.ToShortDateString(), 
+                                                        section.UpdatedDT.Date, 
                                                         section.UpdatedBy, 
-                                                        (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString())
+                                                        (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.Date.ToShortDateString()),
+                                                        section.Order
                                                     };
                 this.DTSectionContent.Rows.Add(sectionObject);
                 counter++;
             }
         }
 
-
         private void LoadIndexesList()
         {
             this.ListOrderIndexes = this._docSectionController.GetAllIndexes();
         }
-      
 
         private void UpdateFileChage(string sectionName, string filePath) 
         {
@@ -711,9 +723,9 @@ namespace LibraryManager.Views
                         rowToCpyUnderIndex += 1;
                     }
                     DTSectionContent.Rows.Insert(rowToCpyUnderIndex, rowCopy);
+                    Console.WriteLine(rowCopy.Cells[9].Value);
                 }
             }
-
             DTSectionContent.ClearSelection();
 
             foreach (DataGridViewRow rowToMove in SelectedRows)
@@ -801,6 +813,9 @@ namespace LibraryManager.Views
             {
                 var sectionList = _docSectionController.GetByKeyWord(TbxSearch.Text);
                 this.DTSectionContent.Rows.Clear();
+                this.DTSectionContent.Columns["Updated"].DefaultCellStyle.Format = "MM/dd/yyyy";
+                this.DTSectionContent.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+
                 foreach (var section in sectionList)
                 {
                     object[] sectionObject = new object[] { section.Order, 
@@ -809,10 +824,11 @@ namespace LibraryManager.Views
                                                             section.DocType, 
                                                             section.Description, 
                                                             section.RecSource, 
-                                                            section.UpdatedDT.ToShortDateString(), 
+                                                            section.UpdatedDT.Date, 
                                                             section.UpdatedBy, 
-                                                            (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.ToShortDateString())
-                                                        };
+                                                            (string.IsNullOrEmpty(section.UpdatedBy) ? "" : section.ClientUpdatedDT.Date.ToShortDateString()),
+                                                            section.Order
+                                                         };
                     this.DTSectionContent.Rows.Add(sectionObject);
                 }
             }
@@ -854,7 +870,7 @@ namespace LibraryManager.Views
             this.ListOrderIndexes.Clear();
             foreach (DataGridViewRow row in this.DTSectionContent.Rows) 
             {
-                double val = Convert.ToDouble(row.Cells[0].Value.ToString());
+                double val = Convert.ToDouble(row.Cells[9].Value.ToString());
                 ListOrderIndexes.Add(val);
             }
         }
@@ -959,7 +975,6 @@ namespace LibraryManager.Views
                                               orderby row.Index
                                               select row.Index).FirstOrDefault();
 
-
             //reorder list in background to save them in the database
             ReorderFullIndexList(CutRows, RowIndexOfItemUnderMouseToDrop);
 
@@ -995,11 +1010,12 @@ namespace LibraryManager.Views
             base.OpenPartialView(newView);
         }
 
+
         private void DTSectionContent_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && this.DTSectionContent.SelectedRows.Count == 1)
             {
-                this.SelectedRowIndex = this.DTSectionContent.SelectedRows[0].Index + 1;
+                this.SelectedRowIndex = this.DTSectionContent.SelectedRows[0].Index;
                 BtnEdit.Enabled = true;
                 BtnDelete.Enabled = this.DTSectionContent.SelectedRows[0].Cells[5].Value.ToString().ToUpper().Contains(this.ClientName.ToUpper());
             }

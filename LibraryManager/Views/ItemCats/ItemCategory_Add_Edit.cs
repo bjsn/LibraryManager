@@ -280,8 +280,11 @@ namespace AddEditProposalContent.Views.ItemCats
 
         private void CheckSelectedDataRow() 
         {
-            string recSource = this.DTSectionType.SelectedRows[0].Cells[1].Value.ToString();
-            BtnDelete.Enabled = (recSource.ToString().Equals(this.clientName) || string.IsNullOrEmpty(recSource));
+            if (this.DTSectionType.SelectedRows.Count > 0) 
+            {
+                string recSource = this.DTSectionType.SelectedRows[0].Cells[1].Value.ToString();
+                BtnDelete.Enabled = (recSource.ToString().Equals(this.clientName) || string.IsNullOrEmpty(recSource));
+            }
         }
 
 

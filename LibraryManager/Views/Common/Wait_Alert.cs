@@ -83,7 +83,7 @@
             // 
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox2.Image = global::LibrMgr.Properties.Resources.save21;
+            this.pictureBox2.Image = global::LibraryManager.Views.Properties.Resources.save21;
             this.pictureBox2.Location = new System.Drawing.Point(10, 5);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 18);
@@ -152,7 +152,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LibrMgr.Properties.Resources._45__2_;
+            this.pictureBox1.Image = global::LibraryManager.Views.Properties.Resources._45__2_;
             this.pictureBox1.Location = new System.Drawing.Point(128, 85);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(38, 39);

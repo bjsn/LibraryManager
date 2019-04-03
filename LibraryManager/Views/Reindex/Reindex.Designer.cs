@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reindex));
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.LblMessage = new System.Windows.Forms.Label();
@@ -68,7 +69,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::LibrMgr.Properties.Resources.logo_resize1;
+            this.pictureBox2.Image = global::LibraryManager.Views.Properties.Resources.logo_resize1;
             this.pictureBox2.Location = new System.Drawing.Point(96, 29);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(101, 32);
@@ -84,7 +85,10 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Reindex";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reindex";
             this.Shown += new System.EventHandler(this.Reindex_Shown);

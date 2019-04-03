@@ -234,13 +234,13 @@ namespace LibraryManager.Data
                 command = new OleDbCommand
                 {
                     CommandText = string.Format("UPDATE DocSectionsByItem " +
-                                                "SET DeleteMarkDate = @DeleteMarkDate " +
+                                                "SET DeleteMarkDate = @DeleteMarkDate, " +
+                                                "RecSourceUpdatedDate = @RecSourceUpdatedDate " + 
                                                 "WHERE ItemCategory = @ItemCategory AND SOWSection = @SOWSection", new object[0]),
                     CommandType = CommandType.Text
                 };
                 
                 command.Parameters.AddWithValue("@DeleteMarkDate", docSectionByItem.DeleteMarkDate.Value.ToString(CultureInfo.InvariantCulture));
-                command.Parameters.AddWithValue("@RecSourceUpdatedDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 command.Parameters.AddWithValue("@RecSourceUpdatedDate", DateTime.Now.ToString(CultureInfo.InvariantCulture));
                 command.Parameters.AddWithValue("@ItemCategory", Utilitary.CleanInput(docSectionByItem.ItemCategory));
                 command.Parameters.AddWithValue("@SOWSection", Utilitary.CleanInput(docSectionByItem.SOWSection));

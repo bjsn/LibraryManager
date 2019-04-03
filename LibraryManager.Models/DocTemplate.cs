@@ -16,5 +16,7 @@ namespace LibraryManager.Models
 
         public DateTime RecSourceUpdatedDate { get; set; }
 
+        public string FileExt { get; set; }
+
     }
 }

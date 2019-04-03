@@ -95,6 +95,27 @@ namespace LibraryManager.Data
         }
 
 
+        public DocSection GetPreviousDocSectionByOrder(double sectionOrder)
+        {
+            try
+            {
+                base.OpenDbConnection();
+                DataTable dataTable = new DataTable();
+                new OleDbDataAdapter("SELECT  TOP 1 Order_Number, Section_Name, Object_Type, DocType, Description, RecSource, RecSourceUpdatedDate, Word_Doc,  ModSource, ModSourceUpdatedDate, FileExt " +
+                                     "FROM Section_tbl " +
+                                     "WHERE Order_Number < " + sectionOrder + " AND DeleteMarkDate IS NULL " +
+                                     "ORDER BY Order_Number DESC;", base.DbConnection)
+                                     .Fill(dataTable);
+                base.CloseDbConnection();
+                return this.Convert(dataTable).FirstOrDefault();
+            }
+            catch (Exception exception1)
+            {
+                throw new Exception(exception1.Message);
+            }
+        }
+
+
         public List<DocSection> GetByDocType(string docType)
         {
             try
@@ -290,18 +311,16 @@ namespace LibraryManager.Data
                                                 "SET Object_Type = @Object_Type, " +
                                                 "DocType = @DocType, " +
                                                 "Description = @Description, " +
-                                                "Word_Doc = @Word_Doc, " +
-                                                "FileExt = @FileExt " +
+                                                "Word_Doc = @Word_Doc " +
                                                 "WHERE Section_Name = @Section_Name", new object[0]),
                     CommandType = CommandType.Text
                 };
-              
+                
                 byte[] fileStream = new byte[0];
                 command.Parameters.AddWithValue("@Object_Type", Utilitary.CleanInput(docSection.Location));
                 command.Parameters.AddWithValue("@DocType", Utilitary.CleanInput(docSection.DocType));
                 command.Parameters.AddWithValue("@Description", Utilitary.CleanInput(docSection.Description));
                 command.Parameters.AddWithValue("@Word_Doc", docSection.WordDoc != null ? docSection.WordDoc : fileStream);
-                command.Parameters.AddWithValue("@FileExt", Utilitary.CleanInput(docSection.FileExt));
                 command.Parameters.AddWithValue("@Section_Name", Utilitary.CleanInput(docSection.Section));
                 
                 base.OpenDbConnection();
@@ -315,6 +334,7 @@ namespace LibraryManager.Data
                 throw new Exception(e.Message);
             }
         }
+
 
         public int UpdateRecSource(DocSection docSection)
         {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryManager.AddEditProposalContent
+namespace LibraryManager.Views.Admin
 {
     static class Program
     {
@@ -18,8 +18,7 @@ namespace LibraryManager.AddEditProposalContent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Reindex());
-            Application.Run(new ProposalContent_Container());
+            Application.Run(new Main_Container());
         }
-
     }
 }

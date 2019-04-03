@@ -97,7 +97,7 @@ namespace AddEditProposalContent.Views.OutputTypes
             string outputName = this.DTOutputType.SelectedRows[0].Cells[0].Value.ToString();
             string associations = this.DTOutputType.SelectedRows[0].Cells[1].Value.ToString();
             Delete_Alert newView = new Delete_Alert(base.MainPanel, this);
-            newView.SetText("the Output Type '" + outputName + "' along with \rthe " + associations + " associated Doc \rSection Type associations?");
+            newView.SetText("the Output Type '" + outputName + "' along with \rthe " + associations + " associated Doc Section Type associations?");
             base.OpenPartialAlert(newView);
         }
 

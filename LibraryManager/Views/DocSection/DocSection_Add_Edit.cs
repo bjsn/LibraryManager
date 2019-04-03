@@ -30,10 +30,10 @@ namespace AddEditProposalContent.Views
         private bool isNewSection;
         private string openFileTempPath;
         private bool killDocumentOpenCheck = false;
-        private int sectionNumber;
+        private double sectionNumber;
         #endregion
 
-        public DocSection_Add(Panel Panel, BasePartialView Preview = null, string sectionName = "", int sectionNumber = 0)
+        public DocSection_Add(Panel Panel, BasePartialView Preview = null, string sectionName = "", double sectionNumber = 0)
             : base(Panel, Preview)
         {
             InitializeComponent();
@@ -44,7 +44,6 @@ namespace AddEditProposalContent.Views
             this.InitializeControllers();
             this.LoadDocTypes();
             this.LoadDocSection();
-            this.LoadOutputs();
             this.DefaultEditDocumentVisibility();
         }
 
@@ -233,7 +232,7 @@ namespace AddEditProposalContent.Views
                     string fileName = Utilitary.GetFileNameFromPath(documentPath);
                     this.TxtSectionName.Text = fileName;
 
-                    this.LblLocation.Text = this.documentPath;
+                    this.LblLocation.Text = this.documentPath.Substring(0, 60) + "...";
                     this.LblLocation.Visible = true;
                     this.BtnViewEdit.Enabled = true;
                 }
@@ -244,11 +243,6 @@ namespace AddEditProposalContent.Views
                     this.BtnViewEdit.Enabled = false;
                 }
             };
-        }
-
-        public void LoadOutputs() 
-        {
-
         }
 
         private void CloseOpenedFile(bool saveDocument = false) 
@@ -356,7 +350,6 @@ namespace AddEditProposalContent.Views
             bool fileOpenSuccessfully = this._fileController.OpenFile(filePath);
             return fileOpenSuccessfully;
         }
-
        
 
         private void UpdateFileChage(string sectionName, string filePath)
@@ -386,9 +379,7 @@ namespace AddEditProposalContent.Views
             }
             else 
             {
-                this.LblLocation.Visible = false;
-                this.LblLocationError.Visible = true;
-                this.LblLocationError.Text = "*Is required to choose an option";
+                this.lblImportSection.Text = "*Is required to choose an option";
                 this.LblLocationError.ForeColor = Color.FromArgb(0xcc, 0x36, 0x36);
             }
             return true;
@@ -415,12 +406,18 @@ namespace AddEditProposalContent.Views
 
         private void DocSection_Add_Load(object sender, EventArgs e)
         {
-            this.DGVOutputTypes.CurrentRow.Selected = false;
+            if (this.DGVOutputTypes.CurrentRow != null) 
+            {
+                this.DGVOutputTypes.CurrentRow.Selected = false;
+            }
         }
 
         private void DGVOutputTypes_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            this.DGVOutputTypes.CurrentRow.Selected = false;
+            if (this.DGVOutputTypes.CurrentRow != null)
+            {
+                this.DGVOutputTypes.CurrentRow.Selected = false;
+            }
         }
 
     }

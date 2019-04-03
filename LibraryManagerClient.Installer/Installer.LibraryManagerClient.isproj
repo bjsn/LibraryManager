@@ -45,9 +45,9 @@
 			<Name>LibraryManager.Models</Name>
 			<Project>{4A18442B-1414-487E-9EC8-5919C3259ED9}</Project>
 		</ProjectReference>
-		<ProjectReference Include="..\LibraryManager\LibraryManager.Views.csproj">
-			<Name>LibraryManager.Views</Name>
-			<Project>{3DBEE7C1-5D9D-412B-95F0-9282B0332522}</Project>
+		<ProjectReference Include="..\LibraryManager.Views.Admin\LibraryManager.Views.Admin.csproj">
+			<Name>LibraryManager.Views.Admin</Name>
+			<Project>{CA2ADFA1-C72F-4C43-AEF2-393931BA6AC9}</Project>
 		</ProjectReference>
 	</ItemGroup>
 </Project>

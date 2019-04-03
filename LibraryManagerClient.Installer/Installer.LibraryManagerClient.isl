@@ -346,7 +346,7 @@
 		<row><td>LibraryManager.Core.Primary_output</td><td>{0CB97336-5990-4C01-AC70-E5501966FB1A}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.core.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LibraryManager.Data.Primary_output</td><td>{618C5B8F-31B2-45F7-9BC9-19123E5A6D69}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.data.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LibraryManager.Models.Primary_output</td><td>{FBEF0441-6E1C-4A85-A272-5AAE0B159C77}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.models.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LibraryManager.Views.Primary_output</td><td>{98B91AC6-3609-4FAE-A99A-2DF2F489C4DB}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.views.primary</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LibraryManager.Views.Admin.Primary_output</td><td>{8BC34B87-FD50-4C67-96FB-BB152A59562C}</td><td>INSTALLDIR</td><td>2</td><td/><td>librarymanager.views.admin.p</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1063,7 +1063,7 @@
 		<row><td>INSTALLDIR</td><td>LibraryManager.Core.Primary_output</td></row>
 		<row><td>INSTALLDIR</td><td>LibraryManager.Data.Primary_output</td></row>
 		<row><td>INSTALLDIR</td><td>LibraryManager.Models.Primary_output</td></row>
-		<row><td>INSTALLDIR</td><td>LibraryManager.Views.Primary_output</td></row>
+		<row><td>INSTALLDIR</td><td>LibraryManager.Views.Admin.Primary_output</td></row>
 		<row><td>PROPGEN</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>WindowsVolume</td><td>ISX_DEFAULTCOMPONENT</td></row>
 	</table>
@@ -1887,7 +1887,7 @@
 		<row><td>AlwaysInstall</td><td>LibraryManager.Core.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>LibraryManager.Data.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>LibraryManager.Models.Primary_output</td></row>
-		<row><td>AlwaysInstall</td><td>LibraryManager.Views.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>LibraryManager.Views.Admin.Primary_output</td></row>
 	</table>
 
 	<table name="File">
@@ -1906,7 +1906,7 @@
 		<row><td>librarymanager.core.primary_</td><td>LibraryManager.Core.Primary_output</td><td>LibraryManager.Core.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LibraryManager.Core&gt;|Built</td><td>3</td><td/></row>
 		<row><td>librarymanager.data.primary_</td><td>LibraryManager.Data.Primary_output</td><td>LibraryManager.Data.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LibraryManager.Data&gt;|Built</td><td>3</td><td/></row>
 		<row><td>librarymanager.models.primar</td><td>LibraryManager.Models.Primary_output</td><td>LibraryManager.Models.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LibraryManager.Models&gt;|Built</td><td>3</td><td/></row>
-		<row><td>librarymanager.views.primary</td><td>LibraryManager.Views.Primary_output</td><td>LibraryManager.Views.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LibraryManager.Views&gt;|Built</td><td>3</td><td/></row>
+		<row><td>librarymanager.views.admin.p</td><td>LibraryManager.Views.Admin.Primary_output</td><td>LibraryManager.Views.Admin.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LibraryManager.Views.Admin&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2055,7 +2055,7 @@
 		<row><td>LibraryManager.Core.Primary_output</td><td/><td/><td>_9D895151_27D3_4B6C_9A89_B812A13FBB61_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LibraryManager.Data.Primary_output</td><td/><td/><td>_3E85DAC6_647A_48E4_8BEB_D9E06289407A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LibraryManager.Models.Primary_output</td><td/><td/><td>_AC19187D_1DFE_4CE4_808E_2071F143872D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LibraryManager.Views.Primary_output</td><td/><td/><td>_AAC703D0_83CB_4CAF_B989_B79BE34B53A8_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LibraryManager.Views.Admin.Primary_output</td><td/><td/><td>_D3DC7419_2329_461C_AB3D_FC29524C536D_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2347,6 +2347,7 @@
 		<row><td>LibraryManager.Models1</td><td>LibraryManager.Models1\LibraryManager.Models.csproj</td><td/><td>2</td></row>
 		<row><td>LibraryManager.Views</td><td>LibraryManager\LibraryManager.Views.csproj</td><td/><td>2</td></row>
 		<row><td>LibraryManager.Views.AddEditProposalContent</td><td>LibraryManager.AddEditProposalContent\LibraryManager.Views.AddEditProposalContent.csproj</td><td/><td>2</td></row>
+		<row><td>LibraryManager.Views.Admin</td><td>LibraryManager.Views.Admin\LibraryManager.Views.Admin.csproj</td><td/><td>2</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>

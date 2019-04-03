@@ -69,8 +69,8 @@ namespace LibraryManager.Data
                 OleDbCommand command = null;
                 command = new OleDbCommand
                 {
-                    CommandText = string.Format("INSERT INTO Temp_tbl(Template_Name, Word_Doc, RecSource, RecSourceUpdatedDate) " +
-                                                "VALUES (@Template_Name, @Word_Doc, @RecSource, @RecSourceUpdatedDate) ",
+                    CommandText = string.Format("INSERT INTO Temp_tbl(Template_Name, Word_Doc, RecSource, RecSourceUpdatedDate, FileExt) " +
+                                                "VALUES (@Template_Name, @Word_Doc, @RecSource, @RecSourceUpdatedDate, @FileExt) ",
                                                 new object[0]),
                     CommandType = CommandType.Text
                 };
@@ -78,6 +78,7 @@ namespace LibraryManager.Data
                 command.Parameters.AddWithValue("@Word_Doc", docTemplate.Word_Doc);
                 command.Parameters.AddWithValue("@RecSource", Utilitary.CleanInput(docTemplate.RecSource));
                 command.Parameters.AddWithValue("@RecSourceUpdatedDate", docTemplate.RecSourceUpdatedDate.ToString(CultureInfo.InvariantCulture));
+                command.Parameters.AddWithValue("@FileExt", Utilitary.CleanInput(docTemplate.FileExt));
 
                 base.OpenDbConnection();
                 command.Connection = base.DbConnection;

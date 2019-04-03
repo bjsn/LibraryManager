@@ -47,7 +47,6 @@ namespace LibraryManager.Core
             }
         }
 
-
         public bool IsTemplateNameValid(string templateName) 
         {
             try
@@ -60,19 +59,20 @@ namespace LibraryManager.Core
             }
         }
 
-
         public int Add(string templateName, string filePath) 
         {
             try
             {
                 string clientName = this._setupController.GetClientName();
                 byte[] word_doc = this._fileController.GetBinaryFile(filePath);
+                string fileExt = Path.GetExtension(filePath);
                 DocTemplate docTemplate = new DocTemplate() 
                 {
                     Template_Name = templateName, 
                     Word_Doc = word_doc,
                     RecSource = clientName,
-                    RecSourceUpdatedDate = DateTime.Now
+                    RecSourceUpdatedDate = DateTime.Now,
+                    FileExt = fileExt
                 };
                 return this._docTemplateDL.Add(docTemplate);
             }

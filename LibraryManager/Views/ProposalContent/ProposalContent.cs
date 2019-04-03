@@ -1,6 +1,6 @@
 ﻿namespace LibraryManager.Views
 {
-    using LibrMgr.Properties;
+    using LibraryManager.Views.Properties;
     using LibraryManager.Core;
     using LibraryManager.Models;
     using System;
@@ -503,7 +503,7 @@
             this.BtnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(198)))));
             this.BtnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSearch.Image = global::LibrMgr.Properties.Resources.search;
+            this.BtnSearch.Image = global::LibraryManager.Views.Properties.Resources.search;
             this.BtnSearch.Location = new System.Drawing.Point(213, 68);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(23, 23);

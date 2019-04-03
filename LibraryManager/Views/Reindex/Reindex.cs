@@ -15,7 +15,6 @@ namespace LibrMgr.Views.Reindex
 {
     public partial class Reindex : Form
     {
-
         public Reindex()
         {
             InitializeComponent();
